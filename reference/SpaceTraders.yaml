@@ -1,0 +1,1220 @@
+openapi: 3.1.0
+info:
+  title: SpaceTraders
+  version: '1.0'
+  summary: Documentation for the SpaceTraders API
+  contact:
+    name: Joel Brubaker
+    email: joel@spacetraders.io
+  license:
+    name: NONE
+servers:
+  - url: 'http://v2-0-0.alpha.spacetraders.io'
+    description: v2.0.0-alpha
+paths:
+  /agents:
+    post:
+      summary: Register as a new agent
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      agent:
+                        $ref: ../models/Agent.yaml
+                      faction:
+                        $ref: ../models/Faction.yaml
+                      contract:
+                        $ref: ../models/Contract.yaml
+                      ship:
+                        $ref: ../models/Ship.yaml
+              examples:
+                Success:
+                  value:
+                    data:
+                      token: string
+                      agent:
+                        accountId: cl0hok34m0003ks0jjql5q8f2
+                        symbol: EMBER
+                        headquarters: X1-OE-PM
+                        credits: 0
+                      faction:
+                        symbol: COMMERCE_REPUBLIC
+                        name: Commerce Repubic
+                        description: The Commerce Republic takes capital from top tier worlds and invests it into new systems with high potential for growth.
+                        headquarters: X1-OE-PM
+                        traits:
+                          - BUREAUCRATIC
+                          - CAPITALISTIC
+                          - GUILD
+                          - ESTABLISHED
+                      contract:
+                        id: cl0hok38t0014ks0jnoy8o5vh
+                        faction: COMMERCE_REPUBLIC
+                        type: PROCUREMENT
+                        terms:
+                          deadline: '2022-03-11T05:16:59.113Z'
+                          payment:
+                            onAccepted: 20000
+                            onFulfilled: 100000
+                          deliver:
+                            - tradeSymbol: IRON_ORE
+                              destination: X1-OE-PM
+                              units: 10000
+                              fulfilled: 0
+                        accepted: false
+                        fulfilled: false
+                        expiresAt: '2022-03-09T05:16:59.112Z'
+                      ship:
+                        symbol: string
+                        frame: string
+                        reactor: string
+                        engine: string
+                        modules:
+                          - string
+                        mounts:
+                          - string
+                        registration:
+                          factionSymbol: string
+                          agentSymbol: string
+                          fee: 0
+                          role: string
+                        integrity:
+                          frame: 0
+                          reactor: 0
+                          engine: 0
+                        status: string
+                        location: string
+                        cargo:
+                          - tradeSymbol: string
+                            units: 0
+      operationId: post-agents
+      description: Creates a new agent and ties it to a temporary account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symbol:
+                  type: string
+                faction:
+                  type: string
+  /my/agent:
+    get:
+      summary: Get your agent details
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: ../models/Agent.yaml
+              examples:
+                Agent:
+                  value:
+                    data:
+                      accountId: cl0hok34m0003ks0jjql5q8f2
+                      symbol: EMBER
+                      headquarters: X1-OE-PM
+                      credits: 0
+      operationId: get-my-agent
+  '/my/ships/{shipSymbol}/chart':
+    post:
+      summary: Submit a system or waypoint chart
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      submitted:
+                        type: array
+                        items:
+                          type: string
+              examples:
+                Success:
+                  value:
+                    data:
+                      submitted:
+                        - X1-ZZ
+                        - X1-ZZ-7-EE
+      operationId: 'post-my-ships-:shipSymbol-chart'
+      description: Chart a new system or waypoint.
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The symbol of the ship
+  '/my/ships/{shipSymbol}/deliver':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The symbol of the ship
+    post:
+      summary: Deliver goods on a contract
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      tradeSymbol: IRON_ORE
+                      destination: X1-OE-PM
+                      units: 10000
+                      fulfilled: -30000
+                properties:
+                  data:
+                    $ref: ../models/ContractDelivery.yaml
+                required:
+                  - data
+      operationId: post-my-ships-shipSymbol-deliver
+  '/my/ships/{shipSymbol}/dock':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The symbol of the ship
+    post:
+      summary: Dock your ship
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                    required:
+                      - status
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      status: DOCKED
+              examples:
+                Success:
+                  value:
+                    data:
+                      status: DOCKED
+      operationId: post-my-ships-shipSymbol-dock
+  '/my/ships/{shipSymbol}/orbit':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The symbol of the ship
+    post:
+      summary: Transition your ship into orbit
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      status: ORBIT
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      status: ORBIT
+      operationId: post-my-ships-shipSymbol-orbit
+  '/my/ships/{shipSymbol}/jettison':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Jettison cargo from your ship
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      tradeSymbol:
+                        type: string
+                        minLength: 1
+                      units:
+                        type: number
+                    required:
+                      - tradeSymbol
+                      - units
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      tradeSymbol: ALUMINUM
+                      units: 95
+              examples:
+                Success:
+                  value:
+                    data:
+                      tradeSymbol: ALUMINUM
+                      units: 95
+      operationId: post-my-ships-shipSymbol-jettison
+      description: Jettison cargo from your ship's cargo hold.
+  '/my/ships/{shipSymbol}/extract':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Extract resources from a waypoint
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipSymbol:
+                        type: string
+                        minLength: 1
+                      cooldown:
+                        type: number
+                      yield:
+                        type: object
+                        properties:
+                          tradeSymbol:
+                            type: string
+                            minLength: 1
+                          units:
+                            type: number
+                        required:
+                          - tradeSymbol
+                          - units
+                    required:
+                      - shipSymbol
+                      - cooldown
+                      - yield
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: 054A8F-1
+                      cooldown: 30
+                      yield:
+                        tradeSymbol: SILICON
+                        units: 14
+              examples:
+                Success:
+                  value:
+                    data:
+                      shipSymbol: 054A8F-1
+                      cooldown: 30
+                      yield:
+                        tradeSymbol: IRON_ORE
+                        units: 14
+      operationId: post-my-ships-shipSymbol-extract
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                survey:
+                  $ref: ../models/Survey.yaml
+      description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields.
+  '/my/ships/{shipSymbol}/jump':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Jump to a new system
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipSymbol:
+                        type: string
+                        minLength: 1
+                      destination:
+                        type: string
+                        minLength: 1
+                      cooldown:
+                        type: number
+                    required:
+                      - shipSymbol
+                      - destination
+                      - cooldown
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: CE392B-1
+                      destination: 0b1802ba-da4d-4308-aefb-1e5065f98a53
+                      cooldown: 43200
+              examples:
+                Success:
+                  value:
+                    data:
+                      shipSymbol: CE392B-1
+                      destination: 0b1802ba-da4d-4308-aefb-1e5065f98a53
+                      cooldown: 43200
+      operationId: post-my-ships-shipSymbol-jump
+  '/my/ships/{shipSymbol}/purchase':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Purchase cargo for your ship
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      waypointSymbol:
+                        type: string
+                        minLength: 1
+                      tradeSymbol:
+                        type: string
+                        minLength: 1
+                      credits:
+                        type: number
+                      units:
+                        type: number
+                    required:
+                      - waypointSymbol
+                      - tradeSymbol
+                      - credits
+                      - units
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: MICROPROCESSORS
+                      credits: -843
+                      units: 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: MICROPROCESSORS
+                      credits: -843
+                      units: 1
+      operationId: post-my-ships-shipSymbol-purchase
+  '/my/ships/{shipSymbol}/refuel':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Refuel your ship
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      credits:
+                        type: number
+                      fuel:
+                        type: number
+                    required:
+                      - credits
+                      - fuel
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      credits: 0
+                      fuel: 0
+              examples:
+                Success:
+                  value:
+                    data:
+                      credits: -1920
+                      fuel: 800
+      operationId: post-my-ships-shipSymbol-refuel
+  '/my/ships/{shipSymbol}/scan':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Scan approaching or departing ships from your location
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ships:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          required:
+                            - symbol
+                            - frameSymbol
+                            - reactorSymbol
+                            - engineSymbol
+                            - expiration
+                          properties:
+                            symbol:
+                              type: string
+                              minLength: 1
+                            registration:
+                              type: object
+                              properties:
+                                factionSymbol:
+                                  type: string
+                                  minLength: 1
+                                role:
+                                  type: string
+                                  minLength: 1
+                              required:
+                                - factionSymbol
+                                - role
+                            frameSymbol:
+                              type: string
+                              minLength: 1
+                            reactorSymbol:
+                              type: string
+                              minLength: 1
+                            engineSymbol:
+                              type: string
+                              minLength: 1
+                            expiration:
+                              type: string
+                              minLength: 1
+                      cooldown:
+                        type: number
+                    required:
+                      - ships
+                      - cooldown
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      ships:
+                        - symbol: COMMERCE_REPUBLIC-0060A0
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_HEAVY_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:14.725Z'
+                        - symbol: ZANZIBAR_TRIKES-DF0AAF
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:00.725Z'
+                        - symbol: ZANZIBAR_TRIKES-9B80BE
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: TRANSPORT
+                          frameSymbol: FRAME_TRANSPORT
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:06.725Z'
+                        - symbol: COMMERCE_REPUBLIC-117520
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: HARVESTER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:19:55.725Z'
+                        - symbol: SPACERS_GUILD-609AA5
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: HAULER
+                          frameSymbol: FRAME_FRIGATE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:19:38.725Z'
+                        - symbol: MINERS_COLLECTIVE-7AD322
+                          registration:
+                            factionSymbol: MINERS_COLLECTIVE
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:19:11.725Z'
+                        - symbol: ZANZIBAR_TRIKES-AE6D78
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:44.725Z'
+                        - symbol: SPACERS_GUILD-92828B
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: SURVEYOR
+                          frameSymbol: FRAME_LIGHT_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:49.726Z'
+                        - symbol: ZANZIBAR_TRIKES-B5EAD1
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: TRANSPORT
+                          frameSymbol: FRAME_TRANSPORT
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:25.726Z'
+                        - symbol: ZANZIBAR_TRIKES-6A4E0D
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_EXPLORER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:19:19.726Z'
+                      cooldown: 60
+              examples:
+                Success:
+                  value:
+                    data:
+                      ships:
+                        - symbol: COMMERCE_REPUBLIC-0060A0
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_HEAVY_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:14.725Z'
+                        - symbol: ZANZIBAR_TRIKES-DF0AAF
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:00.725Z'
+                        - symbol: ZANZIBAR_TRIKES-9B80BE
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: TRANSPORT
+                          frameSymbol: FRAME_TRANSPORT
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:06.725Z'
+                        - symbol: COMMERCE_REPUBLIC-117520
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: HARVESTER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:19:55.725Z'
+                        - symbol: SPACERS_GUILD-609AA5
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: HAULER
+                          frameSymbol: FRAME_FRIGATE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:19:38.725Z'
+                        - symbol: MINERS_COLLECTIVE-7AD322
+                          registration:
+                            factionSymbol: MINERS_COLLECTIVE
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:19:11.725Z'
+                        - symbol: ZANZIBAR_TRIKES-AE6D78
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:44.725Z'
+                        - symbol: SPACERS_GUILD-92828B
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: SURVEYOR
+                          frameSymbol: FRAME_LIGHT_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:20:49.726Z'
+                        - symbol: ZANZIBAR_TRIKES-B5EAD1
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: TRANSPORT
+                          frameSymbol: FRAME_TRANSPORT
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-08T05:20:25.726Z'
+                        - symbol: ZANZIBAR_TRIKES-6A4E0D
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_EXPLORER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-08T05:19:19.726Z'
+                      cooldown: 60
+      operationId: post-my-ships-shipSymbol-scan
+      description: Scan approaching or departing ships.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  type: string
+              required:
+                - mode
+            examples:
+              Approaching Ships:
+                value:
+                  mode: APPROACHING_SHIPS
+              Departing Ships:
+                value:
+                  mode: APPROACHING_SHIPS
+        description: ''
+  '/my/ships/{shipSymbol}/sell':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Sell cargo from your ship
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      waypointSymbol:
+                        type: string
+                        minLength: 1
+                      tradeSymbol:
+                        type: string
+                        minLength: 1
+                      credits:
+                        type: number
+                      units:
+                        type: number
+                    required:
+                      - waypointSymbol
+                      - tradeSymbol
+                      - credits
+                      - units
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: SILICON
+                      credits: 144
+                      units: -1
+              examples:
+                Success:
+                  value:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: SILICON
+                      credits: 144
+                      units: -1
+      operationId: post-my-ships-shipSymbol-sell
+      description: Sell cargo from your ship's hold to the local market.
+  '/my/ships/{shipSymbol}':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    get:
+      summary: View the details of your ship
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      symbol: 653298-1
+                      crew: null
+                      officers: null
+                      frame: FRAME_DRONE
+                      reactor: REACTOR_SOLAR_I
+                      engine: ENGINE_SOLAR_PROPULSION
+                      modules:
+                        - MODULE_CARGO_HOLD
+                      mounts:
+                        - MOUNT_MINING_LASER_I
+                      registration:
+                        factionSymbol: COMMERCE_REPUBLIC
+                        agentSymbol: '653298'
+                        fee: 100
+                        role: EXCAVATOR
+                      integrity:
+                        frame: 1
+                        reactor: 1
+                        engine: 1
+                      status: DOCKED
+                      location: X1-OE-PM
+                      cargo: []
+                properties:
+                  data:
+                    $ref: ../models/Ship.yaml
+                required:
+                  - data
+      operationId: get-my-ships-shipSymbol
+      description: Retrieve the details of your ship.
+  /my/ships:
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    get:
+      summary: View a list of all your ships
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - symbol: 653298-1
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-2
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-3
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-4
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-5
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-6
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                    meta:
+                      total: 6
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/Ship.yaml
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+              examples:
+                Success:
+                  value:
+                    data:
+                      - symbol: 653298-1
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-2
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-3
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-4
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-5
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                      - symbol: 653298-6
+                        crew: null
+                        officers: null
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                        registration:
+                          factionSymbol: COMMERCE_REPUBLIC
+                          agentSymbol: '653298'
+                          fee: 100
+                          role: EXCAVATOR
+                        integrity:
+                          frame: 1
+                          reactor: 1
+                          engine: 1
+                        status: DOCKED
+                        location: X1-OE-PM
+                        cargo: []
+                    meta:
+                      total: 6
+                      page: 1
+                      limit: 20
+      operationId: get-my-ships
+      description: Retrieve all of your ships.
+components:
+  schemas: {}
+  securitySchemes: {}

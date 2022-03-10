@@ -1,0 +1,28 @@
+description: ''
+type: object
+x-examples:
+  example-1:
+    signature: X1-OE-D2DD38
+    deposits:
+      - COPPER_ORE
+    expiration: '2022-03-08T05:41:55.514Z'
+properties:
+  signature:
+    type: string
+    minLength: 1
+  deposits:
+    type: array
+    items:
+      type: string
+  expiration:
+    type: string
+    minLength: 1
+required:
+  - signature
+  - deposits
+  - expiration
+examples:
+  - signature: X1-OE-D2DD38
+    deposits:
+      - COPPER_ORE
+    expiration: '2022-03-08T05:41:55.514Z'
