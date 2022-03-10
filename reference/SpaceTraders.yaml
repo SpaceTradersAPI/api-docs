@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: SpaceTraders API
-  version: '1.0'
+  version: '2.0.0-alpha'
   summary: Documentation for the SpaceTraders API
   contact:
     name: Joel Brubaker
