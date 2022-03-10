@@ -1,14 +1,14 @@
 ## SpaceTraders v2.0.0-alpha Preview
 
-Hello everyone and welcome to the SpaceTraders V2.0-alpha preview! We are excited to share our work with our supporters and hope you enjoy what we've neem putting together over the last year.
+Hello everyone and welcome to the SpaceTraders v2.0-alpha preview! We are excited to share progress with our supporters and hope you enjoy the new changes to the game.
 
-We've re-thought the API from lessons learned with our V1.0 release, and hope you will enjoy some of the fleshed out ship mechanics, larger universe to explore, and new ideas that are still being worked on behind the scenes. We really want the 2.0 API to be beginner friendly and very stable for developers to build on top of,
+We've re-thought some elements of the API from lessons learned with our v1.0 release, and hope you will enjoy some of the fleshed out ship mechanics, larger universe to explore, and new ideas that we are still  working on behind the scenes. We really want the 2.0 API to be beginner friendly and reliably stable for developers to build on top of.
 
 We appreciate all of the positive comments and feedback, and look forward to a second year of building SpaceTraders!
 
 ## Overview of the Alpha / Beta / Public releases
 
-The alpha release will be a period of about a month where we fix any critical bugs and make significant changes to API endpoints if they are necessary. The alpha phase will be shared mostly with our supporters and some close members of the community, so please don't advertise the release too broadly. If too many people start using alpha, we'll feel bad about breaking changes that need to be made to stabilize the game.
+The alpha release will be a period of about a month where we fix any critical bugs and make significant changes to API endpoints if they are necessary. The alpha phase will be shared mostly with our supporters and some close members of the community, so please don't advertise the release too broadly.
 
 Having said that, the alpha won't be a secret, so there is no harm if you want to share it directly with friends.
 
@@ -18,29 +18,30 @@ Then we will finally update all of the documentation and website to point to the
 
 ## Alpha Goals
 
-Our goals for the early alpha are to gather feedback so we can guarentee API stability for those that want to start building SDKs. Once we go into a beta release, we will be much less likely to change any specific endpoint, and after a full release we will strive to only make backwards-compatible changes.
+Our goals for the early alpha are to gather feedback so we can guarantee API stability for those that want to start building SDKs. Once we go into a beta release, we will be much less likely to change any specific endpoint, and after a full release we will strive to only make backwards-compatible changes.
 
 ## What can you do
 
 We're genuinely happy to just have people play with the API, and sharing any feedback or progress will be super motivating for us. If you want to help in a specific way, we're looking for the following feedback from the alpha release:
 
-- Find and report bugs or exploits in the game, such as the ability to trade cargo your ship doesn't have
-- Look for typos or errors in the game data
+- Find and report bugs or exploits in the game, such as the ability to trade cargo your ship doesn't contain
+- Look for typos or errors in the game data, symbols, etc.
 - Let us know if performance is an issue for any of the endpoints
 - Tell us which endpoints are painful to use or game mechanics that are tedious / uninteresting\
+- Anything that you think will be difficult for us to add later without breaking how the API works
 
 Again the goal is to catch significant changes that need to be made before the beta release. Thanks for any time you are able to provide to test it out!
 
 ## New V2 Alpha Terminology
 
-The 2.0 version of the API has been significantly reworked and introduces some new terminology. Before reviewing the new endpoints in the next section, it's worth reading through what each new term means.
+The 2.0 version of the API has been significantly reworked and introduces some new terminology. Before reviewing the new endpoints in the next section, it's worth reading through some of the new terms and what they mean.
 
 - **Account** - you can register an account (not required) with your email address and discord handle and it will persist across resets. We will eventually add registration to the website, but for now you can do it via API calls. You will also be able to register your patreon contribution for special in-game recognition.
-- **Agent** - when you start a new game, you register as an agent and choose a 4-8 all-uppercase symbol as your call handle. All of your ships, credits, etc. exist under your agent entity, and you can only have one agent at a time under your account. You will be able to start a new game anytime by retiring your agent and creating a new one.
+- **Agent** - when you start a new game, you register as an agent and choose a symbol (4-8 characters) as your call sign. All of your ships, credits, etc. exist under your agent entity, and you can only have one agent at a time under your account. You will be able to start a new game by retiring your agent and creating a new one.
 - **Sector** - a slice of the universe filled with systems of different types such as star systems, black holes, or nebulae.
 - **System** - a collection of waypoints orbiting around a central feature such as a star or black hole. Systems contain an array of waypoints on an x, y plane.
 - **Waypoint** - a location within a system that you can travel to and interact with. Some common types of waypoints include planets, asteroid fields and jump gates.
-- **Ship** - your ships can navigate between waypoints and jump across systems. Ships must be maintained over time.
+- **Ship** - your ships can navigate between waypoints and jump across systems. They consist of a frame, reactor, engine and various modules and mounts.
 - **Ship Frame** - the structure of a ship which determines the number of modules and mounts that can be installed.
 - **Ship Reactor** - the power module of the ship and limits the types of power-intensive modules and mounts that can be installed.
 - **Ship Engine** - the engine of your ship and determines how fast your ship travels when navigating at slow-than-light speeds.
