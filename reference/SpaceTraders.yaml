@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SpaceTraders
+  title: SpaceTraders API
   version: '1.0'
   summary: Documentation for the SpaceTraders API
   contact:
