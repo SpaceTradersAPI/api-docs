@@ -8,6 +8,10 @@ info:
     email: joel@spacetraders.io
   license:
     name: NONE
+  description: |-
+    SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology. Put your algorithms to the test during one of our regular competitive seasons or build a client to share with the community.
+
+    SpaceTraders is a RESTful API and currently in an alpha stage of development. Join our Discord to learn more.
 servers:
   - url: 'http://v2-0-0.alpha.spacetraders.io'
     description: v2.0.0-alpha
@@ -1217,4 +1221,7 @@ paths:
       description: Retrieve all of your ships.
 components:
   schemas: {}
-  securitySchemes: {}
+  securitySchemes:
+    API Key - 1:
+      type: http
+      scheme: bearer
