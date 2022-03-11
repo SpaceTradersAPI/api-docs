@@ -1,19 +1,28 @@
 openapi: 3.1.0
 info:
   title: SpaceTraders API
-  version: '2.0.0-alpha'
-  summary: Documentation for the SpaceTraders API
+  version: 2.0.0-alpha
+  summary: SpaceTraders is a unique multiplayer game built on a free Web API.
   contact:
     name: Joel Brubaker
     email: joel@spacetraders.io
   license:
-    name: NONE
+    name: 'No'
   description: |-
-    SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology. Put your algorithms to the test during one of our regular competitive seasons or build a client to share with the community.
+    SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology.
 
-    SpaceTraders is a RESTful API and currently in an alpha stage of development. Join our Discord to learn more.
+    Participate in one of our regular competitive seasons or build a client to share with the community.
+
+    SpaceTraders is currently in an alpha stage of development. Join our Discord to learn more.
+
+    ```json http
+    {
+      "method": "GET",
+      "url": "https://v2-0-0.alpha.spacetraders.io/status",
+    }
+    ```
 servers:
-  - url: 'http://v2-0-0.alpha.spacetraders.io'
+  - url: 'https://v2-0-0.alpha.spacetraders.io'
     description: v2.0.0-alpha
 paths:
   /agents:
@@ -136,6 +145,8 @@ paths:
                       headquarters: X1-OE-PM
                       credits: 0
       operationId: get-my-agent
+      security:
+        - Agent Token: []
   '/my/ships/{shipSymbol}/chart':
     post:
       summary: Submit a system or waypoint chart
@@ -1222,6 +1233,7 @@ paths:
 components:
   schemas: {}
   securitySchemes:
-    API Key - 1:
+    Agent Token:
       type: http
       scheme: bearer
+      description: When you register a new agent you will be granted a private bearer token which grants authorization to use the API.
