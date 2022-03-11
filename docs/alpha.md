@@ -138,7 +138,7 @@ Static game data can be queried and should be cached using the `/game/data` endp
 # view all shipyards in a system
 /systems/X1-OE/shipyards
 
-# view all ships for sell at a shipyard
+# view all ships for sale at a shipyard
 /systems/X1-OE/shipyards/X1-OE-001A/ships
 
 # view all markets in a system
