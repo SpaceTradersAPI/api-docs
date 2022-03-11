@@ -1324,6 +1324,95 @@ paths:
       description: Retrieve all of your ships.
       security:
         - AgentToken: []
+  '/systems/{systemSymbol}':
+    parameters:
+      - schema:
+          type: string
+          default: X1-OE
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+    get:
+      summary: Fetch a system
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      symbol:
+                        type: string
+                        minLength: 1
+                      sector:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                      x:
+                        type: number
+                      'y':
+                        type: number
+                      waypoints:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      factions:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      charted:
+                        type: boolean
+                      chartedBy: {}
+                    required:
+                      - symbol
+                      - sector
+                      - type
+                      - x
+                      - 'y'
+                      - waypoints
+                      - factions
+                      - charted
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      symbol: X1-ZZ
+                      sector: X1
+                      type: BLUE_STAR
+                      x: -2
+                      'y': 9
+                      waypoints: []
+                      factions: []
+                      charted: false
+                      chartedBy: null
+              examples:
+                Success:
+                  value:
+                    data:
+                      symbol: X1-ZZ
+                      sector: X1
+                      type: BLUE_STAR
+                      x: -2
+                      'y': 9
+                      waypoints: []
+                      factions: []
+                      charted: false
+                      chartedBy: null
+      operationId: get-systems-systemSymbol
+      security:
+        - AgentToken: []
 tags:
   - name: my
   - name: ships
