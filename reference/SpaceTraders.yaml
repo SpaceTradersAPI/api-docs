@@ -7,8 +7,8 @@ info:
     name: Joel Brubaker
     email: joel@spacetraders.io
   license:
-    identifier: 'https://choosealicense.com/no-permission/'
     name: 'No'
+    url: 'https://choosealicense.com/no-permission/'
   description: |-
     SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology.
 

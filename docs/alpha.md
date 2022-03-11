@@ -1,3 +1,7 @@
+---
+internal: true
+---
+
 # Alpha Preview Guide
 
 Hello everyone and welcome to the SpaceTraders v2.0.0-alpha preview! We are excited to share progress with our supporters and hope you enjoy the new changes to the game.
@@ -132,9 +136,6 @@ Static game data can be queried and should be cached using the `/game/data` endp
 # view system details
 /systems/X1-OE
 
-# submit system information into the public repository of charts
-/systems/X1-OE/chart
-
 # view waypoint details
 /systems/X1-OE/waypoints/X1-OE-001A
 
@@ -149,12 +150,6 @@ Static game data can be queried and should be cached using the `/game/data` endp
 
 # view all trades at a given market
 /systems/X1-OE/markets/X1-OE-001A
-
-# view waypoints that list the given trade
-/systems/X1-OE/trades/IRON_ORE
-
-# list all static data for the game
-/game/data
 ```
 
 ## Quick Start
