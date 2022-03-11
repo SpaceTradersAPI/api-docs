@@ -468,6 +468,63 @@ paths:
       description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields.
       security:
         - AgentToken: []
+    get:
+      summary: ''
+      operationId: get-my-ships-shipSymbol-extract
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipSymbol:
+                        type: string
+                        minLength: 1
+                      cooldown:
+                        type: number
+                      yield:
+                        type: object
+                        properties:
+                          tradeSymbol:
+                            type: string
+                            minLength: 1
+                          units:
+                            type: number
+                        required:
+                          - tradeSymbol
+                          - units
+                    required:
+                      - shipSymbol
+                      - cooldown
+                      - yield
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: 054A8F-1
+                      cooldown: 30
+                      yield:
+                        tradeSymbol: SILICON
+                        units: 10
+              examples:
+                Success:
+                  value:
+                    data:
+                      shipSymbol: 054A8F-1
+                      cooldown: 30
+                      yield:
+                        tradeSymbol: SILICON
+                        units: 10
+      description: Get the status of your last extraction.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/jump':
     parameters:
       - schema:
