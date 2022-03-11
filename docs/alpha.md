@@ -153,7 +153,7 @@ Static game data can be queried and should be cached using the `/game/data` endp
 If you are ready to dive in, just hit the endpoint to register as a new agent. Don't worry too much about account creation right now - temporary accounts will be setup when creating a new agent. We will likely still be doing hard resets during the alpha.
 
 ```bash
-https POST v2-0-0-alpha.spacetraders.io/agents symbol=YOUR_SYMBOL faction=COMMERCE_REPUBLIC
+https POST v2-0-0.alpha.spacetraders.io/agents symbol=YOUR_SYMBOL faction=COMMERCE_REPUBLIC
 ```
 
 When starting a new game, you'll have a command ship to fly around and a contract with the Commerce Republic that you can accept for some credits. Try completing the contract, or just fly around and begin trading and exploring. You can also purchase some low-upkeep drones to begin automating trade routes.
