@@ -33,6 +33,30 @@ x-examples:
     cargo:
       - tradeSymbol: IRON_ORE
         units: 100
+examples:
+  - symbol: 55B261-1
+    crew: null
+    officers: null
+    fuel: 100
+    frame: FRAME_DRONE
+    reactor: REACTOR_SOLAR_I
+    engine: ENGINE_SOLAR_PROPULSION
+    modules:
+      - MODULE_CARGO_HOLD
+    mounts:
+      - MOUNT_MINING_LASER_I
+    registration:
+      factionSymbol: COMMERCE_REPUBLIC
+      agentSymbol: 55B261
+      fee: 100
+      role: EXCAVATOR
+    integrity:
+      frame: 1
+      reactor: 1
+      engine: 1
+    status: DOCKED
+    location: X1-OE-PM
+    cargo: []
 properties:
   symbol:
     type: string
@@ -107,6 +131,8 @@ properties:
       required:
         - tradeSymbol
         - units
+  fuel:
+    type: number
 required:
   - symbol
   - frame
@@ -119,3 +145,4 @@ required:
   - status
   - location
   - cargo
+  - fuel
