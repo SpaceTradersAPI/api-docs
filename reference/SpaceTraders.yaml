@@ -1416,7 +1416,8 @@ paths:
   /systems:
     get:
       summary: List all systems
-      tags: []
+      tags:
+        - systems
       responses:
         '200':
           description: OK
@@ -1491,8 +1492,115 @@ paths:
                 required:
                   - data
                   - meta
+              examples:
+                Success:
+                  value:
+                    data:
+                      - symbol: X1-OE
+                        sector: X1
+                        type: RED_STAR
+                        x: 0
+                        'y': 0
+                        waypoints:
+                          - X1-OE-PM
+                          - X1-OE-PM01
+                          - X1-OE-A005
+                          - X1-OE-25X
+                        factions:
+                          - COMMERCE_REPUBLIC
+                          - MINERS_COLLECTIVE
+                          - SPACERS_GUILD
+                        charted: true
+                        chartedBy: null
+                    meta:
+                      total: 0
+                      page: 0
+                      limit: 0
       operationId: get-systems
       description: Return a list of all systems.
+      security:
+        - AgentToken: []
+  '/my/ships/{shipSymbol}/navigate':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The ship symbol
+    post:
+      summary: Navigate ship
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipSymbol:
+                        type: string
+                        minLength: 1
+                      departure:
+                        type: string
+                        minLength: 1
+                      destination:
+                        type: string
+                        minLength: 1
+                      durationRemaining:
+                        type: number
+                      arrivedAt: {}
+                    required:
+                      - shipSymbol
+                      - departure
+                      - destination
+                      - durationRemaining
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: 3AE434-1
+                      departure: X1-OE-PM
+                      destination: X1-OE-A005
+                      durationRemaining: 2159
+                      arrivedAt: null
+              examples:
+                Success:
+                  value:
+                    data:
+                      shipSymbol: 3AE434-1
+                      departure: X1-OE-PM
+                      destination: X1-OE-A005
+                      durationRemaining: 2159
+                      arrivedAt: null
+      operationId: post-my-ships-shipSymbol-navigate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                  description: The waypoint symbol to navigate to.
+    get:
+      summary: ''
+      operationId: get-my-ships-shipSymbol-navigate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Get the status of your last navigation.
       security:
         - AgentToken: []
 tags:
@@ -1516,6 +1624,8 @@ tags:
   - name: mining
   - name: deliver
   - name: survey
+  - name: systems
+  - name: waypoints
 components:
   schemas: {}
   securitySchemes:
