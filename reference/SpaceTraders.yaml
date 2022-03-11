@@ -1660,6 +1660,23 @@ paths:
       description: Return a list of all systems.
       security:
         - AgentToken: []
+  '/my/ships/{shipSymbol}/survey':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Survey a waypoint
+      tags: []
+      responses: {}
+      operationId: post-my-ships-shipSymbol-survey
+    get:
+      summary: Get survey cooldown
+      tags: []
+      responses: {}
+      operationId: get-my-ships-shipSymbol-survey
 tags:
   - name: my
   - name: ships
