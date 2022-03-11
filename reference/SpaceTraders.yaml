@@ -19,7 +19,7 @@ info:
     ```json http
     {
       "method": "GET",
-      "url": "https://v2-0-0.alpha.spacetraders.io/status",
+      "url": "https://v2-0-0.alpha.spacetraders.io",
     }
     ```
 servers:
@@ -961,6 +961,89 @@ paths:
       description: Sell cargo from your ship's hold to the local market.
       security:
         - AgentToken: []
+  '/my/ships/{shipSymbol}/navigate':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+        description: The ship symbol
+    post:
+      summary: Navigate ship
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipSymbol:
+                        type: string
+                        minLength: 1
+                      departure:
+                        type: string
+                        minLength: 1
+                      destination:
+                        type: string
+                        minLength: 1
+                      durationRemaining:
+                        type: number
+                      arrivedAt: {}
+                    required:
+                      - shipSymbol
+                      - departure
+                      - destination
+                      - durationRemaining
+                required:
+                  - data
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: 3AE434-1
+                      departure: X1-OE-PM
+                      destination: X1-OE-A005
+                      durationRemaining: 2159
+                      arrivedAt: null
+              examples:
+                Success:
+                  value:
+                    data:
+                      shipSymbol: 3AE434-1
+                      departure: X1-OE-PM
+                      destination: X1-OE-A005
+                      durationRemaining: 2159
+                      arrivedAt: null
+      operationId: post-my-ships-shipSymbol-navigate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                  description: The waypoint symbol to navigate to.
+    get:
+      summary: ''
+      operationId: get-my-ships-shipSymbol-navigate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Get the status of your last navigation.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}':
     parameters:
       - schema:
@@ -1518,89 +1601,6 @@ paths:
                       limit: 0
       operationId: get-systems
       description: Return a list of all systems.
-      security:
-        - AgentToken: []
-  '/my/ships/{shipSymbol}/navigate':
-    parameters:
-      - schema:
-          type: string
-        name: shipSymbol
-        in: path
-        required: true
-        description: The ship symbol
-    post:
-      summary: Navigate ship
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      shipSymbol:
-                        type: string
-                        minLength: 1
-                      departure:
-                        type: string
-                        minLength: 1
-                      destination:
-                        type: string
-                        minLength: 1
-                      durationRemaining:
-                        type: number
-                      arrivedAt: {}
-                    required:
-                      - shipSymbol
-                      - departure
-                      - destination
-                      - durationRemaining
-                required:
-                  - data
-                x-examples:
-                  example-1:
-                    data:
-                      shipSymbol: 3AE434-1
-                      departure: X1-OE-PM
-                      destination: X1-OE-A005
-                      durationRemaining: 2159
-                      arrivedAt: null
-              examples:
-                Success:
-                  value:
-                    data:
-                      shipSymbol: 3AE434-1
-                      departure: X1-OE-PM
-                      destination: X1-OE-A005
-                      durationRemaining: 2159
-                      arrivedAt: null
-      operationId: post-my-ships-shipSymbol-navigate
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                destination:
-                  type: string
-                  description: The waypoint symbol to navigate to.
-    get:
-      summary: ''
-      operationId: get-my-ships-shipSymbol-navigate
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      description: Get the status of your last navigation.
       security:
         - AgentToken: []
 tags:
