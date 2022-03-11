@@ -1413,6 +1413,88 @@ paths:
       operationId: get-systems-systemSymbol
       security:
         - AgentToken: []
+  /systems:
+    get:
+      summary: List all systems
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - symbol: X1-OE
+                        sector: X1
+                        type: RED_STAR
+                        x: 0
+                        'y': 0
+                        waypoints:
+                          - X1-OE-PM
+                          - X1-OE-PM01
+                          - X1-OE-A005
+                          - X1-OE-25X
+                        factions:
+                          - COMMERCE_REPUBLIC
+                          - MINERS_COLLECTIVE
+                          - SPACERS_GUILD
+                        charted: true
+                        chartedBy: null
+                      - symbol: X1-EV
+                        sector: X1
+                        type: ORANGE_STAR
+                        x: 3
+                        'y': 4
+                        waypoints:
+                          - X1-EV-A004
+                        factions:
+                          - COMMERCE_REPUBLIC
+                        charted: true
+                        chartedBy: null
+                      - symbol: X1-ZZ
+                        sector: X1
+                        type: BLUE_STAR
+                        x: -2
+                        'y': 11
+                        waypoints: []
+                        factions: []
+                        charted: false
+                        chartedBy: null
+                    meta:
+                      total: 3
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/System.yaml
+                  meta:
+                    type: object
+                    required:
+                      - total
+                      - page
+                      - limit
+                    properties:
+                      total:
+                        type: number
+                      page:
+                        type: number
+                      limit:
+                        type: number
+                required:
+                  - data
+                  - meta
+      operationId: get-systems
+      description: Return a list of all systems.
+      security:
+        - AgentToken: []
 tags:
   - name: my
   - name: ships
