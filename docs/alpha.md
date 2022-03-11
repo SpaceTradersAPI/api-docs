@@ -118,13 +118,13 @@ Static game data can be queried and should be cached using the `/game/data` endp
 /my/ships/EMBER-01/extract survey='{signature: "...", deposits: "...", expiration: "..."}'
 
 # purchase cargo and load it into your ship
-/my/ships/EMBER-01/purchase symbol=HEAVY_MACHINERY quantity=99999
+/my/ships/EMBER-01/purchase tradeSymbol=HEAVY_MACHINERY units=99999
 
 # sell cargo and unload it from your ship
-/my/ships/EMBER-01/sell symbol=HEAVY_MACHINERY quantity=99999
+/my/ships/EMBER-01/sell tradeSymbol=HEAVY_MACHINERY units=99999
 
 # jettison cargo from your ship
-/my/ships/EMBER-01/jettison symbol=HEAVY_MACHINERY quantity=99999
+/my/ships/EMBER-01/jettison tradeSymbol=HEAVY_MACHINERY quantity=99999
 
 # view all systems
 /systems
