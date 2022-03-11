@@ -461,10 +461,23 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              type:
+                - object
+                - 'null'
               properties:
                 survey:
                   $ref: ../models/Survey.yaml
+            examples:
+              No Survey:
+                value: {}
+              With Survey:
+                value:
+                  survey:
+                    signature: X1-OE-D2DD38
+                    deposits:
+                      - COPPER_ORE
+                    expiration: '2022-03-08T05:41:55.514Z'
+        description: ''
       description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields.
       security:
         - AgentToken: []
@@ -525,6 +538,137 @@ paths:
       description: Get the status of your last extraction.
       security:
         - AgentToken: []
+  '/my/ships/{shipSymbol}/survey':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Survey a waypoint
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - signature: X1-OE-D2DD38
+                        deposits:
+                          - COPPER_ORE
+                        expiration: '2022-03-08T05:41:55.514Z'
+                      - signature: X1-OE-B58FEB
+                        deposits:
+                          - ALUMINUM_ORE
+                          - ALUMINUM_ORE
+                          - ALUMINUM_ORE
+                        expiration: '2022-03-08T05:39:15.519Z'
+                      - signature: X1-OE-0E326C
+                        deposits:
+                          - ALUMINUM_ORE
+                          - SILICON
+                        expiration: '2022-03-08T05:20:27.521Z'
+                      - signature: X1-OE-5CDFA4
+                        deposits:
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - IRON_ORE
+                        expiration: '2022-03-08T05:44:34.522Z'
+                      - signature: X1-OE-86C3A1
+                        deposits:
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - IRON_ORE
+                        expiration: '2022-03-08T05:43:45.522Z'
+                      - signature: X1-OE-C97BEA
+                        deposits:
+                          - ALUMINUM_ORE
+                          - COPPER_ORE
+                          - QUARTZ
+                          - QUARTZ
+                        expiration: '2022-03-08T05:22:39.523Z'
+                      - signature: X1-OE-9913BD
+                        deposits:
+                          - QUARTZ
+                        expiration: '2022-03-08T05:37:45.523Z'
+                      - signature: X1-OE-8D87D2
+                        deposits:
+                          - COPPER_ORE
+                          - SILICON
+                        expiration: '2022-03-08T05:32:57.524Z'
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/Survey.yaml
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      - signature: X1-OE-D2DD38
+                        deposits:
+                          - COPPER_ORE
+                        expiration: '2022-03-08T05:41:55.514Z'
+                      - signature: X1-OE-B58FEB
+                        deposits:
+                          - ALUMINUM_ORE
+                          - ALUMINUM_ORE
+                          - ALUMINUM_ORE
+                        expiration: '2022-03-08T05:39:15.519Z'
+                      - signature: X1-OE-0E326C
+                        deposits:
+                          - ALUMINUM_ORE
+                          - SILICON
+                        expiration: '2022-03-08T05:20:27.521Z'
+                      - signature: X1-OE-5CDFA4
+                        deposits:
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - IRON_ORE
+                        expiration: '2022-03-08T05:44:34.522Z'
+                      - signature: X1-OE-86C3A1
+                        deposits:
+                          - COPPER_ORE
+                          - COPPER_ORE
+                          - IRON_ORE
+                        expiration: '2022-03-08T05:43:45.522Z'
+                      - signature: X1-OE-C97BEA
+                        deposits:
+                          - ALUMINUM_ORE
+                          - COPPER_ORE
+                          - QUARTZ
+                          - QUARTZ
+                        expiration: '2022-03-08T05:22:39.523Z'
+                      - signature: X1-OE-9913BD
+                        deposits:
+                          - QUARTZ
+                        expiration: '2022-03-08T05:37:45.523Z'
+                      - signature: X1-OE-8D87D2
+                        deposits:
+                          - COPPER_ORE
+                          - SILICON
+                        expiration: '2022-03-08T05:32:57.524Z'
+      operationId: post-my-ships-shipSymbol-survey
+      security:
+        - AgentToken: []
+    get:
+      summary: Get survey cooldown
+      tags: []
+      responses: {}
+      operationId: get-my-ships-shipSymbol-survey
+      description: ''
   '/my/ships/{shipSymbol}/jump':
     parameters:
       - schema:
@@ -1030,8 +1174,8 @@ paths:
       summary: Navigate ship
       tags: []
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -1660,23 +1804,6 @@ paths:
       description: Return a list of all systems.
       security:
         - AgentToken: []
-  '/my/ships/{shipSymbol}/survey':
-    parameters:
-      - schema:
-          type: string
-        name: shipSymbol
-        in: path
-        required: true
-    post:
-      summary: Survey a waypoint
-      tags: []
-      responses: {}
-      operationId: post-my-ships-shipSymbol-survey
-    get:
-      summary: Get survey cooldown
-      tags: []
-      responses: {}
-      operationId: get-my-ships-shipSymbol-survey
 tags:
   - name: my
   - name: ships
