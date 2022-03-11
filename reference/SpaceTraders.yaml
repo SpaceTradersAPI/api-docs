@@ -7,6 +7,7 @@ info:
     name: Joel Brubaker
     email: joel@spacetraders.io
   license:
+    identifier: 'https://choosealicense.com/no-permission/'
     name: 'No'
   description: |-
     SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology.
@@ -27,11 +28,12 @@ servers:
 paths:
   /agents:
     post:
-      summary: Register as a new agent
-      tags: []
+      summary: Register a new agent
+      tags:
+        - agents
       responses:
         '201':
-          description: Created
+          description: OK
           content:
             application/json:
               schema:
@@ -111,7 +113,22 @@ paths:
                           - tradeSymbol: string
                             units: 0
       operationId: post-agents
-      description: Creates a new agent and ties it to a temporary account.
+      description: |-
+        Creates a new agent and ties it to a temporary Account. Use `COMMERCE_REPUBLIC` as your starting faction if you don't know any other factions to choose from.
+
+        The agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.
+
+        A new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.
+
+        > #### Keep your token safe and secure
+        >
+        > Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.
+
+        You can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field waypoint, and execute the `/my/ships/{shipSymbol}/accept` endpoint to mine various types of ores and minerals.
+
+        Return to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.
+
+        When your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.
       requestBody:
         content:
           application/json:
@@ -120,12 +137,21 @@ paths:
               properties:
                 symbol:
                   type: string
+                  description: How other agents will see your ships and information.
+                  minLength: 4
+                  maxLength: 8
+                  example: BADGER
                 faction:
                   type: string
+                  default: COMMERCE_REPUBLIC
+                  description: The faction you choose determines your headquarters.
+        description: ''
   /my/agent:
     get:
       summary: Get your agent details
-      tags: []
+      tags:
+        - agents
+        - my
       responses:
         '200':
           description: OK
@@ -146,11 +172,15 @@ paths:
                       credits: 0
       operationId: get-my-agent
       security:
-        - Agent Token: []
+        - AgentToken: []
+      description: Fetch your agent's details.
   '/my/ships/{shipSymbol}/chart':
     post:
       summary: Submit a system or waypoint chart
-      tags: []
+      tags:
+        - my
+        - ships
+        - chart
       responses:
         '201':
           description: Created
@@ -175,6 +205,8 @@ paths:
                         - X1-ZZ-7-EE
       operationId: 'post-my-ships-:shipSymbol-chart'
       description: Chart a new system or waypoint.
+      security:
+        - AgentToken: []
     parameters:
       - schema:
           type: string
@@ -192,7 +224,11 @@ paths:
         description: The symbol of the ship
     post:
       summary: Deliver goods on a contract
-      tags: []
+      tags:
+        - contracts
+        - my
+        - ships
+        - deliver
       responses:
         '201':
           description: Created
@@ -214,6 +250,8 @@ paths:
                 required:
                   - data
       operationId: post-my-ships-shipSymbol-deliver
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/dock':
     parameters:
       - schema:
@@ -224,7 +262,10 @@ paths:
         description: The symbol of the ship
     post:
       summary: Dock your ship
-      tags: []
+      tags:
+        - my
+        - ships
+        - dock
       responses:
         '201':
           description: Created
@@ -253,6 +294,8 @@ paths:
                     data:
                       status: DOCKED
       operationId: post-my-ships-shipSymbol-dock
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/orbit':
     parameters:
       - schema:
@@ -263,7 +306,10 @@ paths:
         description: The symbol of the ship
     post:
       summary: Transition your ship into orbit
-      tags: []
+      tags:
+        - my
+        - ships
+        - orbit
       responses:
         '201':
           description: Created
@@ -290,6 +336,9 @@ paths:
                     data:
                       status: ORBIT
       operationId: post-my-ships-shipSymbol-orbit
+      security:
+        - AgentToken: []
+      description: Transition your ship from docked into orbit. Ships are placed into orbit by default when arriving at a destination. Consecutive calls to this endpoint will continue to return a 200 response status.
   '/my/ships/{shipSymbol}/jettison':
     parameters:
       - schema:
@@ -299,7 +348,10 @@ paths:
         required: true
     post:
       summary: Jettison cargo from your ship
-      tags: []
+      tags:
+        - my
+        - ships
+        - jettison
       responses:
         '201':
           description: Created
@@ -335,6 +387,8 @@ paths:
                       units: 95
       operationId: post-my-ships-shipSymbol-jettison
       description: Jettison cargo from your ship's cargo hold.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/extract':
     parameters:
       - schema:
@@ -342,9 +396,15 @@ paths:
         name: shipSymbol
         in: path
         required: true
+        description: The ship symbol
     post:
       summary: Extract resources from a waypoint
-      tags: []
+      tags:
+        - extract
+        - mining
+        - my
+        - ships
+        - survey
       responses:
         '201':
           description: Created
@@ -406,6 +466,8 @@ paths:
                 survey:
                   $ref: ../models/Survey.yaml
       description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/jump':
     parameters:
       - schema:
@@ -415,7 +477,11 @@ paths:
         required: true
     post:
       summary: Jump to a new system
-      tags: []
+      tags:
+        - jump
+        - my
+        - ships
+        - navigation
       responses:
         '201':
           description: Created
@@ -456,6 +522,8 @@ paths:
                       destination: 0b1802ba-da4d-4308-aefb-1e5065f98a53
                       cooldown: 43200
       operationId: post-my-ships-shipSymbol-jump
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/purchase':
     parameters:
       - schema:
@@ -465,7 +533,12 @@ paths:
         required: true
     post:
       summary: Purchase cargo for your ship
-      tags: []
+      tags:
+        - markets
+        - my
+        - purchase
+        - ships
+        - trade
       responses:
         '201':
           description: Created
@@ -511,6 +584,8 @@ paths:
                       credits: -843
                       units: 1
       operationId: post-my-ships-shipSymbol-purchase
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/refuel':
     parameters:
       - schema:
@@ -520,7 +595,10 @@ paths:
         required: true
     post:
       summary: Refuel your ship
-      tags: []
+      tags:
+        - my
+        - ships
+        - refuel
       responses:
         '201':
           description: Created
@@ -554,6 +632,8 @@ paths:
                       credits: -1920
                       fuel: 800
       operationId: post-my-ships-shipSymbol-refuel
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/scan':
     parameters:
       - schema:
@@ -563,7 +643,10 @@ paths:
         required: true
     post:
       summary: Scan approaching or departing ships from your location
-      tags: []
+      tags:
+        - my
+        - ships
+        - scan
       responses:
         '201':
           description: Created
@@ -794,6 +877,8 @@ paths:
                           expiration: '2022-03-08T05:19:19.726Z'
                       cooldown: 60
       operationId: post-my-ships-shipSymbol-scan
+      security:
+        - AgentToken: []
       description: Scan approaching or departing ships.
       requestBody:
         content:
@@ -822,7 +907,12 @@ paths:
         required: true
     post:
       summary: Sell cargo from your ship
-      tags: []
+      tags:
+        - markets
+        - my
+        - sell
+        - ships
+        - trade
       responses:
         '200':
           description: OK
@@ -869,6 +959,8 @@ paths:
                       units: -1
       operationId: post-my-ships-shipSymbol-sell
       description: Sell cargo from your ship's hold to the local market.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}':
     parameters:
       - schema:
@@ -878,7 +970,9 @@ paths:
         required: true
     get:
       summary: View the details of your ship
-      tags: []
+      tags:
+        - my
+        - ships
       responses:
         '200':
           description: OK
@@ -919,16 +1013,14 @@ paths:
                   - data
       operationId: get-my-ships-shipSymbol
       description: Retrieve the details of your ship.
+      security:
+        - AgentToken: []
   /my/ships:
-    parameters:
-      - schema:
-          type: string
-        name: shipSymbol
-        in: path
-        required: true
     get:
       summary: View a list of all your ships
-      tags: []
+      tags:
+        - my
+        - ships
       responses:
         '200':
           description: OK
@@ -1230,10 +1322,33 @@ paths:
                       limit: 20
       operationId: get-my-ships
       description: Retrieve all of your ships.
+      security:
+        - AgentToken: []
+tags:
+  - name: my
+  - name: ships
+  - name: markets
+  - name: trade
+  - name: sell
+  - name: purchase
+  - name: navigation
+  - name: agents
+  - name: dock
+  - name: orbit
+  - name: jettison
+  - name: jump
+  - name: refuel
+  - name: scan
+  - name: contracts
+  - name: chart
+  - name: extract
+  - name: mining
+  - name: deliver
+  - name: survey
 components:
   schemas: {}
   securitySchemes:
-    Agent Token:
+    AgentToken:
       type: http
       scheme: bearer
       description: When you register a new agent you will be granted a private bearer token which grants authorization to use the API.
