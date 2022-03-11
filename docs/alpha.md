@@ -1,7 +1,3 @@
----
-internal: true
----
-
 # Alpha Preview Guide
 
 Hello everyone and welcome to the SpaceTraders v2.0.0-alpha preview! We are excited to share progress with our supporters and hope you enjoy the new changes to the game.
