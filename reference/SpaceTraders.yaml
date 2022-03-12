@@ -525,7 +525,6 @@ paths:
     post:
       summary: Survey Waypoint
       tags:
-        - extract
         - ships
       responses:
         '201':
@@ -640,8 +639,6 @@ paths:
     get:
       summary: Survey Cooldown
       tags:
-        - extract
-        - survey
         - ships
       responses:
         '200':
@@ -675,9 +672,7 @@ paths:
     post:
       summary: Jump Ship
       tags:
-        - jump
         - ships
-        - navigation
       responses:
         '201':
           description: Created
@@ -761,7 +756,6 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - jump
         - ships
   '/my/ships/{shipSymbol}/purchase':
     parameters:
@@ -816,7 +810,6 @@ paths:
       summary: Refuel
       tags:
         - ships
-        - refuel
       responses:
         '201':
           description: Created
@@ -863,7 +856,6 @@ paths:
       summary: Scan
       tags:
         - ships
-        - scan
       responses:
         '201':
           description: Created
