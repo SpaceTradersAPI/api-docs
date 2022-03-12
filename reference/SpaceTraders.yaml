@@ -463,8 +463,7 @@ paths:
                 survey:
                   $ref: ../models/Survey.yaml
             examples:
-              No Survey:
-                value: {}
+              No Survey: {}
               With Survey:
                 value:
                   survey:
@@ -473,7 +472,7 @@ paths:
                       - COPPER_ORE
                     expiration: '2022-03-08T05:41:55.514Z'
         description: ''
-      description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields.
+      description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.
       security:
         - AgentToken: []
     get:
