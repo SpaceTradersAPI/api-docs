@@ -1,0 +1,29 @@
+description: ''
+type: object
+properties:
+  waypointSymbol:
+    type: string
+    minLength: 1
+  tradeSymbol:
+    type: string
+    minLength: 1
+  credits:
+    type: number
+  units:
+    type: number
+required:
+  - waypointSymbol
+  - tradeSymbol
+  - credits
+  - units
+x-examples:
+  example-1:
+    waypointSymbol: X1-OE-PM
+    tradeSymbol: MICROPROCESSORS
+    credits: -843
+    units: 1
+examples:
+  - waypointSymbol: X1-OE-PM
+    tradeSymbol: MICROPROCESSORS
+    credits: 843
+    units: 1

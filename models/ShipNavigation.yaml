@@ -1,0 +1,33 @@
+description: ''
+type: object
+properties:
+  shipSymbol:
+    type: string
+    minLength: 1
+  departure:
+    type: string
+    minLength: 1
+  destination:
+    type: string
+    minLength: 1
+  durationRemaining:
+    type: number
+  arrivedAt: {}
+required:
+  - shipSymbol
+  - departure
+  - destination
+  - durationRemaining
+x-examples:
+  example-1:
+    shipSymbol: 3AE434-1
+    departure: X1-OE-PM
+    destination: X1-OE-A005
+    durationRemaining: 2159
+    arrivedAt: null
+examples:
+  - shipSymbol: 3AE434-1
+    departure: X1-OE-PM
+    destination: X1-OE-A005
+    durationRemaining: 2159
+    arrivedAt: null

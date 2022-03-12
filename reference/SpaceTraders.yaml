@@ -791,27 +791,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      waypointSymbol:
-                        type: string
-                        minLength: 1
-                      tradeSymbol:
-                        type: string
-                        minLength: 1
-                      credits:
-                        type: number
-                      units:
-                        type: number
-                    required:
-                      - waypointSymbol
-                      - tradeSymbol
-                      - credits
-                      - units
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
@@ -819,6 +798,11 @@ paths:
                       tradeSymbol: MICROPROCESSORS
                       credits: -843
                       units: 1
+                properties:
+                  data:
+                    $ref: ../models/Trade.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
@@ -899,56 +883,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      ships:
-                        type: array
-                        uniqueItems: true
-                        minItems: 1
-                        items:
-                          required:
-                            - symbol
-                            - frameSymbol
-                            - reactorSymbol
-                            - engineSymbol
-                            - expiration
-                          properties:
-                            symbol:
-                              type: string
-                              minLength: 1
-                            registration:
-                              type: object
-                              properties:
-                                factionSymbol:
-                                  type: string
-                                  minLength: 1
-                                role:
-                                  type: string
-                                  minLength: 1
-                              required:
-                                - factionSymbol
-                                - role
-                            frameSymbol:
-                              type: string
-                              minLength: 1
-                            reactorSymbol:
-                              type: string
-                              minLength: 1
-                            engineSymbol:
-                              type: string
-                              minLength: 1
-                            expiration:
-                              type: string
-                              minLength: 1
-                      cooldown:
-                        type: number
-                    required:
-                      - ships
-                      - cooldown
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
@@ -1034,6 +968,23 @@ paths:
                           engineSymbol: ENGINE_ION_DRIVE_II
                           expiration: '2022-03-08T05:19:19.726Z'
                       cooldown: 60
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - ships
+                      - cooldown
+                    properties:
+                      ships:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          $ref: ../models/ScannedShip.yaml
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
@@ -1132,6 +1083,9 @@ paths:
               properties:
                 mode:
                   type: string
+                  enum:
+                    - APPROACHING_SHIPS
+                    - DEPARTING_SHIPS
               required:
                 - mode
             examples:
@@ -1165,27 +1119,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      waypointSymbol:
-                        type: string
-                        minLength: 1
-                      tradeSymbol:
-                        type: string
-                        minLength: 1
-                      credits:
-                        type: number
-                      units:
-                        type: number
-                    required:
-                      - waypointSymbol
-                      - tradeSymbol
-                      - credits
-                      - units
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
@@ -1193,6 +1126,11 @@ paths:
                       tradeSymbol: SILICON
                       credits: 144
                       units: -1
+                properties:
+                  data:
+                    $ref: ../models/Trade.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
@@ -1286,8 +1224,21 @@ paths:
           content:
             application/json:
               schema:
+                description: ''
                 type: object
-                properties: {}
+                x-examples:
+                  example-1:
+                    data:
+                      shipSymbol: 3AE434-1
+                      departure: X1-OE-PM
+                      destination: X1-OE-A005
+                      durationRemaining: 2159
+                      arrivedAt: null
+                properties:
+                  data:
+                    $ref: ../models/ShipNavigation.yaml
+                required:
+                  - data
       description: Get the status of your last navigation.
       security:
         - AgentToken: []
@@ -1844,47 +1795,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      symbol:
-                        type: string
-                        minLength: 1
-                      sector:
-                        type: string
-                        minLength: 1
-                      type:
-                        type: string
-                        minLength: 1
-                      x:
-                        type: number
-                      'y':
-                        type: number
-                      waypoints:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                      factions:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                      charted:
-                        type: boolean
-                      chartedBy: {}
-                    required:
-                      - symbol
-                      - sector
-                      - type
-                      - x
-                      - 'y'
-                      - waypoints
-                      - factions
-                      - charted
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
@@ -1897,6 +1807,11 @@ paths:
                       factions: []
                       charted: false
                       chartedBy: null
+                properties:
+                  data:
+                    $ref: ../models/System.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
@@ -1977,18 +1892,7 @@ paths:
                     items:
                       $ref: ../models/System.yaml
                   meta:
-                    type: object
-                    required:
-                      - total
-                      - page
-                      - limit
-                    properties:
-                      total:
-                        type: number
-                      page:
-                        type: number
-                      limit:
-                        type: number
+                    $ref: ../models/Meta.yaml
                 required:
                   - data
                   - meta
