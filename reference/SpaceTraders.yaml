@@ -636,6 +636,10 @@ paths:
       operationId: post-my-ships-shipSymbol-survey
       security:
         - AgentToken: []
+      description: |-
+        If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey as the body payload of the extract request. Your ship will enter a cooldown between consecutive survey requests.
+
+        Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.
     get:
       summary: Survey Cooldown
       tags:
@@ -661,7 +665,7 @@ paths:
                         duration: 899
                         expiration: '2022-03-12T02:11:35.618Z'
       operationId: get-my-ships-shipSymbol-survey
-      description: ''
+      description: 'Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action.'
   '/my/ships/{shipSymbol}/jump':
     parameters:
       - schema:
