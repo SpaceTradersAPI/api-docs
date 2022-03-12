@@ -404,7 +404,7 @@ paths:
         required: true
         description: The ship symbol
     post:
-      summary: Extraction
+      summary: Extract Resources
       tags:
         - ships
       responses:
@@ -799,6 +799,49 @@ paths:
       operationId: post-my-ships-shipSymbol-purchase
       security:
         - AgentToken: []
+  '/my/ships/{shipSymbol}/sell':
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Sell Cargo
+      tags:
+        - ships
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: SILICON
+                      credits: 144
+                      units: -1
+                properties:
+                  data:
+                    $ref: ../models/Trade.yaml
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      waypointSymbol: X1-OE-PM
+                      tradeSymbol: SILICON
+                      credits: 144
+                      units: -1
+      operationId: post-my-ships-shipSymbol-sell
+      description: Sell cargo from your ship's hold to the local market.
+      security:
+        - AgentToken: []
   '/my/ships/{shipSymbol}/refuel':
     parameters:
       - schema:
@@ -807,7 +850,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Refuel
+      summary: Refuel Ship
       tags:
         - ships
       responses:
@@ -1079,47 +1122,29 @@ paths:
                 value:
                   mode: APPROACHING_SHIPS
         description: ''
-  '/my/ships/{shipSymbol}/sell':
-    parameters:
-      - schema:
-          type: string
-        name: shipSymbol
-        in: path
-        required: true
-    post:
-      summary: Sell Cargo
-      tags:
-        - ships
+    get:
+      summary: Scan Cooldown
+      operationId: get-my-ships-shipSymbol-scan
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    data:
-                      waypointSymbol: X1-OE-PM
-                      tradeSymbol: SILICON
-                      credits: 144
-                      units: -1
                 properties:
                   data:
-                    $ref: ../models/Trade.yaml
-                required:
-                  - data
+                    type: object
+                    properties:
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
               examples:
                 Success:
                   value:
                     data:
-                      waypointSymbol: X1-OE-PM
-                      tradeSymbol: SILICON
-                      credits: 144
-                      units: -1
-      operationId: post-my-ships-shipSymbol-sell
-      description: Sell cargo from your ship's hold to the local market.
+                      cooldown:
+                        duration: 59
+                        expiration: '2022-03-12T00:42:44.220Z'
       security:
         - AgentToken: []
   '/my/ships/{shipSymbol}/navigate':
