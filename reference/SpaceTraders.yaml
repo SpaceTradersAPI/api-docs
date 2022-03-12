@@ -463,7 +463,8 @@ paths:
                 survey:
                   $ref: ../models/Survey.yaml
             examples:
-              No Survey: {}
+              No Survey:
+                value: {}
               With Survey:
                 value:
                   survey:
