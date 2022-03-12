@@ -178,7 +178,6 @@ paths:
     post:
       summary: Chart Waypoint
       tags:
-        - chart
         - ships
       responses:
         '201':
@@ -224,9 +223,7 @@ paths:
     post:
       summary: Deliver on Contract
       tags:
-        - contracts
         - ships
-        - deliver
       responses:
         '201':
           description: Created
@@ -278,7 +275,6 @@ paths:
       summary: Dock Ship
       tags:
         - ships
-        - dock
       responses:
         '201':
           description: Created
@@ -322,7 +318,6 @@ paths:
       summary: Orbit Ship
       tags:
         - ships
-        - orbit
       responses:
         '201':
           description: Created
@@ -363,7 +358,6 @@ paths:
       summary: Jettison Cargo
       tags:
         - ships
-        - jettison
       responses:
         '201':
           description: Created
@@ -412,10 +406,7 @@ paths:
     post:
       summary: Extraction
       tags:
-        - extract
-        - mining
         - ships
-        - survey
       responses:
         '201':
           description: Created
@@ -523,7 +514,6 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - extract
         - ships
   '/my/ships/{shipSymbol}/survey':
     parameters:
@@ -783,10 +773,7 @@ paths:
     post:
       summary: Purchase Cargo
       tags:
-        - markets
-        - purchase
         - ships
-        - trade
       responses:
         '201':
           description: Created
@@ -1110,10 +1097,7 @@ paths:
     post:
       summary: Sell Cargo
       tags:
-        - markets
-        - sell
         - ships
-        - trade
       responses:
         '200':
           description: OK
@@ -1155,9 +1139,8 @@ paths:
         required: true
         description: The ship symbol
     post:
-      summary: Navigate ship
+      summary: Navigate Ship
       tags:
-        - navigation
         - ships
       responses:
         '201':
@@ -1218,7 +1201,7 @@ paths:
                   type: string
                   description: The waypoint symbol to navigate to.
     get:
-      summary: Navigation
+      summary: Navigation Status
       operationId: get-my-ships-shipSymbol-navigate
       responses:
         '200':
@@ -1245,7 +1228,6 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - navigation
         - ships
   '/my/ships/{shipSymbol}':
     parameters:
