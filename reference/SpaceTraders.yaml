@@ -600,61 +600,54 @@ paths:
                         expiration: '2022-03-08T05:32:57.524Z'
                 properties:
                   data:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      $ref: ../models/Survey.yaml
+                    type: object
+                    properties:
+                      surveys:
+                        $ref: ../models/Survey.yaml
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
                 required:
                   - data
               examples:
                 Success:
                   value:
                     data:
-                      - signature: X1-OE-D2DD38
-                        deposits:
-                          - COPPER_ORE
-                        expiration: '2022-03-08T05:41:55.514Z'
-                      - signature: X1-OE-B58FEB
-                        deposits:
-                          - ALUMINUM_ORE
-                          - ALUMINUM_ORE
-                          - ALUMINUM_ORE
-                        expiration: '2022-03-08T05:39:15.519Z'
-                      - signature: X1-OE-0E326C
-                        deposits:
-                          - ALUMINUM_ORE
-                          - SILICON
-                        expiration: '2022-03-08T05:20:27.521Z'
-                      - signature: X1-OE-5CDFA4
-                        deposits:
-                          - COPPER_ORE
-                          - COPPER_ORE
-                          - COPPER_ORE
-                          - IRON_ORE
-                        expiration: '2022-03-08T05:44:34.522Z'
-                      - signature: X1-OE-86C3A1
-                        deposits:
-                          - COPPER_ORE
-                          - COPPER_ORE
-                          - IRON_ORE
-                        expiration: '2022-03-08T05:43:45.522Z'
-                      - signature: X1-OE-C97BEA
-                        deposits:
-                          - ALUMINUM_ORE
-                          - COPPER_ORE
-                          - QUARTZ
-                          - QUARTZ
-                        expiration: '2022-03-08T05:22:39.523Z'
-                      - signature: X1-OE-9913BD
-                        deposits:
-                          - QUARTZ
-                        expiration: '2022-03-08T05:37:45.523Z'
-                      - signature: X1-OE-8D87D2
-                        deposits:
-                          - COPPER_ORE
-                          - SILICON
-                        expiration: '2022-03-08T05:32:57.524Z'
+                      cooldown:
+                        duration: 899
+                        expiration: '2022-03-12T02:11:35.618Z'
+                      surveys:
+                        - signature: X1-OE-397C82
+                          deposits:
+                            - SILICON
+                          expiration: '2022-03-12T02:00:19.622Z'
+                        - signature: X1-OE-4413F6
+                          deposits:
+                            - ALUMINUM_ORE
+                            - ALUMINUM_ORE
+                            - COPPER_ORE
+                            - IRON_ORE
+                          expiration: '2022-03-12T02:20:08.625Z'
+                        - signature: X1-OE-E6480F
+                          deposits:
+                            - ALUMINUM_ORE
+                            - IRON_ORE
+                            - QUARTZ
+                            - SILICON
+                          expiration: '2022-03-12T02:18:00.626Z'
+                        - signature: X1-OE-660BE9
+                          deposits:
+                            - ALUMINUM_ORE
+                          expiration: '2022-03-12T02:20:45.626Z'
+                        - signature: X1-OE-D64798
+                          deposits:
+                            - COPPER_ORE
+                            - QUARTZ
+                            - SILICON
+                          expiration: '2022-03-12T02:07:33.626Z'
+                        - signature: X1-OE-F799F3
+                          deposits:
+                            - IRON_ORE
+                          expiration: '2022-03-12T02:23:16.627Z'
       operationId: post-my-ships-shipSymbol-survey
       security:
         - AgentToken: []
@@ -665,7 +658,26 @@ paths:
         - my
         - survey
         - ships
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+              examples:
+                Success:
+                  value:
+                    data:
+                      cooldown:
+                        duration: 899
+                        expiration: '2022-03-12T02:11:35.618Z'
       operationId: get-my-ships-shipSymbol-survey
       description: ''
   '/my/ships/{shipSymbol}/jump':
