@@ -428,49 +428,42 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      shipSymbol:
-                        type: string
-                        minLength: 1
-                      cooldown:
-                        type: number
-                      yield:
-                        type: object
-                        properties:
-                          tradeSymbol:
-                            type: string
-                            minLength: 1
-                          units:
-                            type: number
-                        required:
-                          - tradeSymbol
-                          - units
-                    required:
-                      - shipSymbol
-                      - cooldown
-                      - yield
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
-                      shipSymbol: 054A8F-1
-                      cooldown: 30
-                      yield:
-                        tradeSymbol: SILICON
-                        units: 14
+                      extraction:
+                        shipSymbol: 4B902A-1
+                        yield:
+                          tradeSymbol: SILICON
+                          units: 16
+                      cooldown:
+                        duration: 119
+                        expiration: '2022-03-12T00:41:29.371Z'
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - extraction
+                      - cooldown
+                    properties:
+                      extraction:
+                        $ref: ../models/Extraction.yaml
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
                     data:
-                      shipSymbol: 054A8F-1
-                      cooldown: 30
-                      yield:
-                        tradeSymbol: IRON_ORE
-                        units: 14
+                      extraction:
+                        shipSymbol: 4B902A-1
+                        yield:
+                          tradeSymbol: SILICON
+                          units: 16
+                      cooldown:
+                        duration: 119
+                        expiration: '2022-03-12T00:41:29.371Z'
       operationId: post-my-ships-shipSymbol-extract
       requestBody:
         content:
@@ -507,52 +500,36 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      shipSymbol:
-                        type: string
-                        minLength: 1
-                      cooldown:
-                        type: number
-                      yield:
-                        type: object
-                        properties:
-                          tradeSymbol:
-                            type: string
-                            minLength: 1
-                          units:
-                            type: number
-                        required:
-                          - tradeSymbol
-                          - units
-                    required:
-                      - shipSymbol
-                      - cooldown
-                      - yield
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
-                      shipSymbol: 054A8F-1
-                      cooldown: 30
-                      yield:
-                        tradeSymbol: SILICON
-                        units: 10
+                      cooldown:
+                        duration: 119
+                        expiration: '2022-03-12T00:41:29.285Z'
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - cooldown
+                    properties:
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
                     data:
-                      shipSymbol: 054A8F-1
-                      cooldown: 30
-                      yield:
-                        tradeSymbol: SILICON
-                        units: 10
+                      cooldown:
+                        duration: 119
+                        expiration: '2022-03-12T00:41:29.285Z'
       description: Get the status of your last extraction.
       security:
         - AgentToken: []
+      tags:
+        - extract
+        - my
+        - ships
   '/my/ships/{shipSymbol}/survey':
     parameters:
       - schema:
@@ -680,7 +657,11 @@ paths:
         - AgentToken: []
     get:
       summary: Get survey cooldown
-      tags: []
+      tags:
+        - extract
+        - my
+        - survey
+        - ships
       responses: {}
       operationId: get-my-ships-shipSymbol-survey
       description: ''
@@ -1260,6 +1241,10 @@ paths:
       description: Get the status of your last navigation.
       security:
         - AgentToken: []
+      tags:
+        - my
+        - navigation
+        - ships
   '/my/ships/{shipSymbol}':
     parameters:
       - schema:
@@ -1772,7 +1757,8 @@ paths:
         required: true
     post:
       summary: Accept a contract
-      tags: []
+      tags:
+        - contracts
       responses:
         '201':
           description: Accepted
@@ -1798,7 +1784,8 @@ paths:
         description: The system symbol
     get:
       summary: Fetch a system
-      tags: []
+      tags:
+        - systems
       responses:
         '200':
           description: OK
