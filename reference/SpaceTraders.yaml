@@ -176,11 +176,10 @@ paths:
       description: Fetch your agent's details.
   '/my/ships/{shipSymbol}/chart':
     post:
-      summary: Submit a system or waypoint chart
+      summary: Chart Waypoint
       tags:
-        - my
-        - ships
         - chart
+        - ships
       responses:
         '201':
           description: Created
@@ -223,7 +222,7 @@ paths:
         required: true
         description: The symbol of the ship
     post:
-      summary: Deliver goods on a contract
+      summary: Deliver on Contract
       tags:
         - contracts
         - my
@@ -276,7 +275,7 @@ paths:
         required: true
         description: The symbol of the ship
     post:
-      summary: Dock your ship
+      summary: Dock Ship
       tags:
         - my
         - ships
@@ -320,7 +319,7 @@ paths:
         required: true
         description: The symbol of the ship
     post:
-      summary: Transition your ship into orbit
+      summary: Orbit Ship
       tags:
         - my
         - ships
@@ -362,7 +361,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Jettison cargo from your ship
+      summary: Jettison Cargo
       tags:
         - my
         - ships
@@ -413,7 +412,7 @@ paths:
         required: true
         description: The ship symbol
     post:
-      summary: Extract resources from a waypoint
+      summary: Extraction
       tags:
         - extract
         - mining
@@ -490,7 +489,7 @@ paths:
       security:
         - AgentToken: []
     get:
-      summary: ''
+      summary: Extraction Cooldown
       operationId: get-my-ships-shipSymbol-extract
       responses:
         '200':
@@ -538,7 +537,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Survey a waypoint
+      summary: Survey Waypoint
       tags:
         - extract
         - my
@@ -652,7 +651,7 @@ paths:
       security:
         - AgentToken: []
     get:
-      summary: Get survey cooldown
+      summary: Survey Cooldown
       tags:
         - extract
         - my
@@ -688,7 +687,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Jump to a new system
+      summary: Jump Ship
       tags:
         - jump
         - my
@@ -748,7 +747,7 @@ paths:
       security:
         - AgentToken: []
     get:
-      summary: ''
+      summary: Jump Cooldown
       operationId: get-my-ships-shipSymbol-jump
       responses:
         '200':
@@ -788,7 +787,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Purchase cargo for your ship
+      summary: Purchase Cargo
       tags:
         - markets
         - my
@@ -834,7 +833,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Refuel your ship
+      summary: Refuel
       tags:
         - my
         - ships
@@ -882,7 +881,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Scan approaching or departing ships from your location
+      summary: Scan
       tags:
         - my
         - ships
@@ -1116,7 +1115,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Sell cargo from your ship
+      summary: Sell Cargo
       tags:
         - markets
         - my
@@ -1228,7 +1227,7 @@ paths:
                   type: string
                   description: The waypoint symbol to navigate to.
     get:
-      summary: ''
+      summary: Navigation
       operationId: get-my-ships-shipSymbol-navigate
       responses:
         '200':
@@ -1266,7 +1265,7 @@ paths:
         in: path
         required: true
     get:
-      summary: View the details of your ship
+      summary: View Ship
       tags:
         - my
         - ships
@@ -1314,7 +1313,7 @@ paths:
         - AgentToken: []
   /my/ships:
     get:
-      summary: View a list of all your ships
+      summary: List Ships
       tags:
         - my
         - ships
@@ -1623,7 +1622,7 @@ paths:
         - AgentToken: []
   /my/contracts:
     get:
-      summary: List all of your contracts
+      summary: List Contracts
       tags:
         - my
         - contracts
@@ -1723,7 +1722,7 @@ paths:
         required: true
         description: The contract ID
     get:
-      summary: Get contract details
+      summary: View Contract
       tags:
         - my
         - contracts
@@ -1769,7 +1768,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Accept a contract
+      summary: Accept Contract
       tags:
         - contracts
       responses:
@@ -1796,7 +1795,7 @@ paths:
         required: true
         description: The system symbol
     get:
-      summary: Fetch a system
+      summary: View System
       tags:
         - systems
       responses:
@@ -1842,7 +1841,7 @@ paths:
         - AgentToken: []
   /systems:
     get:
-      summary: List all systems
+      summary: List Systems
       tags:
         - systems
       responses:
