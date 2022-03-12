@@ -1173,29 +1173,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      shipSymbol:
-                        type: string
-                        minLength: 1
-                      departure:
-                        type: string
-                        minLength: 1
-                      destination:
-                        type: string
-                        minLength: 1
-                      durationRemaining:
-                        type: number
-                      arrivedAt: {}
-                    required:
-                      - shipSymbol
-                      - departure
-                      - destination
-                      - durationRemaining
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
@@ -1204,15 +1181,27 @@ paths:
                       destination: X1-OE-A005
                       durationRemaining: 2159
                       arrivedAt: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      navigation:
+                        $ref: ../models/ShipNavigation.yaml
+                      fuelCost:
+                        type: number
+                required:
+                  - data
               examples:
                 Success:
                   value:
                     data:
-                      shipSymbol: 3AE434-1
-                      departure: X1-OE-PM
-                      destination: X1-OE-A005
-                      durationRemaining: 2159
-                      arrivedAt: null
+                      fuelCost: 38
+                      navigation:
+                        shipSymbol: BA03F2-1
+                        departure: X1-OE-PM
+                        destination: X1-OE-A005
+                        durationRemaining: 2279
+                        arrivedAt: null
       operationId: post-my-ships-shipSymbol-navigate
       requestBody:
         content:
@@ -1244,9 +1233,22 @@ paths:
                       arrivedAt: null
                 properties:
                   data:
-                    $ref: ../models/ShipNavigation.yaml
+                    type: object
+                    properties:
+                      navigation:
+                        $ref: ../models/ShipNavigation.yaml
                 required:
                   - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      navigation:
+                        shipSymbol: BA03F2-1
+                        departure: X1-OE-PM
+                        destination: X1-OE-A005
+                        durationRemaining: 2279
+                        arrivedAt: null
       description: Get the status of your last navigation.
       security:
         - AgentToken: []
