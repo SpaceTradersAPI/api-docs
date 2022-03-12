@@ -1621,6 +1621,67 @@ paths:
       description: Retrieve all of your ships.
       security:
         - AgentToken: []
+    post:
+      summary: Purchase Ship
+      tags:
+        - shipyards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      symbol: 4F4D44-1
+                      crew: null
+                      officers: null
+                      fuel: 100
+                      frame: FRAME_DRONE
+                      reactor: REACTOR_SOLAR_I
+                      engine: ENGINE_SOLAR_PROPULSION
+                      modules:
+                        - MODULE_CARGO_HOLD
+                      mounts:
+                        - MOUNT_MINING_LASER_I
+                      registration:
+                        factionSymbol: COMMERCE_REPUBLIC
+                        agentSymbol: 4F4D44
+                        fee: 100
+                        role: EXCAVATOR
+                      integrity:
+                        frame: 1
+                        reactor: 1
+                        engine: 1
+                      status: DOCKED
+                      location: X1-OE-PM
+                      cargo: []
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ship:
+                        $ref: ../models/Ship.yaml
+                      credits:
+                        type: number
+                required:
+                  - data
+      operationId: post-my-ships
+      security:
+        - AgentToken: []
+      description: Purchase a ship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The id of the shipyard listing you want to purchase.
   /my/contracts:
     get:
       summary: List Contracts
@@ -1934,6 +1995,140 @@ paths:
       operationId: get-systems-systemSymbol
       security:
         - AgentToken: []
+  '/systems/{systemSymbol}/shipyards':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: the system symbol
+    get:
+      summary: List Shipyards
+      tags:
+        - shipyards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - symbol: X1-OE-PM
+                        faction: COMMERCE_REPUBLIC
+                    meta:
+                      total: 1
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/Shipyard.yaml
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+      operationId: get-systems-systemSymbol-shipyards
+      security:
+        - AgentToken: []
+      description: Returns a list of all shipyards in a system.
+  '/systems/{systemSymbol}/shipyards/{waypointSymbol}':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+      - schema:
+          type: string
+        name: waypointSymbol
+        in: path
+        required: true
+        description: The waypoint symbol
+    get:
+      summary: Shipyard Details
+      tags:
+        - shipyards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: ../models/Shipyard.yaml
+      operationId: get-systems-systemSymbol-shipyards-waypointSymbol
+      security:
+        - AgentToken: []
+  '/systems/{systemSymbol}/shipyards/{waypointSymbol}/ships':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+      - schema:
+          type: string
+        name: waypointSymbol
+        in: path
+        required: true
+        description: The waypoint symbol
+    get:
+      summary: Shipyard Listings
+      tags:
+        - shipyards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - id: cl0nahta90000aq0jonm1nprl
+                        waypoint: X1-OE-PM
+                        price: 58191
+                        role: EXCAVATOR
+                        frame: FRAME_DRONE
+                        reactor: REACTOR_SOLAR_I
+                        engine: ENGINE_SOLAR_PROPULSION
+                        modules:
+                          - MODULE_CARGO_HOLD
+                        mounts:
+                          - MOUNT_MINING_LASER_I
+                    meta:
+                      total: 1
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/ShipyardListing.yaml
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+              examples: {}
+      operationId: get-systems-systemSymbol-shipyards-waypointSymbol-ships
 tags:
   - name: ships
   - name: markets
@@ -1956,6 +2151,7 @@ tags:
   - name: survey
   - name: systems
   - name: waypoints
+  - name: shipyards
 components:
   schemas: {}
   securitySchemes:

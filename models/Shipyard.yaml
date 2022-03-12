@@ -1,0 +1,19 @@
+description: ''
+type: object
+properties:
+  symbol:
+    type: string
+    minLength: 1
+  faction:
+    type: string
+    minLength: 1
+required:
+  - symbol
+  - faction
+x-examples:
+  example-1:
+    symbol: X1-OE-PM
+    faction: COMMERCE_REPUBLIC
+examples:
+  - symbol: X1-OE-PM
+    faction: COMMERCE_REPUBLIC
