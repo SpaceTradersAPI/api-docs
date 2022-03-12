@@ -65,7 +65,7 @@ The 2.0 version of the API has been significantly reworked and introduces some n
 - **Trade** - all goods in the universe have a unique trade symbol (in all caps), such as `IRON_ORE`, `NANOBOTS` or `REACTOR_FISSION_I`.
 - **Market** - most populated waypoints have a market where you can buy and sell goods. Each market will have a list of imports, exports and commodities that you can trade in. Markets evolve with player activity - prices will rise and fall with trades, and new imports or exports will be added as the market grows.
 - **Tariff** - a flat tax added to each unit of a good traded at a market
-- **Shipyards** - where agents can purchase ships, perform maintanence, or install new modules and mounts.
+- **Shipyards** - where agents can purchase ships, perform maintenance, or install new modules and mounts.
 
 ### New API Endpoints
 
@@ -77,7 +77,7 @@ All routes that are prefixed with `/my` will require an agent access token to be
 
 When registering your account, you will be given a different type of token called an Account Token, which allows you to create a new Agent or update your account details such as email address, discord handle or patreon code.
 
-All routes targeting a specific ship, such as `/my/ships/COBRA-00AF/survey` will put a lock on your ship until the request is resolved. This means you can only take a single action at a time for your ship. Sending two simaltaneous actions for a single ship will throw a 409 conflict response code.
+All routes targeting a specific ship, such as `/my/ships/COBRA-00AF/survey` will put a lock on your ship until the request is resolved. This means you can only take a single action at a time for your ship. Sending two simultaneous actions for a single ship will throw a 409 conflict response code.
 
 All routes with the prefix `/systems` will return limited data until an agent submits the chart for that system or you have a ship present in the system.
 
