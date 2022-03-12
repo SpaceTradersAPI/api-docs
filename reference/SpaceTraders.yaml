@@ -28,7 +28,7 @@ servers:
 paths:
   /agents:
     post:
-      summary: Register a new agent
+      summary: Register New Agent
       tags:
         - agents
       responses:
@@ -149,7 +149,7 @@ paths:
         description: ''
   /my/agent:
     get:
-      summary: Get your agent details
+      summary: My Agent Details
       tags:
         - agents
       responses:
@@ -1714,7 +1714,7 @@ paths:
         required: true
         description: The contract ID
     get:
-      summary: View Contract
+      summary: Contract Details
       tags:
         - contracts
       responses:
@@ -1776,60 +1776,6 @@ paths:
       security:
         - AgentToken: []
       description: Accept a contract.
-  '/systems/{systemSymbol}':
-    parameters:
-      - schema:
-          type: string
-          default: X1-OE
-        name: systemSymbol
-        in: path
-        required: true
-        description: The system symbol
-    get:
-      summary: View System
-      tags:
-        - systems
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    data:
-                      symbol: X1-ZZ
-                      sector: X1
-                      type: BLUE_STAR
-                      x: -2
-                      'y': 9
-                      waypoints: []
-                      factions: []
-                      charted: false
-                      chartedBy: null
-                properties:
-                  data:
-                    $ref: ../models/System.yaml
-                required:
-                  - data
-              examples:
-                Success:
-                  value:
-                    data:
-                      symbol: X1-ZZ
-                      sector: X1
-                      type: BLUE_STAR
-                      x: -2
-                      'y': 9
-                      waypoints: []
-                      factions: []
-                      charted: false
-                      chartedBy: null
-      operationId: get-systems-systemSymbol
-      security:
-        - AgentToken: []
   /systems:
     get:
       summary: List Systems
@@ -1924,6 +1870,60 @@ paths:
                       limit: 0
       operationId: get-systems
       description: Return a list of all systems.
+      security:
+        - AgentToken: []
+  '/systems/{systemSymbol}':
+    parameters:
+      - schema:
+          type: string
+          default: X1-OE
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+    get:
+      summary: View System
+      tags:
+        - systems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      symbol: X1-ZZ
+                      sector: X1
+                      type: BLUE_STAR
+                      x: -2
+                      'y': 9
+                      waypoints: []
+                      factions: []
+                      charted: false
+                      chartedBy: null
+                properties:
+                  data:
+                    $ref: ../models/System.yaml
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      symbol: X1-ZZ
+                      sector: X1
+                      type: BLUE_STAR
+                      x: -2
+                      'y': 9
+                      waypoints: []
+                      factions: []
+                      charted: false
+                      chartedBy: null
+      operationId: get-systems-systemSymbol
       security:
         - AgentToken: []
 tags:
