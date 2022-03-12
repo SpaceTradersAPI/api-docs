@@ -539,7 +539,10 @@ paths:
         required: true
     post:
       summary: Survey a waypoint
-      tags: []
+      tags:
+        - extract
+        - my
+        - ships
       responses:
         '201':
           description: Created
@@ -687,40 +690,84 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      shipSymbol:
-                        type: string
-                        minLength: 1
-                      destination:
-                        type: string
-                        minLength: 1
-                      cooldown:
-                        type: number
-                    required:
-                      - shipSymbol
-                      - destination
-                      - cooldown
-                required:
-                  - data
                 x-examples:
                   example-1:
                     data:
-                      shipSymbol: CE392B-1
-                      destination: 0b1802ba-da4d-4308-aefb-1e5065f98a53
-                      cooldown: 43200
+                      jump:
+                        shipSymbol: 1D7FDA-1
+                        destination: 00E0B1
+                      cooldown:
+                        duration: 719
+                        expiration: '2022-03-12T00:52:56.735Z'
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - jump
+                      - cooldown
+                    properties:
+                      jump:
+                        type: object
+                        required:
+                          - shipSymbol
+                          - destination
+                        properties:
+                          shipSymbol:
+                            type: string
+                            minLength: 1
+                          destination:
+                            type: string
+                            minLength: 1
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+                required:
+                  - data
               examples:
                 Success:
                   value:
                     data:
-                      shipSymbol: CE392B-1
-                      destination: 0b1802ba-da4d-4308-aefb-1e5065f98a53
-                      cooldown: 43200
+                      jump:
+                        shipSymbol: 1D7FDA-1
+                        destination: 00E0B1
+                      cooldown:
+                        duration: 719
+                        expiration: '2022-03-12T00:52:56.735Z'
       operationId: post-my-ships-shipSymbol-jump
       security:
         - AgentToken: []
+    get:
+      summary: ''
+      operationId: get-my-ships-shipSymbol-jump
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      cooldown:
+                        duration: 719
+                        expiration: '2022-03-12T00:52:56.735Z'
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - cooldown
+                    properties:
+                      cooldown:
+                        $ref: ../models/Cooldown.yaml
+                required:
+                  - data
+      security:
+        - AgentToken: []
+      tags:
+        - jump
+        - my
+        - ships
   '/my/ships/{shipSymbol}/purchase':
     parameters:
       - schema:
@@ -1168,7 +1215,10 @@ paths:
         description: The ship symbol
     post:
       summary: Navigate ship
-      tags: []
+      tags:
+        - my
+        - navigation
+        - ships
       responses:
         '201':
           description: Created
