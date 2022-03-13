@@ -867,6 +867,17 @@ paths:
       description: Sell cargo from your ship's hold to the local market.
       security:
         - AgentToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tradeSymbol:
+                  type: string
+                units:
+                  type: number
+        description: ''
   '/my/ships/{shipSymbol}/refuel':
     parameters:
       - schema:
