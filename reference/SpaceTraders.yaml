@@ -814,6 +814,16 @@ paths:
       operationId: post-my-ships-shipSymbol-purchase
       security:
         - AgentToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tradeSymbol:
+                  type: string
+                units:
+                  type: number
   '/my/ships/{shipSymbol}/sell':
     parameters:
       - schema:
