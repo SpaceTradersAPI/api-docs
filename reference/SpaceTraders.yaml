@@ -1212,6 +1212,8 @@ paths:
                 destination:
                   type: string
                   description: The waypoint symbol to navigate to.
+      security:
+        - AgentToken: []
     get:
       summary: Navigation Status
       operationId: get-my-ships-shipSymbol-navigate
