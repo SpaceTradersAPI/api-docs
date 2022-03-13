@@ -395,6 +395,17 @@ paths:
       description: Jettison cargo from your ship's cargo hold.
       security:
         - AgentToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tradeSymbol:
+                  type: string
+                units:
+                  type: number
+                  minimum: 1
   '/my/ships/{shipSymbol}/extract':
     parameters:
       - schema:
