@@ -525,7 +525,7 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - ships
+        - mining
   '/my/ships/{shipSymbol}/survey':
     parameters:
       - schema:
