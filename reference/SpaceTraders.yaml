@@ -178,7 +178,7 @@ paths:
     post:
       summary: Chart Waypoint
       tags:
-        - ships
+        - navigation
       responses:
         '201':
           description: Created
@@ -274,7 +274,7 @@ paths:
     post:
       summary: Dock Ship
       tags:
-        - ships
+        - navigation
       responses:
         '201':
           description: Created
@@ -316,8 +316,6 @@ paths:
         description: The symbol of the ship
     post:
       summary: Orbit Ship
-      tags:
-        - ships
       responses:
         '201':
           description: Created
@@ -347,6 +345,8 @@ paths:
       security:
         - AgentToken: []
       description: Transition your ship from docked into orbit. Ships are placed into orbit by default when arriving at a destination. Consecutive calls to this endpoint will continue to return a 200 response status.
+      tags:
+        - navigation
   '/my/ships/{shipSymbol}/jettison':
     parameters:
       - schema:
@@ -888,7 +888,7 @@ paths:
     post:
       summary: Refuel Ship
       tags:
-        - ships
+        - navigation
       responses:
         '201':
           description: Created
@@ -1287,7 +1287,7 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - ships
+        - navigation
   '/my/ships/{shipSymbol}':
     parameters:
       - schema:
