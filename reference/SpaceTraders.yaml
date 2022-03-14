@@ -1196,7 +1196,7 @@ paths:
     post:
       summary: Navigate Ship
       tags:
-        - ships
+        - navigation
       responses:
         '201':
           description: Created
