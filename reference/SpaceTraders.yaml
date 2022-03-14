@@ -223,7 +223,7 @@ paths:
     post:
       summary: Deliver on Contract
       tags:
-        - ships
+        - contracts
       responses:
         '201':
           description: Created
@@ -687,7 +687,7 @@ paths:
     post:
       summary: Jump Ship
       tags:
-        - ships
+        - navigation
       responses:
         '201':
           description: Created
@@ -771,7 +771,7 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - ships
+        - navigation
   '/my/ships/{shipSymbol}/purchase':
     parameters:
       - schema:
