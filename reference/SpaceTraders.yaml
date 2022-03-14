@@ -782,7 +782,7 @@ paths:
     post:
       summary: Purchase Cargo
       tags:
-        - ships
+        - trade
       responses:
         '201':
           description: Created
@@ -834,7 +834,7 @@ paths:
     post:
       summary: Sell Cargo
       tags:
-        - ships
+        - trade
       responses:
         '200':
           description: OK
