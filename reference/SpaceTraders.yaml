@@ -2163,6 +2163,8 @@ paths:
                   - meta
               examples: {}
       operationId: get-systems-systemSymbol-shipyards-waypointSymbol-ships
+      security:
+        - AgentToken: []
 tags:
   - name: ships
   - name: markets
