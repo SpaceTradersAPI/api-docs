@@ -416,8 +416,6 @@ paths:
         description: The ship symbol
     post:
       summary: Extract Resources
-      tags:
-        - ships
       responses:
         '201':
           description: Created
@@ -487,6 +485,8 @@ paths:
       description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.
       security:
         - AgentToken: []
+      tags:
+        - extract
     get:
       summary: Extraction Cooldown
       operationId: get-my-ships-shipSymbol-extract
@@ -525,7 +525,7 @@ paths:
       security:
         - AgentToken: []
       tags:
-        - mining
+        - extract
   '/my/ships/{shipSymbol}/survey':
     parameters:
       - schema:
@@ -535,8 +535,6 @@ paths:
         required: true
     post:
       summary: Survey Waypoint
-      tags:
-        - ships
       responses:
         '201':
           description: Created
@@ -651,10 +649,12 @@ paths:
         If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.
 
         Your ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.
+      tags:
+        - extract
     get:
       summary: Survey Cooldown
       tags:
-        - ships
+        - extract
       responses:
         '200':
           description: OK
