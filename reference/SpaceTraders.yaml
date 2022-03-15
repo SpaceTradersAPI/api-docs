@@ -10,11 +10,14 @@ info:
     name: 'No'
     url: 'https://choosealicense.com/no-permission/'
   description: |-
-    SpaceTraders is a unique multiplayer game built on a free Web API. You control a fleets of ships that can explore the universe, mine asteroids, automate trade routes, meet new factions, and discover hidden technology.
+    SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.
 
-    Participate in one of our regular competitive seasons or build a client to share with the community.
+    Similar to games such as Eve Online, you work with or against other players to establish trade routes, chart new systems, mine precious ores, patrol for pirates, spy on factions, and discover hidden treasures.
 
-    SpaceTraders is currently in an alpha stage of development. Join our Discord to learn more.
+    But what makes our game unique? SpaceTraders is entirely accessible through open and well-documented Web API endpoints. In fact, SpaceTraders doesn't have a first-class client to play the game - if you want to take it for a spin, you should try one of our community-created web clients, or use the API documentation to see how you might play a game through an API.
+
+    If this sounds fun and interesting to you, please drop into our Discord and get to know the community. We are actively working on new clients, new ideas and sharing tips for how to play the game.
+
 
     ```json http
     {
@@ -202,7 +205,7 @@ paths:
                         - X1-ZZ
                         - X1-ZZ-7-EE
       operationId: 'post-my-ships-:shipSymbol-chart'
-      description: Chart a new system or waypoint.
+      description: 'Chart a new system or waypoint. Returns an array of the symbols that have been charted, including the system and the waypoint if both were uncharted, or just the waypoint.'
       security:
         - AgentToken: []
     parameters:
@@ -741,6 +744,15 @@ paths:
       operationId: post-my-ships-shipSymbol-jump
       security:
         - AgentToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                  description: The system symbol to jump to.
     get:
       summary: Jump Cooldown
       operationId: get-my-ships-shipSymbol-jump
@@ -2195,3 +2207,4 @@ components:
       type: http
       scheme: bearer
       description: When you register a new agent you will be granted a private bearer token which grants authorization to use the API.
+  requestBodies: {}
