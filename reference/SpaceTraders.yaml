@@ -2333,7 +2333,7 @@ paths:
         required: true
         description: The system symbol
     get:
-      summary: Get Trades
+      summary: List Markets
       tags:
         - markets
       responses:
@@ -2466,7 +2466,7 @@ paths:
         required: true
         description: The market symbol
     get:
-      summary: Get Trades
+      summary: View Market
       tags:
         - markets
       responses:
