@@ -2324,6 +2324,226 @@ paths:
       operationId: get-trade-tradeSymbol-exchange
       security:
         - AgentToken: []
+  '/systems/{systemSymbol}/markets':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+    get:
+      summary: Get Trades
+      tags:
+        - markets
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      exports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: MICROPROCESSORS
+                          price: 834
+                          tariff: 0
+                      imports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: SILICON
+                          price: 144
+                          tariff: 0
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: QUARTZ
+                          price: 286
+                          tariff: 0
+                      exchange: []
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - exports
+                      - imports
+                      - exchange
+                    properties:
+                      exports:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                      imports:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                      exchange:
+                        type: array
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      exports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: MICROPROCESSORS
+                          price: 834
+                          tariff: 0
+                      imports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: SILICON
+                          price: 144
+                          tariff: 0
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: QUARTZ
+                          price: 286
+                          tariff: 0
+                      exchange: []
+        '':
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - X1-OE-PM
+                      - X1-OE-PM01
+                      - X1-OE-EL70
+                    meta:
+                      total: 3
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+              examples:
+                Success:
+                  value:
+                    data:
+                      - X1-OE-PM
+                      - X1-OE-PM01
+                      - X1-OE-EL70
+                    meta:
+                      total: 3
+                      page: 1
+                      limit: 20
+      operationId: get-systems-systemSymbol-markets-marketSymbol
+      description: |-
+        Retrieve a list of all charted markets in the given system. Market data is only available if the waypoint is charted and contains a communications relay.
+
+        To install a communications relay at a market, look at the `my/ships/{shipSymbol}/deploy` endpoint.
+      security:
+        - AgentToken: []
+  '/systems/{systemSymbol}/markets/{marketSymbol}':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+      - schema:
+          type: string
+        name: marketSymbol
+        in: path
+        required: true
+        description: The market symbol
+    get:
+      summary: Get Trades
+      tags:
+        - markets
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      exports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: MICROPROCESSORS
+                          price: 834
+                          tariff: 0
+                      imports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: SILICON
+                          price: 144
+                          tariff: 0
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: QUARTZ
+                          price: 286
+                          tariff: 0
+                      exchange: []
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - exports
+                      - imports
+                      - exchange
+                    properties:
+                      exports:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                      imports:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                      exchange:
+                        type: array
+                        items:
+                          $ref: ../models/MarketTrade.yaml
+                required:
+                  - data
+              examples:
+                Success:
+                  value:
+                    data:
+                      exports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: MICROPROCESSORS
+                          price: 834
+                          tariff: 0
+                      imports:
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: SILICON
+                          price: 144
+                          tariff: 0
+                        - waypointSymbol: X1-OE-PM
+                          tradeSymbol: QUARTZ
+                          price: 286
+                          tariff: 0
+                      exchange: []
+      operationId: get-systems-systemSymbol-markets-marketSymbol
+      description: 'Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.'
+      security:
+        - AgentToken: []
 tags:
   - name: ships
   - name: markets
