@@ -1,0 +1,18 @@
+description: ""
+type: object
+properties:
+  waypointSymbol:
+    type: string
+    minLength: 1
+  tradeSymbol:
+    type: string
+    minLength: 1
+  price:
+    type: number
+  tariff:
+    type: number
+required:
+  - waypointSymbol
+  - tradeSymbol
+  - price
+  - tariff
