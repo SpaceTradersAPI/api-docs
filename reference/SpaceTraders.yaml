@@ -2541,7 +2541,12 @@ paths:
                           tariff: 0
                       exchange: []
       operationId: get-systems-systemSymbol-markets-marketSymbol
-      description: 'Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.'
+      description: |-
+        Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.
+
+        Market data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.
+
+        See `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.
       security:
         - AgentToken: []
 tags:
