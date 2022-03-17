@@ -7,8 +7,8 @@ info:
     name: Joel Brubaker
     email: joel@spacetraders.io
   license:
-    name: "No"
-    url: "https://choosealicense.com/no-permission/"
+    name: 'No'
+    url: 'https://choosealicense.com/no-permission/'
   description: |-
     SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.
 
@@ -26,7 +26,7 @@ info:
     }
     ```
 servers:
-  - url: "https://v2-0-0.alpha.spacetraders.io"
+  - url: 'https://v2-0-0.alpha.spacetraders.io'
     description: v2.0.0-alpha
 paths:
   /agents:
@@ -35,7 +35,7 @@ paths:
       tags:
         - agents
       responses:
-        "201":
+        '201':
           description: OK
           content:
             application/json:
@@ -80,7 +80,7 @@ paths:
                         faction: COMMERCE_REPUBLIC
                         type: PROCUREMENT
                         terms:
-                          deadline: "2022-03-11T05:16:59.113Z"
+                          deadline: '2022-03-11T05:16:59.113Z'
                           payment:
                             onAccepted: 20000
                             onFulfilled: 100000
@@ -91,7 +91,7 @@ paths:
                               fulfilled: 0
                         accepted: false
                         fulfilled: false
-                        expiresAt: "2022-03-09T05:16:59.112Z"
+                        expiresAt: '2022-03-09T05:16:59.112Z'
                       ship:
                         symbol: string
                         frame: string
@@ -149,14 +149,14 @@ paths:
                   type: string
                   default: COMMERCE_REPUBLIC
                   description: The faction you choose determines your headquarters.
-        description: ""
+        description: ''
   /my/agent:
     get:
       summary: My Agent Details
       tags:
         - agents
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -177,13 +177,13 @@ paths:
       security:
         - AgentToken: []
       description: Fetch your agent's details.
-  "/my/ships/{shipSymbol}/chart":
+  '/my/ships/{shipSymbol}/chart':
     post:
       summary: Chart Waypoint
       tags:
         - navigation
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -204,8 +204,8 @@ paths:
                       submitted:
                         - X1-ZZ
                         - X1-ZZ-7-EE
-      operationId: "post-my-ships-:shipSymbol-chart"
-      description: "Chart a new system or waypoint. Returns an array of the symbols that have been charted, including the system and the waypoint if both were uncharted, or just the waypoint."
+      operationId: 'post-my-ships-:shipSymbol-chart'
+      description: 'Chart a new system or waypoint. Returns an array of the symbols that have been charted, including the system and the waypoint if both were uncharted, or just the waypoint.'
       security:
         - AgentToken: []
     parameters:
@@ -215,7 +215,7 @@ paths:
         in: path
         required: true
         description: The symbol of the ship
-  "/my/ships/{shipSymbol}/deliver":
+  '/my/ships/{shipSymbol}/deliver':
     parameters:
       - schema:
           type: string
@@ -228,12 +228,12 @@ paths:
       tags:
         - contracts
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -266,7 +266,7 @@ paths:
                 - contractId
                 - tradeSymbol
       description: Deliver cargo on a given contract.
-  "/my/ships/{shipSymbol}/dock":
+  '/my/ships/{shipSymbol}/dock':
     parameters:
       - schema:
           type: string
@@ -279,12 +279,12 @@ paths:
       tags:
         - navigation
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
@@ -309,7 +309,7 @@ paths:
       security:
         - AgentToken: []
       description: Transition your ship from orbit to docked. Consecutive calls to this endpoint will succeed.
-  "/my/ships/{shipSymbol}/orbit":
+  '/my/ships/{shipSymbol}/orbit':
     parameters:
       - schema:
           type: string
@@ -320,12 +320,12 @@ paths:
     post:
       summary: Orbit Ship
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -350,7 +350,7 @@ paths:
       description: Transition your ship from docked into orbit. Ships are placed into orbit by default when arriving at a destination. Consecutive calls to this endpoint will continue to return a 200 response status.
       tags:
         - navigation
-  "/my/ships/{shipSymbol}/jettison":
+  '/my/ships/{shipSymbol}/jettison':
     parameters:
       - schema:
           type: string
@@ -362,12 +362,12 @@ paths:
       tags:
         - ships
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
@@ -409,7 +409,7 @@ paths:
                 units:
                   type: number
                   minimum: 1
-  "/my/ships/{shipSymbol}/extract":
+  '/my/ships/{shipSymbol}/extract':
     parameters:
       - schema:
           type: string
@@ -420,12 +420,12 @@ paths:
     post:
       summary: Extract Resources
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -437,7 +437,7 @@ paths:
                           units: 16
                       cooldown:
                         duration: 119
-                        expiration: "2022-03-12T00:41:29.371Z"
+                        expiration: '2022-03-12T00:41:29.371Z'
                 properties:
                   data:
                     type: object
@@ -462,7 +462,7 @@ paths:
                           units: 16
                       cooldown:
                         duration: 119
-                        expiration: "2022-03-12T00:41:29.371Z"
+                        expiration: '2022-03-12T00:41:29.371Z'
       operationId: post-my-ships-shipSymbol-extract
       requestBody:
         content:
@@ -470,7 +470,7 @@ paths:
             schema:
               type:
                 - object
-                - "null"
+                - 'null'
               properties:
                 survey:
                   $ref: ../models/Survey.yaml
@@ -483,8 +483,8 @@ paths:
                     signature: X1-OE-D2DD38
                     deposits:
                       - COPPER_ORE
-                    expiration: "2022-03-08T05:41:55.514Z"
-        description: ""
+                    expiration: '2022-03-08T05:41:55.514Z'
+        description: ''
       description: Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.
       security:
         - AgentToken: []
@@ -494,19 +494,19 @@ paths:
       summary: Extraction Cooldown
       operationId: get-my-ships-shipSymbol-extract
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
                     data:
                       cooldown:
                         duration: 119
-                        expiration: "2022-03-12T00:41:29.285Z"
+                        expiration: '2022-03-12T00:41:29.285Z'
                 properties:
                   data:
                     type: object
@@ -523,13 +523,13 @@ paths:
                     data:
                       cooldown:
                         duration: 119
-                        expiration: "2022-03-12T00:41:29.285Z"
+                        expiration: '2022-03-12T00:41:29.285Z'
       description: Get the status of your last extraction.
       security:
         - AgentToken: []
       tags:
         - extract
-  "/my/ships/{shipSymbol}/survey":
+  '/my/ships/{shipSymbol}/survey':
     parameters:
       - schema:
           type: string
@@ -539,12 +539,12 @@ paths:
     post:
       summary: Survey Waypoint
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -552,47 +552,47 @@ paths:
                       - signature: X1-OE-D2DD38
                         deposits:
                           - COPPER_ORE
-                        expiration: "2022-03-08T05:41:55.514Z"
+                        expiration: '2022-03-08T05:41:55.514Z'
                       - signature: X1-OE-B58FEB
                         deposits:
                           - ALUMINUM_ORE
                           - ALUMINUM_ORE
                           - ALUMINUM_ORE
-                        expiration: "2022-03-08T05:39:15.519Z"
+                        expiration: '2022-03-08T05:39:15.519Z'
                       - signature: X1-OE-0E326C
                         deposits:
                           - ALUMINUM_ORE
                           - SILICON
-                        expiration: "2022-03-08T05:20:27.521Z"
+                        expiration: '2022-03-08T05:20:27.521Z'
                       - signature: X1-OE-5CDFA4
                         deposits:
                           - COPPER_ORE
                           - COPPER_ORE
                           - COPPER_ORE
                           - IRON_ORE
-                        expiration: "2022-03-08T05:44:34.522Z"
+                        expiration: '2022-03-08T05:44:34.522Z'
                       - signature: X1-OE-86C3A1
                         deposits:
                           - COPPER_ORE
                           - COPPER_ORE
                           - IRON_ORE
-                        expiration: "2022-03-08T05:43:45.522Z"
+                        expiration: '2022-03-08T05:43:45.522Z'
                       - signature: X1-OE-C97BEA
                         deposits:
                           - ALUMINUM_ORE
                           - COPPER_ORE
                           - QUARTZ
                           - QUARTZ
-                        expiration: "2022-03-08T05:22:39.523Z"
+                        expiration: '2022-03-08T05:22:39.523Z'
                       - signature: X1-OE-9913BD
                         deposits:
                           - QUARTZ
-                        expiration: "2022-03-08T05:37:45.523Z"
+                        expiration: '2022-03-08T05:37:45.523Z'
                       - signature: X1-OE-8D87D2
                         deposits:
                           - COPPER_ORE
                           - SILICON
-                        expiration: "2022-03-08T05:32:57.524Z"
+                        expiration: '2022-03-08T05:32:57.524Z'
                 properties:
                   data:
                     type: object
@@ -611,40 +611,40 @@ paths:
                     data:
                       cooldown:
                         duration: 899
-                        expiration: "2022-03-12T02:11:35.618Z"
+                        expiration: '2022-03-12T02:11:35.618Z'
                       surveys:
                         - signature: X1-OE-397C82
                           deposits:
                             - SILICON
-                          expiration: "2022-03-12T02:00:19.622Z"
+                          expiration: '2022-03-12T02:00:19.622Z'
                         - signature: X1-OE-4413F6
                           deposits:
                             - ALUMINUM_ORE
                             - ALUMINUM_ORE
                             - COPPER_ORE
                             - IRON_ORE
-                          expiration: "2022-03-12T02:20:08.625Z"
+                          expiration: '2022-03-12T02:20:08.625Z'
                         - signature: X1-OE-E6480F
                           deposits:
                             - ALUMINUM_ORE
                             - IRON_ORE
                             - QUARTZ
                             - SILICON
-                          expiration: "2022-03-12T02:18:00.626Z"
+                          expiration: '2022-03-12T02:18:00.626Z'
                         - signature: X1-OE-660BE9
                           deposits:
                             - ALUMINUM_ORE
-                          expiration: "2022-03-12T02:20:45.626Z"
+                          expiration: '2022-03-12T02:20:45.626Z'
                         - signature: X1-OE-D64798
                           deposits:
                             - COPPER_ORE
                             - QUARTZ
                             - SILICON
-                          expiration: "2022-03-12T02:07:33.626Z"
+                          expiration: '2022-03-12T02:07:33.626Z'
                         - signature: X1-OE-F799F3
                           deposits:
                             - IRON_ORE
-                          expiration: "2022-03-12T02:23:16.627Z"
+                          expiration: '2022-03-12T02:23:16.627Z'
       operationId: post-my-ships-shipSymbol-survey
       security:
         - AgentToken: []
@@ -659,7 +659,7 @@ paths:
       tags:
         - extract
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -677,10 +677,10 @@ paths:
                     data:
                       cooldown:
                         duration: 899
-                        expiration: "2022-03-12T02:11:35.618Z"
+                        expiration: '2022-03-12T02:11:35.618Z'
       operationId: get-my-ships-shipSymbol-survey
-      description: "Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action."
-  "/my/ships/{shipSymbol}/jump":
+      description: 'Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action.'
+  '/my/ships/{shipSymbol}/jump':
     parameters:
       - schema:
           type: string
@@ -692,12 +692,12 @@ paths:
       tags:
         - navigation
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -707,7 +707,7 @@ paths:
                         destination: 00E0B1
                       cooldown:
                         duration: 719
-                        expiration: "2022-03-12T00:52:56.735Z"
+                        expiration: '2022-03-12T00:52:56.735Z'
                 properties:
                   data:
                     type: object
@@ -740,7 +740,7 @@ paths:
                         destination: 00E0B1
                       cooldown:
                         duration: 719
-                        expiration: "2022-03-12T00:52:56.735Z"
+                        expiration: '2022-03-12T00:52:56.735Z'
       operationId: post-my-ships-shipSymbol-jump
       security:
         - AgentToken: []
@@ -757,19 +757,19 @@ paths:
       summary: Jump Cooldown
       operationId: get-my-ships-shipSymbol-jump
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
                     data:
                       cooldown:
                         duration: 719
-                        expiration: "2022-03-12T00:52:56.735Z"
+                        expiration: '2022-03-12T00:52:56.735Z'
                 properties:
                   data:
                     type: object
@@ -784,7 +784,7 @@ paths:
         - AgentToken: []
       tags:
         - navigation
-  "/my/ships/{shipSymbol}/purchase":
+  '/my/ships/{shipSymbol}/purchase':
     parameters:
       - schema:
           type: string
@@ -796,12 +796,12 @@ paths:
       tags:
         - trade
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -836,7 +836,7 @@ paths:
                   type: string
                 units:
                   type: number
-  "/my/ships/{shipSymbol}/sell":
+  '/my/ships/{shipSymbol}/sell':
     parameters:
       - schema:
           type: string
@@ -848,12 +848,12 @@ paths:
       tags:
         - trade
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -889,8 +889,8 @@ paths:
                   type: string
                 units:
                   type: number
-        description: ""
-  "/my/ships/{shipSymbol}/refuel":
+        description: ''
+  '/my/ships/{shipSymbol}/refuel':
     parameters:
       - schema:
           type: string
@@ -902,12 +902,12 @@ paths:
       tags:
         - navigation
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
@@ -936,7 +936,7 @@ paths:
       operationId: post-my-ships-shipSymbol-refuel
       security:
         - AgentToken: []
-  "/my/ships/{shipSymbol}/deploy":
+  '/my/ships/{shipSymbol}/deploy':
     parameters:
       - schema:
           type: string
@@ -948,11 +948,25 @@ paths:
       tags:
         - markets
       responses:
-        "204":
+        '204':
           description: OK
       operationId: post-my-ships-shipSymbol-deploy
       security:
         - AgentToken: []
+      description: |-
+        Use this endpoint to deploy a Communications Relay to a waypoint. A waypoint with a communications relay will allow agents to retrieve price information from the market. Without a relay, agents must send a ship to a market to retrieve price information.
+
+        Communication relays can be purchased from a market that exports `COMM_RELAY_I`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tradeSymbol:
+                  type: string
+              required:
+                - tradeSymbol
     requestBody:
       content:
         application/json:
@@ -961,7 +975,7 @@ paths:
             properties:
               tradeSymbol:
                 type: string
-  "/my/ships/{shipSymbol}/scan":
+  '/my/ships/{shipSymbol}/scan':
     parameters:
       - schema:
           type: string
@@ -973,12 +987,12 @@ paths:
       tags:
         - ships
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -991,7 +1005,7 @@ paths:
                           frameSymbol: FRAME_HEAVY_FREIGHTER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-08T05:20:14.725Z"
+                          expiration: '2022-03-08T05:20:14.725Z'
                         - symbol: ZANZIBAR_TRIKES-DF0AAF
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -999,7 +1013,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-08T05:20:00.725Z"
+                          expiration: '2022-03-08T05:20:00.725Z'
                         - symbol: ZANZIBAR_TRIKES-9B80BE
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1007,7 +1021,7 @@ paths:
                           frameSymbol: FRAME_TRANSPORT
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-08T05:20:06.725Z"
+                          expiration: '2022-03-08T05:20:06.725Z'
                         - symbol: COMMERCE_REPUBLIC-117520
                           registration:
                             factionSymbol: COMMERCE_REPUBLIC
@@ -1015,7 +1029,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-08T05:19:55.725Z"
+                          expiration: '2022-03-08T05:19:55.725Z'
                         - symbol: SPACERS_GUILD-609AA5
                           registration:
                             factionSymbol: SPACERS_GUILD
@@ -1023,7 +1037,7 @@ paths:
                           frameSymbol: FRAME_FRIGATE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-08T05:19:38.725Z"
+                          expiration: '2022-03-08T05:19:38.725Z'
                         - symbol: MINERS_COLLECTIVE-7AD322
                           registration:
                             factionSymbol: MINERS_COLLECTIVE
@@ -1031,7 +1045,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-08T05:19:11.725Z"
+                          expiration: '2022-03-08T05:19:11.725Z'
                         - symbol: ZANZIBAR_TRIKES-AE6D78
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1039,7 +1053,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-08T05:20:44.725Z"
+                          expiration: '2022-03-08T05:20:44.725Z'
                         - symbol: SPACERS_GUILD-92828B
                           registration:
                             factionSymbol: SPACERS_GUILD
@@ -1047,7 +1061,7 @@ paths:
                           frameSymbol: FRAME_LIGHT_FREIGHTER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-08T05:20:49.726Z"
+                          expiration: '2022-03-08T05:20:49.726Z'
                         - symbol: ZANZIBAR_TRIKES-B5EAD1
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1055,7 +1069,7 @@ paths:
                           frameSymbol: FRAME_TRANSPORT
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-08T05:20:25.726Z"
+                          expiration: '2022-03-08T05:20:25.726Z'
                         - symbol: ZANZIBAR_TRIKES-6A4E0D
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1063,7 +1077,7 @@ paths:
                           frameSymbol: FRAME_EXPLORER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-08T05:19:19.726Z"
+                          expiration: '2022-03-08T05:19:19.726Z'
                       cooldown: 60
                 properties:
                   data:
@@ -1088,7 +1102,7 @@ paths:
                     data:
                       cooldown:
                         duration: 59
-                        expiration: "2022-03-12T00:42:44.220Z"
+                        expiration: '2022-03-12T00:42:44.220Z'
                       ships:
                         - symbol: SPACERS_GUILD-65E1BA
                           registration:
@@ -1097,7 +1111,7 @@ paths:
                           frameSymbol: FRAME_LIGHT_FREIGHTER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:44:14.222Z"
+                          expiration: '2022-03-12T00:44:14.222Z'
                         - symbol: MINERS_COLLECTIVE-C6ACCA
                           registration:
                             factionSymbol: MINERS_COLLECTIVE
@@ -1105,7 +1119,7 @@ paths:
                           frameSymbol: FRAME_INTERCEPTOR
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:44:38.222Z"
+                          expiration: '2022-03-12T00:44:38.222Z'
                         - symbol: COMMERCE_REPUBLIC-866DC7
                           registration:
                             factionSymbol: COMMERCE_REPUBLIC
@@ -1113,7 +1127,7 @@ paths:
                           frameSymbol: FRAME_LIGHT_FREIGHTER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:45:21.222Z"
+                          expiration: '2022-03-12T00:45:21.222Z'
                         - symbol: SPACERS_GUILD-2B1D01
                           registration:
                             factionSymbol: SPACERS_GUILD
@@ -1121,7 +1135,7 @@ paths:
                           frameSymbol: FRAME_HEAVY_FREIGHTER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:44:53.222Z"
+                          expiration: '2022-03-12T00:44:53.222Z'
                         - symbol: MINERS_COLLECTIVE-2F238C
                           registration:
                             factionSymbol: MINERS_COLLECTIVE
@@ -1129,7 +1143,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-12T00:44:07.222Z"
+                          expiration: '2022-03-12T00:44:07.222Z'
                         - symbol: ZANZIBAR_TRIKES-ACF237
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1137,7 +1151,7 @@ paths:
                           frameSymbol: FRAME_INTERCEPTOR
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-12T00:44:22.223Z"
+                          expiration: '2022-03-12T00:44:22.223Z'
                         - symbol: SPACERS_GUILD-94A474
                           registration:
                             factionSymbol: SPACERS_GUILD
@@ -1145,7 +1159,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:43:51.223Z"
+                          expiration: '2022-03-12T00:43:51.223Z'
                         - symbol: ZANZIBAR_TRIKES-648BA8
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1153,7 +1167,7 @@ paths:
                           frameSymbol: FRAME_SHUTTLE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_I
-                          expiration: "2022-03-12T00:44:56.223Z"
+                          expiration: '2022-03-12T00:44:56.223Z'
                         - symbol: COMMERCE_REPUBLIC-1EED24
                           registration:
                             factionSymbol: COMMERCE_REPUBLIC
@@ -1161,7 +1175,7 @@ paths:
                           frameSymbol: FRAME_EXPLORER
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-12T00:45:23.223Z"
+                          expiration: '2022-03-12T00:45:23.223Z'
                         - symbol: ZANZIBAR_TRIKES-A5600D
                           registration:
                             factionSymbol: ZANZIBAR_TRIKES
@@ -1169,7 +1183,7 @@ paths:
                           frameSymbol: FRAME_FRIGATE
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
-                          expiration: "2022-03-12T00:44:00.223Z"
+                          expiration: '2022-03-12T00:44:00.223Z'
       operationId: post-my-ships-shipSymbol-scan
       security:
         - AgentToken: []
@@ -1194,12 +1208,12 @@ paths:
               Departing Ships:
                 value:
                   mode: APPROACHING_SHIPS
-        description: ""
+        description: ''
     get:
       summary: Scan Cooldown
       operationId: get-my-ships-shipSymbol-scan
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -1217,12 +1231,12 @@ paths:
                     data:
                       cooldown:
                         duration: 59
-                        expiration: "2022-03-12T00:42:44.220Z"
+                        expiration: '2022-03-12T00:42:44.220Z'
       security:
         - AgentToken: []
       tags:
         - ships
-  "/my/ships/{shipSymbol}/navigate":
+  '/my/ships/{shipSymbol}/navigate':
     parameters:
       - schema:
           type: string
@@ -1235,12 +1249,12 @@ paths:
       tags:
         - navigation
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1287,12 +1301,12 @@ paths:
       summary: Navigation Status
       operationId: get-my-ships-shipSymbol-navigate
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1325,7 +1339,7 @@ paths:
         - AgentToken: []
       tags:
         - navigation
-  "/my/ships/{shipSymbol}":
+  '/my/ships/{shipSymbol}':
     parameters:
       - schema:
           type: string
@@ -1337,12 +1351,12 @@ paths:
       tags:
         - ships
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1359,7 +1373,7 @@ paths:
                         - MOUNT_MINING_LASER_I
                       registration:
                         factionSymbol: COMMERCE_REPUBLIC
-                        agentSymbol: "653298"
+                        agentSymbol: '653298'
                         fee: 100
                         role: EXCAVATOR
                       integrity:
@@ -1384,12 +1398,12 @@ paths:
       tags:
         - ships
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1406,7 +1420,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1428,7 +1442,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1450,7 +1464,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1472,7 +1486,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1494,7 +1508,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1516,7 +1530,7 @@ paths:
                           - MOUNT_MINING_LASER_I
                         registration:
                           factionSymbol: COMMERCE_REPUBLIC
-                          agentSymbol: "653298"
+                          agentSymbol: '653298'
                           fee: 100
                           role: EXCAVATOR
                         integrity:
@@ -1697,12 +1711,12 @@ paths:
       tags:
         - shipyards
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1759,12 +1773,12 @@ paths:
       tags:
         - contracts
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1773,7 +1787,7 @@ paths:
                         faction: COMMERCE_REPUBLIC
                         type: PROCUREMENT
                         terms:
-                          deadline: "2022-03-11T05:16:59.113Z"
+                          deadline: '2022-03-11T05:16:59.113Z'
                           payment:
                             onAccepted: 20000
                             onFulfilled: 100000
@@ -1784,12 +1798,12 @@ paths:
                               fulfilled: 0
                         accepted: false
                         fulfilled: false
-                        expiresAt: "2022-03-09T05:16:59.112Z"
+                        expiresAt: '2022-03-09T05:16:59.112Z'
                       - id: cl0hok3920023kv0jflbjpltg
                         faction: COMMERCE_REPUBLIC
                         type: PROCUREMENT
                         terms:
-                          deadline: "2022-03-11T05:16:59.123Z"
+                          deadline: '2022-03-11T05:16:59.123Z'
                           payment:
                             onAccepted: 20000
                             onFulfilled: 100000
@@ -1800,7 +1814,7 @@ paths:
                               fulfilled: 0
                         accepted: false
                         fulfilled: false
-                        expiresAt: "2022-03-09T05:16:59.122Z"
+                        expiresAt: '2022-03-09T05:16:59.122Z'
                     meta:
                       total: 2
                       page: 1
@@ -1825,7 +1839,7 @@ paths:
                         faction: COMMERCE_REPUBLIC
                         type: PROCUREMENT
                         terms:
-                          deadline: "2022-03-11T05:16:59.113Z"
+                          deadline: '2022-03-11T05:16:59.113Z'
                           payment:
                             onAccepted: 20000
                             onFulfilled: 100000
@@ -1836,7 +1850,7 @@ paths:
                               fulfilled: 0
                         accepted: false
                         fulfilled: false
-                        expiresAt: "2022-03-09T05:16:59.112Z"
+                        expiresAt: '2022-03-09T05:16:59.112Z'
                     meta:
                       total: 10
                       page: 1
@@ -1845,7 +1859,7 @@ paths:
       security:
         - AgentToken: []
       description: List all of your contracts.
-  "/my/contracts/{contractId}":
+  '/my/contracts/{contractId}':
     parameters:
       - schema:
           type: string
@@ -1858,7 +1872,7 @@ paths:
       tags:
         - contracts
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -1875,7 +1889,7 @@ paths:
                       faction: COMMERCE_REPUBLIC
                       type: PROCUREMENT
                       terms:
-                        deadline: "2022-03-11T05:16:59.113Z"
+                        deadline: '2022-03-11T05:16:59.113Z'
                         payment:
                           onAccepted: 20000
                           onFulfilled: 100000
@@ -1886,12 +1900,12 @@ paths:
                             fulfilled: 0
                       accepted: false
                       fulfilled: false
-                      expiresAt: "2022-03-09T05:16:59.112Z"
+                      expiresAt: '2022-03-09T05:16:59.112Z'
       operationId: get-my-contracts-contractId
       security:
         - AgentToken: []
       description: Get the details of a contract by ID.
-  "/my/contracts/{contractId}/accept":
+  '/my/contracts/{contractId}/accept':
     parameters:
       - schema:
           type: string
@@ -1903,7 +1917,7 @@ paths:
       tags:
         - contracts
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -1922,12 +1936,12 @@ paths:
       tags:
         - systems
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -1936,7 +1950,7 @@ paths:
                         sector: X1
                         type: RED_STAR
                         x: 0
-                        "y": 0
+                        'y': 0
                         waypoints:
                           - X1-OE-PM
                           - X1-OE-PM01
@@ -1952,7 +1966,7 @@ paths:
                         sector: X1
                         type: ORANGE_STAR
                         x: 3
-                        "y": 4
+                        'y': 4
                         waypoints:
                           - X1-EV-A004
                         factions:
@@ -1963,7 +1977,7 @@ paths:
                         sector: X1
                         type: BLUE_STAR
                         x: -2
-                        "y": 11
+                        'y': 11
                         waypoints: []
                         factions: []
                         charted: false
@@ -1992,7 +2006,7 @@ paths:
                         sector: X1
                         type: RED_STAR
                         x: 0
-                        "y": 0
+                        'y': 0
                         waypoints:
                           - X1-OE-PM
                           - X1-OE-PM01
@@ -2012,7 +2026,7 @@ paths:
       description: Return a list of all systems.
       security:
         - AgentToken: []
-  "/systems/{systemSymbol}":
+  '/systems/{systemSymbol}':
     parameters:
       - schema:
           type: string
@@ -2026,12 +2040,12 @@ paths:
       tags:
         - systems
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -2040,7 +2054,7 @@ paths:
                       sector: X1
                       type: BLUE_STAR
                       x: -2
-                      "y": 9
+                      'y': 9
                       waypoints: []
                       factions: []
                       charted: false
@@ -2058,7 +2072,7 @@ paths:
                       sector: X1
                       type: BLUE_STAR
                       x: -2
-                      "y": 9
+                      'y': 9
                       waypoints: []
                       factions: []
                       charted: false
@@ -2066,7 +2080,7 @@ paths:
       operationId: get-systems-systemSymbol
       security:
         - AgentToken: []
-  "/systems/{systemSymbol}/shipyards":
+  '/systems/{systemSymbol}/shipyards':
     parameters:
       - schema:
           type: string
@@ -2079,12 +2093,12 @@ paths:
       tags:
         - shipyards
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -2111,7 +2125,7 @@ paths:
       security:
         - AgentToken: []
       description: Returns a list of all shipyards in a system.
-  "/systems/{systemSymbol}/shipyards/{waypointSymbol}":
+  '/systems/{systemSymbol}/shipyards/{waypointSymbol}':
     parameters:
       - schema:
           type: string
@@ -2130,7 +2144,7 @@ paths:
       tags:
         - shipyards
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -2142,7 +2156,7 @@ paths:
       operationId: get-systems-systemSymbol-shipyards-waypointSymbol
       security:
         - AgentToken: []
-  "/systems/{systemSymbol}/shipyards/{waypointSymbol}/ships":
+  '/systems/{systemSymbol}/shipyards/{waypointSymbol}/ships':
     parameters:
       - schema:
           type: string
@@ -2161,12 +2175,12 @@ paths:
       tags:
         - shipyards
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 x-examples:
                   example-1:
@@ -2202,7 +2216,7 @@ paths:
       operationId: get-systems-systemSymbol-shipyards-waypointSymbol-ships
       security:
         - AgentToken: []
-  "/trade/{tradeSymbol}/imports":
+  '/trade/{tradeSymbol}/imports':
     parameters:
       - schema:
           type: string
@@ -2215,12 +2229,12 @@ paths:
       tags:
         - markets
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
@@ -2238,7 +2252,7 @@ paths:
       operationId: get-trade-tradeSymbol-imports
       security:
         - AgentToken: []
-  "/trade/{tradeSymbol}/exports":
+  '/trade/{tradeSymbol}/exports':
     parameters:
       - schema:
           type: string
@@ -2251,12 +2265,12 @@ paths:
       tags:
         - markets
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
@@ -2274,7 +2288,7 @@ paths:
       operationId: get-trade-tradeSymbol-exports
       security:
         - AgentToken: []
-  "/trade/{tradeSymbol}/exchange":
+  '/trade/{tradeSymbol}/exchange':
     parameters:
       - schema:
           type: string
@@ -2287,12 +2301,12 @@ paths:
       tags:
         - markets
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: ""
+                description: ''
                 type: object
                 properties:
                   data:
