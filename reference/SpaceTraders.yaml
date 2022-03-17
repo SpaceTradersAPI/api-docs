@@ -936,6 +936,31 @@ paths:
       operationId: post-my-ships-shipSymbol-refuel
       security:
         - AgentToken: []
+  "/my/ships/{shipSymbol}/deploy":
+    parameters:
+      - schema:
+          type: string
+        name: shipSymbol
+        in: path
+        required: true
+    post:
+      summary: Deploy Asset
+      tags:
+        - markets
+      responses:
+        "204":
+          description: OK
+      operationId: post-my-ships-shipSymbol-deploy
+      security:
+        - AgentToken: []
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tradeSymbol:
+                type: string
   "/my/ships/{shipSymbol}/scan":
     parameters:
       - schema:
