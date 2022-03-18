@@ -943,6 +943,7 @@ paths:
         name: shipSymbol
         in: path
         required: true
+        description: The ship symbol
     post:
       summary: Deploy Asset
       tags:
@@ -967,14 +968,6 @@ paths:
                   type: string
               required:
                 - tradeSymbol
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              tradeSymbol:
-                type: string
   '/my/ships/{shipSymbol}/scan':
     parameters:
       - schema:
@@ -2373,17 +2366,16 @@ paths:
                       exports:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           $ref: ../models/MarketTrade.yaml
                       imports:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           $ref: ../models/MarketTrade.yaml
                       exchange:
                         type: array
+                        uniqueItems: true
                         items:
                           $ref: ../models/MarketTrade.yaml
                 required:
@@ -2407,44 +2399,7 @@ paths:
                           price: 286
                           tariff: 0
                       exchange: []
-        '':
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    data:
-                      - X1-OE-PM
-                      - X1-OE-PM01
-                      - X1-OE-EL70
-                    meta:
-                      total: 3
-                      page: 1
-                      limit: 20
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: string
-                  meta:
-                    $ref: ../models/Meta.yaml
-                required:
-                  - data
-                  - meta
-              examples:
-                Success:
-                  value:
-                    data:
-                      - X1-OE-PM
-                      - X1-OE-PM01
-                      - X1-OE-EL70
-                    meta:
-                      total: 3
-                      page: 1
-                      limit: 20
-      operationId: get-systems-systemSymbol-markets-marketSymbol
+      operationId: get-systems-systemSymbol-markets
       description: |-
         Retrieve a list of all charted markets in the given system. Market data is only available if the waypoint is charted and contains a communications relay.
 
@@ -2549,6 +2504,334 @@ paths:
         See `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.
       security:
         - AgentToken: []
+  '/systems/{systemSymbol}/waypoints':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+    get:
+      summary: List Waypoints
+      tags:
+        - systems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - system: X1-OE
+                        symbol: X1-OE-PM
+                        type: PLANET
+                        x: 10
+                        'y': 5
+                        orbitals:
+                          - X1-OE-PM01
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                          - SHIPYARD
+                        traits:
+                          - OVERCROWDED
+                          - HIGH_TECH
+                          - BUREAUCRATIC
+                          - TRADING_HUB
+                          - TEMPERATE
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-PM01
+                        type: MOON
+                        x: 10
+                        'y': 5
+                        orbitals: []
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                        traits:
+                          - WEAK_GRAVITY
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-A005
+                        type: ASTEROID_FIELD
+                        x: -1
+                        'y': -29
+                        orbitals: []
+                        faction: MINERS_COLLECTIVE
+                        features: []
+                        traits:
+                          - COMMON_METAL_DEPOSITS
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-25X
+                        type: JUMP_GATE
+                        x: -38
+                        'y': 47
+                        orbitals: []
+                        faction: SPACERS_GUILD
+                        features: []
+                        traits: []
+                        charted: true
+                        chartedBy: null
+                    meta:
+                      total: 4
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/Waypoint.yaml
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+              examples:
+                Success:
+                  value:
+                    data:
+                      - system: X1-OE
+                        symbol: X1-OE-PM
+                        type: PLANET
+                        x: 10
+                        'y': 5
+                        orbitals:
+                          - X1-OE-PM01
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                          - SHIPYARD
+                        traits:
+                          - OVERCROWDED
+                          - HIGH_TECH
+                          - BUREAUCRATIC
+                          - TRADING_HUB
+                          - TEMPERATE
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-PM01
+                        type: MOON
+                        x: 10
+                        'y': 5
+                        orbitals: []
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                        traits:
+                          - WEAK_GRAVITY
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-A005
+                        type: ASTEROID_FIELD
+                        x: -1
+                        'y': -29
+                        orbitals: []
+                        faction: MINERS_COLLECTIVE
+                        features: []
+                        traits:
+                          - COMMON_METAL_DEPOSITS
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-25X
+                        type: JUMP_GATE
+                        x: -38
+                        'y': 47
+                        orbitals: []
+                        faction: SPACERS_GUILD
+                        features: []
+                        traits: []
+                        charted: true
+                        chartedBy: null
+                    meta:
+                      total: 4
+                      page: 1
+                      limit: 20
+      operationId: get-systems-systemSymbol-waypoints-waypointSymbol
+      security:
+        - AgentToken: []
+      description: Fetch all of the waypoints for a given system. System must be charted or a ship must be present to return waypoint details.
+  '/systems/{systemSymbol}/waypoints/{waypointSymbol}':
+    parameters:
+      - schema:
+          type: string
+        name: systemSymbol
+        in: path
+        required: true
+        description: The system symbol
+      - schema:
+          type: string
+        name: waypointSymbol
+        in: path
+        required: true
+        description: The waypoint symbol
+    get:
+      summary: View Waypoint
+      tags:
+        - systems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - system: X1-OE
+                        symbol: X1-OE-PM
+                        type: PLANET
+                        x: 10
+                        'y': 5
+                        orbitals:
+                          - X1-OE-PM01
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                          - SHIPYARD
+                        traits:
+                          - OVERCROWDED
+                          - HIGH_TECH
+                          - BUREAUCRATIC
+                          - TRADING_HUB
+                          - TEMPERATE
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-PM01
+                        type: MOON
+                        x: 10
+                        'y': 5
+                        orbitals: []
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                        traits:
+                          - WEAK_GRAVITY
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-A005
+                        type: ASTEROID_FIELD
+                        x: -1
+                        'y': -29
+                        orbitals: []
+                        faction: MINERS_COLLECTIVE
+                        features: []
+                        traits:
+                          - COMMON_METAL_DEPOSITS
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-25X
+                        type: JUMP_GATE
+                        x: -38
+                        'y': 47
+                        orbitals: []
+                        faction: SPACERS_GUILD
+                        features: []
+                        traits: []
+                        charted: true
+                        chartedBy: null
+                    meta:
+                      total: 4
+                      page: 1
+                      limit: 20
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: ../models/Waypoint.yaml
+                  meta:
+                    $ref: ../models/Meta.yaml
+                required:
+                  - data
+                  - meta
+              examples:
+                Success:
+                  value:
+                    data:
+                      - system: X1-OE
+                        symbol: X1-OE-PM
+                        type: PLANET
+                        x: 10
+                        'y': 5
+                        orbitals:
+                          - X1-OE-PM01
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                          - SHIPYARD
+                        traits:
+                          - OVERCROWDED
+                          - HIGH_TECH
+                          - BUREAUCRATIC
+                          - TRADING_HUB
+                          - TEMPERATE
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-PM01
+                        type: MOON
+                        x: 10
+                        'y': 5
+                        orbitals: []
+                        faction: COMMERCE_REPUBLIC
+                        features:
+                          - MARKETPLACE
+                        traits:
+                          - WEAK_GRAVITY
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-A005
+                        type: ASTEROID_FIELD
+                        x: -1
+                        'y': -29
+                        orbitals: []
+                        faction: MINERS_COLLECTIVE
+                        features: []
+                        traits:
+                          - COMMON_METAL_DEPOSITS
+                        charted: true
+                        chartedBy: null
+                      - system: X1-OE
+                        symbol: X1-OE-25X
+                        type: JUMP_GATE
+                        x: -38
+                        'y': 47
+                        orbitals: []
+                        faction: SPACERS_GUILD
+                        features: []
+                        traits: []
+                        charted: true
+                        chartedBy: null
+                    meta:
+                      total: 4
+                      page: 1
+                      limit: 20
+      operationId: get-systems-systemSymbol-waypoints
+      security:
+        - AgentToken: []
+      description: View the details of a waypoint.
 tags:
   - name: ships
   - name: markets
