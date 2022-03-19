@@ -2498,51 +2498,23 @@ paths:
                       exchange: []
                 properties:
                   data:
-                    type: object
-                    required:
-                      - exports
-                      - imports
-                      - exchange
-                    properties:
-                      exports:
-                        type: array
-                        uniqueItems: true
-                        items:
-                          $ref: ../models/MarketTrade.yaml
-                      imports:
-                        type: array
-                        uniqueItems: true
-                        items:
-                          $ref: ../models/MarketTrade.yaml
-                      exchange:
-                        type: array
-                        uniqueItems: true
-                        items:
-                          $ref: ../models/MarketTrade.yaml
+                    type: array
+                    items:
+                      type: string
                 required:
                   - data
               examples:
                 Success:
                   value:
                     data:
-                      exports:
-                        - waypointSymbol: X1-OE-PM
-                          tradeSymbol: MICROPROCESSORS
-                          price: 834
-                          tariff: 0
-                      imports:
-                        - waypointSymbol: X1-OE-PM
-                          tradeSymbol: SILICON
-                          price: 144
-                          tariff: 0
-                        - waypointSymbol: X1-OE-PM
-                          tradeSymbol: QUARTZ
-                          price: 286
-                          tariff: 0
-                      exchange: []
+                      - X1-AK3-88760F
+                    meta:
+                      total: 1
+                      page: 1
+                      limit: 20
       operationId: get-systems-systemSymbol-markets
       description: |-
-        Retrieve a list of all charted markets in the given system. Market data is only available if the waypoint is charted and contains a communications relay.
+        Retrieve a list of all charted markets in the given system. Markets are only available if the waypoint is charted and contains a communications relay.
 
         To install a communications relay at a market, look at the `my/ships/{shipSymbol}/deploy` endpoint.
       security:
