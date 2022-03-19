@@ -2519,7 +2519,7 @@ paths:
         To install a communications relay at a market, look at the `my/ships/{shipSymbol}/deploy` endpoint.
       security:
         - AgentToken: []
-  "/systems/{systemSymbol}/markets/{marketSymbol}":
+  "/systems/{systemSymbol}/markets/{waypointSymbol}":
     parameters:
       - schema:
           type: string
@@ -2529,10 +2529,10 @@ paths:
         description: The system symbol
       - schema:
           type: string
-        name: marketSymbol
+        name: waypointSymbol
         in: path
         required: true
-        description: The market symbol
+        description: The waypoint symbol
     get:
       summary: View Market
       tags:
@@ -2608,7 +2608,7 @@ paths:
                           price: 286
                           tariff: 0
                       exchange: []
-      operationId: get-systems-systemSymbol-markets-marketSymbol
+      operationId: get-systems-systemSymbol-markets-waypointSymbol
       description: |-
         Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.
 
