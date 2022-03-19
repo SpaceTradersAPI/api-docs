@@ -1074,23 +1074,34 @@ paths:
                       cooldown: 60
                 properties:
                   data:
+                    oneOf:
+                      - properties:
+                          ships:
+                            type: array
+                            uniqueItems: true
+                            minItems: 1
+                            items:
+                              $ref: ../models/ScannedShip.yaml
+                          cooldown:
+                            $ref: ../models/Cooldown.yaml
+                        required:
+                          - ships
+                          - cooldown
+                      - properties:
+                          cooldown:
+                            $ref: ../models/Cooldown.yaml
+                          system:
+                            $ref: ../models/System.yaml
+                      - properties:
+                          cooldown:
+                            $ref: ../models/Cooldown.yaml
+                          waypoint:
+                            $ref: ../models/Waypoint.yaml
                     type: object
-                    required:
-                      - ships
-                      - cooldown
-                    properties:
-                      ships:
-                        type: array
-                        uniqueItems: true
-                        minItems: 1
-                        items:
-                          $ref: ../models/ScannedShip.yaml
-                      cooldown:
-                        $ref: ../models/Cooldown.yaml
                 required:
                   - data
               examples:
-                Success:
+                Approaching Ships:
                   value:
                     data:
                       cooldown:
@@ -1177,6 +1188,134 @@ paths:
                           reactorSymbol: REACTOR_FUSION_I
                           engineSymbol: ENGINE_ION_DRIVE_II
                           expiration: '2022-03-12T00:44:00.223Z'
+                Departing Ships:
+                  value:
+                    data:
+                      cooldown:
+                        duration: 59
+                        expiration: '2022-03-12T00:42:44.220Z'
+                      ships:
+                        - symbol: SPACERS_GUILD-65E1BA
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_LIGHT_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:44:14.222Z'
+                        - symbol: MINERS_COLLECTIVE-C6ACCA
+                          registration:
+                            factionSymbol: MINERS_COLLECTIVE
+                            role: HARVESTER
+                          frameSymbol: FRAME_INTERCEPTOR
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:44:38.222Z'
+                        - symbol: COMMERCE_REPUBLIC-866DC7
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: SURVEYOR
+                          frameSymbol: FRAME_LIGHT_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:45:21.222Z'
+                        - symbol: SPACERS_GUILD-2B1D01
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: SURVEYOR
+                          frameSymbol: FRAME_HEAVY_FREIGHTER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:44:53.222Z'
+                        - symbol: MINERS_COLLECTIVE-2F238C
+                          registration:
+                            factionSymbol: MINERS_COLLECTIVE
+                            role: HAULER
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-12T00:44:07.222Z'
+                        - symbol: ZANZIBAR_TRIKES-ACF237
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: HAULER
+                          frameSymbol: FRAME_INTERCEPTOR
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-12T00:44:22.223Z'
+                        - symbol: SPACERS_GUILD-94A474
+                          registration:
+                            factionSymbol: SPACERS_GUILD
+                            role: EXCAVATOR
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:43:51.223Z'
+                        - symbol: ZANZIBAR_TRIKES-648BA8
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: PATROL
+                          frameSymbol: FRAME_SHUTTLE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_I
+                          expiration: '2022-03-12T00:44:56.223Z'
+                        - symbol: COMMERCE_REPUBLIC-1EED24
+                          registration:
+                            factionSymbol: COMMERCE_REPUBLIC
+                            role: PATROL
+                          frameSymbol: FRAME_EXPLORER
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-12T00:45:23.223Z'
+                        - symbol: ZANZIBAR_TRIKES-A5600D
+                          registration:
+                            factionSymbol: ZANZIBAR_TRIKES
+                            role: PATROL
+                          frameSymbol: FRAME_FRIGATE
+                          reactorSymbol: REACTOR_FUSION_I
+                          engineSymbol: ENGINE_ION_DRIVE_II
+                          expiration: '2022-03-12T00:44:00.223Z'
+                System Scan:
+                  value:
+                    data:
+                      cooldown:
+                        duration: 0
+                        expiration: '2022-03-12T00:42:44.220Z'
+                      system:
+                        symbol: X1-OE
+                        sector: X1
+                        type: RED_STAR
+                        x: 0
+                        'y': 0
+                        waypoints:
+                          - X1-OE-PM
+                          - X1-OE-PM01
+                          - X1-OE-25X
+                          - X1-OE-A005
+                        factions:
+                          - COMMERCE_REPUBLIC
+                          - SPACERS_GUILD
+                          - MINERS_COLLECTIVE
+                        charted: true
+                        chartedBy: null
+                Waypoint Scan:
+                  value:
+                    data:
+                      cooldown:
+                        duration: 0
+                        expiration: '2022-03-12T00:42:44.220Z'
+                      waypoint:
+                        system: X1-OE
+                        symbol: X1-OE-25X
+                        type: JUMP_GATE
+                        x: -1
+                        'y': -59
+                        orbitals: []
+                        faction: SPACERS_GUILD
+                        features: []
+                        traits: []
+                        charted: true
+                        chartedBy: null
       operationId: post-my-ships-shipSymbol-scan
       security:
         - AgentToken: []
@@ -1192,6 +1331,8 @@ paths:
                   enum:
                     - APPROACHING_SHIPS
                     - DEPARTING_SHIPS
+                    - SYSTEM
+                    - WAYPOINT
               required:
                 - mode
             examples:
