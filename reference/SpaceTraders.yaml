@@ -180,8 +180,6 @@ paths:
   '/my/ships/{shipSymbol}/chart':
     post:
       summary: Chart Waypoint
-      tags:
-        - navigation
       responses:
         '200':
           description: OK
@@ -208,6 +206,8 @@ paths:
       description: 'Chart a new system or waypoint. Returns an array of the symbols that have been charted, including the system and the waypoint if both were uncharted, or just the waypoint.'
       security:
         - AgentToken: []
+      tags:
+        - systems
     parameters:
       - schema:
           type: string
@@ -1319,7 +1319,7 @@ paths:
       operationId: post-my-ships-shipSymbol-scan
       security:
         - AgentToken: []
-      description: Scan approaching or departing ships.
+      description: 'Execute a ship scan to view approach / departing ships, system information or details about a waypoint. Send a scan mode to select the type of scan performed by your ship.'
       requestBody:
         content:
           application/json:
