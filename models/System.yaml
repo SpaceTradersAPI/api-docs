@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 x-examples:
   example-1:
@@ -6,7 +6,7 @@ x-examples:
     sector: X1
     type: RED_STAR
     x: 0
-    'y': 0
+    "y": 0
     waypoints:
       - X1-OE-PM
       - X1-OE-PM01
@@ -23,7 +23,7 @@ examples:
     sector: X1
     type: RED_STAR
     x: 0
-    'y': 0
+    "y": 0
     waypoints:
       - X1-OE-PM
       - X1-OE-PM01
@@ -46,9 +46,9 @@ properties:
     type: string
     minLength: 1
   x:
-    type: number
-  'y':
-    type: number
+    type: integer
+  "y":
+    type: integer
   waypoints:
     type: array
     items:
@@ -62,13 +62,13 @@ properties:
   chartedBy:
     type:
       - string
-      - 'null'
+      - "null"
 required:
   - symbol
   - sector
   - type
   - x
-  - 'y'
+  - "y"
   - waypoints
   - factions
   - charted

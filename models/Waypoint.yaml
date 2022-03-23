@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 x-examples:
   example-1:
@@ -6,7 +6,7 @@ x-examples:
     symbol: X1-OE-PM
     type: PLANET
     x: 10
-    'y': 5
+    "y": 5
     orbitals:
       - X1-OE-PM01
     faction: COMMERCE_REPUBLIC
@@ -26,7 +26,7 @@ examples:
     symbol: X1-OE-PM
     type: PLANET
     x: 10
-    'y': 5
+    "y": 5
     orbitals:
       - X1-OE-PM01
     faction: COMMERCE_REPUBLIC
@@ -52,9 +52,9 @@ properties:
     type: string
     minLength: 1
   x:
-    type: number
-  'y':
-    type: number
+    type: integer
+  "y":
+    type: integer
   orbitals:
     type: array
     items:
@@ -75,13 +75,13 @@ properties:
   chartedBy:
     type:
       - string
-      - 'null'
+      - "null"
 required:
   - system
   - symbol
   - type
   - x
-  - 'y'
+  - "y"
   - orbitals
   - faction
   - features

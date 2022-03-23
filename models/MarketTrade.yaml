@@ -8,9 +8,9 @@ properties:
     type: string
     minLength: 1
   price:
-    type: number
+    type: integer
   tariff:
-    type: number
+    type: integer
 required:
   - waypointSymbol
   - tradeSymbol

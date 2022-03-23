@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 x-examples:
   example-1:
@@ -17,7 +17,7 @@ properties:
     type: string
     minLength: 1
   credits:
-    type: number
+    type: integer
 required:
   - accountId
   - symbol

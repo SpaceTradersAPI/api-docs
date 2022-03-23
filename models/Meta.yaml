@@ -1,12 +1,12 @@
-description: ''
+description: ""
 type: object
 properties:
   total:
-    type: number
+    type: integer
   page:
-    type: number
+    type: integer
   limit:
-    type: number
+    type: integer
 required:
   - total
   - page

@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 x-examples:
   example-1:
@@ -33,7 +33,7 @@ properties:
     type: string
     minLength: 1
   price:
-    type: number
+    type: integer
   role:
     type: string
     minLength: 1

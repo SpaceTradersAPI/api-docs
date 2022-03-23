@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 properties:
   data:
@@ -11,9 +11,9 @@ properties:
         type: string
         minLength: 1
       units:
-        type: number
+        type: integer
       fulfilled:
-        type: number
+        type: integer
     required:
       - tradeSymbol
       - destination

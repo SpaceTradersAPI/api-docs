@@ -1,8 +1,8 @@
-description: ''
+description: ""
 type: object
 properties:
   duration:
-    type: number
+    type: integer
   expiration:
     type: string
     minLength: 1
@@ -12,7 +12,7 @@ required:
 x-examples:
   example-1:
     duration: 119
-    expiration: '2022-03-12T00:41:29.285Z'
+    expiration: "2022-03-12T00:41:29.285Z"
 examples:
   - duration: 119
-    expiration: '2022-03-12T00:41:29.285Z'
+    expiration: "2022-03-12T00:41:29.285Z"

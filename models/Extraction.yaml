@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 properties:
   shipSymbol:
@@ -11,7 +11,7 @@ properties:
         type: string
         minLength: 1
       units:
-        type: number
+        type: integer
     required:
       - tradeSymbol
       - units

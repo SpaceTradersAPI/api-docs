@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 x-examples:
   example-1:
@@ -93,7 +93,7 @@ properties:
         type: string
         minLength: 1
       fee:
-        type: number
+        type: integer
       role:
         type: string
         minLength: 1
@@ -127,12 +127,12 @@ properties:
           type: string
           minLength: 1
         units:
-          type: number
+          type: integer
       required:
         - tradeSymbol
         - units
   fuel:
-    type: number
+    type: integer
 required:
   - symbol
   - frame
