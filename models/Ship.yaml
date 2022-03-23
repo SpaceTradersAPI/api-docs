@@ -110,6 +110,19 @@ properties:
         type: number
       engine:
         type: number
+  stats:
+    type: object
+    required:
+      - fuelTank
+      - cargoLimit
+      - jumpRange
+    properties:
+      fuelTank:
+        type: integer
+      cargoLimit:
+        type: integer
+      jumpRange:
+        type: integer
   status:
     type: string
     minLength: 1
