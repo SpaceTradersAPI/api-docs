@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "description": "The thrusters determine how quickly a ship travels between waypoints.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "IMPULSE_DRIVE",
+        "ION_DRIVE_I",
+        "ION_DRIVE_II",
+        "HYPER_DRIVE"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "Impulse Drive",
+        "Ion Drive",
+        "Advanced Ion Drive",
+        "Hyper Drive"
+      ]
+    },
+    "condition": {
+      "$ref": "./ShipCondition.json"
+    },
+    "speed": {
+      "type": "number",
+      "minimum": 1
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  }
+}

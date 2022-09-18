@@ -1,0 +1,3803 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SpaceTraders API",
+    "version": "2.1.0",
+    "summary": "SpaceTraders is a unique multiplayer game built on a free Web API.",
+    "contact": {
+      "name": "Joel Brubaker",
+      "email": "joel@spacetraders.io"
+    },
+    "license": {
+      "name": "No Permission",
+      "url": "https://choosealicense.com/no-permission/"
+    },
+    "description": "SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.\n\nSimilar to games such as Eve Online, you work with or against other players to establish trade routes, chart new systems, mine precious ores, patrol for pirates, spy on factions, and discover hidden treasures.\n\nBut what makes SpaceTraders unique is that the game is entirely accessible through open and well-documented API endpoints. In fact, SpaceTraders doesn't have a first-class client to play the game - if you want to take it for a spin, you should try one of our community-created web clients, or use the API documentation to see how you might play a game through an API.\n\nIf this sounds fun and interesting to you, please drop into our Discord and get to know the community. We are actively working on new clients, new ideas and sharing tips for how to play the game.\n\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://v2-0-0.alpha.spacetraders.io\",\n}\n```"
+  },
+  "servers": [
+    {
+      "url": "https://v2-1-0.spacetraders.io",
+      "description": "v2.1.0"
+    }
+  ],
+  "paths": {
+    "/agents": {
+      "post": {
+        "summary": "Register New Agent",
+        "tags": [
+          "agents"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string"
+                        },
+                        "agent": {
+                          "$ref": "../models/Agent.yaml"
+                        },
+                        "faction": {
+                          "$ref": "../models/Faction.yaml"
+                        },
+                        "contract": {
+                          "$ref": "../models/Contract.yaml"
+                        },
+                        "ship": {
+                          "$ref": "../models/Ship.json"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-agents",
+        "description": "Creates a new agent and ties it to a temporary Account. Use `COMMERCE_REPUBLIC` as your starting faction if you don't know any other factions to choose from.\n\nThe agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field waypoint, and execute the `/my/ships/{shipSymbol}/accept` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "description": "How other agents will see your ships and information.",
+                    "minLength": 4,
+                    "maxLength": 8,
+                    "example": "BADGER"
+                  },
+                  "faction": {
+                    "type": "string",
+                    "default": "COMMERCE_REPUBLIC",
+                    "description": "The faction you choose determines your headquarters."
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/my/agent": {
+      "get": {
+        "summary": "My Agent Details",
+        "tags": [
+          "agents"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Agent.yaml"
+                    }
+                  }
+                },
+                "examples": {
+                  "Agent": {
+                    "value": {
+                      "data": {
+                        "accountId": "cl0hok34m0003ks0jjql5q8f2",
+                        "symbol": "EMBER",
+                        "headquarters": "X1-OE-PM",
+                        "credits": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-agent",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Fetch your agent's details."
+      }
+    },
+    "/my/ships/{shipSymbol}/chart": {
+      "post": {
+        "summary": "Chart Waypoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "submitted": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "submitted": [
+                          "X1-ZZ",
+                          "X1-ZZ-7-EE"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-:shipSymbol-chart",
+        "description": "Command a ship to chart the current system and/or waypoint.\n\nSystems and waypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.\n\nReturns an array of system / waypoint symbols that have been charted.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "systems"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ]
+    },
+    "/my/ships/{shipSymbol}/deliver": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ],
+      "post": {
+        "summary": "Deliver on Contract",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "tradeSymbol": "IRON_ORE",
+                        "destination": "X1-OE-PM",
+                        "units": 10000,
+                        "fulfilled": -30000
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ContractDelivery.yaml"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-deliver",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contractId": {
+                    "type": "string"
+                  },
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "contractId",
+                  "tradeSymbol"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Deliver cargo on a given contract."
+      }
+    },
+    "/my/ships/{shipSymbol}/nav/transit": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The ship symbol"
+        }
+      ],
+      "post": {
+        "summary": "Navigate Ship",
+        "tags": [
+          "navigation"
+        ],
+        "responses": {
+          "201": {
+            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "shipSymbol": "3AE434-1",
+                        "departure": "X1-OE-PM",
+                        "destination": "X1-OE-A005",
+                        "durationRemaining": 2159,
+                        "arrivedAt": null
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "route": {
+                          "$ref": "../models/ShipNavRoute.json"
+                        },
+                        "shipFuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "fuelCost": 38,
+                        "navigation": {
+                          "shipSymbol": "BA03F2-1",
+                          "departure": "X1-OE-PM",
+                          "destination": "X1-OE-A005",
+                          "durationRemaining": 2279,
+                          "arrivedAt": null
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-navigate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "waypointSymbol": {
+                    "type": "string",
+                    "description": "The target destination."
+                  }
+                },
+                "required": [
+                  "waypointSymbol"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action."
+      }
+    },
+    "/my/ships/{shipSymbol}/nav/dock": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ],
+      "post": {
+        "summary": "Dock Ship",
+        "tags": [
+          "navigation"
+        ],
+        "responses": {
+          "200": {
+            "description": "The ship has successfully docked at it's current location.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "status": "DOCKED"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "status"
+                      ],
+                      "properties": {
+                        "status": {
+                          "$ref": "../models/ShipNavStatus.json"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "status": "DOCKED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-dock",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked."
+      }
+    },
+    "/my/ships/{shipSymbol}/nav/orbit": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ],
+      "post": {
+        "summary": "Orbit Ship",
+        "responses": {
+          "200": {
+            "description": "The ship has successfully moved into orbit at it's current location.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "status": "ORBIT"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "$ref": "../models/ShipNavStatus.json"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "status": "ORBIT"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-orbit",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
+        "tags": [
+          "navigation"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/jettison": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Jettison Cargo",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tradeSymbol": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "units": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "tradeSymbol",
+                        "units"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "tradeSymbol": "ALUMINUM",
+                        "units": 95
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "tradeSymbol": "ALUMINUM",
+                        "units": 95
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-jettison",
+        "description": "Jettison cargo from your ship's cargo hold.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/ships/{shipSymbol}/extract": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The ship symbol"
+        }
+      ],
+      "post": {
+        "summary": "Extract Resources",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "extraction": {
+                          "shipSymbol": "4B902A-1",
+                          "yield": {
+                            "tradeSymbol": "SILICON",
+                            "units": 16
+                          }
+                        },
+                        "cooldown": {
+                          "duration": 119,
+                          "expiration": "2022-03-12T00:41:29.371Z"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "extraction",
+                        "cooldown"
+                      ],
+                      "properties": {
+                        "extraction": {
+                          "$ref": "../models/Extraction.yaml"
+                        },
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "extraction": {
+                          "shipSymbol": "4B902A-1",
+                          "yield": {
+                            "tradeSymbol": "SILICON",
+                            "units": 16
+                          }
+                        },
+                        "cooldown": {
+                          "duration": 119,
+                          "expiration": "2022-03-12T00:41:29.371Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-extract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "survey": {
+                    "$ref": "../models/Survey.yaml"
+                  }
+                }
+              },
+              "examples": {
+                "No Survey": {
+                  "value": {}
+                },
+                "With Survey": {
+                  "value": {
+                    "survey": {
+                      "signature": "X1-OE-D2DD38",
+                      "deposits": [
+                        "COPPER_ORE"
+                      ],
+                      "expiration": "2022-03-08T05:41:55.514Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "extract"
+        ]
+      },
+      "get": {
+        "summary": "Extraction Cooldown",
+        "operationId": "get-my-ships-shipSymbol-extract",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 119,
+                          "expiration": "2022-03-12T00:41:29.285Z"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "cooldown"
+                      ],
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 119,
+                          "expiration": "2022-03-12T00:41:29.285Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the status of your last extraction.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "extract"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/survey": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Survey Waypoint",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "signature": "X1-OE-D2DD38",
+                          "deposits": [
+                            "COPPER_ORE"
+                          ],
+                          "expiration": "2022-03-08T05:41:55.514Z"
+                        },
+                        {
+                          "signature": "X1-OE-B58FEB",
+                          "deposits": [
+                            "ALUMINUM_ORE",
+                            "ALUMINUM_ORE",
+                            "ALUMINUM_ORE"
+                          ],
+                          "expiration": "2022-03-08T05:39:15.519Z"
+                        },
+                        {
+                          "signature": "X1-OE-0E326C",
+                          "deposits": [
+                            "ALUMINUM_ORE",
+                            "SILICON"
+                          ],
+                          "expiration": "2022-03-08T05:20:27.521Z"
+                        },
+                        {
+                          "signature": "X1-OE-5CDFA4",
+                          "deposits": [
+                            "COPPER_ORE",
+                            "COPPER_ORE",
+                            "COPPER_ORE",
+                            "IRON_ORE"
+                          ],
+                          "expiration": "2022-03-08T05:44:34.522Z"
+                        },
+                        {
+                          "signature": "X1-OE-86C3A1",
+                          "deposits": [
+                            "COPPER_ORE",
+                            "COPPER_ORE",
+                            "IRON_ORE"
+                          ],
+                          "expiration": "2022-03-08T05:43:45.522Z"
+                        },
+                        {
+                          "signature": "X1-OE-C97BEA",
+                          "deposits": [
+                            "ALUMINUM_ORE",
+                            "COPPER_ORE",
+                            "QUARTZ",
+                            "QUARTZ"
+                          ],
+                          "expiration": "2022-03-08T05:22:39.523Z"
+                        },
+                        {
+                          "signature": "X1-OE-9913BD",
+                          "deposits": [
+                            "QUARTZ"
+                          ],
+                          "expiration": "2022-03-08T05:37:45.523Z"
+                        },
+                        {
+                          "signature": "X1-OE-8D87D2",
+                          "deposits": [
+                            "COPPER_ORE",
+                            "SILICON"
+                          ],
+                          "expiration": "2022-03-08T05:32:57.524Z"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "surveys": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/Survey.yaml"
+                          }
+                        },
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 899,
+                          "expiration": "2022-03-12T02:11:35.618Z"
+                        },
+                        "surveys": [
+                          {
+                            "signature": "X1-OE-397C82",
+                            "deposits": [
+                              "SILICON"
+                            ],
+                            "expiration": "2022-03-12T02:00:19.622Z"
+                          },
+                          {
+                            "signature": "X1-OE-4413F6",
+                            "deposits": [
+                              "ALUMINUM_ORE",
+                              "ALUMINUM_ORE",
+                              "COPPER_ORE",
+                              "IRON_ORE"
+                            ],
+                            "expiration": "2022-03-12T02:20:08.625Z"
+                          },
+                          {
+                            "signature": "X1-OE-E6480F",
+                            "deposits": [
+                              "ALUMINUM_ORE",
+                              "IRON_ORE",
+                              "QUARTZ",
+                              "SILICON"
+                            ],
+                            "expiration": "2022-03-12T02:18:00.626Z"
+                          },
+                          {
+                            "signature": "X1-OE-660BE9",
+                            "deposits": [
+                              "ALUMINUM_ORE"
+                            ],
+                            "expiration": "2022-03-12T02:20:45.626Z"
+                          },
+                          {
+                            "signature": "X1-OE-D64798",
+                            "deposits": [
+                              "COPPER_ORE",
+                              "QUARTZ",
+                              "SILICON"
+                            ],
+                            "expiration": "2022-03-12T02:07:33.626Z"
+                          },
+                          {
+                            "signature": "X1-OE-F799F3",
+                            "deposits": [
+                              "IRON_ORE"
+                            ],
+                            "expiration": "2022-03-12T02:23:16.627Z"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-survey",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.",
+        "tags": [
+          "extract"
+        ]
+      },
+      "get": {
+        "summary": "Survey Cooldown",
+        "tags": [
+          "extract"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 899,
+                          "expiration": "2022-03-12T02:11:35.618Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-ships-shipSymbol-survey",
+        "description": "Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action."
+      }
+    },
+    "/my/ships/{shipSymbol}/jump": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Jump Ship",
+        "tags": [
+          "navigation"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "jump": {
+                          "shipSymbol": "1D7FDA-1",
+                          "destination": "00E0B1"
+                        },
+                        "cooldown": {
+                          "duration": 719,
+                          "expiration": "2022-03-12T00:52:56.735Z"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "jump",
+                        "cooldown"
+                      ],
+                      "properties": {
+                        "jump": {
+                          "type": "object",
+                          "required": [
+                            "shipSymbol",
+                            "destination"
+                          ],
+                          "properties": {
+                            "shipSymbol": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "destination": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "jump": {
+                          "shipSymbol": "1D7FDA-1",
+                          "destination": "00E0B1"
+                        },
+                        "cooldown": {
+                          "duration": 719,
+                          "expiration": "2022-03-12T00:52:56.735Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-jump",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destination": {
+                    "type": "string",
+                    "description": "The system symbol to jump to."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Jump Cooldown",
+        "operationId": "get-my-ships-shipSymbol-jump",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 719,
+                          "expiration": "2022-03-12T00:52:56.735Z"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "cooldown"
+                      ],
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "navigation"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/purchase": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Purchase Cargo",
+        "tags": [
+          "trade"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "waypointSymbol": "X1-OE-PM",
+                        "tradeSymbol": "MICROPROCESSORS",
+                        "credits": -843,
+                        "units": 1
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Trade.yaml"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "waypointSymbol": "X1-OE-PM",
+                        "tradeSymbol": "MICROPROCESSORS",
+                        "credits": -843,
+                        "units": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-purchase",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/ships/{shipSymbol}/sell": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Sell Cargo",
+        "tags": [
+          "trade"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "waypointSymbol": "X1-OE-PM",
+                        "tradeSymbol": "SILICON",
+                        "credits": 144,
+                        "units": -1
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Trade.yaml"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "waypointSymbol": "X1-OE-PM",
+                        "tradeSymbol": "SILICON",
+                        "credits": 144,
+                        "units": -1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-sell",
+        "description": "Sell cargo from your ship's hold to the local market.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/my/ships/{shipSymbol}/refuel": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Refuel Ship",
+        "tags": [
+          "navigation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "credits": {
+                          "type": "integer"
+                        },
+                        "fuel": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "credits",
+                        "fuel"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "credits": 0,
+                        "fuel": 0
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "credits": -1920,
+                        "fuel": 800
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-refuel",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/deploy": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The ship symbol"
+        }
+      ],
+      "post": {
+        "summary": "Deploy Asset",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-deploy",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Use this endpoint to deploy a Communications Relay to a waypoint. A waypoint with a communications relay will allow agents to retrieve price information from the market. Without a relay, agents must send a ship to a market to retrieve price information.\n\nCommunication relays can be purchased from a market that exports `COMM_RELAY_I`.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tradeSymbol": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tradeSymbol"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/ships/{shipSymbol}/scan": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Scan",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "ships": [
+                          {
+                            "symbol": "COMMERCE_REPUBLIC-0060A0",
+                            "registration": {
+                              "factionSymbol": "COMMERCE_REPUBLIC",
+                              "role": "EXCAVATOR"
+                            },
+                            "frameSymbol": "FRAME_HEAVY_FREIGHTER",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_I",
+                            "expiration": "2022-03-08T05:20:14.725Z"
+                          },
+                          {
+                            "symbol": "ZANZIBAR_TRIKES-DF0AAF",
+                            "registration": {
+                              "factionSymbol": "ZANZIBAR_TRIKES",
+                              "role": "HAULER"
+                            },
+                            "frameSymbol": "FRAME_SHUTTLE",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_II",
+                            "expiration": "2022-03-08T05:20:00.725Z"
+                          },
+                          {
+                            "symbol": "ZANZIBAR_TRIKES-9B80BE",
+                            "registration": {
+                              "factionSymbol": "ZANZIBAR_TRIKES",
+                              "role": "TRANSPORT"
+                            },
+                            "frameSymbol": "FRAME_TRANSPORT",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_I",
+                            "expiration": "2022-03-08T05:20:06.725Z"
+                          },
+                          {
+                            "symbol": "COMMERCE_REPUBLIC-117520",
+                            "registration": {
+                              "factionSymbol": "COMMERCE_REPUBLIC",
+                              "role": "HARVESTER"
+                            },
+                            "frameSymbol": "FRAME_SHUTTLE",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_II",
+                            "expiration": "2022-03-08T05:19:55.725Z"
+                          },
+                          {
+                            "symbol": "SPACERS_GUILD-609AA5",
+                            "registration": {
+                              "factionSymbol": "SPACERS_GUILD",
+                              "role": "HAULER"
+                            },
+                            "frameSymbol": "FRAME_FRIGATE",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_I",
+                            "expiration": "2022-03-08T05:19:38.725Z"
+                          },
+                          {
+                            "symbol": "MINERS_COLLECTIVE-7AD322",
+                            "registration": {
+                              "factionSymbol": "MINERS_COLLECTIVE",
+                              "role": "EXCAVATOR"
+                            },
+                            "frameSymbol": "FRAME_SHUTTLE",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_I",
+                            "expiration": "2022-03-08T05:19:11.725Z"
+                          },
+                          {
+                            "symbol": "ZANZIBAR_TRIKES-AE6D78",
+                            "registration": {
+                              "factionSymbol": "ZANZIBAR_TRIKES",
+                              "role": "HAULER"
+                            },
+                            "frameSymbol": "FRAME_SHUTTLE",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_II",
+                            "expiration": "2022-03-08T05:20:44.725Z"
+                          },
+                          {
+                            "symbol": "SPACERS_GUILD-92828B",
+                            "registration": {
+                              "factionSymbol": "SPACERS_GUILD",
+                              "role": "SURVEYOR"
+                            },
+                            "frameSymbol": "FRAME_LIGHT_FREIGHTER",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_II",
+                            "expiration": "2022-03-08T05:20:49.726Z"
+                          },
+                          {
+                            "symbol": "ZANZIBAR_TRIKES-B5EAD1",
+                            "registration": {
+                              "factionSymbol": "ZANZIBAR_TRIKES",
+                              "role": "TRANSPORT"
+                            },
+                            "frameSymbol": "FRAME_TRANSPORT",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_I",
+                            "expiration": "2022-03-08T05:20:25.726Z"
+                          },
+                          {
+                            "symbol": "ZANZIBAR_TRIKES-6A4E0D",
+                            "registration": {
+                              "factionSymbol": "ZANZIBAR_TRIKES",
+                              "role": "HAULER"
+                            },
+                            "frameSymbol": "FRAME_EXPLORER",
+                            "reactorSymbol": "REACTOR_FUSION_I",
+                            "engineSymbol": "ENGINE_ION_DRIVE_II",
+                            "expiration": "2022-03-08T05:19:19.726Z"
+                          }
+                        ],
+                        "cooldown": 60
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "oneOf": [
+                        {
+                          "properties": {
+                            "ships": {
+                              "type": "array",
+                              "uniqueItems": true,
+                              "minItems": 1,
+                              "items": {
+                                "$ref": "../models/ScannedShip.yaml"
+                              }
+                            },
+                            "cooldown": {
+                              "$ref": "../models/Cooldown.yaml"
+                            }
+                          },
+                          "required": [
+                            "ships",
+                            "cooldown"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "cooldown": {
+                              "$ref": "../models/Cooldown.yaml"
+                            },
+                            "system": {
+                              "$ref": "../models/System.yaml"
+                            }
+                          }
+                        },
+                        {
+                          "properties": {
+                            "cooldown": {
+                              "$ref": "../models/Cooldown.yaml"
+                            },
+                            "waypoint": {
+                              "$ref": "../models/Waypoint.yaml"
+                            }
+                          }
+                        }
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-scan",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Execute a ship scan to view approach / departing ships, system information or details about a waypoint. Send a scan mode to select the type of scan performed by your ship.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "APPROACHING_SHIPS",
+                      "DEPARTING_SHIPS",
+                      "SYSTEM",
+                      "WAYPOINT"
+                    ]
+                  }
+                },
+                "required": [
+                  "mode"
+                ]
+              },
+              "examples": {
+                "Approaching Ships": {
+                  "value": {
+                    "mode": "APPROACHING_SHIPS"
+                  }
+                },
+                "Departing Ships": {
+                  "value": {
+                    "mode": "APPROACHING_SHIPS"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "get": {
+        "summary": "Scan Cooldown",
+        "operationId": "get-my-ships-shipSymbol-scan",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.yaml"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "cooldown": {
+                          "duration": 59,
+                          "expiration": "2022-03-12T00:42:44.220Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "ships"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "View Ship",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "653298-1",
+                        "crew": null,
+                        "officers": null,
+                        "frame": "FRAME_DRONE",
+                        "reactor": "REACTOR_SOLAR_I",
+                        "engine": "ENGINE_SOLAR_PROPULSION",
+                        "modules": [
+                          "MODULE_CARGO_HOLD"
+                        ],
+                        "mounts": [
+                          "MOUNT_MINING_LASER_I"
+                        ],
+                        "registration": {
+                          "factionSymbol": "COMMERCE_REPUBLIC",
+                          "agentSymbol": "653298",
+                          "fee": 100,
+                          "role": "EXCAVATOR"
+                        },
+                        "integrity": {
+                          "frame": 1,
+                          "reactor": 1,
+                          "engine": 1
+                        },
+                        "status": "DOCKED",
+                        "location": "X1-OE-PM",
+                        "cargo": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Ship.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-ships-shipSymbol",
+        "description": "Retrieve the details of your ship.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/my/ships": {
+      "get": {
+        "summary": "List Ships",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "symbol": "653298-1",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-2",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-3",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-4",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-5",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-6",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        }
+                      ],
+                      "meta": {
+                        "total": 6,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Ship.json"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-ships",
+        "description": "Retrieve all of your ships.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Purchase Ship",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "4F4D44-1",
+                        "crew": null,
+                        "officers": null,
+                        "fuel": 100,
+                        "frame": "FRAME_DRONE",
+                        "reactor": "REACTOR_SOLAR_I",
+                        "engine": "ENGINE_SOLAR_PROPULSION",
+                        "modules": [
+                          "MODULE_CARGO_HOLD"
+                        ],
+                        "mounts": [
+                          "MOUNT_MINING_LASER_I"
+                        ],
+                        "registration": {
+                          "factionSymbol": "COMMERCE_REPUBLIC",
+                          "agentSymbol": "4F4D44",
+                          "fee": 100,
+                          "role": "EXCAVATOR"
+                        },
+                        "integrity": {
+                          "frame": 1,
+                          "reactor": 1,
+                          "engine": 1
+                        },
+                        "status": "DOCKED",
+                        "location": "X1-OE-PM",
+                        "cargo": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ship": {
+                          "$ref": "../models/Ship.json"
+                        },
+                        "credits": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Purchase a ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the shipyard listing you want to purchase."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/contracts": {
+      "get": {
+        "summary": "List Contracts",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "id": "cl0hok38t0014ks0jnoy8o5vh",
+                          "faction": "COMMERCE_REPUBLIC",
+                          "type": "PROCUREMENT",
+                          "terms": {
+                            "deadline": "2022-03-11T05:16:59.113Z",
+                            "payment": {
+                              "onAccepted": 20000,
+                              "onFulfilled": 100000
+                            },
+                            "deliver": [
+                              {
+                                "tradeSymbol": "IRON_ORE",
+                                "destination": "X1-OE-PM",
+                                "units": 10000,
+                                "fulfilled": 0
+                              }
+                            ]
+                          },
+                          "accepted": false,
+                          "fulfilled": false,
+                          "expiresAt": "2022-03-09T05:16:59.112Z"
+                        },
+                        {
+                          "id": "cl0hok3920023kv0jflbjpltg",
+                          "faction": "COMMERCE_REPUBLIC",
+                          "type": "PROCUREMENT",
+                          "terms": {
+                            "deadline": "2022-03-11T05:16:59.123Z",
+                            "payment": {
+                              "onAccepted": 20000,
+                              "onFulfilled": 100000
+                            },
+                            "deliver": [
+                              {
+                                "tradeSymbol": "IRON_ORE",
+                                "destination": "X1-OE-PM",
+                                "units": 10000,
+                                "fulfilled": 0
+                              }
+                            ]
+                          },
+                          "accepted": false,
+                          "fulfilled": false,
+                          "expiresAt": "2022-03-09T05:16:59.122Z"
+                        }
+                      ],
+                      "meta": {
+                        "total": 2,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Contract.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": [
+                        {
+                          "id": "cl0hok38t0014ks0jnoy8o5vh",
+                          "faction": "COMMERCE_REPUBLIC",
+                          "type": "PROCUREMENT",
+                          "terms": {
+                            "deadline": "2022-03-11T05:16:59.113Z",
+                            "payment": {
+                              "onAccepted": 20000,
+                              "onFulfilled": 100000
+                            },
+                            "deliver": [
+                              {
+                                "tradeSymbol": "IRON_ORE",
+                                "destination": "X1-OE-PM",
+                                "units": 10000,
+                                "fulfilled": 0
+                              }
+                            ]
+                          },
+                          "accepted": false,
+                          "fulfilled": false,
+                          "expiresAt": "2022-03-09T05:16:59.112Z"
+                        }
+                      ],
+                      "meta": {
+                        "total": 10,
+                        "page": 1,
+                        "limit": 10
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-contracts",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "List all of your contracts."
+      }
+    },
+    "/my/contracts/{contractId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "contractId",
+          "in": "path",
+          "required": true,
+          "description": "The contract ID"
+        }
+      ],
+      "get": {
+        "summary": "Contract Details",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Contract.yaml"
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "id": "cl0hok38t0014ks0jnoy8o5vh",
+                        "faction": "COMMERCE_REPUBLIC",
+                        "type": "PROCUREMENT",
+                        "terms": {
+                          "deadline": "2022-03-11T05:16:59.113Z",
+                          "payment": {
+                            "onAccepted": 20000,
+                            "onFulfilled": 100000
+                          },
+                          "deliver": [
+                            {
+                              "tradeSymbol": "IRON_ORE",
+                              "destination": "X1-OE-PM",
+                              "units": 10000,
+                              "fulfilled": 0
+                            }
+                          ]
+                        },
+                        "accepted": false,
+                        "fulfilled": false,
+                        "expiresAt": "2022-03-09T05:16:59.112Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-contracts-contractId",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Get the details of a contract by ID."
+      }
+    },
+    "/my/contracts/{contractId}/accept": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "contractId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Accept Contract",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Contract.yaml"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-contracts-contractId-accept",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Accept a contract."
+      }
+    },
+    "/systems": {
+      "get": {
+        "summary": "List Systems",
+        "tags": [
+          "systems"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "symbol": "X1-OE",
+                          "sector": "X1",
+                          "type": "RED_STAR",
+                          "x": 0,
+                          "y": 0,
+                          "waypoints": [
+                            "X1-OE-PM",
+                            "X1-OE-PM01",
+                            "X1-OE-A005",
+                            "X1-OE-25X"
+                          ],
+                          "factions": [
+                            "COMMERCE_REPUBLIC",
+                            "MINERS_COLLECTIVE",
+                            "SPACERS_GUILD"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "symbol": "X1-EV",
+                          "sector": "X1",
+                          "type": "ORANGE_STAR",
+                          "x": 3,
+                          "y": 4,
+                          "waypoints": [
+                            "X1-EV-A004"
+                          ],
+                          "factions": [
+                            "COMMERCE_REPUBLIC"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "symbol": "X1-ZZ",
+                          "sector": "X1",
+                          "type": "BLUE_STAR",
+                          "x": -2,
+                          "y": 11,
+                          "waypoints": [],
+                          "factions": [],
+                          "charted": false,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 3,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/System.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": [
+                        {
+                          "symbol": "X1-OE",
+                          "sector": "X1",
+                          "type": "RED_STAR",
+                          "x": 0,
+                          "y": 0,
+                          "waypoints": [
+                            "X1-OE-PM",
+                            "X1-OE-PM01",
+                            "X1-OE-A005",
+                            "X1-OE-25X"
+                          ],
+                          "factions": [
+                            "COMMERCE_REPUBLIC",
+                            "MINERS_COLLECTIVE",
+                            "SPACERS_GUILD"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 0,
+                        "page": 0,
+                        "limit": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems",
+        "description": "Return a list of all systems.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "default": "X1-OE"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        }
+      ],
+      "get": {
+        "summary": "View System",
+        "tags": [
+          "systems"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "X1-ZZ",
+                        "sector": "X1",
+                        "type": "BLUE_STAR",
+                        "x": -2,
+                        "y": 9,
+                        "waypoints": [],
+                        "factions": [],
+                        "charted": false,
+                        "chartedBy": null
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/System.yaml"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "symbol": "X1-ZZ",
+                        "sector": "X1",
+                        "type": "BLUE_STAR",
+                        "x": -2,
+                        "y": 9,
+                        "waypoints": [],
+                        "factions": [],
+                        "charted": false,
+                        "chartedBy": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/shipyards": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "the system symbol"
+        }
+      ],
+      "get": {
+        "summary": "List Shipyards",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "symbol": "X1-OE-PM",
+                          "faction": "COMMERCE_REPUBLIC"
+                        }
+                      ],
+                      "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Shipyard.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-shipyards",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Returns a list of all shipyards in a system."
+      }
+    },
+    "/systems/{systemSymbol}/shipyards/{waypointSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "Shipyard Details",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Shipyard.yaml"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/shipyards/{waypointSymbol}/ships": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "Shipyard Listings",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "id": "cl0nahta90000aq0jonm1nprl",
+                          "waypoint": "X1-OE-PM",
+                          "price": 58191,
+                          "role": "EXCAVATOR",
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ]
+                        }
+                      ],
+                      "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/ShipyardListing.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol-ships",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/trade/{tradeSymbol}/imports": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "tradeSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The trade symbol"
+        }
+      ],
+      "get": {
+        "summary": "Trade Imports",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/MarketTrade.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-trade-tradeSymbol-imports",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/trade/{tradeSymbol}/exports": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "tradeSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The trade symbol"
+        }
+      ],
+      "get": {
+        "summary": "Trade Exports",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/MarketTrade.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-trade-tradeSymbol-exports",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/trade/{tradeSymbol}/exchange": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "tradeSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The trade symbol"
+        }
+      ],
+      "get": {
+        "summary": "Trade Exchanges",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/MarketTrade.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-trade-tradeSymbol-exchange",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/markets": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        }
+      ],
+      "get": {
+        "summary": "List Markets",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "exports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "MICROPROCESSORS",
+                            "price": 834,
+                            "tariff": 0
+                          }
+                        ],
+                        "imports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "SILICON",
+                            "price": 144,
+                            "tariff": 0
+                          },
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "QUARTZ",
+                            "price": 286,
+                            "tariff": 0
+                          }
+                        ],
+                        "exchange": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": [
+                        "X1-AK3-88760F"
+                      ],
+                      "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-markets",
+        "description": "Retrieve a list of all charted markets in the given system. Markets are only available if the waypoint is charted and contains a communications relay.\n\nTo install a communications relay at a market, look at the `my/ships/{shipSymbol}/deploy` endpoint.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/markets/{waypointSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "View Market",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "exports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "MICROPROCESSORS",
+                            "price": 834,
+                            "tariff": 0
+                          }
+                        ],
+                        "imports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "SILICON",
+                            "price": 144,
+                            "tariff": 0
+                          },
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "QUARTZ",
+                            "price": 286,
+                            "tariff": 0
+                          }
+                        ],
+                        "exchange": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "exports",
+                        "imports",
+                        "exchange"
+                      ],
+                      "properties": {
+                        "exports": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "$ref": "../models/MarketTrade.yaml"
+                          }
+                        },
+                        "imports": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "$ref": "../models/MarketTrade.yaml"
+                          }
+                        },
+                        "exchange": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/MarketTrade.yaml"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "exports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "MICROPROCESSORS",
+                            "price": 834,
+                            "tariff": 0
+                          }
+                        ],
+                        "imports": [
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "SILICON",
+                            "price": 144,
+                            "tariff": 0
+                          },
+                          {
+                            "waypointSymbol": "X1-OE-PM",
+                            "tradeSymbol": "QUARTZ",
+                            "price": 286,
+                            "tariff": 0
+                          }
+                        ],
+                        "exchange": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-markets-waypointSymbol",
+        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.\n\nMarket data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.\n\nSee `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/waypoints": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        }
+      ],
+      "get": {
+        "summary": "List Waypoints",
+        "tags": [
+          "systems"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM",
+                          "type": "PLANET",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [
+                            "X1-OE-PM01"
+                          ],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE",
+                            "SHIPYARD"
+                          ],
+                          "traits": [
+                            "OVERCROWDED",
+                            "HIGH_TECH",
+                            "BUREAUCRATIC",
+                            "TRADING_HUB",
+                            "TEMPERATE"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM01",
+                          "type": "MOON",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE"
+                          ],
+                          "traits": [
+                            "WEAK_GRAVITY"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-A005",
+                          "type": "ASTEROID_FIELD",
+                          "x": -1,
+                          "y": -29,
+                          "orbitals": [],
+                          "faction": "MINERS_COLLECTIVE",
+                          "features": [],
+                          "traits": [
+                            "COMMON_METAL_DEPOSITS"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-25X",
+                          "type": "JUMP_GATE",
+                          "x": -38,
+                          "y": 47,
+                          "orbitals": [],
+                          "faction": "SPACERS_GUILD",
+                          "features": [],
+                          "traits": [],
+                          "charted": true,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 4,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Waypoint.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": [
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM",
+                          "type": "PLANET",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [
+                            "X1-OE-PM01"
+                          ],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE",
+                            "SHIPYARD"
+                          ],
+                          "traits": [
+                            "OVERCROWDED",
+                            "HIGH_TECH",
+                            "BUREAUCRATIC",
+                            "TRADING_HUB",
+                            "TEMPERATE"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM01",
+                          "type": "MOON",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE"
+                          ],
+                          "traits": [
+                            "WEAK_GRAVITY"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-A005",
+                          "type": "ASTEROID_FIELD",
+                          "x": -1,
+                          "y": -29,
+                          "orbitals": [],
+                          "faction": "MINERS_COLLECTIVE",
+                          "features": [],
+                          "traits": [
+                            "COMMON_METAL_DEPOSITS"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-25X",
+                          "type": "JUMP_GATE",
+                          "x": -38,
+                          "y": 47,
+                          "orbitals": [],
+                          "faction": "SPACERS_GUILD",
+                          "features": [],
+                          "traits": [],
+                          "charted": true,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 4,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-waypoints-waypointSymbol",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Fetch all of the waypoints for a given system. System must be charted or a ship must be present to return waypoint details."
+      }
+    },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "View Waypoint",
+        "tags": [
+          "systems"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM",
+                          "type": "PLANET",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [
+                            "X1-OE-PM01"
+                          ],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE",
+                            "SHIPYARD"
+                          ],
+                          "traits": [
+                            "OVERCROWDED",
+                            "HIGH_TECH",
+                            "BUREAUCRATIC",
+                            "TRADING_HUB",
+                            "TEMPERATE"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM01",
+                          "type": "MOON",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE"
+                          ],
+                          "traits": [
+                            "WEAK_GRAVITY"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-A005",
+                          "type": "ASTEROID_FIELD",
+                          "x": -1,
+                          "y": -29,
+                          "orbitals": [],
+                          "faction": "MINERS_COLLECTIVE",
+                          "features": [],
+                          "traits": [
+                            "COMMON_METAL_DEPOSITS"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-25X",
+                          "type": "JUMP_GATE",
+                          "x": -38,
+                          "y": 47,
+                          "orbitals": [],
+                          "faction": "SPACERS_GUILD",
+                          "features": [],
+                          "traits": [],
+                          "charted": true,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 4,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Waypoint.yaml"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": [
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM",
+                          "type": "PLANET",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [
+                            "X1-OE-PM01"
+                          ],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE",
+                            "SHIPYARD"
+                          ],
+                          "traits": [
+                            "OVERCROWDED",
+                            "HIGH_TECH",
+                            "BUREAUCRATIC",
+                            "TRADING_HUB",
+                            "TEMPERATE"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-PM01",
+                          "type": "MOON",
+                          "x": 10,
+                          "y": 5,
+                          "orbitals": [],
+                          "faction": "COMMERCE_REPUBLIC",
+                          "features": [
+                            "MARKETPLACE"
+                          ],
+                          "traits": [
+                            "WEAK_GRAVITY"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-A005",
+                          "type": "ASTEROID_FIELD",
+                          "x": -1,
+                          "y": -29,
+                          "orbitals": [],
+                          "faction": "MINERS_COLLECTIVE",
+                          "features": [],
+                          "traits": [
+                            "COMMON_METAL_DEPOSITS"
+                          ],
+                          "charted": true,
+                          "chartedBy": null
+                        },
+                        {
+                          "system": "X1-OE",
+                          "symbol": "X1-OE-25X",
+                          "type": "JUMP_GATE",
+                          "x": -38,
+                          "y": 47,
+                          "orbitals": [],
+                          "faction": "SPACERS_GUILD",
+                          "features": [],
+                          "traits": [],
+                          "charted": true,
+                          "chartedBy": null
+                        }
+                      ],
+                      "meta": {
+                        "total": 4,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-waypoints",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "View the details of a waypoint."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ships"
+    },
+    {
+      "name": "markets"
+    },
+    {
+      "name": "trade"
+    },
+    {
+      "name": "sell"
+    },
+    {
+      "name": "purchase"
+    },
+    {
+      "name": "navigation"
+    },
+    {
+      "name": "agents"
+    },
+    {
+      "name": "dock"
+    },
+    {
+      "name": "orbit"
+    },
+    {
+      "name": "jettison"
+    },
+    {
+      "name": "jump"
+    },
+    {
+      "name": "refuel"
+    },
+    {
+      "name": "scan"
+    },
+    {
+      "name": "contracts"
+    },
+    {
+      "name": "chart"
+    },
+    {
+      "name": "extract"
+    },
+    {
+      "name": "mining"
+    },
+    {
+      "name": "deliver"
+    },
+    {
+      "name": "survey"
+    },
+    {
+      "name": "systems"
+    },
+    {
+      "name": "waypoints"
+    },
+    {
+      "name": "shipyards"
+    },
+    {
+      "name": "markets"
+    }
+  ],
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "AgentToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "When you register a new agent you will be granted a private bearer token which grants authorization to use the API."
+      }
+    },
+    "requestBodies": {}
+  },
+  "security": [
+    {
+      "AgentToken": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "faction",
+    "role"
+  ],
+  "description": "The public registration information of the ship",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The agent's registered name of the ship",
+      "minLength": 1,
+      "examples": [
+        "Red Falcon",
+        "Black Pearl IV",
+        "The Flying Dutchman"
+      ]
+    },
+    "faction": {
+      "type": "string",
+      "description": "The symbol of the faction the ship is registered with",
+      "minLength": 1,
+      "examples": [
+        "F_COMM"
+      ]
+    },
+    "role": {
+      "$ref": "./ShipRole.json"
+    }
+  }
+}

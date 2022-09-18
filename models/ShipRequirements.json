@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "description": "The requirements for installation on a ship",
+  "properties": {
+    "power": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "crew": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "power",
+    "crew"
+  ]
+}

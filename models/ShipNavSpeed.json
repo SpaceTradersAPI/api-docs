@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "description": "The ship's set speed when travelling between waypoints. Nav speed can wear down the ship's engines and lower crew morale but improves travel time.",
+  "enum": [
+    "CONSERVATIVE",
+    "CRUISE",
+    "MAX"
+  ],
+  "default": "CRUISE"
+}

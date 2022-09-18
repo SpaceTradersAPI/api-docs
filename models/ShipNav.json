@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "The navigation information of the ship.",
+  "properties": {
+    "route": {
+      "$ref": "./ShipNavRoute.json"
+    },
+    "status": {
+      "$ref": "./ShipNavStatus.json"
+    },
+    "speed": {
+      "$ref": "./ShipNavSpeed.json"
+    }
+  },
+  "required": [
+    "route",
+    "status",
+    "speed"
+  ]
+}

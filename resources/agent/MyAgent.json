@@ -1,0 +1,44 @@
+{
+  "get": {
+    "summary": "My Agent Details",
+    "tags": [
+      "agents"
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "../../models/Agent.yaml"
+                }
+              }
+            },
+            "examples": {
+              "Agent": {
+                "value": {
+                  "data": {
+                    "accountId": "cl0hok34m0003ks0jjql5q8f2",
+                    "symbol": "EMBER",
+                    "headquarters": "X1-OE-PM",
+                    "credits": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "operationId": "get-my-agent",
+    "security": [
+      {
+        "AgentToken": []
+      }
+    ],
+    "description": "Fetch your agent's details."
+  }
+}

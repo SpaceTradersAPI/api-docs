@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "The reactor of the ship. It is a large, cylindrical structure that is usually located in the center of the ship. The reactor is responsible for powering the ship's systems and weapons.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "SOLAR_REACTOR",
+        "FUSION_REACTOR",
+        "FISSION_REACTOR",
+        "CHEMICAL_REACTOR",
+        "DARK_MATTER_REACTOR"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "Solar Reactor",
+        "Fusion Reactor",
+        "Fission Reactor",
+        "Chemical Reactor",
+        "Dark Matter Reactor"
+      ]
+    },
+    "condition": {
+      "$ref": "./ShipCondition.json"
+    },
+    "powerOutput": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cooldown": {
+      "$ref": "./Cooldown.json"
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  }
+}

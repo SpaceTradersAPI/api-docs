@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "required": [
+    "count",
+    "min",
+    "max",
+    "rotation",
+    "morale"
+  ],
+  "description": "The ship's crew service and maintain the ship's systems and equipment.",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "description": "The total number of crew members on the ship."
+    },
+    "min": {
+      "type": "integer",
+      "description": "The minimum number of crew members required to maintain the ship."
+    },
+    "max": {
+      "type": "integer",
+      "description": "The maximum number of crew members the ship can support."
+    },
+    "rotation": {
+      "type": "string",
+      "description": "The rotation of crew shifts. Stricter shifts can improve the ship's performance, and more relaxed shifts can improve the crew's morale.",
+      "enum": [
+        "STRICT",
+        "STANDARD",
+        "RELAXED"
+      ],
+      "default": "STANDARD"
+    },
+    "morale": {
+      "type": "integer",
+      "description": "A rough measure of the crew's morale. A higher morale means the crew is happier and more productive. A lower morale means the ship is more prone to accidents.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "wages": {
+      "type": "integer",
+      "description": "The amount of credits per crew member paid per minute of time travelled between waypoints. Wages are paid when a ship departs from a waypoint.",
+      "minimum": 0
+    }
+  }
+}

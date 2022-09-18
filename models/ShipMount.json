@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "description": "A mount is installed on the exterier of a ship.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "MOUNT_GAS_SIPHON_I",
+        "MOUNT_GAS_SIPHON_II",
+        "MOUNT_GAS_SIPHON_III",
+        "MOUNT_SENSOR_ARRAY_I",
+        "MOUNT_SENSOR_ARRAY_II",
+        "MOUNT_SENSOR_ARRAY_III",
+        "MOUNT_MINING_LASER_I",
+        "MOUNT_MINING_LASER_II",
+        "MOUNT_MINING_LASER_III"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "Gas Siphon I",
+        "Gas Siphon II",
+        "Gas Siphon III",
+        "Sensor Array I",
+        "Sensor Array II",
+        "Sensor Array III",
+        "Mining Laser I",
+        "Mining Laser II",
+        "Mining Laser III"
+      ]
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  }
+}

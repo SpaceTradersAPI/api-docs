@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "description": "The frame of the ship. The frame determines the number of modules and mounting points of the ship, as well as base fuel capacity. As the condition of the frame takes more wear, the ship will become more sluggish and less maneuverable.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "FRAME_DRONE",
+        "FRAME_INTERCEPTOR",
+        "FRAME_RACER",
+        "FRAME_FIGHTER",
+        "FRAME_FRIGATE",
+        "FRAME_SHUTTLE",
+        "FRAME_EXPLORER",
+        "FRAME_LIGHT_FREIGHTER",
+        "FRAME_HEAVY_FREIGHTER",
+        "FRAME_TRANSPORT",
+        "FRAME_DESTROYER",
+        "FRAME_CRUISER",
+        "FRAME_CARRIER"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "Drone",
+        "Interceptor",
+        "Racer",
+        "Fighter",
+        "Frigate",
+        "Shuttle",
+        "Explorer",
+        "Light Freighter",
+        "Heavy Freighter",
+        "Transport",
+        "Destroyer",
+        "Cruiser",
+        "Carrier"
+      ]
+    },
+    "condition": {
+      "$ref": "./ShipCondition.json"
+    },
+    "moduleSlots": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mountingPoints": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "fuelCapacity": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  }
+}

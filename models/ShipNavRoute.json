@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "description": "The routing information for the ship's most recent transit or current location.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The unique identifer of the waypoint."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the waypoint."
+    },
+    "x": {
+      "type": "integer",
+      "description": "The x coordinate of the waypoint."
+    },
+    "y": {
+      "type": "integer",
+      "description": "The y coordinate of the waypoint."
+    },
+    "arrival": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date time of the ship's arrival. If the ship is in-transit, this is the expected time of arrival."
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "x",
+    "y",
+    "arrival"
+  ]
+}

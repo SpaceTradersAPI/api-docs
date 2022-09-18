@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "examples": [
+              "ORE_COPPER",
+              "MICROPROCESSORS",
+              "FOOD"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "examples": [
+              "Copper Ore",
+              "Microprocessors",
+              "Food"
+            ]
+          },
+          "units": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "symbol",
+          "name",
+          "units"
+        ]
+      },
+      "required": [
+        "size",
+        "inventory"
+      ]
+    }
+  }
+}
