@@ -496,7 +496,7 @@
                   "Success": {
                     "value": {
                       "data": {
-                        "status": "ORBIT"
+                        "status": "IN_ORBIT"
                       }
                     }
                   }

@@ -17,7 +17,7 @@
         "The Flying Dutchman"
       ]
     },
-    "faction": {
+    "factionSymbol": {
       "type": "string",
       "description": "The symbol of the faction the ship is registered with",
       "minLength": 1,

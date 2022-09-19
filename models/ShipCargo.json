@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "size": {
+    "capacity": {
       "type": "integer",
       "minimum": 0
     },

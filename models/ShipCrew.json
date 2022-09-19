@@ -23,13 +23,12 @@
     },
     "rotation": {
       "type": "string",
-      "description": "The rotation of crew shifts. Stricter shifts can improve the ship's performance, and more relaxed shifts can improve the crew's morale.",
+      "description": "The rotation of crew shifts. A stricter shift improves the ship's performance. A more relaxed shift improves the crew's morale.",
       "enum": [
         "STRICT",
-        "STANDARD",
         "RELAXED"
       ],
-      "default": "STANDARD"
+      "default": "STRICT"
     },
     "morale": {
       "type": "integer",

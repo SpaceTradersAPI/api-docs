@@ -4,15 +4,15 @@
   "properties": {
     "power": {
       "type": "integer",
-      "minimum": 0
+      "description": "The amount of power required from the reactor."
     },
     "crew": {
       "type": "integer",
-      "minimum": 0
+      "description": "The number of crew required for operation."
+    },
+    "slots": {
+      "type": "integer",
+      "description": "The number of module slots required for installation."
     }
-  },
-  "required": [
-    "power",
-    "crew"
-  ]
+  }
 }
