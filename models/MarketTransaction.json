@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the trade good."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of transaction.",
+      "enum": [
+        "PURCHASE",
+        "SELL"
+      ]
+    },
+    "units": {
+      "type": "integer",
+      "description": "The number of units of the transaction.",
+      "minimum": 1
+    },
+    "pricePerUnit": {
+      "type": "integer",
+      "description": "The price per unit of the transaction.",
+      "minimum": 1
+    },
+    "shipSymbol": {
+      "type": "string",
+      "description": "The symbol of the ship that made the transaction."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the transaction."
+    }
+  }
+}

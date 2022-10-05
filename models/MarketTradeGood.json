@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the trade good."
+    },
+    "tradeVolume": {
+      "type": "integer",
+      "description": "The average volume flowing through the market for this type of good.",
+      "minimum": 1
+    },
+    "supply": {
+      "type": "string",
+      "description": "A rough estimate of the total supply of this good in this marketplace.",
+      "enum": [
+        "HIGH",
+        "AVERAGE",
+        "LOW"
+      ]
+    },
+    "purchasePrice": {
+      "type": "integer",
+      "description": "The price at which this good is sold.",
+      "minimum": 0
+    },
+    "sellPrice": {
+      "type": "integer",
+      "description": "The price at which this good is bought.",
+      "minimum": 0
+    }
+  }
+}

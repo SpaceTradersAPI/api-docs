@@ -26,8 +26,8 @@
     "reactor": {
       "$ref": "./ShipReactor.json"
     },
-    "thrusters": {
-      "$ref": "./ShipThrusters.json"
+    "engine": {
+      "$ref": "./ShipEngine.json"
     },
     "modules": {
       "type": "array",

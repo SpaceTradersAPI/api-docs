@@ -1,0 +1,14 @@
+{
+  "type": "string",
+  "description": "The type of waypoint.",
+  "enum": [
+    "PLANET",
+    "GAS_GIANT",
+    "MOON",
+    "ORBITAL_STATION",
+    "JUMP_GATE",
+    "ASTEROID_FIELD",
+    "DEBRIS_FIELD",
+    "GRAVITY_WELL"
+  ]
+}

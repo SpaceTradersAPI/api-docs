@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "description": "The type of cargo item and the number of units.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "examples": [
+        "ORE_COPPER",
+        "MICROPROCESSORS",
+        "FOOD"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "examples": [
+        "Copper Ore",
+        "Microprocessors",
+        "Food"
+      ]
+    },
+    "units": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "units"
+  ]
+}

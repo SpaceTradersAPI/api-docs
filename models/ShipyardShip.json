@@ -1,0 +1,34 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "price": {
+      "type": "integer"
+    },
+    "frame": {
+      "$ref": "./ShipFrame.json"
+    },
+    "reactor": {
+      "$ref": "./ShipReactor.json"
+    },
+    "engine": {
+      "$ref": "./ShipEngine.json"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipModule.json"
+      }
+    },
+    "mounts": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipMount.json"
+      }
+    }
+  }
+}

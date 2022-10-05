@@ -3,42 +3,17 @@
   "properties": {
     "capacity": {
       "type": "integer",
+      "description": "The max number of items that can be stored in the cargo hold.",
       "minimum": 0
     },
     "inventory": {
       "type": "array",
+      "description": "The items currently in the cargo hold.",
       "items": {
-        "type": "object",
-        "properties": {
-          "symbol": {
-            "type": "string",
-            "examples": [
-              "ORE_COPPER",
-              "MICROPROCESSORS",
-              "FOOD"
-            ]
-          },
-          "name": {
-            "type": "string",
-            "examples": [
-              "Copper Ore",
-              "Microprocessors",
-              "Food"
-            ]
-          },
-          "units": {
-            "type": "integer",
-            "minimum": 1
-          }
-        },
-        "required": [
-          "symbol",
-          "name",
-          "units"
-        ]
+        "$ref": "./ShipCargoItem.json"
       },
       "required": [
-        "size",
+        "capacity",
         "inventory"
       ]
     }

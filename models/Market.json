@@ -1,0 +1,38 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the market. The symbol is the same as the waypoint where the market is located."
+    },
+    "exports": {
+      "type": "array",
+      "description": "The list of goods that are exported from this market.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "description": "The list of goods that are sought as imports in this market.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "description": "The list of recent transactions at this market.",
+      "items": {
+        "$ref": "./MarketTransaction.json"
+      }
+    },
+    "tradeGoods": {
+      "type": "array",
+      "description": "The list of goods that are traded at this market.",
+      "items": {
+        "$ref": "./MarketTradeGood.json"
+      }
+    }
+  }
+}

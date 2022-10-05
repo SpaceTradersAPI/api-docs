@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "SpaceTraders API",
-    "version": "2.1.0",
-    "summary": "SpaceTraders is a unique multiplayer game built on a free Web API.",
+    "version": "2.0.0-rc.2",
+    "summary": "[Alpha] SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships.",
     "contact": {
       "name": "Joel Brubaker",
       "email": "joel@spacetraders.io"
@@ -12,16 +12,16 @@
       "name": "No Permission",
       "url": "https://choosealicense.com/no-permission/"
     },
-    "description": "SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.\n\nSimilar to games such as Eve Online, you work with or against other players to establish trade routes, chart new systems, mine precious ores, patrol for pirates, spy on factions, and discover hidden treasures.\n\nBut what makes SpaceTraders unique is that the game is entirely accessible through open and well-documented API endpoints. In fact, SpaceTraders doesn't have a first-class client to play the game - if you want to take it for a spin, you should try one of our community-created web clients, or use the API documentation to see how you might play a game through an API.\n\nIf this sounds fun and interesting to you, please drop into our Discord and get to know the community. We are actively working on new clients, new ideas and sharing tips for how to play the game.\n\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://v2-0-0.alpha.spacetraders.io\",\n}\n```"
+    "description": "SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.\n\nSimilar to games such as Eve Online, you work with or against other players to establish trade routes, chart new systems, mine precious ores, patrol for pirates, spy on factions, and discover hidden treasures.\n\nSpaceTraders as a game is unique in that it is entirely accessible through open and well-documented API endpoints.\n\nIf this sounds fun and interesting to you, please drop into our Discord and get to know the community. We are actively working on new clients, new ideas and sharing tips for how to play the game.\n\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://v2-0-0.alpha.spacetraders.io\",\n}\n```"
   },
   "servers": [
     {
-      "url": "https://v2-1-0.spacetraders.io",
-      "description": "v2.1.0"
+      "url": "https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app",
+      "description": "v2.0.0-rc.2"
     }
   ],
   "paths": {
-    "/agents": {
+    "/register": {
       "post": {
         "summary": "Register New Agent",
         "tags": [
@@ -39,13 +39,14 @@
                       "type": "object",
                       "properties": {
                         "token": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "A Bearer token for accessing secured API endpoints."
                         },
                         "agent": {
                           "$ref": "../models/Agent.yaml"
                         },
                         "faction": {
-                          "$ref": "../models/Faction.yaml"
+                          "$ref": "../models/Faction.json"
                         },
                         "contract": {
                           "$ref": "../models/Contract.yaml"
@@ -61,7 +62,7 @@
             }
           }
         },
-        "operationId": "post-agents",
+        "operationId": "post-register",
         "description": "Creates a new agent and ties it to a temporary Account. Use `COMMERCE_REPUBLIC` as your starting faction if you don't know any other factions to choose from.\n\nThe agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field waypoint, and execute the `/my/ships/{shipSymbol}/accept` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
         "requestBody": {
           "content": {
@@ -131,6 +132,398 @@
           }
         ],
         "description": "Fetch your agent's details."
+      }
+    },
+    "/my/ships": {
+      "get": {
+        "summary": "List Ships",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": [
+                        {
+                          "symbol": "653298-1",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-2",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-3",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-4",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-5",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        },
+                        {
+                          "symbol": "653298-6",
+                          "crew": null,
+                          "officers": null,
+                          "frame": "FRAME_DRONE",
+                          "reactor": "REACTOR_SOLAR_I",
+                          "engine": "ENGINE_SOLAR_PROPULSION",
+                          "modules": [
+                            "MODULE_CARGO_HOLD"
+                          ],
+                          "mounts": [
+                            "MOUNT_MINING_LASER_I"
+                          ],
+                          "registration": {
+                            "factionSymbol": "COMMERCE_REPUBLIC",
+                            "agentSymbol": "653298",
+                            "fee": 100,
+                            "role": "EXCAVATOR"
+                          },
+                          "integrity": {
+                            "frame": 1,
+                            "reactor": 1,
+                            "engine": 1
+                          },
+                          "status": "DOCKED",
+                          "location": "X1-OE-PM",
+                          "cargo": []
+                        }
+                      ],
+                      "meta": {
+                        "total": 6,
+                        "page": 1,
+                        "limit": 20
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Ship.json"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-ships",
+        "description": "Retrieve all of your ships.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Purchase Ship",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "4F4D44-1",
+                        "crew": null,
+                        "officers": null,
+                        "fuel": 100,
+                        "frame": "FRAME_DRONE",
+                        "reactor": "REACTOR_SOLAR_I",
+                        "engine": "ENGINE_SOLAR_PROPULSION",
+                        "modules": [
+                          "MODULE_CARGO_HOLD"
+                        ],
+                        "mounts": [
+                          "MOUNT_MINING_LASER_I"
+                        ],
+                        "registration": {
+                          "factionSymbol": "COMMERCE_REPUBLIC",
+                          "agentSymbol": "4F4D44",
+                          "fee": 100,
+                          "role": "EXCAVATOR"
+                        },
+                        "integrity": {
+                          "frame": 1,
+                          "reactor": 1,
+                          "engine": 1
+                        },
+                        "status": "DOCKED",
+                        "location": "X1-OE-PM",
+                        "cargo": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ship": {
+                          "$ref": "../models/Ship.json"
+                        },
+                        "credits": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Purchase a ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the shipyard listing you want to purchase."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/ships/{shipSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "View Ship",
+        "tags": [
+          "ships"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "653298-1",
+                        "crew": null,
+                        "officers": null,
+                        "frame": "FRAME_DRONE",
+                        "reactor": "REACTOR_SOLAR_I",
+                        "engine": "ENGINE_SOLAR_PROPULSION",
+                        "modules": [
+                          "MODULE_CARGO_HOLD"
+                        ],
+                        "mounts": [
+                          "MOUNT_MINING_LASER_I"
+                        ],
+                        "registration": {
+                          "factionSymbol": "COMMERCE_REPUBLIC",
+                          "agentSymbol": "653298",
+                          "fee": 100,
+                          "role": "EXCAVATOR"
+                        },
+                        "integrity": {
+                          "frame": 1,
+                          "reactor": 1,
+                          "engine": 1
+                        },
+                        "status": "DOCKED",
+                        "location": "X1-OE-PM",
+                        "cargo": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Ship.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-my-ships-shipSymbol",
+        "description": "Retrieve the details of your ship.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/my/ships/{shipSymbol}/chart": {
@@ -275,246 +668,6 @@
           }
         },
         "description": "Deliver cargo on a given contract."
-      }
-    },
-    "/my/ships/{shipSymbol}/nav/transit": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "shipSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The ship symbol"
-        }
-      ],
-      "post": {
-        "summary": "Navigate Ship",
-        "tags": [
-          "navigation"
-        ],
-        "responses": {
-          "201": {
-            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "shipSymbol": "3AE434-1",
-                        "departure": "X1-OE-PM",
-                        "destination": "X1-OE-A005",
-                        "durationRemaining": 2159,
-                        "arrivedAt": null
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "route": {
-                          "$ref": "../models/ShipNavRoute.json"
-                        },
-                        "shipFuel": {
-                          "$ref": "../models/ShipFuel.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "fuelCost": 38,
-                        "navigation": {
-                          "shipSymbol": "BA03F2-1",
-                          "departure": "X1-OE-PM",
-                          "destination": "X1-OE-A005",
-                          "durationRemaining": 2279,
-                          "arrivedAt": null
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "post-my-ships-shipSymbol-navigate",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "waypointSymbol": {
-                    "type": "string",
-                    "description": "The target destination."
-                  }
-                },
-                "required": [
-                  "waypointSymbol"
-                ]
-              }
-            }
-          },
-          "description": ""
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action."
-      }
-    },
-    "/my/ships/{shipSymbol}/nav/dock": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "shipSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The symbol of the ship"
-        }
-      ],
-      "post": {
-        "summary": "Dock Ship",
-        "tags": [
-          "navigation"
-        ],
-        "responses": {
-          "200": {
-            "description": "The ship has successfully docked at it's current location.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "status": "DOCKED"
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "required": [
-                        "status"
-                      ],
-                      "properties": {
-                        "status": {
-                          "$ref": "../models/ShipNavStatus.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "status": "DOCKED"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "post-my-ships-shipSymbol-dock",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked."
-      }
-    },
-    "/my/ships/{shipSymbol}/nav/orbit": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "shipSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The symbol of the ship"
-        }
-      ],
-      "post": {
-        "summary": "Orbit Ship",
-        "responses": {
-          "200": {
-            "description": "The ship has successfully moved into orbit at it's current location.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "status": "ORBIT"
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "$ref": "../models/ShipNavStatus.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "status": "IN_ORBIT"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "post-my-ships-shipSymbol-orbit",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
-        "tags": [
-          "navigation"
-        ]
       }
     },
     "/my/ships/{shipSymbol}/jettison": {
@@ -1683,7 +1836,7 @@
                               "$ref": "../models/Cooldown.yaml"
                             },
                             "waypoint": {
-                              "$ref": "../models/Waypoint.yaml"
+                              "$ref": "../models/Waypoint.json"
                             }
                           }
                         }
@@ -1790,7 +1943,7 @@
         ]
       }
     },
-    "/my/ships/{shipSymbol}": {
+    "/my/ships/{shipSymbol}/navigate": {
       "parameters": [
         {
           "schema": {
@@ -1798,57 +1951,34 @@
           },
           "name": "shipSymbol",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ship symbol"
         }
       ],
-      "get": {
-        "summary": "View Ship",
+      "post": {
+        "summary": "Navigate Ship",
         "tags": [
-          "ships"
+          "navigation"
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival.",
             "content": {
               "application/json": {
                 "schema": {
                   "description": "",
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "symbol": "653298-1",
-                        "crew": null,
-                        "officers": null,
-                        "frame": "FRAME_DRONE",
-                        "reactor": "REACTOR_SOLAR_I",
-                        "engine": "ENGINE_SOLAR_PROPULSION",
-                        "modules": [
-                          "MODULE_CARGO_HOLD"
-                        ],
-                        "mounts": [
-                          "MOUNT_MINING_LASER_I"
-                        ],
-                        "registration": {
-                          "factionSymbol": "COMMERCE_REPUBLIC",
-                          "agentSymbol": "653298",
-                          "fee": 100,
-                          "role": "EXCAVATOR"
-                        },
-                        "integrity": {
-                          "frame": 1,
-                          "reactor": 1,
-                          "engine": 1
-                        },
-                        "status": "DOCKED",
-                        "location": "X1-OE-PM",
-                        "cargo": []
-                      }
-                    }
-                  },
                   "properties": {
                     "data": {
-                      "$ref": "../models/Ship.json"
+                      "type": "object",
+                      "properties": {
+                        "route": {
+                          "$ref": "../models/ShipNav.json"
+                        },
+                        "shipFuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -1859,246 +1989,54 @@
             }
           }
         },
-        "operationId": "get-my-ships-shipSymbol",
-        "description": "Retrieve the details of your ship.",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/my/ships": {
-      "get": {
-        "summary": "List Ships",
-        "tags": [
-          "ships"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": [
-                        {
-                          "symbol": "653298-1",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        },
-                        {
-                          "symbol": "653298-2",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        },
-                        {
-                          "symbol": "653298-3",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        },
-                        {
-                          "symbol": "653298-4",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        },
-                        {
-                          "symbol": "653298-5",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        },
-                        {
-                          "symbol": "653298-6",
-                          "crew": null,
-                          "officers": null,
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ],
-                          "registration": {
-                            "factionSymbol": "COMMERCE_REPUBLIC",
-                            "agentSymbol": "653298",
-                            "fee": 100,
-                            "role": "EXCAVATOR"
-                          },
-                          "integrity": {
-                            "frame": 1,
-                            "reactor": 1,
-                            "engine": 1
-                          },
-                          "status": "DOCKED",
-                          "location": "X1-OE-PM",
-                          "cargo": []
-                        }
-                      ],
-                      "meta": {
-                        "total": 6,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/Ship.json"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                }
+        "operationId": "post-my-ships-shipSymbol-navigate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "waypointSymbol": {
+                    "type": "string",
+                    "description": "The target destination."
+                  }
+                },
+                "required": [
+                  "waypointSymbol"
+                ]
               }
             }
-          }
+          },
+          "description": ""
         },
-        "operationId": "get-my-ships",
-        "description": "Retrieve all of your ships.",
         "security": [
           {
             "AgentToken": []
           }
-        ]
-      },
+        ],
+        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action."
+      }
+    },
+    "/my/ships/{shipSymbol}/dock": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ],
       "post": {
-        "summary": "Purchase Ship",
+        "summary": "Dock Ship",
         "tags": [
-          "shipyards"
+          "navigation"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The ship has successfully docked at it's current location.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2107,33 +2045,75 @@
                   "x-examples": {
                     "example-1": {
                       "data": {
-                        "symbol": "4F4D44-1",
-                        "crew": null,
-                        "officers": null,
-                        "fuel": 100,
-                        "frame": "FRAME_DRONE",
-                        "reactor": "REACTOR_SOLAR_I",
-                        "engine": "ENGINE_SOLAR_PROPULSION",
-                        "modules": [
-                          "MODULE_CARGO_HOLD"
-                        ],
-                        "mounts": [
-                          "MOUNT_MINING_LASER_I"
-                        ],
-                        "registration": {
-                          "factionSymbol": "COMMERCE_REPUBLIC",
-                          "agentSymbol": "4F4D44",
-                          "fee": 100,
-                          "role": "EXCAVATOR"
-                        },
-                        "integrity": {
-                          "frame": 1,
-                          "reactor": 1,
-                          "engine": 1
-                        },
-                        "status": "DOCKED",
-                        "location": "X1-OE-PM",
-                        "cargo": []
+                        "status": "DOCKED"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "status"
+                      ],
+                      "properties": {
+                        "status": {
+                          "$ref": "../models/ShipNavStatus.json"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "status": "DOCKED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-my-ships-shipSymbol-dock",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked."
+      }
+    },
+    "/my/ships/{shipSymbol}/orbit": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ],
+      "post": {
+        "summary": "Orbit Ship",
+        "responses": {
+          "200": {
+            "description": "The ship has successfully moved into orbit at it's current location.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "status": "ORBIT"
                       }
                     }
                   },
@@ -2141,11 +2121,8 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "ship": {
-                          "$ref": "../models/Ship.json"
-                        },
-                        "credits": {
-                          "type": "integer"
+                        "status": {
+                          "$ref": "../models/ShipNavStatus.json"
                         }
                       }
                     }
@@ -2153,33 +2130,56 @@
                   "required": [
                     "data"
                   ]
-                }
-              }
-            }
-          }
-        },
-        "operationId": "post-my-ships",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Purchase a ship",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "The id of the shipyard listing you want to purchase."
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "status": "IN_ORBIT"
+                      }
+                    }
                   }
                 }
               }
             }
           }
+        },
+        "operationId": "post-my-ships-shipSymbol-orbit",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
+        "tags": [
+          "navigation"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/negotiate": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
         }
+      ],
+      "post": {
+        "summary": "Negotiate with a waypoint",
+        "operationId": "post-my-ships-negotiate",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Attempt to negotiate with the faction at a waypoint. The request will only succeed if the waypoint is a negotiable location, and your ship is capable of negotiating using an envoy.",
+        "tags": [
+          "ships"
+        ]
       }
     },
     "/my/contracts": {
@@ -2648,625 +2648,6 @@
         ]
       }
     },
-    "/systems/{systemSymbol}/shipyards": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "systemSymbol",
-          "in": "path",
-          "required": true,
-          "description": "the system symbol"
-        }
-      ],
-      "get": {
-        "summary": "List Shipyards",
-        "tags": [
-          "shipyards"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": [
-                        {
-                          "symbol": "X1-OE-PM",
-                          "faction": "COMMERCE_REPUBLIC"
-                        }
-                      ],
-                      "meta": {
-                        "total": 1,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/Shipyard.yaml"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-systems-systemSymbol-shipyards",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Returns a list of all shipyards in a system."
-      }
-    },
-    "/systems/{systemSymbol}/shipyards/{waypointSymbol}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "systemSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The system symbol"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "waypointSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The waypoint symbol"
-        }
-      ],
-      "get": {
-        "summary": "Shipyard Details",
-        "tags": [
-          "shipyards"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Shipyard.yaml"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/systems/{systemSymbol}/shipyards/{waypointSymbol}/ships": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "systemSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The system symbol"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "waypointSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The waypoint symbol"
-        }
-      ],
-      "get": {
-        "summary": "Shipyard Listings",
-        "tags": [
-          "shipyards"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": [
-                        {
-                          "id": "cl0nahta90000aq0jonm1nprl",
-                          "waypoint": "X1-OE-PM",
-                          "price": 58191,
-                          "role": "EXCAVATOR",
-                          "frame": "FRAME_DRONE",
-                          "reactor": "REACTOR_SOLAR_I",
-                          "engine": "ENGINE_SOLAR_PROPULSION",
-                          "modules": [
-                            "MODULE_CARGO_HOLD"
-                          ],
-                          "mounts": [
-                            "MOUNT_MINING_LASER_I"
-                          ]
-                        }
-                      ],
-                      "meta": {
-                        "total": 1,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/ShipyardListing.yaml"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol-ships",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/trade/{tradeSymbol}/imports": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "tradeSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The trade symbol"
-        }
-      ],
-      "get": {
-        "summary": "Trade Imports",
-        "tags": [
-          "markets"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/MarketTrade.yaml"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "operationId": "get-trade-tradeSymbol-imports",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/trade/{tradeSymbol}/exports": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "tradeSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The trade symbol"
-        }
-      ],
-      "get": {
-        "summary": "Trade Exports",
-        "tags": [
-          "markets"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/MarketTrade.yaml"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "operationId": "get-trade-tradeSymbol-exports",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/trade/{tradeSymbol}/exchange": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "tradeSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The trade symbol"
-        }
-      ],
-      "get": {
-        "summary": "Trade Exchanges",
-        "tags": [
-          "markets"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/MarketTrade.yaml"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.yaml"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "operationId": "get-trade-tradeSymbol-exchange",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/systems/{systemSymbol}/markets": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "systemSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The system symbol"
-        }
-      ],
-      "get": {
-        "summary": "List Markets",
-        "tags": [
-          "markets"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "exports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "MICROPROCESSORS",
-                            "price": 834,
-                            "tariff": 0
-                          }
-                        ],
-                        "imports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "SILICON",
-                            "price": 144,
-                            "tariff": 0
-                          },
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "QUARTZ",
-                            "price": 286,
-                            "tariff": 0
-                          }
-                        ],
-                        "exchange": []
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": [
-                        "X1-AK3-88760F"
-                      ],
-                      "meta": {
-                        "total": 1,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-systems-systemSymbol-markets",
-        "description": "Retrieve a list of all charted markets in the given system. Markets are only available if the waypoint is charted and contains a communications relay.\n\nTo install a communications relay at a market, look at the `my/ships/{shipSymbol}/deploy` endpoint.",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
-    "/systems/{systemSymbol}/markets/{waypointSymbol}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "systemSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The system symbol"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "waypointSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The waypoint symbol"
-        }
-      ],
-      "get": {
-        "summary": "View Market",
-        "tags": [
-          "markets"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "exports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "MICROPROCESSORS",
-                            "price": 834,
-                            "tariff": 0
-                          }
-                        ],
-                        "imports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "SILICON",
-                            "price": 144,
-                            "tariff": 0
-                          },
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "QUARTZ",
-                            "price": 286,
-                            "tariff": 0
-                          }
-                        ],
-                        "exchange": []
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "required": [
-                        "exports",
-                        "imports",
-                        "exchange"
-                      ],
-                      "properties": {
-                        "exports": {
-                          "type": "array",
-                          "uniqueItems": true,
-                          "minItems": 1,
-                          "items": {
-                            "$ref": "../models/MarketTrade.yaml"
-                          }
-                        },
-                        "imports": {
-                          "type": "array",
-                          "uniqueItems": true,
-                          "minItems": 1,
-                          "items": {
-                            "$ref": "../models/MarketTrade.yaml"
-                          }
-                        },
-                        "exchange": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "../models/MarketTrade.yaml"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "exports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "MICROPROCESSORS",
-                            "price": 834,
-                            "tariff": 0
-                          }
-                        ],
-                        "imports": [
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "SILICON",
-                            "price": 144,
-                            "tariff": 0
-                          },
-                          {
-                            "waypointSymbol": "X1-OE-PM",
-                            "tradeSymbol": "QUARTZ",
-                            "price": 286,
-                            "tariff": 0
-                          }
-                        ],
-                        "exchange": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-systems-systemSymbol-markets-waypointSymbol",
-        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.\n\nMarket data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.\n\nSee `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      }
-    },
     "/systems/{systemSymbol}/waypoints": {
       "parameters": [
         {
@@ -3378,7 +2759,7 @@
                       "uniqueItems": true,
                       "minItems": 1,
                       "items": {
-                        "$ref": "../models/Waypoint.yaml"
+                        "$ref": "../models/Waypoint.json"
                       }
                     },
                     "meta": {
@@ -3389,88 +2770,6 @@
                     "data",
                     "meta"
                   ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": [
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM",
-                          "type": "PLANET",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [
-                            "X1-OE-PM01"
-                          ],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE",
-                            "SHIPYARD"
-                          ],
-                          "traits": [
-                            "OVERCROWDED",
-                            "HIGH_TECH",
-                            "BUREAUCRATIC",
-                            "TRADING_HUB",
-                            "TEMPERATE"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM01",
-                          "type": "MOON",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE"
-                          ],
-                          "traits": [
-                            "WEAK_GRAVITY"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-A005",
-                          "type": "ASTEROID_FIELD",
-                          "x": -1,
-                          "y": -29,
-                          "orbitals": [],
-                          "faction": "MINERS_COLLECTIVE",
-                          "features": [],
-                          "traits": [
-                            "COMMON_METAL_DEPOSITS"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-25X",
-                          "type": "JUMP_GATE",
-                          "x": -38,
-                          "y": 47,
-                          "orbitals": [],
-                          "faction": "SPACERS_GUILD",
-                          "features": [],
-                          "traits": [],
-                          "charted": true,
-                          "chartedBy": null
-                        }
-                      ],
-                      "meta": {
-                        "total": 4,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -3605,7 +2904,7 @@
                       "uniqueItems": true,
                       "minItems": 1,
                       "items": {
-                        "$ref": "../models/Waypoint.yaml"
+                        "$ref": "../models/Waypoint.json"
                       }
                     },
                     "meta": {
@@ -3616,88 +2915,6 @@
                     "data",
                     "meta"
                   ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": [
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM",
-                          "type": "PLANET",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [
-                            "X1-OE-PM01"
-                          ],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE",
-                            "SHIPYARD"
-                          ],
-                          "traits": [
-                            "OVERCROWDED",
-                            "HIGH_TECH",
-                            "BUREAUCRATIC",
-                            "TRADING_HUB",
-                            "TEMPERATE"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM01",
-                          "type": "MOON",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE"
-                          ],
-                          "traits": [
-                            "WEAK_GRAVITY"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-A005",
-                          "type": "ASTEROID_FIELD",
-                          "x": -1,
-                          "y": -29,
-                          "orbitals": [],
-                          "faction": "MINERS_COLLECTIVE",
-                          "features": [],
-                          "traits": [
-                            "COMMON_METAL_DEPOSITS"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-25X",
-                          "type": "JUMP_GATE",
-                          "x": -38,
-                          "y": 47,
-                          "orbitals": [],
-                          "faction": "SPACERS_GUILD",
-                          "features": [],
-                          "traits": [],
-                          "charted": true,
-                          "chartedBy": null
-                        }
-                      ],
-                      "meta": {
-                        "total": 4,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -3711,9 +2928,165 @@
         ],
         "description": "View the details of a waypoint."
       }
+    },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "Get Shipyard",
+        "tags": [
+          "shipyards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "../models/Shipyard.json"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.yaml"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol-ships",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}/market": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "systemSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The system symbol"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "waypointSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The waypoint symbol"
+        }
+      ],
+      "get": {
+        "summary": "View Market",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Market.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-system-waypoint-market",
+        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.\n\nMarket data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.\n\nSee `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/factions": {
+      "get": {
+        "summary": "List Factions",
+        "description": "List all discovered factions in the game.",
+        "tags": [
+          "factions"
+        ],
+        "operationId": "get-factions"
+      }
+    },
+    "/factions/{factionSymbol}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "default": "CGR"
+          },
+          "name": "factionSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The faction symbol"
+        }
+      ],
+      "get": {
+        "summary": "View Faction",
+        "tags": [
+          "factions"
+        ],
+        "operationId": "get-factions-factionSymbol",
+        "description": "View the details of a faction."
+      }
     }
   },
   "tags": [
+    {
+      "name": "factions"
+    },
     {
       "name": "ships"
     },
@@ -3779,9 +3152,6 @@
     },
     {
       "name": "shipyards"
-    },
-    {
-      "name": "markets"
     }
   ],
   "components": {

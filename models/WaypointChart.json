@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "description": "The chart of the waypoint, which makes the waypoint visible to other agents.",
+  "properties": {
+    "submittedBy": {
+      "type": "string"
+    },
+    "submittedOn": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

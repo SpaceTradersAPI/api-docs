@@ -1,0 +1,18 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the shipyard. The symbol is the same as the waypoint where the shipyard is located.",
+      "minLength": 1
+    },
+    "ships": {
+      "type": "array",
+      "description": "The ships that are currently available for purchase at the shipyard.",
+      "items": {
+        "$ref": "./ShipyardShip.json"
+      }
+    }
+  }
+}

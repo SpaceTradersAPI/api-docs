@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "The thrusters determine how quickly a ship travels between waypoints.",
+  "description": "The engine determines how quickly a ship travels between waypoints.",
   "properties": {
     "symbol": {
       "type": "string",
