@@ -589,16 +589,16 @@
         }
       ]
     },
-    "/my/ships/{shipSymbol}/deliver": {
+    "/my/contracts/{contractId}/deliver": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "shipSymbol",
+          "name": "contractId",
           "in": "path",
           "required": true,
-          "description": "The symbol of the ship"
+          "description": "The ID of the contract"
         }
       ],
       "post": {
