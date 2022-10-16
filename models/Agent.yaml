@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 x-examples:
   example-1:
@@ -23,8 +23,3 @@ required:
   - symbol
   - headquarters
   - credits
-examples:
-  - accountId: cl0hok34m0003ks0jjql5q8f2
-    symbol: EMBER
-    headquarters: X1-OE-PM
-    credits: 0

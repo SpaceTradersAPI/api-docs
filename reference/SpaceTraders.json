@@ -1,9 +1,8 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "SpaceTraders API",
     "version": "2.0.0-rc.2",
-    "summary": "[Alpha] SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships.",
     "contact": {
       "name": "Joel Brubaker",
       "email": "joel@spacetraders.io"
@@ -816,7 +815,7 @@
                           "$ref": "../models/Extraction.yaml"
                         },
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -824,25 +823,6 @@
                   "required": [
                     "data"
                   ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "extraction": {
-                          "shipSymbol": "4B902A-1",
-                          "yield": {
-                            "tradeSymbol": "SILICON",
-                            "units": 16
-                          }
-                        },
-                        "cooldown": {
-                          "duration": 119,
-                          "expiration": "2022-03-12T00:41:29.371Z"
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -853,10 +833,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": [
-                  "object",
-                  "null"
-                ],
+                "type": "object",
                 "properties": {
                   "survey": {
                     "$ref": "../models/Survey.yaml"
@@ -922,7 +899,7 @@
                       ],
                       "properties": {
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -1064,7 +1041,7 @@
                           }
                         },
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -1169,7 +1146,7 @@
                       "type": "object",
                       "properties": {
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -1259,7 +1236,7 @@
                           }
                         },
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -1339,7 +1316,7 @@
                       ],
                       "properties": {
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -1812,7 +1789,7 @@
                               }
                             },
                             "cooldown": {
-                              "$ref": "../models/Cooldown.yaml"
+                              "$ref": "../models/Cooldown.json"
                             }
                           },
                           "required": [
@@ -1823,7 +1800,7 @@
                         {
                           "properties": {
                             "cooldown": {
-                              "$ref": "../models/Cooldown.yaml"
+                              "$ref": "../models/Cooldown.json"
                             },
                             "system": {
                               "$ref": "../models/System.yaml"
@@ -1833,7 +1810,7 @@
                         {
                           "properties": {
                             "cooldown": {
-                              "$ref": "../models/Cooldown.yaml"
+                              "$ref": "../models/Cooldown.json"
                             },
                             "waypoint": {
                               "$ref": "../models/Waypoint.json"
@@ -1911,7 +1888,7 @@
                       "type": "object",
                       "properties": {
                         "cooldown": {
-                          "$ref": "../models/Cooldown.yaml"
+                          "$ref": "../models/Cooldown.json"
                         }
                       }
                     }
@@ -2179,7 +2156,12 @@
         "description": "Attempt to negotiate with the faction at a waypoint. The request will only succeed if the waypoint is a negotiable location, and your ship is capable of negotiating using an envoy.",
         "tags": [
           "ships"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
       }
     },
     "/my/contracts": {
@@ -2544,8 +2526,7 @@
                             "MINERS_COLLECTIVE",
                             "SPACERS_GUILD"
                           ],
-                          "charted": true,
-                          "chartedBy": null
+                          "charted": true
                         }
                       ],
                       "meta": {
@@ -2630,8 +2611,7 @@
                         "y": 9,
                         "waypoints": [],
                         "factions": [],
-                        "charted": false,
-                        "chartedBy": null
+                        "charted": false
                       }
                     }
                   }
@@ -2818,94 +2798,9 @@
                 "schema": {
                   "description": "",
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": [
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM",
-                          "type": "PLANET",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [
-                            "X1-OE-PM01"
-                          ],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE",
-                            "SHIPYARD"
-                          ],
-                          "traits": [
-                            "OVERCROWDED",
-                            "HIGH_TECH",
-                            "BUREAUCRATIC",
-                            "TRADING_HUB",
-                            "TEMPERATE"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-PM01",
-                          "type": "MOON",
-                          "x": 10,
-                          "y": 5,
-                          "orbitals": [],
-                          "faction": "COMMERCE_REPUBLIC",
-                          "features": [
-                            "MARKETPLACE"
-                          ],
-                          "traits": [
-                            "WEAK_GRAVITY"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-A005",
-                          "type": "ASTEROID_FIELD",
-                          "x": -1,
-                          "y": -29,
-                          "orbitals": [],
-                          "faction": "MINERS_COLLECTIVE",
-                          "features": [],
-                          "traits": [
-                            "COMMON_METAL_DEPOSITS"
-                          ],
-                          "charted": true,
-                          "chartedBy": null
-                        },
-                        {
-                          "system": "X1-OE",
-                          "symbol": "X1-OE-25X",
-                          "type": "JUMP_GATE",
-                          "x": -38,
-                          "y": 47,
-                          "orbitals": [],
-                          "faction": "SPACERS_GUILD",
-                          "features": [],
-                          "traits": [],
-                          "charted": true,
-                          "chartedBy": null
-                        }
-                      ],
-                      "meta": {
-                        "total": 4,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  },
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "../models/Waypoint.json"
-                      }
+                      "$ref": "../models/Waypoint.json"
                     },
                     "meta": {
                       "$ref": "../models/Meta.yaml"
@@ -2920,7 +2815,7 @@
             }
           }
         },
-        "operationId": "get-systems-systemSymbol-waypoints",
+        "operationId": "get-system-waypoint",
         "security": [
           {
             "AgentToken": []
@@ -3057,7 +2952,12 @@
         "tags": [
           "factions"
         ],
-        "operationId": "get-factions"
+        "operationId": "get-factions",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
       }
     },
     "/factions/{factionSymbol}": {
@@ -3079,7 +2979,12 @@
           "factions"
         ],
         "operationId": "get-factions-factionSymbol",
-        "description": "View the details of a faction."
+        "description": "View the details of a faction.",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
       }
     }
   },

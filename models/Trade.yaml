@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 properties:
   waypointSymbol:
@@ -21,9 +21,4 @@ x-examples:
     waypointSymbol: X1-OE-PM
     tradeSymbol: MICROPROCESSORS
     credits: -843
-    units: 1
-examples:
-  - waypointSymbol: X1-OE-PM
-    tradeSymbol: MICROPROCESSORS
-    credits: 843
     units: 1

@@ -3,20 +3,10 @@
   "description": "The type of cargo item and the number of units.",
   "properties": {
     "symbol": {
-      "type": "string",
-      "examples": [
-        "ORE_COPPER",
-        "MICROPROCESSORS",
-        "FOOD"
-      ]
+      "type": "string"
     },
     "name": {
-      "type": "string",
-      "examples": [
-        "Copper Ore",
-        "Microprocessors",
-        "Food"
-      ]
+      "type": "string"
     },
     "units": {
       "type": "integer",

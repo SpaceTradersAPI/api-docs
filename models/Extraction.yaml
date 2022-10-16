@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 properties:
   shipSymbol:
@@ -21,11 +21,6 @@ required:
 x-examples:
   example-1:
     shipSymbol: 4B902A-1
-    yield:
-      tradeSymbol: SILICON
-      units: 16
-examples:
-  - shipSymbol: 4B902A-1
     yield:
       tradeSymbol: SILICON
       units: 16

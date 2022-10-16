@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 x-examples:
   example-1:
@@ -6,24 +6,7 @@ x-examples:
     sector: X1
     type: RED_STAR
     x: 0
-    "y": 0
-    waypoints:
-      - X1-OE-PM
-      - X1-OE-PM01
-      - X1-OE-A005
-      - X1-OE-25X
-    factions:
-      - COMMERCE_REPUBLIC
-      - MINERS_COLLECTIVE
-      - SPACERS_GUILD
-    charted: true
-    chartedBy: null
-examples:
-  - symbol: X1-OE
-    sector: X1
-    type: RED_STAR
-    x: 0
-    "y": 0
+    'y': 0
     waypoints:
       - X1-OE-PM
       - X1-OE-PM01
@@ -47,7 +30,7 @@ properties:
     minLength: 1
   x:
     type: integer
-  "y":
+  'y':
     type: integer
   waypoints:
     type: array
@@ -60,15 +43,13 @@ properties:
   charted:
     type: boolean
   chartedBy:
-    type:
-      - string
-      - "null"
+    type: string
 required:
   - symbol
   - sector
   - type
   - x
-  - "y"
+  - 'y'
   - waypoints
   - factions
   - charted

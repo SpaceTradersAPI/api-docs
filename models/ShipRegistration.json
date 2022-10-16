@@ -10,20 +10,12 @@
     "name": {
       "type": "string",
       "description": "The agent's registered name of the ship",
-      "minLength": 1,
-      "examples": [
-        "Red Falcon",
-        "Black Pearl IV",
-        "The Flying Dutchman"
-      ]
+      "minLength": 1
     },
     "factionSymbol": {
       "type": "string",
       "description": "The symbol of the faction the ship is registered with",
-      "minLength": 1,
-      "examples": [
-        "F_COMM"
-      ]
+      "minLength": 1
     },
     "role": {
       "$ref": "./ShipRole.json"

@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 properties:
   data:
@@ -24,12 +24,6 @@ required:
 x-examples:
   example-1:
     data:
-      tradeSymbol: IRON_ORE
-      destination: X1-OE-PM
-      units: 10000
-      fulfilled: 500
-examples:
-  - data:
       tradeSymbol: IRON_ORE
       destination: X1-OE-PM
       units: 10000

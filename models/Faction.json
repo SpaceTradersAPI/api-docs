@@ -15,20 +15,6 @@
       ]
     }
   },
-  "examples": [
-    {
-      "symbol": "COMMERCE_REPUBLIC",
-      "name": "Commerce Repubic",
-      "description": "The Commerce Republic takes capital from top tier worlds and invests it into new systems with high potential for growth.",
-      "headquarters": "X1-OE-PM",
-      "traits": [
-        "BUREAUCRATIC",
-        "CAPITALISTIC",
-        "GUILD",
-        "ESTABLISHED"
-      ]
-    }
-  ],
   "properties": {
     "symbol": {
       "type": "string",

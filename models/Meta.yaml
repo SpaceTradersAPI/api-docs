@@ -1,4 +1,4 @@
-description: ""
+description: ''
 type: object
 properties:
   total:
@@ -16,7 +16,3 @@ x-examples:
     total: 6
     page: 1
     limit: 20
-examples:
-  - total: 10
-    page: 1
-    limit: 10
