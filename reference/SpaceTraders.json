@@ -61,7 +61,7 @@
             }
           }
         },
-        "operationId": "post-register",
+        "operationId": "register",
         "description": "Creates a new agent and ties it to a temporary Account. Use `COMMERCE_REPUBLIC` as your starting faction if you don't know any other factions to choose from.\n\nThe agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field waypoint, and execute the `/my/ships/{shipSymbol}/accept` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
         "requestBody": {
           "content": {
@@ -348,7 +348,7 @@
             }
           }
         },
-        "operationId": "get-my-ships",
+        "operationId": "list-my-ships",
         "description": "Retrieve all of your ships.",
         "security": [
           {
@@ -423,7 +423,7 @@
             }
           }
         },
-        "operationId": "post-my-ships",
+        "operationId": "purchase-ship",
         "security": [
           {
             "AgentToken": []
@@ -516,7 +516,7 @@
             }
           }
         },
-        "operationId": "get-my-ships-shipSymbol",
+        "operationId": "get-my-ship",
         "description": "Retrieve the details of your ship.",
         "security": [
           {
@@ -565,7 +565,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-:shipSymbol-chart",
+        "operationId": "chart-system",
         "description": "Command a ship to chart the current system and/or waypoint.\n\nSystems and waypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.\n\nReturns an array of system / waypoint symbols that have been charted.",
         "security": [
           {
@@ -636,7 +636,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-deliver",
+        "operationId": "deliver-contract",
         "security": [
           {
             "AgentToken": []
@@ -648,7 +648,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "contractId": {
+                  "shipSymbol": {
                     "type": "string"
                   },
                   "tradeSymbol": {
@@ -737,7 +737,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-jettison",
+        "operationId": "jettison",
         "description": "Jettison cargo from your ship's cargo hold.",
         "security": [
           {
@@ -828,7 +828,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-extract",
+        "operationId": "create-extraction",
         "requestBody": {
           "content": {
             "application/json": {
@@ -872,7 +872,7 @@
       },
       "get": {
         "summary": "Extraction Cooldown",
-        "operationId": "get-my-ships-shipSymbol-extract",
+        "operationId": "get-ship-extraction",
         "responses": {
           "200": {
             "description": "OK",
@@ -1118,7 +1118,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-survey",
+        "operationId": "create-ship-survey",
         "security": [
           {
             "AgentToken": []
@@ -1168,7 +1168,7 @@
             }
           }
         },
-        "operationId": "get-my-ships-shipSymbol-survey",
+        "operationId": "get-ship-survey",
         "description": "Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action."
       }
     },
@@ -1265,7 +1265,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-jump",
+        "operationId": "jump-ship",
         "security": [
           {
             "AgentToken": []
@@ -1289,7 +1289,7 @@
       },
       "get": {
         "summary": "Jump Cooldown",
-        "operationId": "get-my-ships-shipSymbol-jump",
+        "operationId": "get-ship-jump",
         "responses": {
           "200": {
             "description": "OK",
@@ -1398,7 +1398,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-purchase",
+        "operationId": "purchase-cargo",
         "security": [
           {
             "AgentToken": []
@@ -1482,7 +1482,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-sell",
+        "operationId": "sell-cargo",
         "description": "Sell cargo from your ship's hold to the local market.",
         "security": [
           {
@@ -1576,7 +1576,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-refuel",
+        "operationId": "refuel-ship",
         "security": [
           {
             "AgentToken": []
@@ -1606,7 +1606,7 @@
             "description": "OK"
           }
         },
-        "operationId": "post-my-ships-shipSymbol-deploy",
+        "operationId": "deploy-asset",
         "security": [
           {
             "AgentToken": []
@@ -1829,7 +1829,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-scan",
+        "operationId": "create-ship-scan",
         "security": [
           {
             "AgentToken": []
@@ -1875,7 +1875,7 @@
       },
       "get": {
         "summary": "Scan Cooldown",
-        "operationId": "get-my-ships-shipSymbol-scan",
+        "operationId": "get-ship-scan",
         "responses": {
           "200": {
             "description": "OK",
@@ -1966,7 +1966,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-navigate",
+        "operationId": "navigate-ship",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2056,7 +2056,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-dock",
+        "operationId": "dock-ship",
         "security": [
           {
             "AgentToken": []
@@ -2121,7 +2121,7 @@
             }
           }
         },
-        "operationId": "post-my-ships-shipSymbol-orbit",
+        "operationId": "orbit-ship",
         "security": [
           {
             "AgentToken": []
@@ -2131,37 +2131,6 @@
         "tags": [
           "navigation"
         ]
-      }
-    },
-    "/my/ships/{shipSymbol}/negotiate": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "shipSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The symbol of the ship"
-        }
-      ],
-      "post": {
-        "summary": "Negotiate with a waypoint",
-        "operationId": "post-my-ships-negotiate",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Attempt to negotiate with the faction at a waypoint. The request will only succeed if the waypoint is a negotiable location, and your ship is capable of negotiating using an envoy.",
-        "tags": [
-          "ships"
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
       }
     },
     "/my/contracts": {
@@ -2178,63 +2147,6 @@
                 "schema": {
                   "description": "",
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": [
-                        {
-                          "id": "cl0hok38t0014ks0jnoy8o5vh",
-                          "faction": "COMMERCE_REPUBLIC",
-                          "type": "PROCUREMENT",
-                          "terms": {
-                            "deadline": "2022-03-11T05:16:59.113Z",
-                            "payment": {
-                              "onAccepted": 20000,
-                              "onFulfilled": 100000
-                            },
-                            "deliver": [
-                              {
-                                "tradeSymbol": "IRON_ORE",
-                                "destination": "X1-OE-PM",
-                                "units": 10000,
-                                "fulfilled": 0
-                              }
-                            ]
-                          },
-                          "accepted": false,
-                          "fulfilled": false,
-                          "expiresAt": "2022-03-09T05:16:59.112Z"
-                        },
-                        {
-                          "id": "cl0hok3920023kv0jflbjpltg",
-                          "faction": "COMMERCE_REPUBLIC",
-                          "type": "PROCUREMENT",
-                          "terms": {
-                            "deadline": "2022-03-11T05:16:59.123Z",
-                            "payment": {
-                              "onAccepted": 20000,
-                              "onFulfilled": 100000
-                            },
-                            "deliver": [
-                              {
-                                "tradeSymbol": "IRON_ORE",
-                                "destination": "X1-OE-PM",
-                                "units": 10000,
-                                "fulfilled": 0
-                              }
-                            ]
-                          },
-                          "accepted": false,
-                          "fulfilled": false,
-                          "expiresAt": "2022-03-09T05:16:59.122Z"
-                        }
-                      ],
-                      "meta": {
-                        "total": 2,
-                        "page": 1,
-                        "limit": 20
-                      }
-                    }
-                  },
                   "properties": {
                     "data": {
                       "type": "array",
@@ -2252,42 +2164,6 @@
                     "data",
                     "meta"
                   ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": [
-                        {
-                          "id": "cl0hok38t0014ks0jnoy8o5vh",
-                          "faction": "COMMERCE_REPUBLIC",
-                          "type": "PROCUREMENT",
-                          "terms": {
-                            "deadline": "2022-03-11T05:16:59.113Z",
-                            "payment": {
-                              "onAccepted": 20000,
-                              "onFulfilled": 100000
-                            },
-                            "deliver": [
-                              {
-                                "tradeSymbol": "IRON_ORE",
-                                "destination": "X1-OE-PM",
-                                "units": 10000,
-                                "fulfilled": 0
-                              }
-                            ]
-                          },
-                          "accepted": false,
-                          "fulfilled": false,
-                          "expiresAt": "2022-03-09T05:16:59.112Z"
-                        }
-                      ],
-                      "meta": {
-                        "total": 10,
-                        "page": 1,
-                        "limit": 10
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -2365,7 +2241,7 @@
             }
           }
         },
-        "operationId": "get-my-contracts-contractId",
+        "operationId": "get-my-contract",
         "security": [
           {
             "AgentToken": []
@@ -2407,7 +2283,7 @@
             }
           }
         },
-        "operationId": "post-my-contracts-contractId-accept",
+        "operationId": "accept-contract",
         "security": [
           {
             "AgentToken": []
@@ -2620,7 +2496,7 @@
             }
           }
         },
-        "operationId": "get-systems-systemSymbol",
+        "operationId": "get-system",
         "security": [
           {
             "AgentToken": []
@@ -2755,7 +2631,7 @@
             }
           }
         },
-        "operationId": "get-systems-systemSymbol-waypoints-waypointSymbol",
+        "operationId": "get-system-waypoints",
         "security": [
           {
             "AgentToken": []
@@ -2815,7 +2691,7 @@
             }
           }
         },
-        "operationId": "get-system-waypoint",
+        "operationId": "get-waypoint",
         "security": [
           {
             "AgentToken": []
@@ -2847,6 +2723,7 @@
       ],
       "get": {
         "summary": "Get Shipyard",
+        "description": "",
         "tags": [
           "shipyards"
         ],
@@ -2875,13 +2752,12 @@
                     "data",
                     "meta"
                   ]
-                },
-                "examples": {}
+                }
               }
             }
           }
         },
-        "operationId": "get-systems-systemSymbol-shipyards-waypointSymbol-ships",
+        "operationId": "get-shipyard",
         "security": [
           {
             "AgentToken": []
@@ -2936,7 +2812,7 @@
             }
           }
         },
-        "operationId": "get-system-waypoint-market",
+        "operationId": "get-market",
         "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.\n\nMarket data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.\n\nSee `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.",
         "security": [
           {
@@ -2952,7 +2828,7 @@
         "tags": [
           "factions"
         ],
-        "operationId": "get-factions",
+        "operationId": "list-factions",
         "responses": {
           "200": {
             "description": ""
@@ -2978,7 +2854,7 @@
         "tags": [
           "factions"
         ],
-        "operationId": "get-factions-factionSymbol",
+        "operationId": "get-faction",
         "description": "View the details of a faction.",
         "responses": {
           "200": {
