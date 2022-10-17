@@ -523,39 +523,82 @@
         ]
       }
     },
-    "/my/ships/{shipSymbol}/chart": {
-      "post": {
-        "summary": "Chart Waypoint",
+    "/my/ships/{shipSymbol}/cooldown": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "View Ship",
+        "tags": [
+          "fleet"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "symbol": "653298-1",
+                        "crew": null,
+                        "officers": null,
+                        "frame": "FRAME_DRONE",
+                        "reactor": "REACTOR_SOLAR_I",
+                        "engine": "ENGINE_SOLAR_PROPULSION",
+                        "modules": [
+                          "MODULE_CARGO_HOLD"
+                        ],
+                        "mounts": [
+                          "MOUNT_MINING_LASER_I"
+                        ],
+                        "registration": {
+                          "factionSymbol": "COMMERCE_REPUBLIC",
+                          "agentSymbol": "653298",
+                          "fee": 100,
+                          "role": "EXCAVATOR"
+                        },
+                        "integrity": {
+                          "frame": 1,
+                          "reactor": 1,
+                          "engine": 1
+                        },
+                        "status": "DOCKED",
+                        "location": "X1-OE-PM",
+                        "cargo": []
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Ship.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "submitted": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "submitted": [
-                          "X1-ZZ",
-                          "X1-ZZ-7-EE"
-                        ]
-                      }
+                      "$ref": "../models/Cooldown.json"
                     }
                   }
                 }
@@ -563,17 +606,16 @@
             }
           }
         },
-        "operationId": "chart-system",
-        "description": "Command a ship to chart the current system and/or waypoint.\n\nSystems and waypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.\n\nReturns an array of system / waypoint symbols that have been charted.",
+        "operationId": "get-ship-cooldown",
+        "description": "Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump drive, scanning, or extracting resources taxes your reactor and results in a cooldown.\n\nYour ship cannot perform additional actions until your cooldown has expired. The duration of your cooldown is relative to the power consumption of the related modules or mounts for the action taken.",
         "security": [
           {
             "AgentToken": []
           }
-        ],
-        "tags": [
-          "fleet"
         ]
-      },
+      }
+    },
+    "/my/ships/{shipSymbol}/navigate": {
       "parameters": [
         {
           "schema": {
@@ -582,9 +624,70 @@
           "name": "shipSymbol",
           "in": "path",
           "required": true,
-          "description": "The symbol of the ship"
+          "description": "The ship symbol"
         }
-      ]
+      ],
+      "post": {
+        "summary": "Navigate Ship",
+        "tags": [
+          "fleet"
+        ],
+        "responses": {
+          "201": {
+            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "route": {
+                          "$ref": "../models/ShipNav.json"
+                        },
+                        "shipFuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "navigate-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "waypointSymbol": {
+                    "type": "string",
+                    "description": "The target destination."
+                  }
+                },
+                "required": [
+                  "waypointSymbol"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action."
+      }
     },
     "/my/ships/{shipSymbol}/jettison": {
       "parameters": [
@@ -680,6 +783,69 @@
           }
         }
       }
+    },
+    "/my/ships/{shipSymbol}/chart": {
+      "post": {
+        "summary": "Chart Waypoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "submitted": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "data": {
+                        "submitted": [
+                          "X1-ZZ",
+                          "X1-ZZ-7-EE"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "chart-system",
+        "description": "Command a ship to chart the current system and/or waypoint.\n\nSystems and waypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.\n\nReturns an array of system / waypoint symbols that have been charted.",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "tags": [
+          "fleet"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "shipSymbol",
+          "in": "path",
+          "required": true,
+          "description": "The symbol of the ship"
+        }
+      ]
     },
     "/my/ships/{shipSymbol}/extract": {
       "parameters": [
@@ -778,70 +944,6 @@
           "description": ""
         },
         "description": "Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "tags": [
-          "fleet"
-        ]
-      },
-      "get": {
-        "summary": "Extraction Cooldown",
-        "operationId": "get-ship-extraction",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "cooldown": {
-                          "duration": 119,
-                          "expiration": "2022-03-12T00:41:29.285Z"
-                        }
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "required": [
-                        "cooldown"
-                      ],
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "cooldown": {
-                          "duration": 119,
-                          "expiration": "2022-03-12T00:41:29.285Z"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "description": "Get the status of your last extraction.",
         "security": [
           {
             "AgentToken": []
@@ -1045,48 +1147,6 @@
         "tags": [
           "fleet"
         ]
-      },
-      "get": {
-        "summary": "Survey Cooldown",
-        "tags": [
-          "fleet"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "cooldown": {
-                          "duration": 899,
-                          "expiration": "2022-03-12T02:11:35.618Z"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-ship-survey",
-        "description": "Executing a survey will initiate a cooldown for a number of seconds before you can call it again. This endpoint returns the details of your cooldown, or a 404 if there is no cooldown for the survey action."
       }
     },
     "/my/ships/{shipSymbol}/jump": {
@@ -1204,57 +1264,6 @@
             }
           }
         }
-      },
-      "get": {
-        "summary": "Jump Cooldown",
-        "operationId": "get-ship-jump",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "cooldown": {
-                          "duration": 719,
-                          "expiration": "2022-03-12T00:52:56.735Z"
-                        }
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "required": [
-                        "cooldown"
-                      ],
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "tags": [
-          "fleet"
-        ]
       }
     },
     "/my/ships/{shipSymbol}/purchase": {
@@ -1790,126 +1799,6 @@
           },
           "description": ""
         }
-      },
-      "get": {
-        "summary": "Scan Cooldown",
-        "operationId": "get-ship-scan",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Success": {
-                    "value": {
-                      "data": {
-                        "cooldown": {
-                          "duration": 59,
-                          "expiration": "2022-03-12T00:42:44.220Z"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/navigate": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "shipSymbol",
-          "in": "path",
-          "required": true,
-          "description": "The ship symbol"
-        }
-      ],
-      "post": {
-        "summary": "Navigate Ship",
-        "tags": [
-          "fleet"
-        ],
-        "responses": {
-          "201": {
-            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "route": {
-                          "$ref": "../models/ShipNav.json"
-                        },
-                        "shipFuel": {
-                          "$ref": "../models/ShipFuel.json"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "operationId": "navigate-ship",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "waypointSymbol": {
-                    "type": "string",
-                    "description": "The target destination."
-                  }
-                },
-                "required": [
-                  "waypointSymbol"
-                ]
-              }
-            }
-          },
-          "description": ""
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action."
       }
     },
     "/my/ships/{shipSymbol}/dock": {
