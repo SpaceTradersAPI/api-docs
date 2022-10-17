@@ -23,9 +23,7 @@
     "/register": {
       "post": {
         "summary": "Register New Agent",
-        "tags": [
-          "agents"
-        ],
+        "tags": [],
         "responses": {
           "201": {
             "description": "OK",
@@ -136,9 +134,6 @@
     "/my/ships": {
       "get": {
         "summary": "List Ships",
-        "tags": [
-          "ships"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -354,12 +349,15 @@
           {
             "AgentToken": []
           }
+        ],
+        "tags": [
+          "fleet"
         ]
       },
       "post": {
         "summary": "Purchase Ship",
         "tags": [
-          "shipyards"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -461,7 +459,7 @@
       "get": {
         "summary": "View Ship",
         "tags": [
-          "ships"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -573,7 +571,7 @@
           }
         ],
         "tags": [
-          "systems"
+          "fleet"
         ]
       },
       "parameters": [
@@ -587,87 +585,6 @@
           "description": "The symbol of the ship"
         }
       ]
-    },
-    "/my/contracts/{contractId}/deliver": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "contractId",
-          "in": "path",
-          "required": true,
-          "description": "The ID of the contract"
-        }
-      ],
-      "post": {
-        "summary": "Deliver on Contract",
-        "tags": [
-          "contracts"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "tradeSymbol": "IRON_ORE",
-                        "destination": "X1-OE-PM",
-                        "units": 10000,
-                        "fulfilled": -30000
-                      }
-                    }
-                  },
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/ContractDelivery.yaml"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "operationId": "deliver-contract",
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "shipSymbol": {
-                    "type": "string"
-                  },
-                  "tradeSymbol": {
-                    "type": "string"
-                  },
-                  "units": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "contractId",
-                  "tradeSymbol"
-                ]
-              }
-            }
-          }
-        },
-        "description": "Deliver cargo on a given contract."
-      }
     },
     "/my/ships/{shipSymbol}/jettison": {
       "parameters": [
@@ -683,7 +600,7 @@
       "post": {
         "summary": "Jettison Cargo",
         "tags": [
-          "ships"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -867,7 +784,7 @@
           }
         ],
         "tags": [
-          "extract"
+          "fleet"
         ]
       },
       "get": {
@@ -931,7 +848,7 @@
           }
         ],
         "tags": [
-          "extract"
+          "fleet"
         ]
       }
     },
@@ -1126,13 +1043,13 @@
         ],
         "description": "If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.",
         "tags": [
-          "extract"
+          "fleet"
         ]
       },
       "get": {
         "summary": "Survey Cooldown",
         "tags": [
-          "extract"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -1185,8 +1102,9 @@
       ],
       "post": {
         "summary": "Jump Ship",
+        "description": "Jump your ship from one system to another.",
         "tags": [
-          "navigation"
+          "fleet"
         ],
         "responses": {
           "201": {
@@ -1335,7 +1253,7 @@
           }
         ],
         "tags": [
-          "navigation"
+          "fleet"
         ]
       }
     },
@@ -1353,7 +1271,7 @@
       "post": {
         "summary": "Purchase Cargo",
         "tags": [
-          "trade"
+          "fleet"
         ],
         "responses": {
           "201": {
@@ -1437,7 +1355,7 @@
       "post": {
         "summary": "Sell Cargo",
         "tags": [
-          "trade"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -1523,7 +1441,7 @@
       "post": {
         "summary": "Refuel Ship",
         "tags": [
-          "navigation"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -1599,7 +1517,7 @@
       "post": {
         "summary": "Deploy Asset",
         "tags": [
-          "markets"
+          "fleet"
         ],
         "responses": {
           "204": {
@@ -1646,7 +1564,7 @@
       "post": {
         "summary": "Scan",
         "tags": [
-          "ships"
+          "fleet"
         ],
         "responses": {
           "201": {
@@ -1916,7 +1834,7 @@
           }
         ],
         "tags": [
-          "ships"
+          "fleet"
         ]
       }
     },
@@ -1935,7 +1853,7 @@
       "post": {
         "summary": "Navigate Ship",
         "tags": [
-          "navigation"
+          "fleet"
         ],
         "responses": {
           "201": {
@@ -2009,7 +1927,7 @@
       "post": {
         "summary": "Dock Ship",
         "tags": [
-          "navigation"
+          "fleet"
         ],
         "responses": {
           "200": {
@@ -2129,7 +2047,7 @@
         ],
         "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
         "tags": [
-          "navigation"
+          "fleet"
         ]
       }
     },
@@ -2248,6 +2166,87 @@
           }
         ],
         "description": "Get the details of a contract by ID."
+      }
+    },
+    "/my/contracts/{contractId}/deliver": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "contractId",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the contract"
+        }
+      ],
+      "post": {
+        "summary": "Deliver on Contract",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "tradeSymbol": "IRON_ORE",
+                        "destination": "X1-OE-PM",
+                        "units": 10000,
+                        "fulfilled": -30000
+                      }
+                    }
+                  },
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ContractDelivery.yaml"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deliver-contract",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipSymbol": {
+                    "type": "string"
+                  },
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "contractId",
+                  "tradeSymbol"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Deliver cargo on a given contract."
       }
     },
     "/my/contracts/{contractId}/accept": {
@@ -2724,9 +2723,6 @@
       "get": {
         "summary": "Get Shipyard",
         "description": "",
-        "tags": [
-          "shipyards"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -2762,6 +2758,9 @@
           {
             "AgentToken": []
           }
+        ],
+        "tags": [
+          "systems"
         ]
       }
     },
@@ -2788,9 +2787,6 @@
       ],
       "get": {
         "summary": "View Market",
-        "tags": [
-          "markets"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -2818,6 +2814,9 @@
           {
             "AgentToken": []
           }
+        ],
+        "tags": [
+          "systems"
         ]
       }
     },
@@ -2869,70 +2868,16 @@
       "name": "factions"
     },
     {
-      "name": "ships"
-    },
-    {
-      "name": "markets"
-    },
-    {
-      "name": "trade"
-    },
-    {
-      "name": "sell"
-    },
-    {
-      "name": "purchase"
-    },
-    {
-      "name": "navigation"
-    },
-    {
-      "name": "agents"
-    },
-    {
-      "name": "dock"
-    },
-    {
-      "name": "orbit"
-    },
-    {
-      "name": "jettison"
-    },
-    {
-      "name": "jump"
-    },
-    {
-      "name": "refuel"
-    },
-    {
-      "name": "scan"
+      "name": "fleet"
     },
     {
       "name": "contracts"
     },
     {
-      "name": "chart"
-    },
-    {
-      "name": "extract"
-    },
-    {
-      "name": "mining"
-    },
-    {
-      "name": "deliver"
-    },
-    {
-      "name": "survey"
-    },
-    {
       "name": "systems"
     },
     {
-      "name": "waypoints"
-    },
-    {
-      "name": "shipyards"
+      "name": "agents"
     }
   ],
   "components": {
