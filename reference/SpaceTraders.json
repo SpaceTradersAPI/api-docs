@@ -457,7 +457,7 @@
         }
       ],
       "get": {
-        "summary": "View Ship",
+        "summary": "Get Ship",
         "tags": [
           "fleet"
         ],
@@ -535,7 +535,7 @@
         }
       ],
       "get": {
-        "summary": "View Ship",
+        "summary": "Get Ship Cooldown",
         "tags": [
           "fleet"
         ],
@@ -547,60 +547,14 @@
                 "schema": {
                   "description": "",
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "symbol": "653298-1",
-                        "crew": null,
-                        "officers": null,
-                        "frame": "FRAME_DRONE",
-                        "reactor": "REACTOR_SOLAR_I",
-                        "engine": "ENGINE_SOLAR_PROPULSION",
-                        "modules": [
-                          "MODULE_CARGO_HOLD"
-                        ],
-                        "mounts": [
-                          "MOUNT_MINING_LASER_I"
-                        ],
-                        "registration": {
-                          "factionSymbol": "COMMERCE_REPUBLIC",
-                          "agentSymbol": "653298",
-                          "fee": 100,
-                          "role": "EXCAVATOR"
-                        },
-                        "integrity": {
-                          "frame": 1,
-                          "reactor": 1,
-                          "engine": 1
-                        },
-                        "status": "DOCKED",
-                        "location": "X1-OE-PM",
-                        "cargo": []
-                      }
-                    }
-                  },
                   "properties": {
                     "data": {
-                      "$ref": "../models/Ship.json"
+                      "$ref": "../models/Cooldown.json"
                     }
                   },
                   "required": [
                     "data"
                   ]
-                }
-              }
-            }
-          },
-          "": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Cooldown.json"
-                    }
-                  }
                 }
               }
             }
@@ -786,7 +740,7 @@
     },
     "/my/ships/{shipSymbol}/chart": {
       "post": {
-        "summary": "Chart Waypoint",
+        "summary": "Create Chart",
         "responses": {
           "200": {
             "description": "OK",
@@ -824,7 +778,7 @@
             }
           }
         },
-        "operationId": "chart-system",
+        "operationId": "create-chart",
         "description": "Command a ship to chart the current system and/or waypoint.\n\nSystems and waypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.\n\nReturns an array of system / waypoint symbols that have been charted.",
         "security": [
           {
@@ -911,7 +865,7 @@
             }
           }
         },
-        "operationId": "create-extraction",
+        "operationId": "extract-resources",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1137,7 +1091,7 @@
             }
           }
         },
-        "operationId": "create-ship-survey",
+        "operationId": "survey-waypoint",
         "security": [
           {
             "AgentToken": []
@@ -1732,7 +1686,11 @@
                             "system": {
                               "$ref": "../models/System.yaml"
                             }
-                          }
+                          },
+                          "required": [
+                            "cooldown",
+                            "system"
+                          ]
                         },
                         {
                           "properties": {
@@ -1742,7 +1700,11 @@
                             "waypoint": {
                               "$ref": "../models/Waypoint.json"
                             }
-                          }
+                          },
+                          "required": [
+                            "cooldown",
+                            "waypoint"
+                          ]
                         }
                       ],
                       "type": "object"
@@ -1762,7 +1724,7 @@
             "AgentToken": []
           }
         ],
-        "description": "Execute a ship scan to view approach / departing ships, system information or details about a waypoint. Send a scan mode to select the type of scan performed by your ship.",
+        "description": "Activate your ship's sensor arrays to scan for arriving ships, departing ships, system information, or waypoint information. Send a scan mode to select the type of scan performed by your ship.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1976,7 +1938,7 @@
             }
           }
         },
-        "operationId": "get-my-contracts",
+        "operationId": "list-contracts",
         "security": [
           {
             "AgentToken": []
@@ -1998,7 +1960,7 @@
         }
       ],
       "get": {
-        "summary": "Contract Details",
+        "summary": "Get Contract",
         "tags": [
           "contracts"
         ],
@@ -2048,7 +2010,7 @@
             }
           }
         },
-        "operationId": "get-my-contract",
+        "operationId": "get-contract",
         "security": [
           {
             "AgentToken": []
@@ -2070,7 +2032,7 @@
         }
       ],
       "post": {
-        "summary": "Deliver on Contract",
+        "summary": "Deliver Contract",
         "tags": [
           "contracts"
         ],
@@ -2178,6 +2140,63 @@
           }
         ],
         "description": "Accept a contract."
+      }
+    },
+    "/my/contracts/{contractId}/fulfill": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "contractId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Fulfill Contract",
+        "tags": [
+          "contracts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Contract.yaml"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Contract.yaml"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Contract has been successfully fulfilled."
+          }
+        },
+        "operationId": "fulfill-contract",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "description": "Fulfill a contract."
       }
     },
     "/systems": {
@@ -2328,7 +2347,7 @@
         }
       ],
       "get": {
-        "summary": "View System",
+        "summary": "Get System",
         "tags": [
           "systems"
         ],
@@ -2550,7 +2569,7 @@
         }
       ],
       "get": {
-        "summary": "View Waypoint",
+        "summary": "Get Waypoint",
         "tags": [
           "systems"
         ],
@@ -2675,7 +2694,7 @@
         }
       ],
       "get": {
-        "summary": "View Market",
+        "summary": "Get Market",
         "responses": {
           "200": {
             "description": "OK",
@@ -2738,7 +2757,7 @@
         }
       ],
       "get": {
-        "summary": "View Faction",
+        "summary": "Get Faction",
         "tags": [
           "factions"
         ],
