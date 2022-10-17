@@ -2173,21 +2173,6 @@
                 }
               }
             }
-          },
-          "": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Contract.yaml"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Contract has been successfully fulfilled."
           }
         },
         "operationId": "fulfill-contract",
