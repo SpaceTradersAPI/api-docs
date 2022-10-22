@@ -17,21 +17,15 @@
       ]
     },
     "name": {
-      "type": "string",
-      "enum": [
-        "Gas Siphon I",
-        "Gas Siphon II",
-        "Gas Siphon III",
-        "Sensor Array I",
-        "Sensor Array II",
-        "Sensor Array III",
-        "Mining Laser I",
-        "Mining Laser II",
-        "Mining Laser III"
-      ]
+      "type": "string"
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "requirements"
+  ]
 }

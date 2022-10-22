@@ -14,5 +14,10 @@
       "type": "integer",
       "description": "The number of module slots required for installation."
     }
-  }
+  },
+  "required": [
+    "power",
+    "crew",
+    "slots"
+  ]
 }

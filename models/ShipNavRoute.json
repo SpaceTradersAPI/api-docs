@@ -2,21 +2,13 @@
   "type": "object",
   "description": "The routing information for the ship's most recent transit or current location.",
   "properties": {
-    "symbol": {
-      "type": "string",
-      "description": "The unique identifer of the waypoint."
+    "destination": {
+      "type": "object",
+      "$ref": "./Waypoint.json"
     },
-    "name": {
-      "type": "string",
-      "description": "The name of the waypoint."
-    },
-    "x": {
-      "type": "integer",
-      "description": "The x coordinate of the waypoint."
-    },
-    "y": {
-      "type": "integer",
-      "description": "The y coordinate of the waypoint."
+    "departure": {
+      "type": "object",
+      "$ref": "./Waypoint.json"
     },
     "arrival": {
       "type": "string",
@@ -25,10 +17,8 @@
     }
   },
   "required": [
-    "symbol",
-    "name",
-    "x",
-    "y",
+    "destination",
+    "departure",
     "arrival"
   ]
 }

@@ -1,13 +1,19 @@
 {
-  "description": "",
+  "description": "The ship that was scanned. Details include information about the ship that could be detected by the scanner.",
   "type": "object",
   "properties": {
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]_[HEX_ID]`",
+      "minLength": 8
     },
-    "purchasePrice": {
-      "type": "integer"
+    "registration": {
+      "type": "object",
+      "$ref": "./ShipRegistration.json"
+    },
+    "nav": {
+      "type": "object",
+      "$ref": "./ShipNav.json"
     },
     "frame": {
       "$ref": "./ShipFrame.json"
@@ -18,12 +24,6 @@
     "engine": {
       "$ref": "./ShipEngine.json"
     },
-    "modules": {
-      "type": "array",
-      "items": {
-        "$ref": "./ShipModule.json"
-      }
-    },
     "mounts": {
       "type": "array",
       "items": {
@@ -33,11 +33,11 @@
   },
   "required": [
     "symbol",
-    "purchasePrice",
+    "registration",
+    "nav",
     "frame",
     "reactor",
     "engine",
-    "modules",
     "mounts"
   ]
 }

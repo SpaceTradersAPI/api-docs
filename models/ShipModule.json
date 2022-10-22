@@ -15,19 +15,15 @@
       ]
     },
     "name": {
-      "type": "string",
-      "enum": [
-        "Fuel Tank",
-        "Cargo Hold",
-        "Crew Quarters",
-        "Envoy Quarters",
-        "Passenger Cabin",
-        "Micro Refinery",
-        "Jump Drive"
-      ]
+      "type": "string"
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "requirements"
+  ]
 }

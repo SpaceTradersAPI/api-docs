@@ -1,20 +1,6 @@
 {
   "description": "",
   "type": "object",
-  "x-examples": {
-    "example-1": {
-      "symbol": "COMMERCE_REPUBLIC",
-      "name": "Commerce Repubic",
-      "description": "",
-      "headquarters": "X1-OE-PM",
-      "traits": [
-        "BUREAUCRATIC",
-        "CAPITALISTIC",
-        "GUILD",
-        "ESTABLISHED"
-      ]
-    }
-  },
   "properties": {
     "symbol": {
       "type": "string",
@@ -35,7 +21,8 @@
     "traits": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object",
+        "$ref": "./FactionTrait.json"
       }
     }
   },

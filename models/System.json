@@ -1,0 +1,63 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sectorSymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "NEUTRON_STAR",
+        "RED_STAR",
+        "ORANGE_STAR",
+        "BLUE_STAR",
+        "YOUNG_STAR",
+        "WHITE_DWARF",
+        "BLACK_HOLE",
+        "HYPERGIANT",
+        "NEBULA",
+        "UNSTABLE"
+      ]
+    },
+    "x": {
+      "type": "integer"
+    },
+    "y": {
+      "type": "integer"
+    },
+    "waypoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./SystemWaypoint.json"
+      }
+    },
+    "factions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./SystemFaction.json"
+      }
+    },
+    "chart": {
+      "type": "object",
+      "$ref": "./Chart.json"
+    }
+  },
+  "required": [
+    "symbol",
+    "sectorSymbol",
+    "type",
+    "x",
+    "y",
+    "waypoints",
+    "factions",
+    "chart"
+  ]
+}

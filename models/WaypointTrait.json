@@ -68,5 +68,10 @@
       "type": "string",
       "description": "A description of the trait."
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description"
+  ]
 }

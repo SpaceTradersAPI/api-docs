@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "The chart of the waypoint, which makes the waypoint visible to other agents.",
+  "description": "The chart of a system or waypoint, which makes the location visible to other agents.",
   "properties": {
     "submittedBy": {
       "type": "string"

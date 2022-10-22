@@ -18,5 +18,10 @@
       "description": "The date and time when the cooldown expires in ISO 8601 format",
       "minimum": 0
     }
-  }
+  },
+  "required": [
+    "totalSeconds",
+    "remainingSeconds",
+    "expiration"
+  ]
 }

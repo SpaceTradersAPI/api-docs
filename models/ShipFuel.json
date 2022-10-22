@@ -31,5 +31,9 @@
         "timestamp"
       ]
     }
-  }
+  },
+  "required": [
+    "amount",
+    "capacity"
+  ]
 }

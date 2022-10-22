@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "units": {
+      "type": "integer",
+      "description": "The number of units extracted that were placed into the ship's cargo hold."
+    }
+  },
+  "required": [
+    "symbol",
+    "units"
+  ]
+}

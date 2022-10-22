@@ -1,0 +1,29 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "headquarters": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The headquarters of the agent."
+    },
+    "credits": {
+      "type": "integer",
+      "description": "The number of credits the agent has available. Credits can be negative if funds have been overdrawn."
+    }
+  },
+  "required": [
+    "accountId",
+    "symbol",
+    "headquarters",
+    "credits"
+  ]
+}

@@ -10,14 +10,26 @@
       "type": "array",
       "description": "The list of goods that are exported from this market.",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the good."
+          }
+        }
       }
     },
     "imports": {
       "type": "array",
       "description": "The list of goods that are sought as imports in this market.",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "The symbol of the good."
+          }
+        }
       }
     },
     "transactions": {
@@ -34,5 +46,12 @@
         "$ref": "./MarketTradeGood.json"
       }
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "exports",
+    "imports",
+    "transactions",
+    "tradeGoods"
+  ]
 }

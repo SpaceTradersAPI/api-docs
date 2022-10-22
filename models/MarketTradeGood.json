@@ -7,7 +7,7 @@
     },
     "tradeVolume": {
       "type": "integer",
-      "description": "The average volume flowing through the market for this type of good.",
+      "description": "The typical volume flowing through the market for this type of good.",
       "minimum": 1
     },
     "supply": {
@@ -29,5 +29,12 @@
       "description": "The price at which this good is bought.",
       "minimum": 0
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "tradeVolume",
+    "supply",
+    "purchasePrice",
+    "sellPrice"
+  ]
 }

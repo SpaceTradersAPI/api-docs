@@ -1,12 +1,5 @@
 {
   "type": "object",
-  "required": [
-    "count",
-    "min",
-    "max",
-    "rotation",
-    "morale"
-  ],
   "description": "The ship's crew service and maintain the ship's systems and equipment.",
   "properties": {
     "count": {
@@ -41,5 +34,13 @@
       "description": "The amount of credits per crew member paid per minute of time travelled between waypoints. Wages are paid when a ship departs from a waypoint.",
       "minimum": 0
     }
-  }
+  },
+  "required": [
+    "count",
+    "min",
+    "max",
+    "rotation",
+    "morale",
+    "wages"
+  ]
 }

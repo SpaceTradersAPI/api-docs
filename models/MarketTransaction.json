@@ -23,6 +23,11 @@
       "description": "The price per unit of the transaction.",
       "minimum": 1
     },
+    "totalPrice": {
+      "type": "integer",
+      "description": "The total price of the transaction.",
+      "minimum": 1
+    },
     "shipSymbol": {
       "type": "string",
       "description": "The symbol of the ship that made the transaction."
@@ -32,5 +37,13 @@
       "format": "date-time",
       "description": "The timestamp of the transaction."
     }
-  }
+  },
+  "required": [
+    "symbol",
+    "type",
+    "units",
+    "pricePerUnit",
+    "shipSymbol",
+    "timestamp"
+  ]
 }

@@ -45,6 +45,16 @@
     }
   },
   "required": [
-    "symbol"
+    "symbol",
+    "registration",
+    "nav",
+    "crew",
+    "frame",
+    "reactor",
+    "engine",
+    "modules",
+    "mounts",
+    "cargo",
+    "fuel"
   ]
 }

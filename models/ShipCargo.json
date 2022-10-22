@@ -11,11 +11,11 @@
       "description": "The items currently in the cargo hold.",
       "items": {
         "$ref": "./ShipCargoItem.json"
-      },
-      "required": [
-        "capacity",
-        "inventory"
-      ]
+      }
     }
-  }
+  },
+  "required": [
+    "capacity",
+    "inventory"
+  ]
 }

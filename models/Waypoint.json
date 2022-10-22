@@ -40,7 +40,7 @@
       }
     },
     "chart": {
-      "$ref": "./WaypointChart.json"
+      "$ref": "./Chart.json"
     }
   },
   "required": [
@@ -51,6 +51,7 @@
     "y",
     "orbitals",
     "factions",
-    "traits"
+    "traits",
+    "chart"
   ]
 }

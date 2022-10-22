@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the ship that was purchased."
+    },
+    "price": {
+      "type": "integer",
+      "description": "The price of the transaction.",
+      "minimum": 1
+    },
+    "agentSymbol": {
+      "type": "string",
+      "description": "The symbol of the agent that made the transaction."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the transaction."
+    }
+  },
+  "required": [
+    "symbol",
+    "price",
+    "agentSymbol",
+    "timestamp"
+  ]
+}

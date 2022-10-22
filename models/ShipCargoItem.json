@@ -3,13 +3,16 @@
   "description": "The type of cargo item and the number of units.",
   "properties": {
     "symbol": {
-      "type": "string"
+      "type": "string",
+      "description": "The unique identifier of the cargo item type."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of the cargo item type."
     },
     "units": {
       "type": "integer",
+      "description": "The number of units of the cargo item.",
       "minimum": 1
     }
   },

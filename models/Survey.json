@@ -1,0 +1,30 @@
+{
+  "description": "A resource survey of a waypoint, detailing a specific extraction location and the types of resources that can be found there.",
+  "type": "object",
+  "properties": {
+    "signature": {
+      "type": "string",
+      "description": "A unique signature for the location of this survey. This signature is verified when attempting an extraction using this survey.",
+      "minLength": 1
+    },
+    "deposits": {
+      "type": "array",
+      "description": "A list of deposits that can be found at this location.",
+      "items": {
+        "type": "object",
+        "$ref": "./SurveyDeposit.json"
+      }
+    },
+    "expiration": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the survey expires. After this date and time, the survey will no longer be available for extraction.",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "signature",
+    "deposits",
+    "expiration"
+  ]
+}
