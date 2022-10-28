@@ -57,7 +57,9 @@
         "BARREN",
         "TEMPERATE",
         "JUNGLE",
-        "OCEAN"
+        "OCEAN",
+        "MARKETPLACE",
+        "SHIPYARD"
       ]
     },
     "name": {

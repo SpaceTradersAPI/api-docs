@@ -9,6 +9,7 @@
     "JUMP_GATE",
     "ASTEROID_FIELD",
     "DEBRIS_FIELD",
-    "GRAVITY_WELL"
+    "GRAVITY_WELL",
+    "NEBULA"
   ]
 }

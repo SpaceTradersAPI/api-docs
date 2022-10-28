@@ -34,20 +34,14 @@
     "waypoints": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "./SystemWaypoint.json"
       }
     },
     "factions": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "./SystemFaction.json"
       }
-    },
-    "chart": {
-      "type": "object",
-      "$ref": "./Chart.json"
     }
   },
   "required": [
@@ -57,7 +51,6 @@
     "x",
     "y",
     "waypoints",
-    "factions",
-    "chart"
+    "factions"
   ]
 }

@@ -21,7 +21,6 @@
     "traits": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "./FactionTrait.json"
       }
     }

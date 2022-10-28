@@ -20,7 +20,6 @@
       ]
     },
     "terms": {
-      "type": "object",
       "$ref": "./ContractTerms.json"
     },
     "accepted": {

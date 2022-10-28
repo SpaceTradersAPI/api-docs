@@ -8,11 +8,9 @@
       "minLength": 8
     },
     "registration": {
-      "type": "object",
       "$ref": "./ShipRegistration.json"
     },
     "nav": {
-      "type": "object",
       "$ref": "./ShipNav.json"
     },
     "frame": {

@@ -25,12 +25,8 @@
         "$ref": "./WaypointOrbital.json"
       }
     },
-    "factions": {
-      "type": "array",
-      "description": "The factions that are active on the waypoint.",
-      "items": {
-        "$ref": "./WaypointFaction.json"
-      }
+    "faction": {
+      "$ref": "./Faction.json"
     },
     "traits": {
       "type": "array",
@@ -50,8 +46,6 @@
     "x",
     "y",
     "orbitals",
-    "factions",
-    "traits",
-    "chart"
+    "traits"
   ]
 }

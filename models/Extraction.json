@@ -7,7 +7,6 @@
       "minLength": 1
     },
     "yield": {
-      "type": "object",
       "$ref": "./ExtractionYield.json"
     }
   },
