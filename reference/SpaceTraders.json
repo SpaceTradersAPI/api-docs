@@ -666,7 +666,7 @@
     },
     "/my/ships/{shipSymbol}/cooldown": {
       "get": {
-        "description": "Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump drive, scanning, or extracting resources taxes your reactor and results in a cooldown.\n\nYour ship cannot perform additional actions until your cooldown has expired. The duration of your cooldown is relative to the power consumption of the related modules or mounts for the action taken.",
+        "description": "Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump drive, scanning, or extracting resources taxes your reactor and results in a cooldown.\n\nYour ship cannot perform additional actions until your cooldown has expired. The duration of your cooldown is relative to the power consumption of the related modules or mounts for the action taken.\n\nResponse returns a 204 status code (no-content) when the ship has no cooldown.",
         "operationId": "get-ship-cooldown",
         "responses": {
           "200": {
@@ -687,6 +687,9 @@
               }
             },
             "description": "OK"
+          },
+          "204": {
+            "description": "No cooldown"
           }
         },
         "security": [
