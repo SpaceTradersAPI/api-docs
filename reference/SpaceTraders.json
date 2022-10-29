@@ -733,12 +733,12 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "tradeSymbol": {
+                  "symbol": {
                     "type": "string"
                   }
                 },
                 "required": [
-                  "tradeSymbol"
+                  "symbol"
                 ],
                 "type": "object"
               }
@@ -912,7 +912,7 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "tradeSymbol": {
+                  "symbol": {
                     "type": "string"
                   },
                   "units": {
@@ -921,7 +921,7 @@
                   }
                 },
                 "required": [
-                  "tradeSymbol",
+                  "symbol",
                   "units"
                 ],
                 "type": "object"
@@ -1194,7 +1194,7 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "tradeSymbol": {
+                  "symbol": {
                     "type": "string"
                   },
                   "units": {
@@ -1202,7 +1202,7 @@
                   }
                 },
                 "required": [
-                  "tradeSymbol",
+                  "symbol",
                   "units"
                 ],
                 "type": "object"
@@ -1449,7 +1449,7 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "tradeSymbol": {
+                  "symbol": {
                     "type": "string"
                   },
                   "units": {
@@ -1457,7 +1457,7 @@
                   }
                 },
                 "required": [
-                  "tradeSymbol",
+                  "symbol",
                   "units"
                 ],
                 "type": "object"
