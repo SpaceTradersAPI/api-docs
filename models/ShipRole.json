@@ -11,6 +11,7 @@
     "SURVEYOR",
     "COMMAND",
     "CARRIER",
-    "PATROL"
+    "PATROL",
+    "SATELLITE"
   ]
 }

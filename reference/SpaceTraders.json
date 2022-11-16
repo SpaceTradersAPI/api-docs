@@ -1,15 +1,5 @@
 {
-  "components": {
-    "requestBodies": {},
-    "schemas": {},
-    "securitySchemes": {
-      "AgentToken": {
-        "description": "When you register a new agent you will be granted a private bearer token which grants authorization to use the API.",
-        "scheme": "bearer",
-        "type": "http"
-      }
-    }
-  },
+  "openapi": "3.0.0",
   "info": {
     "contact": {
       "email": "joel@spacetraders.io",
@@ -23,1558 +13,51 @@
     "title": "SpaceTraders API",
     "version": "2.0.0-rc.2"
   },
-  "openapi": "3.0.0",
+  "security": [
+    {
+      "AgentToken": []
+    }
+  ],
+  "servers": [
+    {
+      "description": "v2.0.0-rc.2",
+      "url": "https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Factions",
+      "name": "factions"
+    },
+    {
+      "description": "Fleet",
+      "name": "fleet"
+    },
+    {
+      "description": "Contracts",
+      "name": "contracts"
+    },
+    {
+      "description": "Systems",
+      "name": "systems"
+    },
+    {
+      "description": "Agents",
+      "name": "agents"
+    }
+  ],
+  "components": {
+    "requestBodies": {},
+    "schemas": {},
+    "securitySchemes": {
+      "AgentToken": {
+        "description": "When you register a new agent you will be granted a private bearer token which grants authorization to use the API.",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
   "paths": {
-    "/factions": {
-      "get": {
-        "description": "List all discovered factions in the game.",
-        "operationId": "get-factions",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "items": {
-                        "$ref": "../models/Faction.json"
-                      },
-                      "type": "array"
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.json"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "List Factions",
-        "tags": [
-          "factions"
-        ]
-      }
-    },
-    "/factions/{factionSymbol}": {
-      "get": {
-        "description": "View the details of a faction.",
-        "operationId": "get-faction",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Faction.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Get Faction",
-        "tags": [
-          "factions"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The faction symbol",
-          "in": "path",
-          "name": "factionSymbol",
-          "required": true,
-          "schema": {
-            "default": "CGR",
-            "type": "string"
-          }
-        }
-      ]
-    },
-    "/my/agent": {
-      "get": {
-        "description": "Fetch your agent's details.",
-        "operationId": "get-my-agent",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Agent.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "My Agent Details",
-        "tags": [
-          "agents"
-        ]
-      }
-    },
-    "/my/contracts": {
-      "get": {
-        "description": "List all of your contracts.",
-        "operationId": "get-contracts",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "items": {
-                        "$ref": "../models/Contract.json"
-                      },
-                      "type": "array"
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.json"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "List Contracts",
-        "tags": [
-          "contracts"
-        ]
-      }
-    },
-    "/my/contracts/{contractId}": {
-      "get": {
-        "description": "Get the details of a contract by ID.",
-        "operationId": "get-contract",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Contract.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Get Contract",
-        "tags": [
-          "contracts"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The contract ID",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
-    },
-    "/my/contracts/{contractId}/accept": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Accept a contract.",
-        "operationId": "accept-contract",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "contract": {
-                          "$ref": "../models/Contract.json"
-                        }
-                      },
-                      "required": [
-                        "contract",
-                        "agent"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Accept Contract",
-        "tags": [
-          "contracts"
-        ]
-      }
-    },
-    "/my/contracts/{contractId}/deliver": {
-      "parameters": [
-        {
-          "description": "The ID of the contract",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Deliver cargo on a given contract.",
-        "operationId": "deliver-contract",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "shipSymbol": {
-                    "type": "string"
-                  },
-                  "tradeSymbol": {
-                    "type": "string"
-                  },
-                  "units": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "shipSymbol",
-                  "tradeSymbol",
-                  "units"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "contract": {
-                          "$ref": "../models/Contract.json"
-                        },
-                        "shipCargo": {
-                          "$ref": "../models/ShipCargo.json"
-                        }
-                      },
-                      "required": [
-                        "contract",
-                        "shipCargo"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Deliver Contract",
-        "tags": [
-          "contracts"
-        ]
-      }
-    },
-    "/my/contracts/{contractId}/fulfill": {
-      "parameters": [
-        {
-          "description": "The ID of the contract",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Fulfill a contract",
-        "operationId": "fulfill-contract",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "contract": {
-                          "$ref": "../models/Contract.json"
-                        }
-                      },
-                      "required": [
-                        "contract",
-                        "agent"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Fulfill Contract",
-        "tags": [
-          "contracts"
-        ]
-      }
-    },
-    "/my/ships": {
-      "get": {
-        "description": "Retrieve all of your ships.",
-        "operationId": "get-my-ships",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "items": {
-                        "$ref": "../models/Ship.json"
-                      },
-                      "type": "array"
-                    },
-                    "meta": {
-                      "$ref": "../models/Meta.json"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "List Ships",
-        "tags": [
-          "fleet"
-        ]
-      },
-      "post": {
-        "description": "Purchase a ship",
-        "operationId": "purchase-ship",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "id": {
-                    "description": "The ID of the ship you want to purchase.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "id"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "ship": {
-                          "$ref": "../models/Ship.json"
-                        }
-                      },
-                      "required": [
-                        "ship",
-                        "agent"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Purchase Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}": {
-      "get": {
-        "description": "Retrieve the details of your ship.",
-        "operationId": "get-my-ship",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Ship.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "data": {
-                        "cargo": [],
-                        "crew": null,
-                        "engine": "ENGINE_SOLAR_PROPULSION",
-                        "frame": "FRAME_DRONE",
-                        "integrity": {
-                          "engine": 1,
-                          "frame": 1,
-                          "reactor": 1
-                        },
-                        "location": "X1-OE-PM",
-                        "modules": [
-                          "MODULE_CARGO_HOLD"
-                        ],
-                        "mounts": [
-                          "MOUNT_MINING_LASER_I"
-                        ],
-                        "officers": null,
-                        "reactor": "REACTOR_SOLAR_I",
-                        "registration": {
-                          "agentSymbol": "653298",
-                          "factionSymbol": "COMMERCE_REPUBLIC",
-                          "fee": 100,
-                          "role": "EXCAVATOR"
-                        },
-                        "status": "DOCKED",
-                        "symbol": "653298-1"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Get Ship",
-        "tags": [
-          "fleet"
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
-    },
-    "/my/ships/{shipSymbol}/chart": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Command a ship to chart the current waypoint.\n\nWaypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.",
-        "operationId": "create-chart",
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "chart": {
-                          "$ref": "../models/Chart.json"
-                        }
-                      },
-                      "required": [
-                        "chart"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Create Chart",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/cooldown": {
-      "get": {
-        "description": "Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump drive, scanning, or extracting resources taxes your reactor and results in a cooldown.\n\nYour ship cannot perform additional actions until your cooldown has expired. The duration of your cooldown is relative to the power consumption of the related modules or mounts for the action taken.\n\nResponse returns a 204 status code (no-content) when the ship has no cooldown.",
-        "operationId": "get-ship-cooldown",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Cooldown.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "204": {
-            "description": "No cooldown"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Get Ship Cooldown",
-        "tags": [
-          "fleet"
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
-    },
-    "/my/ships/{shipSymbol}/deploy": {
-      "parameters": [
-        {
-          "description": "The ship symbol",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Use this endpoint to deploy a Communications Relay to a waypoint. A waypoint with a communications relay will allow agents to retrieve price information from the market. Without a relay, agents must send a ship to a market to retrieve price information.\n\nCommunication relays can be purchased from a market that exports `COMM_RELAY_I`.",
-        "operationId": "deploy-asset",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "symbol"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Deploy Asset",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/dock": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked.",
-        "operationId": "dock-ship",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
-                        }
-                      },
-                      "required": [
-                        "nav"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The ship has successfully docked at it's current location."
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Dock Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/extract": {
-      "parameters": [
-        {
-          "description": "The ship symbol",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.",
-        "operationId": "extract-resources",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "survey": {
-                    "$ref": "../models/Survey.json"
-                  }
-                },
-                "required": [
-                  "survey"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "description": ""
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        },
-                        "extraction": {
-                          "$ref": "../models/Extraction.json"
-                        }
-                      },
-                      "required": [
-                        "extraction",
-                        "cooldown"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Extract Resources",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/jettison": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Jettison cargo from your ship's cargo hold.",
-        "operationId": "jettison",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  },
-                  "units": {
-                    "minimum": 1,
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "symbol",
-                  "units"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "cargo": {
-                          "$ref": "../models/ShipCargo.json"
-                        }
-                      },
-                      "required": [
-                        "cargo"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Jettison Cargo",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/jump": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Jump your ship from one system to another.",
-        "operationId": "jump-ship",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "destination": {
-                    "description": "The system symbol to jump to.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "destination"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        },
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
-                        }
-                      },
-                      "required": [
-                        "route",
-                        "cooldown"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Jump Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/navigate": {
-      "parameters": [
-        {
-          "description": "The ship symbol",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action.",
-        "operationId": "navigate-ship",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "waypointSymbol": {
-                    "description": "The target destination.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "waypointSymbol"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "description": ""
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "fuel": {
-                          "$ref": "../models/ShipFuel.json"
-                        },
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
-                        }
-                      },
-                      "required": [
-                        "nav",
-                        "fuel"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival."
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Navigate Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/orbit": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
-        "operationId": "orbit-ship",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The ship has successfully moved into orbit at it's current location."
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Orbit Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/purchase": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Purchase cargo.",
-        "operationId": "purchase-cargo",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  },
-                  "units": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "symbol",
-                  "units"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "cargo": {
-                          "$ref": "../models/ShipCargo.json"
-                        },
-                        "transaction": {
-                          "$ref": "../models/MarketTransaction.json"
-                        }
-                      },
-                      "required": [
-                        "cargo",
-                        "transaction",
-                        "agent"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Purchase Cargo",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/refuel": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Refuel your ship from the local market.",
-        "operationId": "refuel-ship",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "fuel": {
-                          "$ref": "../models/ShipFuel.json"
-                        }
-                      },
-                      "required": [
-                        "agent",
-                        "fuel"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Refuel Ship",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/scan": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Activate your ship's sensor arrays to scan for arriving ships, departing ships, system information, or waypoint information. Send a scan mode to select the type of scan performed by your ship.",
-        "operationId": "create-ship-scan",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "examples": {
-                "Approaching Ships": {
-                  "value": {
-                    "mode": "APPROACHING_SHIPS"
-                  }
-                },
-                "Departing Ships": {
-                  "value": {
-                    "mode": "DEPARTING_SHIPS"
-                  }
-                }
-              },
-              "schema": {
-                "properties": {
-                  "mode": {
-                    "enum": [
-                      "APPROACHING_SHIPS",
-                      "DEPARTING_SHIPS",
-                      "WAYPOINT"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "mode"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "description": ""
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "oneOf": [
-                        {
-                          "properties": {
-                            "cooldown": {
-                              "$ref": "../models/Cooldown.json"
-                            },
-                            "ships": {
-                              "items": {
-                                "$ref": "../models/ScannedShip.json"
-                              },
-                              "type": "array"
-                            }
-                          },
-                          "required": [
-                            "ships",
-                            "cooldown"
-                          ]
-                        },
-                        {
-                          "properties": {
-                            "cooldown": {
-                              "$ref": "../models/Cooldown.json"
-                            },
-                            "waypoint": {
-                              "$ref": "../models/Waypoint.json"
-                            }
-                          },
-                          "required": [
-                            "cooldown",
-                            "waypoint"
-                          ]
-                        }
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Scan",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/sell": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Sell cargo from your ship's hold to the local market.",
-        "operationId": "sell-cargo",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  },
-                  "units": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "symbol",
-                  "units"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "description": ""
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "agent": {
-                          "$ref": "../models/Agent.json"
-                        },
-                        "cargo": {
-                          "$ref": "../models/ShipCargo.json"
-                        },
-                        "transaction": {
-                          "$ref": "../models/MarketTransaction.json"
-                        }
-                      },
-                      "required": [
-                        "agent",
-                        "cargo",
-                        "transaction"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Sell Cargo",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/survey": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.",
-        "operationId": "survey-waypoint",
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "cooldown": {
-                          "$ref": "../models/Cooldown.json"
-                        },
-                        "surveys": {
-                          "items": {
-                            "$ref": "../models/Survey.json"
-                          },
-                          "type": "array"
-                        }
-                      },
-                      "required": [
-                        "surveys",
-                        "cooldown"
-                      ],
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Created"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Survey Waypoint",
-        "tags": [
-          "fleet"
-        ]
-      }
-    },
     "/register": {
       "post": {
         "description": "Creates a new agent and ties it to a temporary Account. Use `COMMERCE_REPUBLIC` as your starting faction if you don't know any other factions to choose from.\n\nThe agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field waypoint, and execute the `/my/ships/{shipSymbol}/accept` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
@@ -1967,39 +450,1483 @@
           }
         }
       ]
-    }
-  },
-  "security": [
-    {
-      "AgentToken": []
-    }
-  ],
-  "servers": [
-    {
-      "description": "v2.0.0-rc.2",
-      "url": "https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app"
-    }
-  ],
-  "tags": [
-    {
-      "description": "Factions",
-      "name": "factions"
     },
-    {
-      "description": "Fleet",
-      "name": "fleet"
+    "/factions": {
+      "get": {
+        "description": "List all discovered factions in the game.",
+        "operationId": "get-factions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/Faction.json"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.json"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "List Factions",
+        "tags": [
+          "factions"
+        ]
+      }
     },
-    {
-      "description": "Contracts",
-      "name": "contracts"
+    "/factions/{factionSymbol}": {
+      "get": {
+        "description": "View the details of a faction.",
+        "operationId": "get-faction",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Faction.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get Faction",
+        "tags": [
+          "factions"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "The faction symbol",
+          "in": "path",
+          "name": "factionSymbol",
+          "required": true,
+          "schema": {
+            "default": "CGR",
+            "type": "string"
+          }
+        }
+      ]
     },
-    {
-      "description": "Systems",
-      "name": "systems"
+    "/my/agent": {
+      "get": {
+        "description": "Fetch your agent's details.",
+        "operationId": "get-my-agent",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Agent.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "My Agent Details",
+        "tags": [
+          "agents"
+        ]
+      }
     },
-    {
-      "description": "Agents",
-      "name": "agents"
+    "/my/contracts": {
+      "get": {
+        "description": "List all of your contracts.",
+        "operationId": "get-contracts",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/Contract.json"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.json"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "List Contracts",
+        "tags": [
+          "contracts"
+        ]
+      }
+    },
+    "/my/contracts/{contractId}": {
+      "get": {
+        "description": "Get the details of a contract by ID.",
+        "operationId": "get-contract",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Contract.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Contract",
+        "tags": [
+          "contracts"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "The contract ID",
+          "in": "path",
+          "name": "contractId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/my/contracts/{contractId}/accept": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "contractId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Accept a contract.",
+        "operationId": "accept-contract",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "contract": {
+                          "$ref": "../models/Contract.json"
+                        }
+                      },
+                      "required": [
+                        "contract",
+                        "agent"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Accept Contract",
+        "tags": [
+          "contracts"
+        ]
+      }
+    },
+    "/my/contracts/{contractId}/deliver": {
+      "parameters": [
+        {
+          "description": "The ID of the contract",
+          "in": "path",
+          "name": "contractId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Deliver cargo on a given contract.",
+        "operationId": "deliver-contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "shipSymbol": {
+                    "type": "string"
+                  },
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "shipSymbol",
+                  "tradeSymbol",
+                  "units"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "contract": {
+                          "$ref": "../models/Contract.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "contract",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Deliver Contract",
+        "tags": [
+          "contracts"
+        ]
+      }
+    },
+    "/my/contracts/{contractId}/fulfill": {
+      "parameters": [
+        {
+          "description": "The ID of the contract",
+          "in": "path",
+          "name": "contractId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Fulfill a contract",
+        "operationId": "fulfill-contract",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "contract": {
+                          "$ref": "../models/Contract.json"
+                        }
+                      },
+                      "required": [
+                        "contract",
+                        "agent"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Fulfill Contract",
+        "tags": [
+          "contracts"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/orbit": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
+        "operationId": "orbit-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Orbit Ship 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "nav"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ship has successfully moved into orbit at it's current location."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Orbit Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships": {
+      "get": {
+        "description": "Retrieve all of your ships.",
+        "operationId": "get-my-ships",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/Ship.json"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.json"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "List Ships",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "post": {
+        "description": "Purchase a ship",
+        "operationId": "purchase-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "shipSymbol": {
+                    "description": "The symbol of the ship you want to purchase.",
+                    "type": "string"
+                  },
+                  "waypointSymbol": {
+                    "description": "The symbol of the waypoint you want to purchase the ship at.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "shipSymbol",
+                  "waypointSymbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "ship": {
+                          "$ref": "../models/Ship.json"
+                        }
+                      },
+                      "required": [
+                        "ship",
+                        "agent"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Purchase Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}": {
+      "get": {
+        "description": "Retrieve the details of your ship.",
+        "operationId": "get-my-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Ship.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Ship",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/my/ships/{shipSymbol}/chart": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Command a ship to chart the current waypoint.\n\nWaypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.",
+        "operationId": "create-chart",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "chart": {
+                          "$ref": "../models/Chart.json"
+                        }
+                      },
+                      "required": [
+                        "chart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Create Chart",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/cooldown": {
+      "get": {
+        "description": "Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump drive, scanning, or extracting resources taxes your reactor and results in a cooldown.\n\nYour ship cannot perform additional actions until your cooldown has expired. The duration of your cooldown is relative to the power consumption of the related modules or mounts for the action taken.\n\nResponse returns a 204 status code (no-content) when the ship has no cooldown.",
+        "operationId": "get-ship-cooldown",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Cooldown.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "No cooldown"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Ship Cooldown",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/my/ships/{shipSymbol}/deploy": {
+      "parameters": [
+        {
+          "description": "The ship symbol",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Use this endpoint to deploy a Communications Relay to a waypoint. A waypoint with a communications relay will allow agents to retrieve price information from the market. Without a relay, agents must send a ship to a market to retrieve price information.\n\nCommunication relays can be purchased from a market that exports `COMM_RELAY_I`.",
+        "operationId": "deploy-asset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "symbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Deploy Asset",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/dock": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked.",
+        "operationId": "dock-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Dock Ship 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "required": [
+                        "nav"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ship has successfully docked at it's current location."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Dock Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/extract": {
+      "parameters": [
+        {
+          "description": "The ship symbol",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.",
+        "operationId": "extract-resources",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "survey": {
+                    "$ref": "../models/Survey.json"
+                  }
+                },
+                "required": [
+                  "survey"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "extraction": {
+                          "$ref": "../models/Extraction.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "extraction",
+                        "cooldown",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Extract Resources",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/jettison": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Jettison cargo from your ship's cargo hold.",
+        "operationId": "jettison",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "minimum": 1,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "units"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Jettison Cargo",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/jump": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Jump your ship from one system to another.",
+        "operationId": "jump-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "systemSymbol": {
+                    "description": "The system symbol to jump to.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "systemSymbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "required": [
+                        "route",
+                        "cooldown"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Jump Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/navigate": {
+      "parameters": [
+        {
+          "description": "The ship symbol",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action.",
+        "operationId": "navigate-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "waypointSymbol": {
+                    "description": "The target destination.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "waypointSymbol"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "fuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        },
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "required": [
+                        "nav",
+                        "fuel"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Navigate Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/sell": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Sell cargo.",
+        "operationId": "sell-cargo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "SellCargoRequest",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "units"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Sell Cargo 201 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/MarketTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "cargo",
+                        "transaction",
+                        "agent"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Sell Cargo",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/scan": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Activate your ship's sensor arrays to scan for arriving ships, departing ships, system information, or waypoint information. Send a scan mode to select the type of scan performed by your ship.",
+        "operationId": "create-ship-scan",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "Approaching Ships": {
+                  "value": {
+                    "mode": "APPROACHING_SHIPS"
+                  }
+                },
+                "Departing Ships": {
+                  "value": {
+                    "mode": "DEPARTING_SHIPS"
+                  }
+                }
+              },
+              "schema": {
+                "properties": {
+                  "mode": {
+                    "enum": [
+                      "APPROACHING_SHIPS",
+                      "DEPARTING_SHIPS",
+                      "WAYPOINT"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "mode"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "oneOf": [
+                        {
+                          "properties": {
+                            "cooldown": {
+                              "$ref": "../models/Cooldown.json"
+                            },
+                            "ships": {
+                              "items": {
+                                "$ref": "../models/ScannedShip.json"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "ships",
+                            "cooldown"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "cooldown": {
+                              "$ref": "../models/Cooldown.json"
+                            },
+                            "waypoint": {
+                              "$ref": "../models/Waypoint.json"
+                            }
+                          },
+                          "required": [
+                            "cooldown",
+                            "waypoint"
+                          ]
+                        }
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Scan",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/refuel": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Refuel your ship from the local market.",
+        "operationId": "refuel-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "fuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        }
+                      },
+                      "required": [
+                        "agent",
+                        "fuel"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Refuel Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/purchase": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Purchase cargo.",
+        "operationId": "purchase-cargo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Purchase Cargo Request",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "units"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Purchase Cargo 201 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/MarketTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "cargo",
+                        "transaction",
+                        "agent"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Purchase Cargo",
+        "tags": [
+          "fleet"
+        ]
+      }
     }
-  ]
+  }
 }

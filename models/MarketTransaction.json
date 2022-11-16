@@ -1,7 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "symbol": {
+    "shipSymbol": {
+      "type": "string",
+      "description": "The symbol of the ship that made the transaction."
+    },
+    "tradeSymbol": {
       "type": "string",
       "description": "The symbol of the trade good."
     },
@@ -27,10 +31,6 @@
       "type": "integer",
       "description": "The total price of the transaction.",
       "minimum": 1
-    },
-    "shipSymbol": {
-      "type": "string",
-      "description": "The symbol of the ship that made the transaction."
     },
     "timestamp": {
       "type": "string",

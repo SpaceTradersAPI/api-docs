@@ -29,7 +29,6 @@
   "required": [
     "symbol",
     "name",
-    "condition",
     "powerOutput",
     "requirements"
   ]
