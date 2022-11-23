@@ -1275,6 +1275,67 @@
         ]
       }
     },
+    "/my/ships/{shipSymbol}/survey": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.",
+        "operationId": "create-survey",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "surveys": {
+                          "items": {
+                            "$ref": "../models/Survey.json"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "surveys",
+                        "cooldown"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Create Survey",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/extract": {
       "parameters": [
         {
@@ -1288,7 +1349,7 @@
         }
       ],
       "post": {
-        "description": "Extract resources from the waypoint into your ship. Send a survey as the payload to target specific yields. The entire survey must be sent as it contains a signature that the backend verifies.",
+        "description": "Extract resources from the waypoint into your ship. Send an optional survey as the payload to target specific yields.",
         "operationId": "extract-resources",
         "requestBody": {
           "content": {
@@ -1299,14 +1360,10 @@
                     "$ref": "../models/Survey.json"
                   }
                 },
-                "required": [
-                  "survey"
-                ],
                 "type": "object"
               }
             }
-          },
-          "description": ""
+          }
         },
         "responses": {
           "201": {

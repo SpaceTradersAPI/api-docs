@@ -7,6 +7,11 @@
       "description": "A unique signature for the location of this survey. This signature is verified when attempting an extraction using this survey.",
       "minLength": 1
     },
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the waypoint that this survey is for.",
+      "minLength": 1
+    },
     "deposits": {
       "type": "array",
       "description": "A list of deposits that can be found at this location.",
@@ -23,6 +28,7 @@
   },
   "required": [
     "signature",
+    "symbol",
     "deposits",
     "expiration"
   ]
