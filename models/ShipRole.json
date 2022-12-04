@@ -1,17 +1,4 @@
 {
   "type": "string",
-  "description": "The registered role of the ship",
-  "enum": [
-    "FABRICATOR",
-    "HARVESTER",
-    "HAULER",
-    "EXCAVATOR",
-    "TRANSPORT",
-    "REPAIR",
-    "SURVEYOR",
-    "COMMAND",
-    "CARRIER",
-    "PATROL",
-    "SATELLITE"
-  ]
+  "description": "The registered role of the ship"
 }

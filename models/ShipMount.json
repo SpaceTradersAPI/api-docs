@@ -13,10 +13,16 @@
         "MOUNT_SENSOR_ARRAY_III",
         "MOUNT_MINING_LASER_I",
         "MOUNT_MINING_LASER_II",
-        "MOUNT_MINING_LASER_III"
+        "MOUNT_MINING_LASER_III",
+        "MOUNT_LASER_CANNON_I",
+        "MOUNT_MISSILE_LAUNCHER_I",
+        "MOUNT_TURRET_I"
       ]
     },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     },
     "requirements": {

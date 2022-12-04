@@ -10,6 +10,10 @@
       "type": "string",
       "description": "The name of the cargo item type."
     },
+    "description": {
+      "type": "string",
+      "description": "The description of the cargo item type."
+    },
     "units": {
       "type": "integer",
       "description": "The number of units of the cargo item.",
@@ -19,6 +23,7 @@
   "required": [
     "symbol",
     "name",
+    "description",
     "units"
   ]
 }

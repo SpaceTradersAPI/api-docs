@@ -5,6 +5,7 @@
     "symbol": {
       "type": "string",
       "enum": [
+        "FRAME_PROBE",
         "FRAME_DRONE",
         "FRAME_INTERCEPTOR",
         "FRAME_RACER",
@@ -21,6 +22,9 @@
       ]
     },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     },
     "condition": {

@@ -11,19 +11,7 @@
       "minLength": 1
     },
     "type": {
-      "type": "string",
-      "enum": [
-        "NEUTRON_STAR",
-        "RED_STAR",
-        "ORANGE_STAR",
-        "BLUE_STAR",
-        "YOUNG_STAR",
-        "WHITE_DWARF",
-        "BLACK_HOLE",
-        "HYPERGIANT",
-        "NEBULA",
-        "UNSTABLE"
-      ]
+      "$ref": "./SystemType.json"
     },
     "x": {
       "type": "integer"

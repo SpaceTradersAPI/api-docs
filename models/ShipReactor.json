@@ -5,14 +5,17 @@
     "symbol": {
       "type": "string",
       "enum": [
-        "SOLAR_REACTOR",
-        "FUSION_REACTOR",
-        "FISSION_REACTOR",
-        "CHEMICAL_REACTOR",
-        "DARK_MATTER_REACTOR"
+        "REACTOR_SOLAR_I",
+        "REACTOR_FUSION_I",
+        "REACTOR_FISSION_I",
+        "REACTOR_CHEMICAL_I",
+        "REACTOR_ANTIMATTER_I"
       ]
     },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     },
     "condition": {

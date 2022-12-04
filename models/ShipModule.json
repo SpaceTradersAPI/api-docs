@@ -5,18 +5,24 @@
     "symbol": {
       "type": "string",
       "enum": [
-        "MODULE_PASSENGER_CABIN",
-        "MODULE_ENVOY_QUARTERS",
-        "MODULE_MICRO_REFINERY",
         "MODULE_MINERAL_PROCESSOR",
         "MODULE_CARGO_HOLD",
+        "MODULE_CREW_QUARTERS",
+        "MODULE_ENVOY_QUARTERS",
+        "MODULE_PASSENGER_CABIN",
+        "MODULE_MICRO_REFINERY",
+        "MODULE_SCIENCE_LAB",
         "MODULE_JUMP_DRIVE_I",
         "MODULE_JUMP_DRIVE_II",
         "MODULE_JUMP_DRIVE_III",
-        "MODULE_CREW_QUARTERS"
+        "MODULE_SHIELD_GENERATOR_I",
+        "MODULE_SHIELD_GENERATOR_II"
       ]
     },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     },
     "requirements": {

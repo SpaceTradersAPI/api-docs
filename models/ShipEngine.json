@@ -5,13 +5,16 @@
     "symbol": {
       "type": "string",
       "enum": [
-        "IMPULSE_DRIVE",
-        "ION_DRIVE_I",
-        "ION_DRIVE_II",
-        "HYPER_DRIVE"
+        "ENGINE_IMPULSE_DRIVE",
+        "ENGINE_ION_DRIVE_I",
+        "ENGINE_ION_DRIVE_II",
+        "ENGINE_HYPER_DRIVE"
       ]
     },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     },
     "condition": {

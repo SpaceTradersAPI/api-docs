@@ -4,7 +4,23 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "SHIP_PROBE_SATELLITE",
+        "SHIP_MINING_DRONE",
+        "SHIP_INTERCEPTOR",
+        "SHIP_LIGHT_HAULER",
+        "SHIP_COMMAND_FRIGATE",
+        "SHIP_EXPLORER",
+        "SHIP_HEAVY_FREIGHTER",
+        "SHIP_LIGHT_SHUTTLE",
+        "SHIP_ORE_HOUND"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
     },
     "purchasePrice": {
       "type": "integer"
@@ -33,6 +49,8 @@
   },
   "required": [
     "symbol",
+    "name",
+    "description",
     "purchasePrice",
     "frame",
     "reactor",
