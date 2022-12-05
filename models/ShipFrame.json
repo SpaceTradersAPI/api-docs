@@ -49,6 +49,7 @@
   "required": [
     "symbol",
     "name",
+    "description",
     "moduleSlots",
     "mountingPoints",
     "fuelCapacity",
