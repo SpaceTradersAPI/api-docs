@@ -2,9 +2,9 @@
   "type": "object",
   "description": "Details of the ship's fuel tanks including how much fuel was consumed during the last transit or action.",
   "properties": {
-    "amount": {
+    "current": {
       "type": "integer",
-      "description": "The amount of fuel in the ship's tanks.",
+      "description": "The current amount of fuel in the ship's tanks.",
       "minimum": 0
     },
     "capacity": {
@@ -33,7 +33,7 @@
     }
   },
   "required": [
-    "amount",
+    "current",
     "capacity"
   ]
 }

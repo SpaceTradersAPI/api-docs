@@ -2,15 +2,15 @@
   "type": "object",
   "description": "The ship's crew service and maintain the ship's systems and equipment.",
   "properties": {
-    "count": {
+    "current": {
       "type": "integer",
-      "description": "The total number of crew members on the ship."
+      "description": "The current number of crew members on the ship."
     },
-    "min": {
+    "required": {
       "type": "integer",
       "description": "The minimum number of crew members required to maintain the ship."
     },
-    "max": {
+    "capacity": {
       "type": "integer",
       "description": "The maximum number of crew members the ship can support."
     },
@@ -31,14 +31,14 @@
     },
     "wages": {
       "type": "integer",
-      "description": "The amount of credits per crew member paid per minute of time travelled between waypoints. Wages are paid when a ship departs from a waypoint.",
+      "description": "The amount of credits per crew member paid per hour. Wages are paid when a ship docks at a civilized waypoint.",
       "minimum": 0
     }
   },
   "required": [
-    "count",
-    "min",
-    "max",
+    "current",
+    "required",
+    "capacity",
     "rotation",
     "morale",
     "wages"
