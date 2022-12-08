@@ -7,26 +7,27 @@
     },
     "tradeVolume": {
       "type": "integer",
-      "description": "The typical volume flowing through the market for this type of good.",
-      "minimum": 1
+      "description": "The typical volume flowing through the market for this type of good. The larger the trade volume, the more stable prices will be.",
+      "minimum": 10
     },
     "supply": {
       "type": "string",
-      "description": "A rough estimate of the total supply of this good in this marketplace.",
+      "description": "A rough estimate of the total supply of this good in the marketplace.",
       "enum": [
-        "HIGH",
-        "AVERAGE",
-        "LOW"
+        "SCARCE",
+        "LIMITED",
+        "MODERATE",
+        "ABUNDANT"
       ]
     },
     "purchasePrice": {
       "type": "integer",
-      "description": "The price at which this good is sold.",
+      "description": "The price at which this good can be purchased from the market.",
       "minimum": 0
     },
     "sellPrice": {
       "type": "integer",
-      "description": "The price at which this good is bought.",
+      "description": "The price at which this good can be sold to the market.",
       "minimum": 0
     }
   },
