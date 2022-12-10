@@ -32,6 +32,7 @@
 - most market data will only be available if you have a ship present at the given waypoint
 - jump gates are typically restricted to other jump gates within the same faction
 - most actions will result in a reactor cooldown, which will prevent your ship from taking other actions until the cooldown has expired
+- markets have a limit on how many units can be bought or sold at a given time, which is the same as the market's trade volume
 
 # Factions and Reputation
 

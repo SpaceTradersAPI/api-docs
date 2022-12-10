@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "symbol": {
+    "shipSymbol": {
       "type": "string",
       "description": "The symbol of the ship that was purchased."
     },
