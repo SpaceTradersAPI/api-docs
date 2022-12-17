@@ -1738,7 +1738,7 @@
         ]
       }
     },
-    "/my/ships/{shipSymbol}/scan": {
+    "/my/ships/{shipSymbol}/scan/systems": {
       "parameters": [
         {
           "in": "path",
@@ -1750,43 +1750,8 @@
         }
       ],
       "post": {
-        "description": "Activate your ship's sensor arrays to scan for arriving ships, departing ships, system information, or waypoint information. Send a scan mode to select the type of scan performed by your ship.",
-        "operationId": "create-ship-scan",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "examples": {
-                "Approaching Ships": {
-                  "value": {
-                    "mode": "APPROACHING_SHIPS"
-                  }
-                },
-                "Departing Ships": {
-                  "value": {
-                    "mode": "DEPARTING_SHIPS"
-                  }
-                }
-              },
-              "schema": {
-                "properties": {
-                  "mode": {
-                    "enum": [
-                      "APPROACHING_SHIPS",
-                      "DEPARTING_SHIPS",
-                      "WAYPOINT"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "mode"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "description": ""
-        },
+        "description": "Activate your ship's sensor arrays to scan for system information.",
+        "operationId": "create-ship-system-scan",
         "responses": {
           "201": {
             "content": {
@@ -1795,38 +1760,20 @@
                   "description": "",
                   "properties": {
                     "data": {
-                      "oneOf": [
-                        {
-                          "properties": {
-                            "cooldown": {
-                              "$ref": "../models/Cooldown.json"
-                            },
-                            "ships": {
-                              "items": {
-                                "$ref": "../models/ScannedShip.json"
-                              },
-                              "type": "array"
-                            }
-                          },
-                          "required": [
-                            "ships",
-                            "cooldown"
-                          ]
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
                         },
-                        {
-                          "properties": {
-                            "cooldown": {
-                              "$ref": "../models/Cooldown.json"
-                            },
-                            "waypoint": {
-                              "$ref": "../models/Waypoint.json"
-                            }
+                        "systems": {
+                          "items": {
+                            "$ref": "../models/ScannedSystem.json"
                           },
-                          "required": [
-                            "cooldown",
-                            "waypoint"
-                          ]
+                          "type": "array"
                         }
+                      },
+                      "required": [
+                        "cooldown",
+                        "systems"
                       ],
                       "type": "object"
                     }
@@ -1846,7 +1793,68 @@
             "AgentToken": []
           }
         ],
-        "summary": "Scan",
+        "summary": "Scan Systems",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/scan/ships": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Activate your ship's sensor arrays to scan for ship information.",
+        "operationId": "create-ship-ship-scan",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "ships": {
+                          "items": {
+                            "$ref": "../models/ScannedShip.json"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "cooldown",
+                        "ships"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Scan Ships",
         "tags": [
           "fleet"
         ]

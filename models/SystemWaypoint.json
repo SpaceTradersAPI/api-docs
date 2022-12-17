@@ -6,10 +6,18 @@
     },
     "type": {
       "$ref": "./WaypointType.json"
+    },
+    "x": {
+      "type": "integer"
+    },
+    "y": {
+      "type": "integer"
     }
   },
   "required": [
     "symbol",
-    "type"
+    "type",
+    "x",
+    "y"
   ]
 }
