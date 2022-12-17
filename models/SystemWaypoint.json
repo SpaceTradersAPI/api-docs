@@ -3,9 +3,13 @@
   "properties": {
     "symbol": {
       "type": "string"
+    },
+    "type": {
+      "$ref": "./WaypointType.json"
     }
   },
   "required": [
-    "symbol"
+    "symbol",
+    "type"
   ]
 }

@@ -25,6 +25,10 @@
     "description": {
       "type": "string"
     },
+    "strength": {
+      "type": "integer",
+      "minimum": 0
+    },
     "requirements": {
       "$ref": "./ShipRequirements.json"
     }
