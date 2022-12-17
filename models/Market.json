@@ -34,14 +34,14 @@
     },
     "transactions": {
       "type": "array",
-      "description": "The list of recent transactions at this market.",
+      "description": "The list of recent transactions at this market. Visible only when a ship is present at the market.",
       "items": {
         "$ref": "./MarketTransaction.json"
       }
     },
     "tradeGoods": {
       "type": "array",
-      "description": "The list of goods that are traded at this market.",
+      "description": "The list of goods that are traded at this market. Visible only when a ship is present at the market.",
       "items": {
         "$ref": "./MarketTradeGood.json"
       }
@@ -50,8 +50,6 @@
   "required": [
     "symbol",
     "exports",
-    "imports",
-    "transactions",
-    "tradeGoods"
+    "imports"
   ]
 }

@@ -68,9 +68,19 @@
               "schema": {
                 "properties": {
                   "faction": {
-                    "default": "COMMERCE_REPUBLIC",
                     "description": "The faction you choose determines your headquarters.",
-                    "type": "string"
+                    "enum": [
+                      "COSMIC",
+                      "VOID",
+                      "GALLACTIC",
+                      "QUANTUM",
+                      "DOMINION",
+                      "ASTRO",
+                      "CORSAIRS",
+                      "UNITED",
+                      "SOLITARY",
+                      "COBALT"
+                    ]
                   },
                   "symbol": {
                     "description": "How other agents will see your ships and information.",
@@ -1980,6 +1990,87 @@
           }
         ],
         "summary": "Purchase Cargo",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/transfer": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Transfer cargo between ships.",
+        "operationId": "transfer-cargo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Transfer Cargo Request",
+                "properties": {
+                  "tradeSymbol": {
+                    "type": "string"
+                  },
+                  "units": {
+                    "type": "integer"
+                  },
+                  "shipSymbol": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tradeSymbol",
+                  "units",
+                  "shipSymbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Transfer Cargo 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Transfer Cargo",
         "tags": [
           "fleet"
         ]
