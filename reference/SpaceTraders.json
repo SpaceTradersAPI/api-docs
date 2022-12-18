@@ -970,9 +970,8 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "shipSymbol": {
-                    "description": "The symbol of the ship you want to purchase.",
-                    "type": "string"
+                  "shipType": {
+                    "$ref": "../models/ShipType.json"
                   },
                   "waypointSymbol": {
                     "description": "The symbol of the waypoint you want to purchase the ship at.",
@@ -980,7 +979,7 @@
                   }
                 },
                 "required": [
-                  "shipSymbol",
+                  "shipType",
                   "waypointSymbol"
                 ],
                 "type": "object"
@@ -1511,7 +1510,7 @@
         }
       ],
       "post": {
-        "description": "Jump your ship from one system to another.",
+        "description": "Jump your ship instantly to a target system. Unlike other forms of navigation, jumping requires a unit of antimatter.",
         "operationId": "jump-ship",
         "requestBody": {
           "content": {
@@ -1588,7 +1587,7 @@
         }
       ],
       "post": {
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nFor faster-than-light travel between systems, see the ship's jump action.",
+        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's warp or jump actions.",
         "operationId": "navigate-ship",
         "requestBody": {
           "content": {
@@ -1648,6 +1647,83 @@
           }
         ],
         "summary": "Navigate Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/warp": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Warp your ship to a target destination in another system. Warping will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.",
+        "operationId": "warp-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "waypointSymbol": {
+                    "description": "The target destination.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "waypointSymbol"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "fuel": {
+                          "$ref": "../models/ShipFuel.json"
+                        },
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "required": [
+                        "nav",
+                        "fuel"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Warp Ship",
         "tags": [
           "fleet"
         ]

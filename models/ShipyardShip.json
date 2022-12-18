@@ -2,19 +2,8 @@
   "description": "",
   "type": "object",
   "properties": {
-    "symbol": {
-      "type": "string",
-      "enum": [
-        "SHIP_PROBE_SATELLITE",
-        "SHIP_MINING_DRONE",
-        "SHIP_INTERCEPTOR",
-        "SHIP_LIGHT_HAULER",
-        "SHIP_COMMAND_FRIGATE",
-        "SHIP_EXPLORER",
-        "SHIP_HEAVY_FREIGHTER",
-        "SHIP_LIGHT_SHUTTLE",
-        "SHIP_ORE_HOUND"
-      ]
+    "type": {
+      "$ref": "./ShipType.json"
     },
     "name": {
       "type": "string"
