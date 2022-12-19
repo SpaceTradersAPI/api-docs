@@ -16,8 +16,8 @@
     "status": {
       "$ref": "./ShipNavStatus.json"
     },
-    "speed": {
-      "$ref": "./ShipNavSpeed.json"
+    "flightMode": {
+      "$ref": "./ShipNavFlightMode.json"
     }
   },
   "required": [
@@ -25,6 +25,6 @@
     "waypointSymbol",
     "route",
     "status",
-    "speed"
+    "flightMode"
   ]
 }
