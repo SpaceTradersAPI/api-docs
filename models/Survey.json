@@ -24,12 +24,22 @@
       "format": "date-time",
       "description": "The date and time when the survey expires. After this date and time, the survey will no longer be available for extraction.",
       "minimum": 0
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the deposit. This value indicates how much can be extracted from the survey before it is exhausted.",
+      "enum": [
+        "SMALL",
+        "MODERATE",
+        "LARGE"
+      ]
     }
   },
   "required": [
     "signature",
     "symbol",
     "deposits",
-    "expiration"
+    "expiration",
+    "size"
   ]
 }
