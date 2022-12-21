@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "A module can be installed in a ship and provides a set of capabilities such as storage space or quarters for crew.",
+  "description": "A module can be installed in a ship and provides a set of capabilities such as storage space or quarters for crew. Module installations are permanent.",
   "properties": {
     "symbol": {
       "type": "string",
@@ -11,6 +11,8 @@
         "MODULE_ENVOY_QUARTERS_I",
         "MODULE_PASSENGER_CABIN_I",
         "MODULE_MICRO_REFINERY_I",
+        "MODULE_ORE_REFINERY_I",
+        "MODULE_FUEL_REFINERY_I",
         "MODULE_SCIENCE_LAB_I",
         "MODULE_JUMP_DRIVE_I",
         "MODULE_JUMP_DRIVE_II",

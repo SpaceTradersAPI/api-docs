@@ -745,7 +745,7 @@
                     "type": "string"
                   },
                   "tradeSymbol": {
-                    "type": "string"
+                    "$ref": "../models/TradeSymbol.json"
                   },
                   "units": {
                     "type": "integer"
@@ -861,62 +861,6 @@
         "summary": "Fulfill Contract",
         "tags": [
           "contracts"
-        ]
-      }
-    },
-    "/my/ships/{shipSymbol}/orbit": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
-        "operationId": "orbit-ship",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Orbit Ship 200 Response",
-                  "description": "",
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
-                        }
-                      },
-                      "type": "object",
-                      "required": [
-                        "nav"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The ship has successfully moved into orbit at it's current location."
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Orbit Ship",
-        "tags": [
-          "fleet"
         ]
       }
     },
@@ -1077,6 +1021,176 @@
         }
       ]
     },
+    "/my/ships/{shipSymbol}/orbit": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
+        "operationId": "orbit-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Orbit Ship 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "nav"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ship has successfully moved into orbit at it's current location."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Orbit Ship",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/refine": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of refining at the time of the request.",
+        "operationId": "ship-refine",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "produce": {
+                    "type": "string",
+                    "enum": [
+                      "IRON",
+                      "COPPER",
+                      "SILVER",
+                      "GOLD",
+                      "ALUMINUM",
+                      "PLATINUM",
+                      "URANITE",
+                      "MERITIUM",
+                      "FUEL"
+                    ]
+                  }
+                },
+                "required": [
+                  "produce"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Ship Refine 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        },
+                        "produced": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tradeSymbol": {
+                                "$ref": "../models/TradeSymbol.json"
+                              },
+                              "units": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "consumed": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tradeSymbol": {
+                                "$ref": "../models/TradeSymbol.json"
+                              },
+                              "units": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "cargo",
+                        "produced",
+                        "consumed"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ship has successfully started refining."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Ship Refine",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/chart": {
       "parameters": [
         {
@@ -1179,54 +1293,6 @@
           }
         }
       ]
-    },
-    "/my/ships/{shipSymbol}/deploy": {
-      "parameters": [
-        {
-          "description": "The ship symbol",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "description": "Use this endpoint to deploy a Communications Relay to a waypoint. A waypoint with a communications relay will allow agents to retrieve price information from the market. Without a relay, agents must send a ship to a market to retrieve price information.\n\nCommunication relays can be purchased from a market that exports `COMM_RELAY_I`.",
-        "operationId": "deploy-asset",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "symbol"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Deploy Asset",
-        "tags": [
-          "fleet"
-        ]
-      }
     },
     "/my/ships/{shipSymbol}/dock": {
       "parameters": [
@@ -1750,7 +1816,7 @@
                 "title": "SellCargoRequest",
                 "properties": {
                   "symbol": {
-                    "type": "string"
+                    "$ref": "../models/TradeSymbol.json"
                   },
                   "units": {
                     "type": "integer"
@@ -2015,7 +2081,7 @@
                 "title": "Purchase Cargo Request",
                 "properties": {
                   "symbol": {
-                    "type": "string"
+                    "$ref": "../models/TradeSymbol.json"
                   },
                   "units": {
                     "type": "integer"
@@ -2100,7 +2166,7 @@
                 "title": "Transfer Cargo Request",
                 "properties": {
                   "tradeSymbol": {
-                    "type": "string"
+                    "$ref": "../models/TradeSymbol.json"
                   },
                   "units": {
                     "type": "integer"
