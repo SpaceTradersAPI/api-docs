@@ -1133,6 +1133,9 @@
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
                         },
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
                         "produced": {
                           "type": "array",
                           "items": {
@@ -1165,6 +1168,7 @@
                       "type": "object",
                       "required": [
                         "cargo",
+                        "cooldown",
                         "produced",
                         "consumed"
                       ]
