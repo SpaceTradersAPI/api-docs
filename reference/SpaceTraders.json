@@ -745,7 +745,7 @@
                     "type": "string"
                   },
                   "tradeSymbol": {
-                    "$ref": "../models/TradeSymbol.json"
+                    "type": "string"
                   },
                   "units": {
                     "type": "integer"
@@ -1139,7 +1139,7 @@
                             "type": "object",
                             "properties": {
                               "tradeSymbol": {
-                                "$ref": "../models/TradeSymbol.json"
+                                "type": "string"
                               },
                               "units": {
                                 "type": "integer"
@@ -1153,7 +1153,7 @@
                             "type": "object",
                             "properties": {
                               "tradeSymbol": {
-                                "$ref": "../models/TradeSymbol.json"
+                                "type": "string"
                               },
                               "units": {
                                 "type": "integer"
@@ -1816,7 +1816,7 @@
                 "title": "SellCargoRequest",
                 "properties": {
                   "symbol": {
-                    "$ref": "../models/TradeSymbol.json"
+                    "type": "string"
                   },
                   "units": {
                     "type": "integer"
@@ -2081,7 +2081,7 @@
                 "title": "Purchase Cargo Request",
                 "properties": {
                   "symbol": {
-                    "$ref": "../models/TradeSymbol.json"
+                    "type": "string"
                   },
                   "units": {
                     "type": "integer"
@@ -2166,7 +2166,7 @@
                 "title": "Transfer Cargo Request",
                 "properties": {
                   "tradeSymbol": {
-                    "$ref": "../models/TradeSymbol.json"
+                    "type": "string"
                   },
                   "units": {
                     "type": "integer"
