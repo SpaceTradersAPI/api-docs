@@ -1220,10 +1220,14 @@
                       "properties": {
                         "chart": {
                           "$ref": "../models/Chart.json"
+                        },
+                        "waypoint": {
+                          "$ref": "../models/Waypoint.json"
                         }
                       },
                       "required": [
-                        "chart"
+                        "chart",
+                        "waypoint"
                       ],
                       "type": "object"
                     }
