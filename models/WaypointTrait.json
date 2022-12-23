@@ -62,7 +62,8 @@
         "BARREN",
         "TEMPERATE",
         "JUNGLE",
-        "OCEAN"
+        "OCEAN",
+        "STRIPPED"
       ]
     },
     "name": {
