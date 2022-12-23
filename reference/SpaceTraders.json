@@ -461,6 +461,62 @@
         }
       ]
     },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate": {
+      "get": {
+        "description": "Get jump gate details for a waypoint.",
+        "operationId": "get-jump-gate",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/JumpGate.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Jump Gate",
+        "tags": [
+          "systems"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "The system symbol",
+          "in": "path",
+          "name": "systemSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The waypoint symbol",
+          "in": "path",
+          "name": "waypointSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "/factions": {
       "get": {
         "description": "List all discovered factions in the game.",

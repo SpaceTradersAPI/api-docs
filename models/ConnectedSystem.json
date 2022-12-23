@@ -1,0 +1,38 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sectorSymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "$ref": "./SystemType.json"
+    },
+    "factionSymbol": {
+      "type": "string",
+      "description": "The symbol of the faction that owns the connected jump gate in the system."
+    },
+    "x": {
+      "type": "integer"
+    },
+    "y": {
+      "type": "integer"
+    },
+    "distance": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "symbol",
+    "sectorSymbol",
+    "type",
+    "x",
+    "y",
+    "distance"
+  ]
+}

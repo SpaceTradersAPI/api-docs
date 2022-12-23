@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "",
+  "properties": {
+    "jumpRange": {
+      "type": "number",
+      "description": "The maximum jump range of the gate."
+    },
+    "factionSymbol": {
+      "type": "string",
+      "description": "The symbol of the faction that owns the gate."
+    },
+    "connectedSystems": {
+      "type": "array",
+      "description": "The systems within range of the gate that have a corresponding gate.",
+      "items": {
+        "$ref": "./ConnectedSystem.json"
+      }
+    }
+  },
+  "required": [
+    "jumpRange",
+    "connectedSystems"
+  ]
+}
