@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "attributes": {
+  "properties": {
     "symbol": {
       "$ref": "./TradeSymbol.json"
     },
@@ -9,11 +9,11 @@
     },
     "description": {
       "type": "string"
-    },
-    "required": [
-      "symbol",
-      "name",
-      "description"
-    ]
-  }
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description"
+  ]
 }

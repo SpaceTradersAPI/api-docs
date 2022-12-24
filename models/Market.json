@@ -10,26 +10,21 @@
       "type": "array",
       "description": "The list of goods that are exported from this market.",
       "items": {
-        "type": "object",
-        "properties": {
-          "symbol": {
-            "type": "string",
-            "description": "The symbol of the good."
-          }
-        }
+        "$ref": "./TradeGood.json"
       }
     },
     "imports": {
       "type": "array",
       "description": "The list of goods that are sought as imports in this market.",
       "items": {
-        "type": "object",
-        "properties": {
-          "symbol": {
-            "type": "string",
-            "description": "The symbol of the good."
-          }
-        }
+        "$ref": "./TradeGood.json"
+      }
+    },
+    "exchange": {
+      "type": "array",
+      "description": "The list of goods that are bought and sold between agents at this market.",
+      "items": {
+        "$ref": "./TradeGood.json"
       }
     },
     "transactions": {
@@ -50,6 +45,7 @@
   "required": [
     "symbol",
     "exports",
-    "imports"
+    "imports",
+    "exchange"
   ]
 }
