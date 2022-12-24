@@ -352,7 +352,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/market": {
       "get": {
-        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange trades can be purchased or sold.\n\nMarket data is only available if you have a ship at the location, or the location is charted and has a communications relay deployed.\n\nSee `/my/ships/{shipSymbol}/deploy` for deploying relays at a location.",
+        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange goods can be purchased or sold. Send a ship to the waypoint to access trade good prices and recent transactions.",
         "operationId": "get-market",
         "responses": {
           "200": {

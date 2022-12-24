@@ -10,7 +10,7 @@ You can use the API to automate your fleet or build a client for you and other p
 
 > #### Alpha 2.0
 >
-> The game is a work in progress. We are currently in the alpha stage of development. We are actively working on the game and adding new features. If you have any questions or feedback, please join our [Discord](https://discord.gg/8YQZ3Z) and let us know.
+> The game is a work in progress. We are currently in the alpha stage of development. We are actively working on the game and adding new features. If you have any questions or feedback, please join our [Discord](https://discord.gg/QB8zyNW7RH) and let us know.
 
 ### Game Overview
 
@@ -595,7 +595,7 @@ Find a waypoint with a type of ASTEROID_FIELD and navigate your command ship to 
 
 ```bash
 https -A bearer -a $apiToken POST $apiUrl/my/ships/$shipSymbol/navigate \
-  waypointSymbol==$waypointSymbol
+  waypointSymbol=$waypointSymbol
 ```
 
 ```json
@@ -643,7 +643,7 @@ Note the route departure and destination details. The departure is the waypoint 
 You will also notice that your ship has consumed fuel upon navigation. You will want to refuel your ship whenever possible or risk getting stranded in space. Once your ship arrives at it's destination, you can refuel it using the following endpoint.
 
 ```bash
-https POST api.spacetraders.io/my/ships/$shipSymbol/refuel
+https -A bearer -a $apiToken POST api.spacetraders.io/my/ships/$shipSymbol/refuel
 ```
 
 ```json
@@ -942,13 +942,11 @@ https -A bearer -a $apiToken POST $apiUrl/my/ships/$shipSymbol/sell \
 
 If you want to purchase any goods from the market, you can use the following endpoint.
 
-````bash
-
 ```bash
 https -A bearer -a $apiToken POST $apiUrl/my/ships/$shipSymbol/purchase \
   symbol=$tradeSymbol \
   units=10
-````
+```
 
 ### Purchase Ships
 
