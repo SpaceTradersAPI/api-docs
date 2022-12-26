@@ -8,7 +8,7 @@
     "tradeVolume": {
       "type": "integer",
       "description": "The typical volume flowing through the market for this type of good. The larger the trade volume, the more stable prices will be.",
-      "minimum": 10
+      "minimum": 1
     },
     "supply": {
       "type": "string",
