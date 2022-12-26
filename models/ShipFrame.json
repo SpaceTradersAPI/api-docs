@@ -13,6 +13,7 @@
         "FRAME_FRIGATE",
         "FRAME_SHUTTLE",
         "FRAME_EXPLORER",
+        "FRAME_MINER",
         "FRAME_LIGHT_FREIGHTER",
         "FRAME_HEAVY_FREIGHTER",
         "FRAME_TRANSPORT",
