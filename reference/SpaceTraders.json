@@ -189,6 +189,24 @@
         "summary": "List Systems",
         "tags": [
           "systems"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What page to request"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
         ]
       }
     },
