@@ -72,7 +72,7 @@
                     "enum": [
                       "COSMIC",
                       "VOID",
-                      "GALLACTIC",
+                      "GALACTIC",
                       "QUANTUM",
                       "DOMINION",
                       "ASTRO",
@@ -193,15 +193,15 @@
         "parameters": [
           {
             "schema": {
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "page",
-            "description": "What page to request"
+            "description": "What entry offset to request"
           },
           {
             "schema": {
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "limit",
@@ -298,6 +298,24 @@
         "summary": "List Waypoints",
         "tags": [
           "systems"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
         ]
       },
       "parameters": [
@@ -569,6 +587,24 @@
         "summary": "List Factions",
         "tags": [
           "factions"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
         ]
       }
     },
@@ -689,6 +725,24 @@
         "summary": "List Contracts",
         "tags": [
           "contracts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
         ]
       }
     },
@@ -978,6 +1032,24 @@
         "summary": "List Ships",
         "tags": [
           "fleet"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
         ]
       },
       "post": {
