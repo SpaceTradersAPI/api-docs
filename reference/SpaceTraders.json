@@ -21,7 +21,7 @@
   "servers": [
     {
       "description": "v2.0.0-rc.2",
-      "url": "https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app"
+      "url": "https://v2-0-0.rc-2.spacetraders.io"
     }
   ],
   "tags": [
@@ -193,7 +193,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -201,7 +202,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
             "in": "query",
             "name": "limit",
@@ -302,7 +305,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -310,7 +314,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
             "in": "query",
             "name": "limit",
@@ -591,7 +597,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -599,7 +606,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
             "in": "query",
             "name": "limit",
@@ -729,7 +738,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -737,7 +747,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
             "in": "query",
             "name": "limit",
@@ -1036,7 +1048,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -1044,7 +1057,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
             "in": "query",
             "name": "limit",
