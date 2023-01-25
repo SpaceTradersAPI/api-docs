@@ -1,0 +1,30 @@
+{
+  "description": "The details of a delivery contract. Includes the type of good, units needed, and the destination.",
+  "type": "object",
+  "properties": {
+    "tradeSymbol": {
+      "type": "string",
+      "description": "The symbol of the trade good to deliver.",
+      "minLength": 1
+    },
+    "destinationSymbol": {
+      "type": "string",
+      "description": "The destination where goods need to be delivered.",
+      "minLength": 1
+    },
+    "unitsRequired": {
+      "type": "integer",
+      "description": "The number of units that need to be delivered on this contract."
+    },
+    "unitsFulfilled": {
+      "type": "integer",
+      "description": "The number of units fulfilled on this contract."
+    }
+  },
+  "required": [
+    "tradeSymbol",
+    "destinationSymbol",
+    "unitsRequired",
+    "unitsFulfilled"
+  ]
+}

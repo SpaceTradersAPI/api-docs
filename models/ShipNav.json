@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "description": "The navigation information of the ship.",
+  "properties": {
+    "systemSymbol": {
+      "type": "string",
+      "description": "The system symbol of the ship's current location."
+    },
+    "waypointSymbol": {
+      "type": "string",
+      "description": "The waypoint symbol of the ship's current location, or if the ship is in-transit, the waypoint symbol of the ship's destination."
+    },
+    "route": {
+      "$ref": "./ShipNavRoute.json"
+    },
+    "status": {
+      "$ref": "./ShipNavStatus.json"
+    },
+    "flightMode": {
+      "$ref": "./ShipNavFlightMode.json"
+    }
+  },
+  "required": [
+    "systemSymbol",
+    "waypointSymbol",
+    "route",
+    "status",
+    "flightMode"
+  ]
+}

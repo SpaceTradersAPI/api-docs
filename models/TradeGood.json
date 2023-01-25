@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "$ref": "./TradeSymbol.json"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description"
+  ]
+}

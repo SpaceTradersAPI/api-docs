@@ -1,0 +1,17 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "shipSymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "yield": {
+      "$ref": "./ExtractionYield.json"
+    }
+  },
+  "required": [
+    "shipSymbol",
+    "yield"
+  ]
+}

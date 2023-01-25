@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the trade good."
+    },
+    "tradeVolume": {
+      "type": "integer",
+      "description": "The typical volume flowing through the market for this type of good. The larger the trade volume, the more stable prices will be.",
+      "minimum": 1
+    },
+    "supply": {
+      "type": "string",
+      "description": "A rough estimate of the total supply of this good in the marketplace.",
+      "enum": [
+        "SCARCE",
+        "LIMITED",
+        "MODERATE",
+        "ABUNDANT"
+      ]
+    },
+    "purchasePrice": {
+      "type": "integer",
+      "description": "The price at which this good can be purchased from the market.",
+      "minimum": 0
+    },
+    "sellPrice": {
+      "type": "integer",
+      "description": "The price at which this good can be sold to the market.",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "symbol",
+    "tradeVolume",
+    "supply",
+    "purchasePrice",
+    "sellPrice"
+  ]
+}

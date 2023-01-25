@@ -1,0 +1,60 @@
+{
+  "description": "A ship",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]_[HEX_ID]`",
+      "minLength": 8
+    },
+    "registration": {
+      "$ref": "./ShipRegistration.json"
+    },
+    "nav": {
+      "$ref": "./ShipNav.json"
+    },
+    "crew": {
+      "$ref": "./ShipCrew.json"
+    },
+    "frame": {
+      "$ref": "./ShipFrame.json"
+    },
+    "reactor": {
+      "$ref": "./ShipReactor.json"
+    },
+    "engine": {
+      "$ref": "./ShipEngine.json"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipModule.json"
+      }
+    },
+    "mounts": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipMount.json"
+      }
+    },
+    "cargo": {
+      "$ref": "./ShipCargo.json"
+    },
+    "fuel": {
+      "$ref": "./ShipFuel.json"
+    }
+  },
+  "required": [
+    "symbol",
+    "registration",
+    "nav",
+    "crew",
+    "frame",
+    "reactor",
+    "engine",
+    "modules",
+    "mounts",
+    "cargo",
+    "fuel"
+  ]
+}

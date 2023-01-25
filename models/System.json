@@ -1,0 +1,44 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sectorSymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "$ref": "./SystemType.json"
+    },
+    "x": {
+      "type": "integer"
+    },
+    "y": {
+      "type": "integer"
+    },
+    "waypoints": {
+      "type": "array",
+      "items": {
+        "$ref": "./SystemWaypoint.json"
+      }
+    },
+    "factions": {
+      "type": "array",
+      "items": {
+        "$ref": "./SystemFaction.json"
+      }
+    }
+  },
+  "required": [
+    "symbol",
+    "sectorSymbol",
+    "type",
+    "x",
+    "y",
+    "waypoints",
+    "factions"
+  ]
+}

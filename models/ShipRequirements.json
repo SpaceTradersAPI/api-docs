@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "description": "The requirements for installation on a ship",
+  "properties": {
+    "power": {
+      "type": "integer",
+      "description": "The amount of power required from the reactor."
+    },
+    "crew": {
+      "type": "integer",
+      "description": "The number of crew required for operation."
+    },
+    "slots": {
+      "type": "integer",
+      "description": "The number of module slots required for installation."
+    }
+  }
+}

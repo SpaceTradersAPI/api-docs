@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The deadline for the contract."
+    },
+    "payment": {
+      "$ref": "./ContractPayment.json"
+    },
+    "deliver": {
+      "type": "array",
+      "items": {
+        "$ref": "./ContractDeliverGood.json"
+      }
+    }
+  },
+  "required": [
+    "deadline",
+    "payment"
+  ]
+}

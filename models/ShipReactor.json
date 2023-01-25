@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "The reactor of the ship. The reactor is responsible for powering the ship's systems and weapons.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "REACTOR_SOLAR_I",
+        "REACTOR_FUSION_I",
+        "REACTOR_FISSION_I",
+        "REACTOR_CHEMICAL_I",
+        "REACTOR_ANTIMATTER_I"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "./ShipCondition.json"
+    },
+    "powerOutput": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description",
+    "powerOutput",
+    "requirements"
+  ]
+}

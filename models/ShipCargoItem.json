@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "description": "The type of cargo item and the number of units.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The unique identifier of the cargo item type."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the cargo item type."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the cargo item type."
+    },
+    "units": {
+      "type": "integer",
+      "description": "The number of units of the cargo item.",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description",
+    "units"
+  ]
+}

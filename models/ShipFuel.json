@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "Details of the ship's fuel tanks including how much fuel was consumed during the last transit or action.",
+  "properties": {
+    "current": {
+      "type": "integer",
+      "description": "The current amount of fuel in the ship's tanks.",
+      "minimum": 0
+    },
+    "capacity": {
+      "type": "integer",
+      "description": "The maximum amount of fuel the ship's tanks can hold.",
+      "minimum": 0
+    },
+    "consumed": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "description": "The amount of fuel consumed by the most recent transit or action.",
+          "minimum": 0
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the fuel was consumed."
+        }
+      },
+      "required": [
+        "amount",
+        "timestamp"
+      ]
+    }
+  },
+  "required": [
+    "current",
+    "capacity"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "The chart of a system or waypoint, which makes the location visible to other agents.",
+  "properties": {
+    "waypointSymbol": {
+      "type": "string"
+    },
+    "submittedBy": {
+      "type": "string"
+    },
+    "submittedOn": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "limit": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "total",
+    "page",
+    "limit"
+  ],
+  "x-examples": {
+    "example-1": {
+      "total": 6,
+      "page": 1,
+      "limit": 20
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "onAccepted": {
+      "type": "integer",
+      "description": "The amount of credits received up front for accepting the contract."
+    },
+    "onFulfilled": {
+      "type": "integer",
+      "description": "The amount of credits received when the contract is fulfilled."
+    }
+  },
+  "required": [
+    "onAccepted",
+    "onFulfilled"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "description": "An orbital is another waypoint that orbits a parent waypoint.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "symbol"
+  ]
+}

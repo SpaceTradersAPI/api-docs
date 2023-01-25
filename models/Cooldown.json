@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "description": "A cooldown is a period of time in which a ship cannot perform certain actions.",
+  "properties": {
+    "shipSymbol": {
+      "type": "string",
+      "description": "The symbol of the ship that is on cooldown",
+      "minLength": 1
+    },
+    "totalSeconds": {
+      "type": "integer",
+      "description": "The total duration of the cooldown in seconds",
+      "minimum": 0
+    },
+    "remainingSeconds": {
+      "type": "integer",
+      "description": "The remaining duration of the cooldown in seconds",
+      "minimum": 0
+    },
+    "expiration": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the cooldown expires in ISO 8601 format",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "shipSymbol",
+    "totalSeconds",
+    "remainingSeconds",
+    "expiration"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "The engine determines how quickly a ship travels between waypoints.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "ENGINE_IMPULSE_DRIVE_I",
+        "ENGINE_ION_DRIVE_I",
+        "ENGINE_ION_DRIVE_II",
+        "ENGINE_HYPER_DRIVE_I"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "./ShipCondition.json"
+    },
+    "speed": {
+      "type": "number",
+      "minimum": 1
+    },
+    "requirements": {
+      "$ref": "./ShipRequirements.json"
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "description",
+    "speed",
+    "requirements"
+  ]
+}

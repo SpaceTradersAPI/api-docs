@@ -1,0 +1,41 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the shipyard. The symbol is the same as the waypoint where the shipyard is located.",
+      "minLength": 1
+    },
+    "shipTypes": {
+      "type": "array",
+      "description": "The list of ship types available for purchase at this shipyard.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "./ShipType.json"
+          }
+        }
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "description": "The list of recent transactions at this shipyard.",
+      "items": {
+        "$ref": "./ShipyardTransaction.json"
+      }
+    },
+    "ships": {
+      "type": "array",
+      "description": "The ships that are currently available for purchase at the shipyard.",
+      "items": {
+        "$ref": "./ShipyardShip.json"
+      }
+    }
+  },
+  "required": [
+    "symbol",
+    "shipTypes"
+  ]
+}

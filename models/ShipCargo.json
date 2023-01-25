@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "capacity": {
+      "type": "integer",
+      "description": "The max number of items that can be stored in the cargo hold.",
+      "minimum": 0
+    },
+    "units": {
+      "type": "integer",
+      "description": "The number of items currently stored in the cargo hold.",
+      "minimum": 0
+    },
+    "inventory": {
+      "type": "array",
+      "description": "The items currently in the cargo hold.",
+      "items": {
+        "$ref": "./ShipCargoItem.json"
+      }
+    }
+  },
+  "required": [
+    "capacity",
+    "units",
+    "inventory"
+  ]
+}
