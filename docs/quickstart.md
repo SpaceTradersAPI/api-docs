@@ -40,7 +40,7 @@ brew install httpie
 You can then hit any API endpoint by simplying typing `https` along with the http method and the url. You can test this by hitting the game status endpoint which will tell us if the game is currently available to play:
 
 ```bash
-https GET v2-0-0.rc-2.spacetraders.io
+https GET v2.api.spacetraders.io
 ```
 
 ```json
@@ -80,7 +80,7 @@ Every agent is identified by a unique call sign (such as `ZER0` or `SP4CE_TR4DER
 - [x] `CORSAIRS` - The Seventh Space Corsairs are a feared group of pirates and raiders who operate throughout the galaxy, preying on merchant ships and plundering valuable cargo.
 
 ```bash
-https POST v2-0-0.rc-2.spacetraders.io/register \
+https POST v2.api.spacetraders.io/register \
   symbol=ZER0 \
   faction=COSMIC
 ```
@@ -113,7 +113,7 @@ Copy your token somewhere safe and set it as a variable in your command prompt. 
 apiToken=<your-token-here>
 shipSymbol=<your-ship-symbol-here>
 contractId=<your-contract-id>
-apiUrl=v2-0-0.rc-2.spacetraders.io
+apiUrl=v2.api.spacetraders.io
 ```
 
 <!-- theme: warning -->
