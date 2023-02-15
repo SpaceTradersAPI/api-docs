@@ -643,7 +643,7 @@ Note the route departure and destination details. The departure is the waypoint 
 You will also notice that your ship has consumed fuel upon navigation. You will want to refuel your ship whenever possible or risk getting stranded in space. Once your ship arrives at it's destination, you can refuel it using the following endpoint.
 
 ```bash
-https -A bearer -a $apiToken POST api.spacetraders.io/my/ships/$shipSymbol/refuel
+https -A bearer -a $apiToken POST $apiUrl/my/ships/$shipSymbol/refuel
 ```
 
 ```json
