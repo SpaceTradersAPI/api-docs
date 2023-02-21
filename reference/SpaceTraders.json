@@ -2105,6 +2105,67 @@
         ]
       }
     },
+    "/my/ships/{shipSymbol}/scan/waypoints": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Activate your ship's sensor arrays to scan for waypoint information.",
+        "operationId": "create-ship-waypoint-scan",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "waypoints": {
+                          "items": {
+                            "$ref": "../models/ScannedWaypoint.json"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "cooldown",
+                        "waypoints"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Scan Waypoints",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/scan/ships": {
       "parameters": [
         {
