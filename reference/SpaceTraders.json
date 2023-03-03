@@ -210,6 +210,41 @@
         ]
       }
     },
+    "/systems.json": {
+      "get": {
+        "description": "Return a json file containing all systems",
+        "operationId": "get-systems-all",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../models/System.json",
+                    "x-stoplight": {
+                      "id": "kd527rrsmw7rb"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get All Systems",
+        "tags": [
+          "systems"
+        ],
+        "parameters": []
+      },
+      "parameters": []
+    },
     "/systems/{systemSymbol}": {
       "get": {
         "description": "Get the details of a system.",
