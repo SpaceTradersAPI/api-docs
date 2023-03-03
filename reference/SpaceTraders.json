@@ -5,13 +5,13 @@
       "email": "joel@spacetraders.io",
       "name": "Joel Brubaker"
     },
-    "description": "SpaceTraders is a multiplayer sci-fi strategy game where you acquire and manage a fleet of ships across a growing and dynamic universe.\n\nSimilar to games such as Eve Online, you work with or against other players to establish trade routes, chart new systems, mine precious ores, patrol for pirates, spy on factions, and discover hidden treasures.\n\nSpaceTraders as a game is unique in that it is entirely accessible through open and well-documented API endpoints.\n\nIf this sounds fun and interesting to you, please drop into our Discord and get to know the community. We are actively working on new clients, new ideas and sharing tips for how to play the game.\n\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app\",\n}\n```",
+    "description": "SpaceTraders is an open-universe game and learning platform that offers a set of HTTP endpoints to control a fleet of ships and explore a multiplayer universe.\n\nThe API is documented using [OpenAPI](https://github.com/SpaceTradersAPI/api-docs). You can send your first request right here in your browser to check the status of the game server.\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://v2.api.spacetraders.io\",\n}\n```\n\nUnlike a traditional game, SpaceTraders does not have a first-party client or app to play the game. Instead, you can use the API to build your own client, write a script to automate your ships, or try an app built by the community.\n\nWe have a [Discord channel](https://discord.com/invite/jh6zurdWk5) where you can share your projects, ask questions, and get help from other players.\n\n\n",
     "license": {
       "name": "No Permission",
       "url": "https://choosealicense.com/no-permission/"
     },
     "title": "SpaceTraders API",
-    "version": "2.0.0-rc.2"
+    "version": "2.0.0"
   },
   "security": [
     {
@@ -20,8 +20,8 @@
   ],
   "servers": [
     {
-      "description": "v2.0.0-rc.2",
-      "url": "https://api-server-2-0-0-rc-2-vxxwq5xqdq-uc.a.run.app"
+      "description": "v2",
+      "url": "https://v2.api.spacetraders.io"
     }
   ],
   "tags": [
@@ -60,7 +60,7 @@
   "paths": {
     "/register": {
       "post": {
-        "description": "Creates a new agent and ties it to a temporary Account.\n\nThe agent symbol is a 4-8 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field and execute the `/my/ships/{shipSymbol}/extract` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
+        "description": "Creates a new agent and ties it to a temporary Account.\n\nThe agent symbol is a 3-14 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field and execute the `/my/ships/{shipSymbol}/extract` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
         "operationId": "register",
         "requestBody": {
           "content": {
@@ -74,19 +74,14 @@
                       "VOID",
                       "GALACTIC",
                       "QUANTUM",
-                      "DOMINION",
-                      "ASTRO",
-                      "CORSAIRS",
-                      "UNITED",
-                      "SOLITARY",
-                      "COBALT"
+                      "DOMINION"
                     ]
                   },
                   "symbol": {
                     "description": "How other agents will see your ships and information.",
                     "example": "BADGER",
-                    "maxLength": 8,
-                    "minLength": 4,
+                    "maxLength": 14,
+                    "minLength": 3,
                     "type": "string"
                   }
                 },
@@ -193,7 +188,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -201,7 +197,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
             },
             "in": "query",
             "name": "limit",
@@ -337,7 +335,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -345,7 +344,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
             },
             "in": "query",
             "name": "limit",
@@ -626,7 +627,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -634,7 +636,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
             },
             "in": "query",
             "name": "limit",
@@ -764,7 +768,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -772,7 +777,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
             },
             "in": "query",
             "name": "limit",
@@ -1071,7 +1078,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1
             },
             "in": "query",
             "name": "page",
@@ -1079,7 +1087,9 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
             },
             "in": "query",
             "name": "limit",
@@ -2125,6 +2135,67 @@
           }
         ],
         "summary": "Scan Systems",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/scan/waypoints": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Activate your ship's sensor arrays to scan for waypoint information.",
+        "operationId": "create-ship-waypoint-scan",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "waypoints": {
+                          "items": {
+                            "$ref": "../models/ScannedWaypoint.json"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "cooldown",
+                        "waypoints"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Scan Waypoints",
         "tags": [
           "fleet"
         ]
