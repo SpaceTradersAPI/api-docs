@@ -444,7 +444,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard": {
       "get": {
-        "description": "Get the shipyard for a waypoint.",
+        "description": "Get the shipyard for a waypoint. Send a ship to the waypoint to access ships that are currently available for purchase and recent transactions.",
         "operationId": "get-shipyard",
         "responses": {
           "200": {
