@@ -1886,6 +1886,101 @@
         ]
       }
     },
+    "/my/ships/{shipSymbol}/nav": {
+      "parameters": [
+        {
+          "description": "The ship symbol",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "patch": {
+        "description": "Update the nav data of a ship, such as the flight mode.",
+        "operationId": "patch-ship-nav",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "flightMode": {
+                    "$ref": "../models/ShipNavFlightMode.json"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ShipNav.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The updated nav status of the ship."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Patch Ship Nav",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "get": {
+        "description": "Get the current nav status of a ship.",
+        "operationId": "get-ship-nav",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ShipNav.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The current nav status of the ship."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Ship Nav",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/warp": {
       "parameters": [
         {
