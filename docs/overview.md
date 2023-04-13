@@ -1,4 +1,4 @@
-# SpaceTraders API
+# Getting Started
 
 SpaceTraders is an API-based game where you acquire and manage a fleet of ships to explore, trade, and fight your way across the galaxy.
 
