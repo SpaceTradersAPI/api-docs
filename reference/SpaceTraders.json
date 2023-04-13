@@ -1101,11 +1101,15 @@
                         },
                         "ship": {
                           "$ref": "../models/Ship.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/ShipyardTransaction.json"
                         }
                       },
                       "required": [
                         "ship",
-                        "agent"
+                        "agent",
+                        "transaction"
                       ],
                       "type": "object"
                     }

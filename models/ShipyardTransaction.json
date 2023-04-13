@@ -1,6 +1,10 @@
 {
   "type": "object",
   "properties": {
+    "waypointSymbol": {
+      "type": "string",
+      "description": "The symbol of the waypoint where the transaction took place."
+    },
     "shipSymbol": {
       "type": "string",
       "description": "The symbol of the ship that was purchased."
@@ -21,7 +25,8 @@
     }
   },
   "required": [
-    "symbol",
+    "waypointSymbol",
+    "shipSymbol",
     "price",
     "agentSymbol",
     "timestamp"
