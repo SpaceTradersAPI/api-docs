@@ -1181,6 +1181,53 @@
         }
       ]
     },
+    "/my/ships/{shipSymbol}/cargo": {
+      "parameters": [
+        {
+          "description": "The symbol of the ship",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Retrieve the cargo of your ship.",
+        "operationId": "get-my-ship-cargo",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ShipCargo.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Ship Cargo",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/orbit": {
       "parameters": [
         {
