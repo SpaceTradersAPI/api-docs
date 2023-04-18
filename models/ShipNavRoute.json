@@ -8,6 +8,11 @@
     "departure": {
       "$ref": "./ShipNavRouteWaypoint.json"
     },
+    "departureTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date time of the ship's departure."
+    },
     "arrival": {
       "type": "string",
       "format": "date-time",
@@ -17,6 +22,7 @@
   "required": [
     "destination",
     "departure",
+    "departureTime",
     "arrival"
   ]
 }
