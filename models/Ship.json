@@ -4,8 +4,7 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]_[HEX_ID]`",
-      "minLength": 8
+      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]_[HEX_ID]`"
     },
     "registration": {
       "$ref": "./ShipRegistration.json"
