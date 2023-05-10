@@ -58,3 +58,15 @@ If you're looking for some project inspiration, here are some ideas to get you s
 - create a Discord bot for others players to use
 
 And finally, if you find an issue and want to report it, please open an issue on our [GitHub repository](https://github.com/SpaceTradersAPI/api-docs) or share it in our [Discord channel](https://discord.com/invite/jh6zurdWk5).
+
+## Donating
+
+By supporting us, you’re not just helping keep the servers running, but potentially helping thousands of fellow developers learn and exercise their programming skills.
+We’re grateful for your support, and together, we’re excited to see the full potential of the API!
+Thank you for being a part of this journey.
+
+Additionally:
+- We will make sure that we reserve your callsign between alpha/beta resets
+- Vote for your most desired features
+- Custom Role in Discord
+[<img width="200" alt="One-off-donation" src="https://github.com/SpaceTradersAPI/api-docs/assets/7666455/8188b287-d14e-4bd9-b34f-1a2cb693e20d">](https://donate.stripe.com/28o29m5vxcri6OccMM)
