@@ -69,4 +69,5 @@ Additionally:
 - We will make sure that we reserve your callsign between alpha/beta resets
 - Vote for your most desired features
 - Custom Role in Discord
+
 [<img width="200" alt="One-off-donation" src="https://github.com/SpaceTradersAPI/api-docs/assets/7666455/8188b287-d14e-4bd9-b34f-1a2cb693e20d">](https://donate.stripe.com/28o29m5vxcri6OccMM)
