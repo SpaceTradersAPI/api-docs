@@ -83,6 +83,9 @@
                     "maxLength": 14,
                     "minLength": 3,
                     "type": "string"
+                  },
+                  "email": {
+                    "description": "Your email address. This is used if you reserved your call sign between resets."
                   }
                 },
                 "required": [
