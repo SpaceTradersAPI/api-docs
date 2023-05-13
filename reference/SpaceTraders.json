@@ -85,6 +85,7 @@
                     "type": "string"
                   },
                   "email": {
+                    "type": "string",
                     "description": "Your email address. This is used if you reserved your call sign between resets."
                   }
                 },
