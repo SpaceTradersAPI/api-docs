@@ -35,7 +35,13 @@
     "expiration": {
       "type": "string",
       "format": "date-time",
-      "description": "The time at which the contract expires"
+      "description": "Deprecated in favor of deadlineToAccept",
+      "deprecated": true
+    },
+    "deadlineToAccept": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the contract is no longer available to be accepted"
     }
   },
   "required": [
