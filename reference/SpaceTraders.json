@@ -2770,6 +2770,68 @@
           "fleet"
         ]
       }
+    },
+    "/my/ships/{shipSymbol}/negotiate/contract": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "",
+        "operationId": "negotiateContract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Negotiate Contract 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "contract": {
+                          "$ref": "../models/Contract.json"
+                        }
+                      },
+                      "required": [
+                        "contract"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Negotiate Contract",
+        "tags": [
+          "fleet"
+        ]
+      }
     }
   }
 }
