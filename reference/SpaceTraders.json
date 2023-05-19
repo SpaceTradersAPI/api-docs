@@ -58,6 +58,176 @@
     }
   },
   "paths": {
+    "/": {
+      "get": {
+        "description": "Return the status of the game server.",
+        "operationId": "get-status",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "The current status of the game server."
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "The current version of the API."
+                    },
+                    "resetDate": {
+                      "type": "string",
+                      "description": "The date and time when the game server was last reset."
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "stats": {
+                      "type": "object",
+                      "properties": {
+                        "agents": {
+                          "type": "integer"
+                        },
+                        "ships": {
+                          "type": "integer"
+                        },
+                        "systems": {
+                          "type": "integer"
+                        },
+                        "waypoints": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "agents",
+                        "ships",
+                        "systems",
+                        "waypoints"
+                      ]
+                    },
+                    "leaderboards": {
+                      "type": "object",
+                      "properties": {
+                        "mostCredits": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "agentSymbol": {
+                                "type": "string"
+                              },
+                              "credits": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "agentSymbol",
+                              "credits"
+                            ]
+                          }
+                        },
+                        "mostSubmittedCharts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "agentSymbol": {
+                                "type": "string"
+                              },
+                              "chartCount": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "agentSymbol",
+                              "chartCount"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "mostCredits",
+                        "mostSubmittedCharts"
+                      ]
+                    },
+                    "serverResets": {
+                      "type": "object",
+                      "properties": {
+                        "next": {
+                          "type": "string",
+                          "description": "The date and time when the game server will reset."
+                        },
+                        "frequency": {
+                          "type": "string",
+                          "description": "How often we intend to reset the game server."
+                        }
+                      },
+                      "required": [
+                        "next",
+                        "frequency"
+                      ]
+                    },
+                    "announcements": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "body": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "title",
+                          "body"
+                        ]
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "url"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "version",
+                    "resetDate",
+                    "description",
+                    "stats",
+                    "leaderboards",
+                    "serverResets",
+                    "announcements",
+                    "links"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get Status",
+        "tags": []
+      }
+    },
     "/register": {
       "post": {
         "description": "Creates a new agent and ties it to a temporary Account.\n\nThe agent symbol is a 3-14 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field and execute the `/my/ships/{shipSymbol}/extract` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
