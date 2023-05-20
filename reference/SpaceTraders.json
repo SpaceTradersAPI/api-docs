@@ -2575,11 +2575,15 @@
                         },
                         "fuel": {
                           "$ref": "../models/ShipFuel.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/MarketTransaction.json"
                         }
                       },
                       "required": [
                         "agent",
-                        "fuel"
+                        "fuel",
+                        "transaction"
                       ],
                       "type": "object"
                     }
