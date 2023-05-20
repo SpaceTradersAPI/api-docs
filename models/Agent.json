@@ -18,12 +18,18 @@
     "credits": {
       "type": "integer",
       "description": "The number of credits the agent has available. Credits can be negative if funds have been overdrawn."
+    },
+    "startingFaction": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The faction the agent started with."
     }
   },
   "required": [
     "accountId",
     "symbol",
     "headquarters",
-    "credits"
+    "credits",
+    "startingFaction"
   ]
 }
