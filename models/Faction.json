@@ -23,6 +23,10 @@
       "items": {
         "$ref": "./FactionTrait.json"
       }
+    },
+    "isRecruiting": {
+      "type": "boolean",
+      "description": "Whether or not the faction is currently recruiting new agents."
     }
   },
   "required": [
@@ -30,6 +34,7 @@
     "name",
     "description",
     "headquarters",
-    "traits"
+    "traits",
+    "isRecruiting"
   ]
 }
