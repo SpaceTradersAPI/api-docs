@@ -21,7 +21,7 @@
       "$ref": "./ShipCondition.json"
     },
     "speed": {
-      "type": "number",
+      "type": "integer",
       "minimum": 1
     },
     "requirements": {
