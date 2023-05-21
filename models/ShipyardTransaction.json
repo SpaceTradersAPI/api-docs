@@ -12,7 +12,7 @@
     "price": {
       "type": "integer",
       "description": "The price of the transaction.",
-      "minimum": 1
+      "minimum": 0
     },
     "agentSymbol": {
       "type": "string",

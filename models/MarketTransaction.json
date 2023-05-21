@@ -24,17 +24,17 @@
     "units": {
       "type": "integer",
       "description": "The number of units of the transaction.",
-      "minimum": 1
+      "minimum": 0
     },
     "pricePerUnit": {
       "type": "integer",
       "description": "The price per unit of the transaction.",
-      "minimum": 1
+      "minimum": 0
     },
     "totalPrice": {
       "type": "integer",
       "description": "The total price of the transaction.",
-      "minimum": 1
+      "minimum": 0
     },
     "timestamp": {
       "type": "string",
