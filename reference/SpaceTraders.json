@@ -225,7 +225,8 @@
           }
         },
         "summary": "Get Status",
-        "tags": []
+        "tags": [],
+        "security": []
       }
     },
     "/register": {
@@ -315,7 +316,8 @@
           }
         },
         "summary": "Register New Agent",
-        "tags": []
+        "tags": [],
+        "security": []
       }
     },
     "/systems": {
