@@ -352,7 +352,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "List Systems",
         "tags": [
           "systems"
@@ -405,7 +408,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "Get System",
         "tags": [
           "systems"
@@ -457,9 +463,8 @@
           }
         },
         "security": [
-          {
-            "AgentToken": []
-          }
+            {},
+            {"AgentToken": []}
         ],
         "summary": "List Waypoints",
         "tags": [
@@ -524,7 +529,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "Get Waypoint",
         "tags": [
           "systems"
@@ -575,7 +583,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "Get Market",
         "tags": [
           "systems"
@@ -627,7 +638,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "Get Shipyard",
         "tags": [
           "systems"
@@ -679,7 +693,10 @@
             "description": "OK"
           }
         },
-        "security": [],
+        "security": [
+            {},
+            {"AgentToken": []}
+        ],
         "summary": "Get Jump Gate",
         "tags": [
           "systems"
