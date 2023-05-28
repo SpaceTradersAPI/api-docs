@@ -240,13 +240,7 @@
                 "properties": {
                   "faction": {
                     "description": "The faction you choose determines your headquarters.",
-                    "enum": [
-                      "COSMIC",
-                      "VOID",
-                      "GALACTIC",
-                      "QUANTUM",
-                      "DOMINION"
-                    ]
+                    "example": "COSMIC"
                   },
                   "symbol": {
                     "description": "How other agents will see your ships and information.",
