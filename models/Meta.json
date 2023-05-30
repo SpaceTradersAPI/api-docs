@@ -3,13 +3,16 @@
   "type": "object",
   "properties": {
     "total": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Amount of elements available."
     },
     "page": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Which page is selected."
     },
     "limit": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Amount of elements per page."
     }
   },
   "required": [
