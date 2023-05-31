@@ -4,11 +4,13 @@
   "properties": {
     "accountId": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The ID of the agent."
     },
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The agent's name."
     },
     "headquarters": {
       "type": "string",
