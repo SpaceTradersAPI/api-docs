@@ -17,6 +17,7 @@
     },
     "credits": {
       "type": "integer",
+      "format": "int64",
       "description": "The number of credits the agent has available. Credits can be negative if funds have been overdrawn."
     },
     "startingFaction": {

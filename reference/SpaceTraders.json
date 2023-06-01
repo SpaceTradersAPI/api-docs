@@ -119,7 +119,8 @@
                                 "type": "string"
                               },
                               "credits": {
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int64"
                               }
                             },
                             "required": [
