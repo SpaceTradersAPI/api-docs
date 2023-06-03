@@ -2808,6 +2808,262 @@
           "fleet"
         ]
       }
+    },
+    "/my/ships/{shipSymbol}/mounts": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Get the mounts on a ship.",
+        "operationId": "get-mounts",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Mounts 200 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/ShipMount.json"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Mounts",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/mounts/install": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Install a mount on a ship.",
+        "operationId": "install-mount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Install Mount Request",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "symbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Install Mount 201 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "mounts": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/ShipMount.json"
+                          }
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        },
+                        "transaction": {
+                          "properties": {
+                            "totalPrice": {
+                              "type": "integer",
+                              "description": "The total price of the transaction.",
+                              "minimum": 0
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp of the transaction."
+                            }
+                          },
+                          "required": [
+                            "totalPrice",
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "agent",
+                        "mounts",
+                        "cargo",
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Install Mount",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/mounts/remove": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Remove a mount from a ship.",
+        "operationId": "remove-mount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Remove Mount Request",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "symbol"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Remove Mount 201 Response",
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "mounts": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/ShipMount.json"
+                          }
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        },
+                        "transaction": {
+                          "properties": {
+                            "totalPrice": {
+                              "type": "integer",
+                              "description": "The total price of the transaction.",
+                              "minimum": 0
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp of the transaction."
+                            }
+                          },
+                          "required": [
+                            "totalPrice",
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "agent",
+                        "mounts",
+                        "cargo",
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Remove Mount",
+        "tags": [
+          "fleet"
+        ]
+      }
     }
   }
 }
