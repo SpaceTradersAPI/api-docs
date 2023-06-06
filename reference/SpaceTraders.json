@@ -1992,7 +1992,7 @@
                         }
                       },
                       "required": [
-                        "route",
+                        "nav",
                         "cooldown"
                       ],
                       "type": "object"
