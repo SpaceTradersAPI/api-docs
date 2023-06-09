@@ -51,5 +51,6 @@
     "pricePerUnit",
     "totalPrice",
     "timestamp"
-  ]
+  ],
+  "description": "Result of a transaction with a market."
 }

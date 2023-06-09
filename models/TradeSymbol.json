@@ -111,5 +111,6 @@
     "MOUNT_LASER_CANNON_I",
     "MOUNT_MISSILE_LAUNCHER_I",
     "MOUNT_TURRET_I"
-  ]
+  ],
+  "description": "The good's symbol."
 }

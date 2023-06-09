@@ -1,9 +1,9 @@
 {
   "type": "object",
+  "description": "The faction that controls the waypoint.",
   "properties": {
     "symbol": {
-      "type": "string",
-      "minLength": 1
+      "$ref": "./FactionSymbols.json"
     }
   },
   "required": [

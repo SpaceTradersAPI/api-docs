@@ -1,10 +1,11 @@
 {
-  "description": "",
+  "description": "Contract details.",
   "type": "object",
   "properties": {
     "id": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "ID of the contract."
     },
     "factionSymbol": {
       "type": "string",
@@ -17,10 +18,12 @@
         "PROCUREMENT",
         "TRANSPORT",
         "SHUTTLE"
-      ]
+      ],
+      "description": "Type of contract."
     },
     "terms": {
-      "$ref": "./ContractTerms.json"
+      "$ref": "./ContractTerms.json",
+      "description": "The terms to fulfill the contract."
     },
     "accepted": {
       "type": "boolean",

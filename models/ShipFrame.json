@@ -20,28 +20,34 @@
         "FRAME_DESTROYER",
         "FRAME_CRUISER",
         "FRAME_CARRIER"
-      ]
+      ],
+      "description": "Symbol of the frame."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "Name of the frame."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Description of the frame."
     },
     "condition": {
       "$ref": "./ShipCondition.json"
     },
     "moduleSlots": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "The amount of slots that can be dedicated to modules installed in the ship. Each installed module take up a number of slots, and once there are no more slots, no new modules can be installed."
     },
     "mountingPoints": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "The amount of slots that can be dedicated to mounts installed in the ship. Each installed mount takes up a number of points, and once there are no more points remaining, no new mounts can be installed."
     },
     "fuelCapacity": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "The maximum amount of fuel that can be stored in this ship. When refueling, the ship will be refueled to this amount."
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"

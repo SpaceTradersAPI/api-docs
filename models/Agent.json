@@ -1,14 +1,16 @@
 {
-  "description": "",
+  "description": "Agent details.",
   "type": "object",
   "properties": {
     "accountId": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Account ID that is tied to this agent."
     },
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Symbol of the agent."
     },
     "headquarters": {
       "type": "string",

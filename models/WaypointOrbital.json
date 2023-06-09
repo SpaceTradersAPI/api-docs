@@ -4,7 +4,8 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The symbol of the orbiting waypoint."
     }
   },
   "required": [

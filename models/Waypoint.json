@@ -4,23 +4,28 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Symbol fo the waypoint."
     },
     "type": {
       "$ref": "./WaypointType.json"
     },
     "systemSymbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The symbol of the system this waypoint belongs to."
     },
     "x": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Position in the universe in the x axis."
     },
     "y": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Position in the universe in the Y axis."
     },
     "orbitals": {
       "type": "array",
+      "description": "Waypoints that orbit this waypoint.",
       "items": {
         "$ref": "./WaypointOrbital.json"
       }

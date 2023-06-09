@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "description": "Terms of the contract needed to fulfill it.",
   "properties": {
     "deadline": {
       "type": "string",
@@ -7,10 +8,12 @@
       "description": "The deadline for the contract."
     },
     "payment": {
-      "$ref": "./ContractPayment.json"
+      "$ref": "./ContractPayment.json",
+      "description": "Payments for the contract."
     },
     "deliver": {
       "type": "array",
+      "description": "The cargo that needs to be delivered to fulfill the contract.",
       "items": {
         "$ref": "./ContractDeliverGood.json"
       }
