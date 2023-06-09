@@ -2748,7 +2748,7 @@
         }
       ],
       "post": {
-        "description": "Transfer cargo between ships.\n\nThe receiving ship must be in the same waypoint as the transferring ship, and it must able to hold the additional cargo after the transfer is complete.\n\nThe response body's cargo shows the cargo of the transferring ship after the transfer is complete.",
+        "description": "Transfer cargo between ships.\n\nThe receiving ship must be in the same waypoint as the transferring ship, and it must able to hold the additional cargo after the transfer is complete. Both ships also must be in the same state, either both are docked or both are orbiting.\n\nThe response body's cargo shows the cargo of the transferring ship after the transfer is complete.",
         "operationId": "transfer-cargo",
         "requestBody": {
           "content": {
