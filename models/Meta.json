@@ -6,10 +6,12 @@
       "type": "integer"
     },
     "page": {
-      "type": "integer"
+      "type": "integer",
+	  "default": 1
     },
     "limit": {
-      "type": "integer"
+      "type": "integer",
+	  "default": 10
     }
   },
   "required": [

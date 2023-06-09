@@ -25,26 +25,26 @@
     }
   ],
   "tags": [
+	{
+		"description": "Agents",
+		"name": "Agents"
+	},
+	{
+		"description": "Contracts",
+		"name": "Contracts"
+	},
     {
       "description": "Factions",
-      "name": "factions"
+      "name": "Factions"
     },
     {
       "description": "Fleet",
-      "name": "fleet"
-    },
-    {
-      "description": "Contracts",
-      "name": "contracts"
-    },
+      "name": "Fleet"
+    },    
     {
       "description": "Systems",
-      "name": "systems"
-    },
-    {
-      "description": "Agents",
-      "name": "agents"
-    }
+      "name": "Systems"
+    }    
   ],
   "components": {
     "requestBodies": {},
@@ -60,7 +60,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "Return the status of the game server.",
+        "description": "Return the status of the game server.\nThis also includes a few global elements, such as announcements, server reset dates and leaderboards.",
         "operationId": "get-status",
         "responses": {
           "200": {
@@ -232,19 +232,19 @@
     },
     "/register": {
       "post": {
-        "description": "Creates a new agent and ties it to a temporary Account.\n\nThe agent symbol is a 3-14 character string that will represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nA new agent will be granted an authorization token, a contract with their starting faction, a command ship with a jump drive, and one hundred thousand credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nYou can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will want to navigate your command ship to a nearby asteroid field and execute the `/my/ships/{shipSymbol}/extract` endpoint to mine various types of ores and minerals.\n\nReturn to the contract destination and execute the `/my/ships/{shipSymbol}/deliver` endpoint to deposit goods into the contract.\n\nWhen your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill` to retrieve payment.",
+        "description": "Creates a new agent and ties it to an account.\n\nThe agent symbol must consist of a 3-14 character string, and will be used to represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nThis new agent will be tied to a starting faction of your choice, which determines your starting location, and will be granted an authorization token, a contract with their starting faction, a command ship that can fly across space with advanced capabilities, a small probe ship that can be used for reconnaissance, and 150,000 credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nIf you are new to SpaceTraders, It is recommended to register with the COSMIC faction, a faction that is well connected to the rest of the universe. After registering, you should try our interactive [quickstart guide](https://docs.spacetraders.io/quickstart/new-game) which will walk you through basic API requests in just a few minutes.",
         "operationId": "register",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
+              "schema": {				
                 "properties": {
                   "faction": {
-                    "description": "The faction you choose determines your headquarters.",
+					"$ref": "../models/FactionSymbols.json",
                     "example": "COSMIC"
                   },
                   "symbol": {
-                    "description": "How other agents will see your ships and information.",
+                    "description": "Your desired agent symbol. This will be a unique name used to represent your agent, and will be the prefix for your ships.",
                     "example": "BADGER",
                     "maxLength": 14,
                     "minLength": 3,
@@ -317,7 +317,7 @@
     },
     "/systems": {
       "get": {
-        "description": "Return a list of all systems.",
+        "description": "Return a paginated list of all systems.",
         "operationId": "get-systems",
         "responses": {
           "200": {
@@ -353,7 +353,7 @@
         ],
         "summary": "List Systems",
         "tags": [
-          "systems"
+          "Systems"
         ],
         "parameters": [
           {
@@ -409,7 +409,7 @@
         ],
         "summary": "Get System",
         "tags": [
-          "systems"
+          "Systems"
         ]
       },
       "parameters": [
@@ -427,7 +427,7 @@
     },
     "/systems/{systemSymbol}/waypoints": {
       "get": {
-        "description": "Fetch all of the waypoints for a given system. System must be charted or a ship must be present to return waypoint details.",
+        "description": "Return a paginated list of all of the waypoints for a given system.\n\nIf a waypoint is uncharted, it will return the 'Uncharted' trait instead of its actual traits.",
         "operationId": "get-system-waypoints",
         "responses": {
           "200": {
@@ -461,9 +461,9 @@
             {},
             {"AgentToken": []}
         ],
-        "summary": "List Waypoints",
+        "summary": "List Waypoints in System",
         "tags": [
-          "systems"
+          "Systems"
         ],
         "parameters": [
           {
@@ -501,7 +501,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}": {
       "get": {
-        "description": "View the details of a waypoint.",
+        "description": "View the details of a waypoint.\n\nIf the waypoint is uncharted, it will return the 'Uncharted' trait instead of its actual traits.",
         "operationId": "get-waypoint",
         "responses": {
           "200": {
@@ -530,7 +530,7 @@
         ],
         "summary": "Get Waypoint",
         "tags": [
-          "systems"
+          "Systems"
         ]
       },
       "parameters": [
@@ -556,7 +556,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/market": {
       "get": {
-        "description": "Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be purchased, and exchange goods can be purchased or sold. Send a ship to the waypoint to access trade good prices and recent transactions.",
+        "description": "Retrieve imports, exports and exchange data from a marketplace. Requires a waypoint that has the 'Marketplace' trait to use.\n\nSend a ship to the waypoint to access trade good prices and recent transactions. Refer to the [Market Tutorial page](https://docs.spacetraders.io/game-concepts/markets) to gain better a understanding of the market in the game.",
         "operationId": "get-market",
         "responses": {
           "200": {
@@ -584,7 +584,7 @@
         ],
         "summary": "Get Market",
         "tags": [
-          "systems"
+          "Systems"
         ]
       },
       "parameters": [
@@ -610,7 +610,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard": {
       "get": {
-        "description": "Get the shipyard for a waypoint. Send a ship to the waypoint to access ships that are currently available for purchase and recent transactions.",
+        "description": "Get the shipyard for a waypoint. Requires a waypoint that has the 'Shipyard' trait to use. Send a ship to the waypoint to access data on ships that are currently available for purchase and recent transactions.",
         "operationId": "get-shipyard",
         "responses": {
           "200": {
@@ -639,7 +639,7 @@
         ],
         "summary": "Get Shipyard",
         "tags": [
-          "systems"
+          "Systems"
         ]
       },
       "parameters": [
@@ -665,7 +665,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate": {
       "get": {
-        "description": "Get jump gate details for a waypoint.",
+        "description": "Get jump gate details for a waypoint. Requires a waypoint of type 'JUMP_GATE' to use.\n\nThe response will return all systems that are have a Jump Gate in range of this Jump Gate and can be jumped to from this jump gate.",
         "operationId": "get-jump-gate",
         "responses": {
           "200": {
@@ -694,7 +694,7 @@
         ],
         "summary": "Get Jump Gate",
         "tags": [
-          "systems"
+          "Systems"
         ]
       },
       "parameters": [
@@ -720,7 +720,7 @@
     },
     "/factions": {
       "get": {
-        "description": "List all discovered factions in the game.",
+        "description": "Return a paginated list of all the factions in the game.",
         "operationId": "get-factions",
         "responses": {
           "200": {
@@ -751,7 +751,7 @@
         },
         "summary": "List Factions",
         "tags": [
-          "factions"
+          "Factions"
         ],
         "parameters": [
           {
@@ -802,7 +802,7 @@
         },
         "summary": "Get Faction",
         "tags": [
-          "factions"
+          "Factions"
         ]
       },
       "parameters": [
@@ -847,15 +847,15 @@
             "AgentToken": []
           }
         ],
-        "summary": "My Agent Details",
+        "summary": "Get Agent",
         "tags": [
-          "agents"
+          "Agents"
         ]
       }
     },
     "/my/contracts": {
       "get": {
-        "description": "List all of your contracts.",
+        "description": "Return a paginated list of all your contracts.",
         "operationId": "get-contracts",
         "responses": {
           "200": {
@@ -892,7 +892,7 @@
         ],
         "summary": "List Contracts",
         "tags": [
-          "contracts"
+          "Contracts"
         ],
         "parameters": [
           {
@@ -948,7 +948,7 @@
         ],
         "summary": "Get Contract",
         "tags": [
-          "contracts"
+          "Contracts"
         ]
       },
       "parameters": [
@@ -958,7 +958,7 @@
           "name": "contractId",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "string"			
           }
         }
       ]
@@ -966,11 +966,12 @@
     "/my/contracts/{contractId}/accept": {
       "parameters": [
         {
+		  "description": "The contract ID to accept.",
           "in": "path",
           "name": "contractId",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "string"		
           }
         }
       ],
@@ -1016,14 +1017,14 @@
         ],
         "summary": "Accept Contract",
         "tags": [
-          "contracts"
+          "Contracts"
         ]
       }
     },
     "/my/contracts/{contractId}/deliver": {
       "parameters": [
         {
-          "description": "The ID of the contract",
+          "description": "The contract ID to deliver cargo to",
           "in": "path",
           "name": "contractId",
           "required": true,
@@ -1033,7 +1034,7 @@
         }
       ],
       "post": {
-        "description": "Deliver cargo on a given contract.",
+        "description": "Deliver cargo on a given contract.\n\nIn order to use this API, a ship must be at the delivery location (denoted in the delivery terms as 'destinationSymbol' of a contract) and must have the specific amount of units of a good required by this contract in its cargo.\n\nDelivered cargo will be removed from the ship's cargo.",
         "operationId": "deliver-contract",
         "requestBody": {
           "content": {
@@ -1041,13 +1042,16 @@
               "schema": {
                 "properties": {
                   "shipSymbol": {
-                    "type": "string"
+                    "type": "string",
+					"description": "Symbol of a ship located in the destination to deliver a contract and that has a good to deliver in its cargo."
                   },
                   "tradeSymbol": {
-                    "type": "string"
+                    "type": "string",
+					"description": "The symbol of the good to deliver."
                   },
                   "units": {
-                    "type": "integer"
+                    "type": "integer",
+					"description": "Amount of units to deliver."
                   }
                 },
                 "required": [
@@ -1098,16 +1102,16 @@
             "AgentToken": []
           }
         ],
-        "summary": "Deliver Contract",
+        "summary": "Deliver Cargo to Contract",
         "tags": [
-          "contracts"
+          "Contracts"
         ]
       }
     },
     "/my/contracts/{contractId}/fulfill": {
       "parameters": [
         {
-          "description": "The ID of the contract",
+          "description": "The ID of the contract to fulfill",
           "in": "path",
           "name": "contractId",
           "required": true,
@@ -1117,7 +1121,7 @@
         }
       ],
       "post": {
-        "description": "Fulfill a contract",
+        "description": "Fulfill a contract. Can only be used on contracts that have all of their delivery terms fulfilled.",
         "operationId": "fulfill-contract",
         "responses": {
           "200": {
@@ -1159,13 +1163,13 @@
         ],
         "summary": "Fulfill Contract",
         "tags": [
-          "contracts"
+          "Contracts"
         ]
       }
     },
     "/my/ships": {
       "get": {
-        "description": "Retrieve all of your ships.",
+        "description": "Return a paginated list of all of ships under your agent's ownership.",
         "operationId": "get-my-ships",
         "responses": {
           "200": {
@@ -1202,7 +1206,7 @@
         ],
         "summary": "List Ships",
         "tags": [
-          "fleet"
+          "Fleet"
         ],
         "parameters": [
           {
@@ -1227,7 +1231,7 @@
         ]
       },
       "post": {
-        "description": "Purchase a ship",
+        "description": "Purchase a ship from a Shipyard. In order to use this API, a ship you own must be in a waypoint that has the 'Shipyard' trait, and the Shipyard must sell the type of the desired ship.\n\nShipyards typically offer ship types, which are predefined templates of ships that have dedicated roles.",
         "operationId": "purchase-ship",
         "requestBody": {
           "content": {
@@ -1295,13 +1299,13 @@
         ],
         "summary": "Purchase Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}": {
       "get": {
-        "description": "Retrieve the details of your ship.",
+        "description": "Retrieve the details of a ship under your agent's ownership.",
         "operationId": "get-my-ship",
         "responses": {
           "200": {
@@ -1331,11 +1335,12 @@
         ],
         "summary": "Get Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       },
       "parameters": [
         {
+		  "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1348,7 +1353,7 @@
     "/my/ships/{shipSymbol}/cargo": {
       "parameters": [
         {
-          "description": "The symbol of the ship",
+          "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1388,14 +1393,14 @@
         ],
         "summary": "Get Ship Cargo",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/orbit": {
       "parameters": [
         {
-          "description": "The symbol of the ship",
+          "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1405,7 +1410,7 @@
         }
       ],
       "post": {
-        "description": "Attempt to move your ship into orbit at it's current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
+        "description": "Attempt to move your ship into orbit at its current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nOrbiting ships are able to do actions that require the ship to be above surface such as navigating or extracting, but cannot access elements in their current location, such as the market or a shipyard.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
         "operationId": "orbit-ship",
         "responses": {
           "200": {
@@ -1434,7 +1439,7 @@
                 }
               }
             },
-            "description": "The ship has successfully moved into orbit at it's current location."
+            "description": "The ship has successfully moved into orbit at its current location."
           }
         },
         "security": [
@@ -1444,14 +1449,14 @@
         ],
         "summary": "Orbit Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/refine": {
       "parameters": [
         {
-          "description": "The symbol of the ship",
+          "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1461,7 +1466,7 @@
         }
       ],
       "post": {
-        "description": "Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of refining at the time of the request.",
+        "description": "Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of refining at the time of the request. In order to be able to refine, a ship must have goods that can be refined and have a 'Refinery' module that can refine it.\n\nWhen refining, 30 basic goods will be converted into 10 processed goods.",
         "operationId": "ship-refine",
         "requestBody": {
           "content": {
@@ -1469,6 +1474,7 @@
               "schema": {
                 "properties": {
                   "produce": {
+					"description": "The goods to produce out of the refining process.",
                     "type": "string",
                     "enum": [
                       "IRON",
@@ -1552,7 +1558,7 @@
                 }
               }
             },
-            "description": "The ship has successfully started refining."
+            "description": "The ship has successfully refined goods."
           }
         },
         "security": [
@@ -1562,14 +1568,14 @@
         ],
         "summary": "Ship Refine",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/chart": {
       "parameters": [
         {
-          "description": "The symbol of the ship",
+          "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1579,7 +1585,7 @@
         }
       ],
       "post": {
-        "description": "Command a ship to chart the current waypoint.\n\nWaypoints in the universe are uncharted by default. These locations will not show up in the API until they have been charted by a ship.\n\nCharting a location will record your agent as the one who created the chart.",
+        "description": "Command a ship to chart the current waypoint.\n\nMost waypoints in the universe are uncharted by default. These waypoints have their traits hidden until they have been charted by a ship.\n\nCharting a waypoint will record your agent as the one who created the chart.",
         "operationId": "create-chart",
         "responses": {
           "201": {
@@ -1620,7 +1626,7 @@
         ],
         "summary": "Create Chart",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -1649,7 +1655,7 @@
             "description": "OK"
           },
           "204": {
-            "description": "No cooldown"
+            "description": "No cooldown."
           }
         },
         "security": [
@@ -1659,11 +1665,12 @@
         ],
         "summary": "Get Ship Cooldown",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       },
       "parameters": [
         {
+		  "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1676,7 +1683,7 @@
     "/my/ships/{shipSymbol}/dock": {
       "parameters": [
         {
-          "description": "The symbol of the ship",
+          "description": "The symbol of the ship.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1686,7 +1693,7 @@
         }
       ],
       "post": {
-        "description": "Attempt to dock your ship at it's current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked.",
+        "description": "Attempt to dock your ship at its current location. Docking will only succeed if the waypoint is a dockable location, and your ship is capable of docking at the time of the request.\n\nDocked ships can access elements in their current location, such as the market or a shipyard, but cannot do actions that require the ship to be above surface such as navigating or extracting.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked.",
         "operationId": "dock-ship",
         "responses": {
           "200": {
@@ -1715,7 +1722,7 @@
                 }
               }
             },
-            "description": "The ship has successfully docked at it's current location."
+            "description": "The ship has successfully docked at its current location."
           }
         },
         "security": [
@@ -1725,7 +1732,7 @@
         ],
         "summary": "Dock Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -1742,7 +1749,7 @@
         }
       ],
       "post": {
-        "description": "If you want to target specific yields for an extraction, you can survey a waypoint, such as an asteroid field, and send the survey in the body of the extract request. Each survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests. Surveys will eventually expire after a period of time. Multiple ships can use the same survey for extraction.",
+        "description": "Create a survey on a waypoint that can be extracted such as asteroid fields. A survey focuses on specific types of deposits from the extracted location. When ships extract using this survey, they are guaranteed to procure a high amount of one of the goods in the survey.\n\nIn order to use the survey, send the entire survey details in the body of the extract request.\n\nEach survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown after surveying in which it is unable to perform certain actions. Surveys will eventually expire after a period of time or will be exhausted after being extracted several times. Multiple ships can use the same survey for extraction.\n\nA ship must have the 'Surveyor' mount in order to use this function.",
         "operationId": "create-survey",
         "responses": {
           "201": {
@@ -1786,14 +1793,14 @@
         ],
         "summary": "Create Survey",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/extract": {
       "parameters": [
         {
-          "description": "The ship symbol",
+          "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1803,7 +1810,7 @@
         }
       ],
       "post": {
-        "description": "Extract resources from the waypoint into your ship. Send an optional survey as the payload to target specific yields.",
+        "description": "Extract resources from the waypoint into your ship. Send an optional survey as the payload to target specific yields.\n\nThe ship must be in orbit to be able to extract.",
         "operationId": "extract-resources",
         "requestBody": {
           "content": {
@@ -1863,13 +1870,14 @@
         ],
         "summary": "Extract Resources",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/jettison": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1879,7 +1887,7 @@
         }
       ],
       "post": {
-        "description": "Jettison cargo from your ship's cargo hold.",
+        "description": "Jettison cargo from your ship's cargo hold.\n\nCargo that was jettison is lost and cannot be fetched again by any means.",
         "operationId": "jettison",
         "requestBody": {
           "content": {
@@ -1939,13 +1947,14 @@
         ],
         "summary": "Jettison Cargo",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/jump": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -1955,7 +1964,7 @@
         }
       ],
       "post": {
-        "description": "Jump your ship instantly to a target system. When used while in orbit or docked to a jump gate waypoint, any ship can use this command. When used elsewhere, jumping requires a jump drive unit and consumes a unit of antimatter (which needs to be in your cargo).",
+        "description": "Jump your ship instantly to a target system. The ship must be in orbit to use this function. When used while in orbit of a Jump Gate waypoint, any ship can use this command and end up on the target system's Jump Gate waypoint. When used elsewhere, jumping requires the ship to have a Jump Drive module and consumes a unit of antimatter from the ship's cargo. The command will fail if there is no antimatter to consume.",
         "operationId": "jump-ship",
         "requestBody": {
           "content": {
@@ -1992,7 +2001,7 @@
                         }
                       },
                       "required": [
-                        "route",
+                        "nav",
                         "cooldown"
                       ],
                       "type": "object"
@@ -2015,14 +2024,14 @@
         ],
         "summary": "Jump Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/navigate": {
       "parameters": [
         {
-          "description": "The ship symbol",
+          "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2032,7 +2041,7 @@
         }
       ],
       "post": {
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's warp or jump actions.",
+        "description": "Navigate to a target destination. The ship must be in orbit to use this function. The destination waypoint must be within the same system as the ship. Navigating will consume the necessary fuel from the ship's manifest based on the distance to the target waypoint.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's warp or jump actions.",
         "operationId": "navigate-ship",
         "requestBody": {
           "content": {
@@ -2083,7 +2092,7 @@
                 }
               }
             },
-            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival."
+            "description": "The successful transit information including the route details and changes to ship fuel. The route includes the expected time of arrival."
           }
         },
         "security": [
@@ -2093,14 +2102,14 @@
         ],
         "summary": "Navigate Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/nav": {
       "parameters": [
         {
-          "description": "The ship symbol",
+          "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2110,7 +2119,7 @@
         }
       ],
       "patch": {
-        "description": "Update the nav data of a ship, such as the flight mode.",
+        "description": "Update the nav configuration of a ship.\n\nCurrently only supports configuring the Flight Mode of the ship, which affects its speed and fuel consumption.",
         "operationId": "patch-ship-nav",
         "requestBody": {
           "content": {
@@ -2144,7 +2153,7 @@
                 }
               }
             },
-            "description": "The updated nav status of the ship."
+            "description": "The updated nav data of the ship."
           }
         },
         "security": [
@@ -2154,7 +2163,7 @@
         ],
         "summary": "Patch Ship Nav",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       },
       "get": {
@@ -2188,13 +2197,14 @@
         ],
         "summary": "Get Ship Nav",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/warp": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2204,7 +2214,7 @@
         }
       ],
       "post": {
-        "description": "Warp your ship to a target destination in another system. Warping will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.",
+        "description": "Warp your ship to a target destination in another system. The ship must be in orbit to use this function. Warping will consume the necessary fuel from the ship's manifest.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.",
         "operationId": "warp-ship",
         "requestBody": {
           "content": {
@@ -2255,7 +2265,7 @@
                 }
               }
             },
-            "description": "The successful transit information including the route details and changes to ship fuel, supplies, and crew wages paid. The route includes the expected time of arrival."
+            "description": "The successful transit information including the route details and changes to ship fuel. The route includes the expected time of arrival."
           }
         },
         "security": [
@@ -2265,7 +2275,7 @@
         ],
         "summary": "Warp Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2281,7 +2291,7 @@
         }
       ],
       "post": {
-        "description": "Sell cargo.",
+        "description": "Sell cargo in your ship to a market that trades this cargo. The ship must be docked in a waypoint that has the 'Marketplace' trait in order to use this function.",
         "operationId": "sell-cargo",
         "requestBody": {
           "content": {
@@ -2350,13 +2360,14 @@
         ],
         "summary": "Sell Cargo",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/systems": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2366,7 +2377,7 @@
         }
       ],
       "post": {
-        "description": "Activate your ship's sensor arrays to scan for system information.",
+        "description": "Scan for nearby systems, retrieving information on the systems' distance from the ship and their waypoints. Requires a ship to have the 'Sensor Array' mount to use.\n\nThe ship will enter a cooldown after using this function.",
         "operationId": "create-ship-system-scan",
         "responses": {
           "201": {
@@ -2401,7 +2412,7 @@
                 }
               }
             },
-            "description": "Created"
+            "description": "Successfully scanned for nearby systems."
           }
         },
         "security": [
@@ -2411,13 +2422,14 @@
         ],
         "summary": "Scan Systems",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/waypoints": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2427,7 +2439,7 @@
         }
       ],
       "post": {
-        "description": "Activate your ship's sensor arrays to scan for waypoint information.",
+        "description": "Scan for nearby waypoints, retrieving detailed information on each waypoint in range. Scanning uncharted waypoints will allow you to ignore their uncharted state and will list the waypoints' traits.\n\nRequires a ship to have the 'Sensor Array' mount to use.\n\nThe ship will enter a cooldown after using this function.",
         "operationId": "create-ship-waypoint-scan",
         "responses": {
           "201": {
@@ -2462,7 +2474,7 @@
                 }
               }
             },
-            "description": "Created"
+            "description": "Successfully scanned for nearby waypoints."
           }
         },
         "security": [
@@ -2472,13 +2484,14 @@
         ],
         "summary": "Scan Waypoints",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/ships": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2488,7 +2501,7 @@
         }
       ],
       "post": {
-        "description": "Activate your ship's sensor arrays to scan for ship information.",
+        "description": "Scan for nearby ships, retrieving information for all ships in rnage.\n\nRequires a ship to have the 'Sensor Array' mount to use.\n\nThe ship will enter a cooldown after using this function.",
         "operationId": "create-ship-ship-scan",
         "responses": {
           "201": {
@@ -2523,7 +2536,7 @@
                 }
               }
             },
-            "description": "Created"
+            "description": "Successfully scanned for nearby ships."
           }
         },
         "security": [
@@ -2533,13 +2546,14 @@
         ],
         "summary": "Scan Ships",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
     "/my/ships/{shipSymbol}/refuel": {
       "parameters": [
         {
+		  "description": "The ship symbol.",
           "in": "path",
           "name": "shipSymbol",
           "required": true,
@@ -2549,7 +2563,7 @@
         }
       ],
       "post": {
-        "description": "Refuel your ship from the local market.",
+        "description": "Refuel your ship by buying fuel from the local market.\n\nRequires the ship to be docked in a waypoint that has the 'Marketplace' trait, and the market must be selling fuel in order to refuel.\n\nEach fuel bought from the market replenishes 100 units in your ship's fuel.\n\nShips will always be refuel to the maximum amount when using this action.",
         "operationId": "refuel-ship",
         "responses": {
           "200": {
@@ -2585,7 +2599,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Refueled successfully."
           }
         },
         "security": [
@@ -2595,7 +2609,7 @@
         ],
         "summary": "Refuel Ship",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2680,7 +2694,7 @@
         ],
         "summary": "Purchase Cargo",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2761,7 +2775,7 @@
         ],
         "summary": "Transfer Cargo",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2823,7 +2837,7 @@
         ],
         "summary": "Negotiate Contract",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2873,7 +2887,7 @@
         ],
         "summary": "Get Mounts",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -2976,7 +2990,7 @@
         ],
         "summary": "Install Mount",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     },
@@ -3079,7 +3093,7 @@
         ],
         "summary": "Remove Mount",
         "tags": [
-          "fleet"
+          "Fleet"
         ]
       }
     }
