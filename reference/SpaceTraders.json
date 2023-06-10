@@ -1143,17 +1143,6 @@
               }
             },
             "description": "Successfully delivered cargo to contract."
-          },
-          "": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
           }
         },
         "security": [
