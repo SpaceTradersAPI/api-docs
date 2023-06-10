@@ -236,7 +236,12 @@
         },
         "summary": "Get Status",
         "tags": [],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/register": {
@@ -321,7 +326,12 @@
         },
         "summary": "Register New Agent",
         "tags": [],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/systems": {
@@ -383,7 +393,12 @@
             "description": "How many entries to return per page"
           }
         ],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/systems/{systemSymbol}": {
@@ -415,7 +430,12 @@
         "tags": [
           "Systems"
         ],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -489,7 +509,12 @@
             "description": "How many entries to return per page"
           }
         ],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -532,7 +557,12 @@
         "tags": [
           "Systems"
         ],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -783,7 +813,12 @@
             "description": "How many entries to return per page"
           }
         ],
-        "security": []
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/factions/{factionSymbol}": {
