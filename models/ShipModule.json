@@ -22,21 +22,26 @@
         "MODULE_WARP_DRIVE_III",
         "MODULE_SHIELD_GENERATOR_I",
         "MODULE_SHIELD_GENERATOR_II"
-      ]
+      ],
+      "description": "The symbol of the module."
     },
     "capacity": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "Modules that provide capacity, such as cargo hold or crew quarters will show this value to denote how much of a bonus the module grants."
     },
     "range": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "Modules that have a range will such as a sensor array show this value to denote how far can the module reach with its capabilities."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "Name of this module."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Description of this module."
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"
@@ -45,6 +50,7 @@
   "required": [
     "symbol",
     "name",
+    "description",
     "requirements"
   ]
 }

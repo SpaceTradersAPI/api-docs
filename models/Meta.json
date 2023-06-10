@@ -1,27 +1,36 @@
 {
-  "description": "",
+  "description": "Meta details for pagination.",
   "type": "object",
-  "properties": {
-    "total": {
-      "type": "integer"
-    },
-    "page": {
-      "type": "integer"
-    },
-    "limit": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "total",
-    "page",
-    "limit"
-  ],
   "x-examples": {
     "example-1": {
       "total": 6,
       "page": 1,
       "limit": 20
     }
-  }
+  },
+  "properties": {
+    "total": {
+      "type": "integer",
+      "description": "Shows the total amount of items of this kind that exist.",
+      "minimum": 0
+    },
+    "page": {
+      "type": "integer",
+      "default": 1,
+      "description": "A page denotes an amount of items, offset from the first item. Each page holds an amount of items equal to the `limit`.",
+      "minimum": 1
+    },
+    "limit": {
+      "type": "integer",
+      "default": 10,
+      "description": "The amount of items in each page. Limits how many items can be fetched at once.",
+      "minimum": 1,
+      "maximum": 20
+    }
+  },
+  "required": [
+    "total",
+    "page",
+    "limit"
+  ]
 }

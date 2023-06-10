@@ -20,20 +20,25 @@
         "MOUNT_LASER_CANNON_I",
         "MOUNT_MISSILE_LAUNCHER_I",
         "MOUNT_TURRET_I"
-      ]
+      ],
+      "description": "Symbo of this mount."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "Name of this mount."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Description of this mount."
     },
     "strength": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "description": "Mounts that have this value, such as mining lasers, denote how powerful this mount's capabilities are."
     },
     "deposits": {
       "type": "array",
+      "description": "Mounts that have this value denote what goods can be produced from using the mount.",
       "items": {
         "type": "string",
         "enum": [

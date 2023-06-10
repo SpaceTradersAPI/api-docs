@@ -10,20 +10,24 @@
         "REACTOR_FISSION_I",
         "REACTOR_CHEMICAL_I",
         "REACTOR_ANTIMATTER_I"
-      ]
+      ],
+      "description": "Symbol of the reactor."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "Name of the reactor."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Description of the reactor."
     },
     "condition": {
       "$ref": "./ShipCondition.json"
     },
     "powerOutput": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "The amount of power provided by this reactor. The more power a reactor provides to the ship, the lower the cooldown it gets when using a module or mount that taxes the ship's power."
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"

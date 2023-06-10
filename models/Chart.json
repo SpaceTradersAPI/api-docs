@@ -3,14 +3,17 @@
   "description": "The chart of a system or waypoint, which makes the location visible to other agents.",
   "properties": {
     "waypointSymbol": {
-      "type": "string"
+      "type": "string",
+      "description": "The symbol of the waypoint."
     },
     "submittedBy": {
-      "type": "string"
+      "type": "string",
+      "description": "The agent that submitted the chart for this waypoint."
     },
     "submittedOn": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "The time the chart for this waypoint was submitted."
     }
   }
 }

@@ -17,7 +17,8 @@
       "description": "The frame of the ship.",
       "properties": {
         "symbol": {
-          "type": "string"
+          "type": "string",
+          "description": "The symbol of the frame."
         }
       },
       "required": [
@@ -29,7 +30,8 @@
       "description": "The reactor of the ship.",
       "properties": {
         "symbol": {
-          "type": "string"
+          "type": "string",
+          "description": "The symbol of the reactor."
         }
       },
       "required": [
@@ -39,23 +41,26 @@
     "engine": {
       "type": "object",
       "description": "The engine of the ship.",
-      "properties": {
-        "symbol": {
-          "type": "string"
-        }
-      },
       "required": [
         "symbol"
-      ]
+      ],
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "The symbol of the engine."
+        }
+      }
     },
     "mounts": {
       "type": "array",
+      "description": "List of mounts installed in the ship.",
       "items": {
         "type": "object",
         "description": "A mount on the ship.",
         "properties": {
           "symbol": {
-            "type": "string"
+            "type": "string",
+            "description": "The symbol of the mount."
           }
         },
         "required": [

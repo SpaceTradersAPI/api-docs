@@ -1,13 +1,15 @@
 {
-  "description": "",
+  "description": "Extraction details.",
   "type": "object",
   "properties": {
     "shipSymbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Symbol of the ship that executed the extraction."
     },
     "yield": {
-      "$ref": "./ExtractionYield.json"
+      "$ref": "./ExtractionYield.json",
+      "description": "Yields from the extract operation."
     }
   },
   "required": [

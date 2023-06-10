@@ -4,20 +4,24 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The symbol of the waypoint."
     },
     "type": {
       "$ref": "./WaypointType.json"
     },
     "systemSymbol": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The symbol of the system the waypoint is in."
     },
     "x": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Position in the universe in the x axis."
     },
     "y": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Position in the universe in the y axis."
     }
   },
   "required": [

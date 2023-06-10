@@ -1,10 +1,10 @@
 {
-  "description": "A ship",
+  "description": "Ship details.",
   "type": "object",
   "properties": {
     "symbol": {
       "type": "string",
-      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]_[HEX_ID]`"
+      "description": "The globally unique identifier of the ship in the following format: `[AGENT_SYMBOL]-[HEX_ID]`"
     },
     "registration": {
       "$ref": "./ShipRegistration.json"
@@ -26,12 +26,14 @@
     },
     "modules": {
       "type": "array",
+      "description": "Modules installed in this ship.",
       "items": {
         "$ref": "./ShipModule.json"
       }
     },
     "mounts": {
       "type": "array",
+      "description": "Mounts installed in this ship.",
       "items": {
         "$ref": "./ShipMount.json"
       }

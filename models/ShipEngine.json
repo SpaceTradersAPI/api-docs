@@ -9,20 +9,24 @@
         "ENGINE_ION_DRIVE_I",
         "ENGINE_ION_DRIVE_II",
         "ENGINE_HYPER_DRIVE_I"
-      ]
+      ],
+      "description": "The symbol of the engine."
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of the engine."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "The description of the engine."
     },
     "condition": {
       "$ref": "./ShipCondition.json"
     },
     "speed": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "The speed stat of this engine. The higher the speed, the faster a ship can travel from one point to another. Reduces the time of arrival when navigating the ship."
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"

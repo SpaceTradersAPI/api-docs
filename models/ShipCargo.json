@@ -23,5 +23,6 @@
     "capacity",
     "units",
     "inventory"
-  ]
+  ],
+  "description": "Ship cargo details."
 }

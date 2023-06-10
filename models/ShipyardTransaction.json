@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "description": "Results of a transaction with a shipyard.",
   "properties": {
     "waypointSymbol": {
       "type": "string",
@@ -7,7 +8,7 @@
     },
     "shipSymbol": {
       "type": "string",
-      "description": "The symbol of the ship that was purchased."
+      "description": "The symbol of the ship that was the subject of the transaction."
     },
     "price": {
       "type": "integer",

@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Type of ship",
   "type": "string",
   "enum": [
     "SHIP_PROBE",

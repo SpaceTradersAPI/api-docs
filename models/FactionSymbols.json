@@ -1,0 +1,29 @@
+{
+  "type": "string",
+  "description": "Faction symbol.",
+  "minLength": 1,
+  "enum": [
+    "COSMIC",
+    "VOID",
+    "GALACTIC",
+    "QUANTUM",
+    "DOMINION",
+    "ASTRO",
+    "CORSAIRS",
+    "OBSIDIAN",
+    "AEGIS",
+    "UNITED",
+    "SOLITARY",
+    "COBALT",
+    "OMEGA",
+    "ECHO",
+    "LORDS",
+    "CULT",
+    "ANCIENTS",
+    "SHADOW",
+    "ETHEREAL"
+  ],
+  "examples": [
+    "COSMIC"
+  ]
+}

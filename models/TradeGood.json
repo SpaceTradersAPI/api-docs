@@ -1,14 +1,17 @@
 {
   "type": "object",
+  "description": "A good that can be traded for other goods or currency.",
   "properties": {
     "symbol": {
       "$ref": "./TradeSymbol.json"
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of the good."
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "The description of the good."
     }
   },
   "required": [
