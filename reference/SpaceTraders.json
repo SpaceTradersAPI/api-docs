@@ -1955,7 +1955,7 @@
         }
       ],
       "post": {
-        "description": "Jump your ship instantly to a target system. When used while in orbit or docked to a jump gate waypoint, any ship can use this command. When used elsewhere, jumping requires a jump drive unit and consumes a unit of antimatter (which needs to be in your cargo).",
+        "description": "Jump your ship instantly to a target system. The ship must be in orbit to use this function. When used while in orbit of a Jump Gate waypoint, any ship can use this command. When used elsewhere, jumping requires the ship to have a Jump Drive module and consumes a unit of antimatter from the ship's cargo (the command will fail if there is no antimatter to consume).",
         "operationId": "jump-ship",
         "requestBody": {
           "content": {
@@ -1992,7 +1992,7 @@
                         }
                       },
                       "required": [
-                        "route",
+                        "nav",
                         "cooldown"
                       ],
                       "type": "object"
@@ -2032,7 +2032,7 @@
         }
       ],
       "post": {
-        "description": "Navigate to a target destination. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's warp or jump actions.",
+        "description": "Navigate to a target destination. The ship must be in orbit to use this function. The destination must be located within the same system as the ship. Navigating will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's warp or jump actions.",
         "operationId": "navigate-ship",
         "requestBody": {
           "content": {
@@ -2204,7 +2204,7 @@
         }
       ],
       "post": {
-        "description": "Warp your ship to a target destination in another system. Warping will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.",
+        "description": "Warp your ship to a target destination in another system. The ship must be in orbit to use this function. Warping will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the agent's account.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.",
         "operationId": "warp-ship",
         "requestBody": {
           "content": {
