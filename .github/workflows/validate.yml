@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate Clients
     steps:
-
     - uses: actions/checkout@v2
 
-    - uses: openapi-generators/openapitools-generator-action@v1
+    - name: Typescript Axios
+      uses: openapi-generators/openapitools-generator-action@v1
       with:
-        generator: typescript-angular
+        generator: typescript-axios
         openapi-file: ./reference/SpaceTraders.json
 
-    - uses: openapi-generators/openapitools-generator-action@v1
+    - name: Dart
+      uses: openapi-generators/openapitools-generator-action@v1
       with:
         generator: dart
         openapi-file: ./reference/SpaceTraders.json
