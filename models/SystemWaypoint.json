@@ -2,7 +2,7 @@
   "type": "object",
   "properties": {
     "symbol": {
-      "type": "string",
+      "$ref": "./WaypointSymbol.json",
       "description": "The symbol of the waypoint."
     },
     "type": {

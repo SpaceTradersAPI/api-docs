@@ -1,0 +1,7 @@
+{
+  "type": "string",
+  "minLength": 1,
+  "x-faker": {
+    "fake": ["X1-{{random.alphaNumeric(5)}}-{{random.alphaNumeric(5)}}"]
+  }
+}

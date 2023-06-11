@@ -11,8 +11,7 @@
       "$ref": "./WaypointType.json"
     },
     "systemSymbol": {
-      "type": "string",
-      "minLength": 1,
+      "$ref": "./SystemSymbol.json",
       "description": "The symbol of the system the waypoint is in."
     },
     "x": {
