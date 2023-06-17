@@ -325,13 +325,7 @@
           }
         },
         "summary": "Register New Agent",
-        "tags": [],
-        "security": [
-          {},
-          {
-            "AgentToken": []
-          }
-        ]
+        "tags": []
       }
     },
     "/systems": {
