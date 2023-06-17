@@ -3030,7 +3030,7 @@
                           "$ref": "../models/ShipCargo.json"
                         },
                         "transaction": {
-                          "$ref": "../models/ShipyardTransaction.json"
+                          "$ref": "../models/ShipModificationTransaction.json"
                         }
                       }
                     }
@@ -3120,7 +3120,7 @@
                           "$ref": "../models/ShipCargo.json"
                         },
                         "transaction": {
-                          "$ref": "../models/ShipyardTransaction.json"
+                          "$ref": "../models/ShipModificationTransaction.json"
                         }
                       }
                     }

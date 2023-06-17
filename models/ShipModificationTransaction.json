@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "waypointSymbol": {
+      "type": "string",
+      "description": "The symbol of the waypoint where the transaction took place."
+    },
+    "shipSymbol": {
+      "type": "string",
+      "description": "The symbol of the ship that made the transaction."
+    },
+    "tradeSymbol": {
+      "type": "string",
+      "description": "The symbol of the trade good."
+    },
+    "totalPrice": {
+      "type": "integer",
+      "description": "The total price of the transaction.",
+      "minimum": 0
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the transaction."
+    }
+  },
+  "required": [
+    "waypointSymbol",
+    "shipSymbol",
+    "tradeSymbol",
+    "totalPrice",
+    "timestamp"
+  ],
+  "description": "Result of a transaction for a ship modification, such as installing a mount or a module."
+}
