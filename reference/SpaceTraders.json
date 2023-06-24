@@ -79,7 +79,7 @@
                     },
                     "resetDate": {
                       "type": "string",
-                      "description": "The date and time when the game server was last reset."
+                      "description": "The date when the game server was last reset."
                     },
                     "description": {
                       "type": "string"
