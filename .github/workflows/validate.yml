@@ -1,0 +1,26 @@
+name: Validate OpenAPI Spec
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    name: Generate Clients
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Typescript Axios
+      uses: openapi-generators/openapitools-generator-action@v1
+      with:
+        generator: typescript-axios
+        openapi-file: ./reference/SpaceTraders.json
+
+    - name: Dart
+      uses: openapi-generators/openapitools-generator-action@v1
+      with:
+        generator: dart
+        openapi-file: ./reference/SpaceTraders.json
