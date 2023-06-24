@@ -1579,7 +1579,11 @@
                                 "type": "integer",
                                 "description": "Amount of units of the good."
                               }
-                            }
+                            },
+                            "required": [
+                              "tradeSymbol",
+                              "units"
+                            ]
                           }
                         },
                         "consumed": {
@@ -1596,7 +1600,11 @@
                                 "type": "integer",
                                 "description": "Amount of units of the good."
                               }
-                            }
+                            },
+                            "required": [
+                              "tradeSymbol",
+                              "units"
+                            ]
                           }
                         }
                       }
