@@ -858,6 +858,120 @@
         }
       ]
     },
+    "/agents": {
+      "get": {
+        "description": "Fetch agents details.",
+        "operationId": "get-agents",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.json"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched agents details."
+          }
+        },
+        "summary": "List Agents",
+        "tags": [
+          "Agents"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20,
+              "default": 10
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
+        ],
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/agents/{agentSymbol}": {
+      "get": {
+        "description": "Fetch agent details.",
+        "operationId": "get-agent",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Agent.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched agent details."
+          }
+        },
+        "summary": "Get Agent",
+        "tags": [
+          "Agents"
+        ],
+        "parameters": [
+          {
+            "description": "The agent symbol",
+            "in": "path",
+            "name": "agentSymbol",
+            "required": true,
+            "schema": {
+              "default": "FEBA66",
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
     "/my/agent": {
       "get": {
         "description": "Fetch your agent's details.",
