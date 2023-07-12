@@ -858,6 +858,41 @@
         }
       ]
     },
+    "/my/agent": {
+      "get": {
+        "description": "Fetch your agent's details.",
+        "operationId": "get-my-agent",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Agent.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched agent details."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Agent",
+        "tags": [
+          "Agents"
+        ]
+      }
+    },
     "/agents": {
       "get": {
         "description": "Fetch agents details.",
@@ -948,7 +983,7 @@
             "description": "Successfully fetched agent details."
           }
         },
-        "summary": "Get Agent",
+        "summary": "Get Public Agent",
         "tags": [
           "Agents"
         ],
@@ -969,41 +1004,6 @@
           {
             "AgentToken": []
           }
-        ]
-      }
-    },
-    "/my/agent": {
-      "get": {
-        "description": "Fetch your agent's details.",
-        "operationId": "get-my-agent",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "../models/Agent.json"
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Successfully fetched agent details."
-          }
-        },
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ],
-        "summary": "Get Agent",
-        "tags": [
-          "Agents"
         ]
       }
     },
