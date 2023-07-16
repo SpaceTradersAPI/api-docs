@@ -59,6 +59,7 @@
     "modules",
     "mounts",
     "cargo",
-    "fuel"
+    "fuel",
+    "cooldown"
   ]
 }
