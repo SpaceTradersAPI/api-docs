@@ -43,6 +43,9 @@
     },
     "fuel": {
       "$ref": "./ShipFuel.json"
+    },
+    "cooldown": {
+      "$ref": "./Cooldown.json"
     }
   },
   "required": [
