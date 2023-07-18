@@ -10,6 +10,7 @@
     "symbol": {
       "type": "string",
       "minLength": 1,
+      "maxLength": 14,
       "description": "Symbol of the agent."
     },
     "headquarters": {
