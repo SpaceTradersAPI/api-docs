@@ -1,6 +1,6 @@
 {
   "type": "string",
-  "description": "The type of waypoint.",
+  "description": "The type of system.",
   "enum": [
     "NEUTRON_STAR",
     "RED_STAR",
