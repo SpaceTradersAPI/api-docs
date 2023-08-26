@@ -1,6 +1,6 @@
 {
   "type": "string",
-  "description": "Faction symbol.",
+  "description": "The symbol of the faction.",
   "minLength": 1,
   "enum": [
     "COSMIC",

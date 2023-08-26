@@ -79,7 +79,7 @@
                     },
                     "resetDate": {
                       "type": "string",
-                      "description": "The date and time when the game server was last reset."
+                      "description": "The date when the game server was last reset."
                     },
                     "description": {
                       "type": "string"
@@ -326,12 +326,7 @@
         },
         "summary": "Register New Agent",
         "tags": [],
-        "security": [
-          {},
-          {
-            "AgentToken": []
-          }
-        ]
+        "security": []
       }
     },
     "/systems": {
@@ -895,6 +890,120 @@
         "summary": "Get Agent",
         "tags": [
           "Agents"
+        ]
+      }
+    },
+    "/agents": {
+      "get": {
+        "description": "Fetch agents details.",
+        "operationId": "get-agents",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "$ref": "../models/Meta.json"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched agents details."
+          }
+        },
+        "summary": "List Agents",
+        "tags": [
+          "Agents"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "description": "What entry offset to request"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20,
+              "default": 10
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many entries to return per page"
+          }
+        ],
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    },
+    "/agents/{agentSymbol}": {
+      "get": {
+        "description": "Fetch agent details.",
+        "operationId": "get-agent",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Agent.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched agent details."
+          }
+        },
+        "summary": "Get Public Agent",
+        "tags": [
+          "Agents"
+        ],
+        "parameters": [
+          {
+            "description": "The agent symbol",
+            "in": "path",
+            "name": "agentSymbol",
+            "required": true,
+            "schema": {
+              "default": "FEBA66",
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
         ]
       }
     },
@@ -1548,11 +1657,11 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Ship Refine 200 Response",
+                  "title": "Ship Refine 201 Response",
                   "type": "object",
                   "properties": {
                     "data": {
@@ -1584,7 +1693,11 @@
                                 "type": "integer",
                                 "description": "Amount of units of the good."
                               }
-                            }
+                            },
+                            "required": [
+                              "tradeSymbol",
+                              "units"
+                            ]
                           }
                         },
                         "consumed": {
@@ -1601,7 +1714,11 @@
                                 "type": "integer",
                                 "description": "Amount of units of the good."
                               }
-                            }
+                            },
+                            "required": [
+                              "tradeSymbol",
+                              "units"
+                            ]
                           }
                         }
                       }
@@ -2624,6 +2741,23 @@
       "post": {
         "description": "Refuel your ship by buying fuel from the local market.\n\nRequires the ship to be docked in a waypoint that has the `Marketplace` trait, and the market must be selling fuel in order to refuel.\n\nEach fuel bought from the market replenishes 100 units in your ship's fuel.\n\nShips will always be refuel to their frame's maximum fuel capacity when using this action.",
         "operationId": "refuel-ship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "units": {
+                    "type": "integer",
+                    "description": "The amount of fuel to fill in the ship's tanks. When not specified, the ship will be refueled to its maximum fuel capacity. If the amount specified is greater than the ship's remaining capacity, the ship will only be refueled to its maximum fuel capacity. The amount specified is not in market units but in ship fuel units.",
+                    "example": "100",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "content": {
@@ -3013,7 +3147,7 @@
                           "$ref": "../models/ShipCargo.json"
                         },
                         "transaction": {
-                          "$ref": "../models/ShipyardTransaction.json"
+                          "$ref": "../models/ShipModificationTransaction.json"
                         }
                       }
                     }
@@ -3103,7 +3237,7 @@
                           "$ref": "../models/ShipCargo.json"
                         },
                         "transaction": {
-                          "$ref": "../models/ShipyardTransaction.json"
+                          "$ref": "../models/ShipModificationTransaction.json"
                         }
                       }
                     }

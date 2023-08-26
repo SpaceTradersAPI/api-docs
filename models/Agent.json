@@ -5,11 +5,12 @@
     "accountId": {
       "type": "string",
       "minLength": 1,
-      "description": "Account ID that is tied to this agent."
+      "description": "Account ID that is tied to this agent. Only included on your own agent."
     },
     "symbol": {
       "type": "string",
-      "minLength": 1,
+      "minLength": 3,
+      "maxLength": 14,
       "description": "Symbol of the agent."
     },
     "headquarters": {
@@ -26,10 +27,13 @@
       "type": "string",
       "minLength": 1,
       "description": "The faction the agent started with."
+    },
+    "shipCount": {
+      "type": "integer",
+      "description": "How many ships are owned by the agent."
     }
   },
   "required": [
-    "accountId",
     "symbol",
     "headquarters",
     "credits",
