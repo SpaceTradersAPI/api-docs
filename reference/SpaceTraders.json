@@ -1983,7 +1983,7 @@
         }
       ],
       "post": {
-        "description": "Extract resources from a waypoint that can be extracted, such as asteroid fields, into your ship. Send an optional survey as the payload to target specific yields.\n\nThe ship must be in orbit to be able to extract and must have mining equipments installed that can extract goods, such as the `Gas Siphon` mount for gas-based goods or `Mining Laser` mount for ore-based goods.",
+        "description": "Extract resources from a waypoint that can be extracted, such as asteroid fields, into your ship. Send an optional survey as the payload to target specific yields.\n\nThe ship must be in orbit to be able to extract and must have mining equipments installed that can extract goods, such as the `Gas Siphon` mount for gas-based goods or `Mining Laser` mount for ore-based goods.\n\nThe survey property is now deprecated. See the `extract/survey` endpoint for more details.",
         "operationId": "extract-resources",
         "requestBody": {
           "content": {
@@ -1991,6 +1991,7 @@
               "schema": {
                 "properties": {
                   "survey": {
+                    "deprecated": true,
                     "$ref": "../models/Survey.json"
                   }
                 },
@@ -2042,6 +2043,78 @@
           }
         ],
         "summary": "Extract Resources",
+        "tags": [
+          "Fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/extract/survey": {
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Use a survey when extracting resources from a waypoint. This endpoint requires a survey as the payload, which allows your ship to extract specific yields.\n\nSend the full survey object as the payload which will be validated according to the signature. If the signature is invalid, or any properties of the survey are changed, the request will fail.",
+        "operationId": "extract-resources-with-survey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../models/Survey.json"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "extraction": {
+                          "$ref": "../models/Extraction.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "extraction",
+                        "cooldown",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Extracted successfully."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Extract Resources with Survey",
         "tags": [
           "Fleet"
         ]

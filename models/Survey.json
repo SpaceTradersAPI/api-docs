@@ -14,7 +14,7 @@
     },
     "deposits": {
       "type": "array",
-      "description": "A list of deposits that can be found at this location.",
+      "description": "A list of deposits that can be found at this location. A ship will extract one of these deposits when using this survey in an extraction request. If multiple deposits of the same type are present, the chance of extracting that deposit is increased.",
       "items": {
         "$ref": "./SurveyDeposit.json"
       }
