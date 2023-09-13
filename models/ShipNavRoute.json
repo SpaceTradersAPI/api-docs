@@ -6,6 +6,11 @@
       "$ref": "./ShipNavRouteWaypoint.json"
     },
     "departure": {
+      "deprecated": true,
+      "description": "Deprecated. Use origin instead.",
+      "$ref": "./ShipNavRouteWaypoint.json"
+    },
+    "origin": {
       "$ref": "./ShipNavRouteWaypoint.json"
     },
     "departureTime": {
@@ -22,6 +27,7 @@
   "required": [
     "destination",
     "departure",
+    "origin",
     "departureTime",
     "arrival"
   ]
