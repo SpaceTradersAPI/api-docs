@@ -24,6 +24,9 @@
     "engine": {
       "$ref": "./ShipEngine.json"
     },
+    "cooldown": {
+      "$ref": "./Cooldown.json"
+    },
     "modules": {
       "type": "array",
       "description": "Modules installed in this ship.",
@@ -56,6 +59,7 @@
     "modules",
     "mounts",
     "cargo",
-    "fuel"
+    "fuel",
+    "cooldown"
   ]
 }
