@@ -16,11 +16,11 @@
     },
     "x": {
       "type": "integer",
-      "description": "Position in the universe in the x axis."
+      "description": "Relative position of the system in the sector in the x axis."
     },
     "y": {
       "type": "integer",
-      "description": "Position in the universe in the y axis."
+      "description": "Relative position of the system in the sector in the y axis."
     },
     "waypoints": {
       "type": "array",
