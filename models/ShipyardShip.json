@@ -34,6 +34,21 @@
       "items": {
         "$ref": "./ShipMount.json"
       }
+    },
+    "crew": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "integer"
+        },
+        "capacity": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "required",
+        "capacity"
+      ]
     }
   },
   "required": [
@@ -45,6 +60,7 @@
     "reactor",
     "engine",
     "modules",
-    "mounts"
+    "mounts",
+    "crew"
   ]
 }
