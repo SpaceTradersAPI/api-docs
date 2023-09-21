@@ -45,6 +45,13 @@
         "$ref": "./WaypointTrait.json"
       }
     },
+    "modifiers": {
+      "type": "array",
+      "description": "The modifiers of the waypoint.",
+      "items": {
+        "$ref": "./WaypointModifier.json"
+      }
+    },
     "chart": {
       "$ref": "./Chart.json"
     }

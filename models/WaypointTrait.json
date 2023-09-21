@@ -6,6 +6,7 @@
       "description": "The unique identifier of the trait.",
       "enum": [
         "UNCHARTED",
+        "UNDER_CONSTRUCTION",
         "MARKETPLACE",
         "SHIPYARD",
         "OUTPOST",
@@ -54,6 +55,7 @@
         "TOXIC_ATMOSPHERE",
         "CORROSIVE_ATMOSPHERE",
         "BREATHABLE_ATMOSPHERE",
+        "THIN_ATMOSPHERE",
         "JOVIAN",
         "ROCKY",
         "VOLCANIC",
@@ -63,6 +65,13 @@
         "TEMPERATE",
         "JUNGLE",
         "OCEAN",
+        "RADIOACTIVE",
+        "MICRO_GRAVITY_ANOMALIES",
+        "DEBRIS_CLUSTER",
+        "DEEP_CRATERS",
+        "SHALLOW_CRATERS",
+        "UNSTABLE_COMPOSITION",
+        "HOLLOWED_INTERIOR",
         "STRIPPED"
       ]
     },
