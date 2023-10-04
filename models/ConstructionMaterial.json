@@ -1,0 +1,22 @@
+{
+  "description": "The details of the required construction materials for a given waypoint under construction.",
+  "type": "object",
+  "properties": {
+    "tradeSymbol": {
+      "$ref": "./TradeSymbol.json"
+    },
+    "required": {
+      "type": "integer",
+      "description": "The number of units required."
+    },
+    "fulfilled": {
+      "type": "integer",
+      "description": "The number of units fulfilled toward the required amount."
+    }
+  },
+  "required": [
+    "tradeSymbol",
+    "required",
+    "fulfilled"
+  ]
+}
