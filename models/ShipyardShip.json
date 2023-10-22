@@ -11,6 +11,16 @@
     "description": {
       "type": "string"
     },
+    "supply": {
+      "type": "string",
+      "description": "A rough estimate of the total supply of this good in the marketplace.",
+      "enum": [
+        "SCARCE",
+        "LIMITED",
+        "MODERATE",
+        "ABUNDANT"
+      ]
+    },
     "purchasePrice": {
       "type": "integer"
     },
@@ -55,6 +65,7 @@
     "symbol",
     "name",
     "description",
+    "supply",
     "purchasePrice",
     "frame",
     "reactor",
