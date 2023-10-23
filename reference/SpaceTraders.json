@@ -2182,6 +2182,69 @@
         ]
       }
     },
+    "/my/ships/{shipSymbol}/siphon": {
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Siphon gases, such as hydrocarbon, from gas giants.\n\nThe ship must be in orbit to be able to siphon and must have siphon mounts and a gas processor installed.",
+        "operationId": "siphon-resources",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "siphon": {
+                          "$ref": "../models/Siphon.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "siphon",
+                        "cooldown",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Siphon successful."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Siphon Resources",
+        "tags": [
+          "Fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/extract/survey": {
       "parameters": [
         {
