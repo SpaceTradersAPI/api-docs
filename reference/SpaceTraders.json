@@ -2440,12 +2440,16 @@
                         "nav": {
                           "$ref": "../models/ShipNav.json"
                         },
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
                         "transaction": {
                           "$ref": "../models/MarketTransaction.json"
                         }
                       },
                       "required": [
                         "nav",
+                        "cooldown",
                         "transaction"
                       ],
                       "type": "object"
