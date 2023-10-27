@@ -502,6 +502,32 @@
             "in": "query",
             "name": "limit",
             "description": "How many entries to return per page"
+          },
+          {
+            "description": "Filter waypoints by type.",
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "$ref": "../models/WaypointType.json"
+            }
+          },
+          {
+            "description": "Filter waypoints by one or more traits.",
+            "in": "query",
+            "name": "traits",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "../models/WaypointTrait.json"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../models/WaypointTrait.json"
+                  }
+                }
+              ]
+            }
           }
         ],
         "security": [
