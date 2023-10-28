@@ -14,7 +14,7 @@
     "supply": {
       "$ref": "./SupplyLevel.json"
     },
-    "production": {
+    "activity": {
       "$ref": "./ActivityLevel.json"
     },
     "purchasePrice": {
