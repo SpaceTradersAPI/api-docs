@@ -811,7 +811,27 @@
         "tags": [
           "Systems"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "description": "The system symbol",
+          "in": "path",
+          "name": "systemSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The waypoint symbol",
+          "in": "path",
+          "name": "waypointSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/construction/supply": {
       "post": {
