@@ -6,7 +6,10 @@
       "type": "string",
       "enum": [
         "MODULE_MINERAL_PROCESSOR_I",
+        "MODULE_GAS_PROCESSOR_I",
         "MODULE_CARGO_HOLD_I",
+        "MODULE_CARGO_HOLD_II",
+        "MODULE_CARGO_HOLD_III",
         "MODULE_CREW_QUARTERS_I",
         "MODULE_ENVOY_QUARTERS_I",
         "MODULE_PASSENGER_CABIN_I",

@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "description": "The construction details of a waypoint.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "The symbol of the waypoint."
+    },
+    "materials": {
+      "type": "array",
+      "description": "The materials required to construct the waypoint.",
+      "items": {
+        "$ref": "./ConstructionMaterial.json"
+      }
+    },
+    "isComplete": {
+      "type": "boolean",
+      "description": "Whether the waypoint has been constructed."
+    }
+  },
+  "required": [
+    "symbol",
+    "materials",
+    "isComplete"
+  ]
+}

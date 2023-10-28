@@ -11,6 +11,12 @@
     "description": {
       "type": "string"
     },
+    "supply": {
+      "$ref": "./SupplyLevel.json"
+    },
+    "activity": {
+      "$ref": "./ActivityLevel.json"
+    },
     "purchasePrice": {
       "type": "integer"
     },
@@ -55,6 +61,7 @@
     "symbol",
     "name",
     "description",
+    "supply",
     "purchasePrice",
     "frame",
     "reactor",

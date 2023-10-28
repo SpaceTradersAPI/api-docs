@@ -502,6 +502,32 @@
             "in": "query",
             "name": "limit",
             "description": "How many entries to return per page"
+          },
+          {
+            "description": "Filter waypoints by type.",
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "$ref": "../models/WaypointType.json"
+            }
+          },
+          {
+            "description": "Filter waypoints by one or more traits.",
+            "in": "query",
+            "name": "traits",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "../models/WaypointTrait.json"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../models/WaypointTrait.json"
+                  }
+                }
+              ]
+            }
           }
         ],
         "security": [
@@ -695,7 +721,7 @@
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate": {
       "get": {
-        "description": "Get jump gate details for a waypoint. Requires a waypoint of type `JUMP_GATE` to use.\n\nThe response will return all systems that are have a Jump Gate in range of this Jump Gate. Those systems can be jumped to from this Jump Gate.",
+        "description": "Get jump gate details for a waypoint. Requires a waypoint of type `JUMP_GATE` to use.\n\nWaypoints connected to this jump gate can be ",
         "operationId": "get-jump-gate",
         "responses": {
           "200": {
@@ -725,6 +751,140 @@
           }
         ],
         "summary": "Get Jump Gate",
+        "tags": [
+          "Systems"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "The system symbol",
+          "in": "path",
+          "name": "systemSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The waypoint symbol",
+          "in": "path",
+          "name": "waypointSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}/construction": {
+      "get": {
+        "description": "Get construction details for a waypoint. Requires a waypoint with a property of `isUnderConstruction` to be true.",
+        "operationId": "get-construction",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/Construction.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully fetched construction site."
+          }
+        },
+        "security": [
+          {},
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Construction Site",
+        "tags": [
+          "Systems"
+        ]
+      }
+    },
+    "/systems/{systemSymbol}/waypoints/{waypointSymbol}/construction/supply": {
+      "post": {
+        "description": "Supply a construction site with the specified good. Requires a waypoint with a property of `isUnderConstruction` to be true.\n\nThe good must be in your ship's cargo. The good will be removed from your ship's cargo and added to the construction site's materials.",
+        "operationId": "supply-construction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "shipSymbol": {
+                    "type": "string",
+                    "description": "Symbol of the ship to use."
+                  },
+                  "tradeSymbol": {
+                    "type": "string",
+                    "description": "The symbol of the good to supply."
+                  },
+                  "units": {
+                    "type": "integer",
+                    "description": "Amount of units to supply."
+                  }
+                },
+                "required": [
+                  "shipSymbol",
+                  "tradeSymbol",
+                  "units"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "construction": {
+                          "$ref": "../models/Construction.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "construction",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully supplied construction site."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Supply Construction Site",
         "tags": [
           "Systems"
         ]
@@ -2048,6 +2208,69 @@
         ]
       }
     },
+    "/my/ships/{shipSymbol}/siphon": {
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "description": "Siphon gases, such as hydrocarbon, from gas giants.\n\nThe ship must be in orbit to be able to siphon and must have siphon mounts and a gas processor installed.",
+        "operationId": "siphon-resources",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "cooldown": {
+                          "$ref": "../models/Cooldown.json"
+                        },
+                        "siphon": {
+                          "$ref": "../models/Siphon.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
+                        }
+                      },
+                      "required": [
+                        "siphon",
+                        "cooldown",
+                        "cargo"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Siphon successful."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Siphon Resources",
+        "tags": [
+          "Fleet"
+        ]
+      }
+    },
     "/my/ships/{shipSymbol}/extract/survey": {
       "parameters": [
         {
@@ -2211,20 +2434,20 @@
         }
       ],
       "post": {
-        "description": "Jump your ship instantly to a target system. The ship must be in orbit to use this function. When used while in orbit of a Jump Gate waypoint, any ship can use this command, jumping to the target system's Jump Gate waypoint.\n\nWhen used elsewhere, jumping requires the ship to have a `Jump Drive` module installed and consumes a unit of antimatter from the ship's cargo. The command will fail if there is no antimatter to consume. When jumping via the `Jump Drive` module, the ship ends up at its largest source of energy in the system, such as a gas planet or a jump gate.",
+        "description": "Jump your ship instantly to a target connected waypoint. The ship must be in orbit to execute a jump.\n\nA unit of antimatter is purchased and consumed from the market when jumping. The price of antimatter is determined by the market and is subject to change. A ship can only jump to connected waypoints",
         "operationId": "jump-ship",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "properties": {
-                  "systemSymbol": {
-                    "description": "The system symbol to jump to.",
+                  "waypointSymbol": {
+                    "description": "The symbol of the waypoint to jump to. The destination must be a connected waypoint.",
                     "type": "string"
                   }
                 },
                 "required": [
-                  "systemSymbol"
+                  "waypointSymbol"
                 ],
                 "type": "object"
               }
@@ -2240,16 +2463,20 @@
                   "properties": {
                     "data": {
                       "properties": {
+                        "nav": {
+                          "$ref": "../models/ShipNav.json"
+                        },
                         "cooldown": {
                           "$ref": "../models/Cooldown.json"
                         },
-                        "nav": {
-                          "$ref": "../models/ShipNav.json"
+                        "transaction": {
+                          "$ref": "../models/MarketTransaction.json"
                         }
                       },
                       "required": [
                         "nav",
-                        "cooldown"
+                        "cooldown",
+                        "transaction"
                       ],
                       "type": "object"
                     }

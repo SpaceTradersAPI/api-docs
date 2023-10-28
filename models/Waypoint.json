@@ -45,8 +45,19 @@
         "$ref": "./WaypointTrait.json"
       }
     },
+    "modifiers": {
+      "type": "array",
+      "description": "The modifiers of the waypoint.",
+      "items": {
+        "$ref": "./WaypointModifier.json"
+      }
+    },
     "chart": {
       "$ref": "./Chart.json"
+    },
+    "isUnderConstruction": {
+      "type": "boolean",
+      "description": "True if the waypoint is under construction."
     }
   },
   "required": [
@@ -56,6 +67,7 @@
     "x",
     "y",
     "orbitals",
-    "traits"
+    "traits",
+    "isUnderConstruction"
   ]
 }

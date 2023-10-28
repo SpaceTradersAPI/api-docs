@@ -1,0 +1,19 @@
+{
+  "description": "Siphon details.",
+  "type": "object",
+  "properties": {
+    "shipSymbol": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Symbol of the ship that executed the siphon."
+    },
+    "yield": {
+      "$ref": "./SiphonYield.json",
+      "description": "Yields from the siphon operation."
+    }
+  },
+  "required": [
+    "shipSymbol",
+    "yield"
+  ]
+}
