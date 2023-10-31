@@ -2,8 +2,7 @@
   "type": "object",
   "properties": {
     "symbol": {
-      "type": "string",
-      "description": "The symbol of the trade good."
+      "$ref": "./TradeSymbol.json"
     },
     "type": {
       "type": "string",
