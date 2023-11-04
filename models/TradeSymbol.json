@@ -115,7 +115,8 @@
     "MOUNT_MINING_LASER_III",
     "MOUNT_LASER_CANNON_I",
     "MOUNT_MISSILE_LAUNCHER_I",
-    "MOUNT_TURRET_I"
+    "MOUNT_TURRET_I",
+    "FAB_MATS"
   ],
   "description": "The good's symbol."
 }
