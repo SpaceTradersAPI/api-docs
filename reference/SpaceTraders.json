@@ -518,12 +518,12 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "../models/WaypointTrait.json"
+                  "$ref": "../models/WaypointTrait.json#/properties/symbol"
                 },
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "../models/WaypointTrait.json"
+                    "$ref": "../models/WaypointTrait.json#/properties/symbol"
                   }
                 }
               ]
