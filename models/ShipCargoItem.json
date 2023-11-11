@@ -3,8 +3,7 @@
   "description": "The type of cargo item and the number of units.",
   "properties": {
     "symbol": {
-      "type": "string",
-      "description": "The unique identifier of the cargo item type."
+      "$ref": "./TradeSymbol.json"
     },
     "name": {
       "type": "string",

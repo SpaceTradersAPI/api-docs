@@ -1,9 +1,3 @@
-# Announcements
-
-The server reset on 2023-05-13 at 11:00AM PST to accomodate new players and push important fixes to the game.
-
-We are also working on a detailed plan for how we manage resets in the future and will communicate that plan in the docs and on Discord when it is ready.
-
 # Getting Started
 
 SpaceTraders is an API-based game where you acquire and manage a fleet of ships to explore, trade, and fight your way across the galaxy.

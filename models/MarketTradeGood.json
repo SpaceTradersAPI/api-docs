@@ -2,8 +2,16 @@
   "type": "object",
   "properties": {
     "symbol": {
+      "$ref": "./TradeSymbol.json"
+    },
+    "type": {
       "type": "string",
-      "description": "The symbol of the trade good."
+      "description": "The type of trade good (export, import, or exchange).",
+      "enum": [
+        "EXPORT",
+        "IMPORT",
+        "EXCHANGE"
+      ]
     },
     "type": {
       "type": "string",
