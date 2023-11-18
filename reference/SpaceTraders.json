@@ -3072,6 +3072,11 @@
                     "description": "The amount of fuel to fill in the ship's tanks. When not specified, the ship will be refueled to its maximum fuel capacity. If the amount specified is greater than the ship's remaining capacity, the ship will only be refueled to its maximum fuel capacity. The amount specified is not in market units but in ship fuel units.",
                     "example": "100",
                     "minimum": 1
+                  },
+                  "fromCargo": {
+                    "type": "boolean",
+                    "description": "Wether to use the FUEL thats in your cargo or not. Default: false",
+                    "example": false
                   }
                 }
               }
