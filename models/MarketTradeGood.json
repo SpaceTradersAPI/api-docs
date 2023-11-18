@@ -13,15 +13,6 @@
         "EXCHANGE"
       ]
     },
-    "type": {
-      "type": "string",
-      "description": "The type of trade good (export, import, or exchange).",
-      "enum": [
-        "EXPORT",
-        "IMPORT",
-        "EXCHANGE"
-      ]
-    },
     "tradeVolume": {
       "type": "integer",
       "description": "This is the maximum number of units that can be purchased or sold at this market in a single trade for this good. Trade volume also gives an indication of price volatility. A market with a low trade volume will have large price swings, while high trade volume will be more resilient to price changes.",
