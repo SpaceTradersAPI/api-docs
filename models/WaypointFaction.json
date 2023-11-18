@@ -3,7 +3,7 @@
   "description": "The faction that controls the waypoint.",
   "properties": {
     "symbol": {
-      "$ref": "./FactionSymbols.json"
+      "$ref": "./FactionSymbol.json"
     }
   },
   "required": [

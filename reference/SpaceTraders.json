@@ -254,7 +254,7 @@
               "schema": {
                 "properties": {
                   "faction": {
-                    "$ref": "../models/FactionSymbols.json",
+                    "$ref": "../models/FactionSymbol.json",
                     "example": "COSMIC"
                   },
                   "symbol": {
@@ -518,12 +518,12 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "../models/WaypointTrait.json"
+                  "$ref": "../models/WaypointTraitSymbol.json"
                 },
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "../models/WaypointTrait.json"
+                    "$ref": "../models/WaypointTraitSymbol.json"
                   }
                 }
               ]
