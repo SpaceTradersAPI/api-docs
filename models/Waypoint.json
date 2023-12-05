@@ -4,7 +4,7 @@
   "properties": {
     "symbol": {
       "$ref": "./WaypointSymbol.json",
-      "description": "Symbol fo the waypoint."
+      "description": "Symbol of the waypoint."
     },
     "type": {
       "$ref": "./WaypointType.json"
