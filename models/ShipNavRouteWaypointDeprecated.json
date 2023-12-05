@@ -1,6 +1,7 @@
 {
-  "description": "The destination or departure of a ships nav route.",
   "type": "object",
+  "deprecated": true,
+  "description": "Deprecated. Use origin instead.",
   "properties": {
     "symbol": {
       "type": "string",
@@ -11,7 +12,8 @@
       "$ref": "./WaypointType.json"
     },
     "systemSymbol": {
-      "$ref": "./SystemSymbol.json"
+      "$ref": "./SystemSymbol.json",
+      "description": "The symbol of the system the waypoint is in."
     },
     "x": {
       "type": "integer",

@@ -3,8 +3,7 @@
   "description": "A yield from the extraction operation.",
   "properties": {
     "symbol": {
-      "$ref": "./TradeSymbol.json",
-      "description": "Symbol of the good that was extracted."
+      "$ref": "./TradeSymbol.json"
     },
     "units": {
       "type": "integer",

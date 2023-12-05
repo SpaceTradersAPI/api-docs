@@ -6,9 +6,7 @@
       "$ref": "./ShipNavRouteWaypoint.json"
     },
     "departure": {
-      "deprecated": true,
-      "description": "Deprecated. Use origin instead.",
-      "$ref": "./ShipNavRouteWaypoint.json"
+      "$ref": "./ShipNavRouteWaypointDeprecated.json"
     },
     "origin": {
       "$ref": "./ShipNavRouteWaypoint.json"

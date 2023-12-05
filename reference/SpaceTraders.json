@@ -254,8 +254,7 @@
               "schema": {
                 "properties": {
                   "faction": {
-                    "$ref": "../models/FactionSymbol.json",
-                    "example": "COSMIC"
+                    "$ref": "../models/FactionSymbol.json"
                   },
                   "symbol": {
                     "description": "Your desired agent symbol. This will be a unique name used to represent your agent, and will be the prefix for your ships.",
