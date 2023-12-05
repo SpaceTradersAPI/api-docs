@@ -58,6 +58,7 @@
     }
   },
   "required": [
+    "type",
     "symbol",
     "name",
     "description",
