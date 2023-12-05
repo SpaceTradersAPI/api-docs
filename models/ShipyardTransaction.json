@@ -3,7 +3,7 @@
   "description": "Results of a transaction with a shipyard.",
   "properties": {
     "waypointSymbol": {
-      "type": "string",
+      "$ref": "./WaypointSymbol.json",
       "description": "The symbol of the waypoint where the transaction took place."
     },
     "shipSymbol": {
