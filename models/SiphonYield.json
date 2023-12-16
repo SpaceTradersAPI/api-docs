@@ -3,8 +3,7 @@
   "description": "A yield from the siphon operation.",
   "properties": {
     "symbol": {
-      "$ref": "./TradeSymbol.json",
-      "description": "Symbol of the good that was siphoned."
+      "$ref": "./TradeSymbol.json"
     },
     "units": {
       "type": "integer",

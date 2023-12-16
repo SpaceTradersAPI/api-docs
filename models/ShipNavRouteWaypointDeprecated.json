@@ -1,6 +1,7 @@
 {
-  "description": "The destination or departure of a ships nav route.",
   "type": "object",
+  "deprecated": true,
+  "description": "Deprecated. Use origin instead.",
   "properties": {
     "symbol": {
       "type": "string",

@@ -2,8 +2,7 @@
   "type": "object",
   "properties": {
     "waypointSymbol": {
-      "$ref": "./WaypointSymbol.json",
-      "description": "The symbol of the waypoint where the transaction took place."
+      "$ref": "./WaypointSymbol.json"
     },
     "shipSymbol": {
       "type": "string",

@@ -22,8 +22,7 @@
       "description": "Type of contract."
     },
     "terms": {
-      "$ref": "./ContractTerms.json",
-      "description": "The terms to fulfill the contract."
+      "$ref": "./ContractTerms.json"
     },
     "accepted": {
       "type": "boolean",

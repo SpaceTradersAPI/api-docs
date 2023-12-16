@@ -3,12 +3,10 @@
   "description": "The navigation information of the ship.",
   "properties": {
     "systemSymbol": {
-      "$ref": "./SystemSymbol.json",
-      "description": "The system symbol of the ship's current location."
+      "$ref": "./SystemSymbol.json"
     },
     "waypointSymbol": {
-      "$ref": "./WaypointSymbol.json",
-      "description": "The waypoint symbol of the ship's current location, or if the ship is in-transit, the waypoint symbol of the ship's destination."
+      "$ref": "./WaypointSymbol.json"
     },
     "route": {
       "$ref": "./ShipNavRoute.json"

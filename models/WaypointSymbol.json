@@ -1,5 +1,6 @@
 {
   "type": "string",
+  "description": "The symbol of the waypoint.",
   "minLength": 1,
   "x-faker": {
     "fake": ["X1-{{random.alphaNumeric(5)}}-{{random.alphaNumeric(5)}}"]

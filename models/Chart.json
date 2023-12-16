@@ -3,8 +3,7 @@
   "description": "The chart of a system or waypoint, which makes the location visible to other agents.",
   "properties": {
     "waypointSymbol": {
-      "$ref": "./WaypointSymbol.json",
-      "description": "The symbol of the waypoint."
+      "$ref": "./WaypointSymbol.json"
     },
     "submittedBy": {
       "type": "string",

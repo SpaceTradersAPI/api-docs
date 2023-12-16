@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "description": "Payments for the contract.",
   "properties": {
     "onAccepted": {
       "type": "integer",

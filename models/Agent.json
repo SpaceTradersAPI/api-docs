@@ -37,6 +37,7 @@
     "symbol",
     "headquarters",
     "credits",
-    "startingFaction"
+    "startingFaction",
+    "shipCount"
   ]
 }

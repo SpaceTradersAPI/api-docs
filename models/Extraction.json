@@ -8,8 +8,7 @@
       "description": "Symbol of the ship that executed the extraction."
     },
     "yield": {
-      "$ref": "./ExtractionYield.json",
-      "description": "Yields from the extract operation."
+      "$ref": "./ExtractionYield.json"
     }
   },
   "required": [

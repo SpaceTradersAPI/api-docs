@@ -3,15 +3,13 @@
   "type": "object",
   "properties": {
     "symbol": {
-      "$ref": "./WaypointSymbol.json",
-      "description": "Symbol fo the waypoint."
+      "$ref": "./WaypointSymbol.json"
     },
     "type": {
       "$ref": "./WaypointType.json"
     },
     "systemSymbol": {
-      "$ref": "./SystemSymbol.json",
-      "description": "The symbol of the system this waypoint belongs to."
+      "$ref": "./SystemSymbol.json"
     },
     "x": {
       "type": "integer",
