@@ -7,6 +7,11 @@
     },
     "shipSymbol": {
       "type": "string",
+      "deprecated": true,
+      "description": "The symbol of the ship that was the subject of the transaction."
+    },
+    "shipType": {
+      "type": "string",
       "description": "The symbol of the ship that was the subject of the transaction."
     },
     "price": {
@@ -27,6 +32,7 @@
   "required": [
     "waypointSymbol",
     "shipSymbol",
+    "shipType",
     "price",
     "agentSymbol",
     "timestamp"

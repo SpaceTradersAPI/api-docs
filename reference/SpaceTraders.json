@@ -2490,12 +2490,16 @@
                         },
                         "transaction": {
                           "$ref": "../models/MarketTransaction.json"
+                        },
+                        "agent": {
+                          "$ref": "../models/Agent.json"
                         }
                       },
                       "required": [
                         "nav",
                         "cooldown",
-                        "transaction"
+                        "transaction",
+                        "agent"
                       ],
                       "type": "object"
                     }
