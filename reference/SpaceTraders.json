@@ -2196,12 +2196,23 @@
                         },
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "../models/ShipConditionEvent.json"
+                              }
+                            ]
+                          }
                         }
                       },
                       "required": [
                         "extraction",
                         "cooldown",
-                        "cargo"
+                        "cargo",
+                        "events"
                       ],
                       "type": "object"
                     }
@@ -2259,12 +2270,23 @@
                         },
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "../models/ShipConditionEvent.json"
+                              }
+                            ]
+                          }
                         }
                       },
                       "required": [
                         "siphon",
                         "cooldown",
-                        "cargo"
+                        "cargo",
+                        "events"
                       ],
                       "type": "object"
                     }
@@ -2573,11 +2595,22 @@
                         },
                         "nav": {
                           "$ref": "../models/ShipNav.json"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "../models/ShipConditionEvent.json"
+                              }
+                            ]
+                          }
                         }
                       },
                       "required": [
                         "nav",
-                        "fuel"
+                        "fuel",
+                        "events"
                       ],
                       "type": "object"
                     }
