@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "waypointSymbol": {
+      "$ref": "./WaypointSymbol.json"
+    },
+    "shipSymbol": {
+      "type": "string",
+      "description": "The symbol of the ship."
+    },
+    "totalPrice": {
+      "type": "integer",
+      "description": "The total price of the transaction.",
+      "minimum": 0
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the transaction."
+    }
+  },
+  "required": [
+    "waypointSymbol",
+    "shipSymbol",
+    "totalPrice",
+    "timestamp"
+  ],
+  "description": "Result of a scrap transaction."
+}

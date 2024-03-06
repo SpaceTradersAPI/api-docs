@@ -3622,6 +3622,216 @@
           "Fleet"
         ]
       }
+    },
+    "/my/ships/{shipSymbol}/scrap": {
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "x-preview-feature": true,
+        "description": "Get the amount of value that will be returned when scrapping a ship.",
+        "operationId": "get-scrap-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "transaction": {
+                          "$ref": "../models/ScrapTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully retrieved the amount of value that will be returned when scrapping a ship."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Scrap Ship",
+        "tags": [
+          "Fleet"
+        ]
+      },
+      "post": {
+        "x-preview-feature": true,
+        "description": "Scrap a ship, removing it from the game and returning a portion of the ship's value to the agent. The ship must be docked in a waypoint that has the `Shipyard` trait in order to use this function. To preview the amount of value that will be returned, use the Get Ship action.",
+        "operationId": "scrap-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/ScrapTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "agent",
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Ship scrapped successfully."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Scrap Ship",
+        "tags": [
+          "Fleet"
+        ]
+      }
+    },
+    "/my/ships/{shipSymbol}/repair": {
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "x-preview-feature": true,
+        "description": "Get the cost of repairing a ship.",
+        "operationId": "get-repair-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "transaction": {
+                          "$ref": "../models/RepairTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully retrieved the cost of repairing a ship."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Repair Ship",
+        "tags": [
+          "Fleet"
+        ]
+      },
+      "post": {
+        "x-preview-feature": true,
+        "description": "Repair a ship, restoring the ship to maximum condition. The ship must be docked at a waypoint that has the `Shipyard` trait in order to use this function. To preview the cost of repairing the ship, use the Get action.",
+        "operationId": "repair-ship",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "agent": {
+                          "$ref": "../models/Agent.json"
+                        },
+                        "ship": {
+                          "$ref": "../models/Ship.json"
+                        },
+                        "transaction": {
+                          "$ref": "../models/RepairTransaction.json"
+                        }
+                      },
+                      "required": [
+                        "agent",
+                        "ship",
+                        "transaction"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Ship repaired successfully."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Repair Ship",
+        "tags": [
+          "Fleet"
+        ]
+      }
     }
   }
 }
