@@ -22,7 +22,10 @@
       "description": "Description of the reactor."
     },
     "condition": {
-      "$ref": "./ShipCondition.json"
+      "$ref": "./ShipComponentCondition.json"
+    },
+    "integrity": {
+      "$ref": "./ShipComponentIntegrity.json"
     },
     "powerOutput": {
       "type": "integer",
@@ -36,6 +39,8 @@
   "required": [
     "symbol",
     "name",
+    "condition",
+    "performance",
     "description",
     "powerOutput",
     "requirements"

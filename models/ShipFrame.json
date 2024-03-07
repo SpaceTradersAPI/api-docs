@@ -32,7 +32,10 @@
       "description": "Description of the frame."
     },
     "condition": {
-      "$ref": "./ShipCondition.json"
+      "$ref": "./ShipComponentCondition.json"
+    },
+    "integrity": {
+      "$ref": "./ShipComponentIntegrity.json"
     },
     "moduleSlots": {
       "type": "integer",
@@ -56,6 +59,8 @@
   "required": [
     "symbol",
     "name",
+    "condition",
+    "performance",
     "description",
     "moduleSlots",
     "mountingPoints",

@@ -21,7 +21,10 @@
       "description": "The description of the engine."
     },
     "condition": {
-      "$ref": "./ShipCondition.json"
+      "$ref": "./ShipComponentCondition.json"
+    },
+    "integrity": {
+      "$ref": "./ShipComponentIntegrity.json"
     },
     "speed": {
       "type": "integer",
@@ -35,6 +38,8 @@
   "required": [
     "symbol",
     "name",
+    "condition",
+    "performance",
     "description",
     "speed",
     "requirements"
