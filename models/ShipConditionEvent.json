@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "description": "An event that represents damage or wear to a ship's reactor, frame, or engine, reducing the condition of the ship.",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "enum": [
+        "REACTOR_OVERLOAD",
+        "ENERGY_SPIKE_FROM_MINERAL",
+        "SOLAR_FLARE_INTERFERENCE",
+        "COOLANT_LEAK",
+        "POWER_DISTRIBUTION_FLUCTUATION",
+        "MAGNETIC_FIELD_DISRUPTION",
+        "HULL_MICROMETEORITE_STRIKES",
+        "STRUCTURAL_STRESS_FRACTURES",
+        "CORROSIVE_MINERAL_CONTAMINATION",
+        "THERMAL_EXPANSION_MISMATCH",
+        "VIBRATION_DAMAGE_FROM_DRILLING",
+        "ELECTROMAGNETIC_FIELD_INTERFERENCE",
+        "IMPACT_WITH_EXTRACTED_DEBRIS",
+        "FUEL_EFFICIENCY_DEGRADATION",
+        "COOLANT_SYSTEM_AGEING",
+        "DUST_MICROABRASIONS",
+        "THRUSTER_NOZZLE_WEAR",
+        "EXHAUST_PORT_CLOGGING",
+        "BEARING_LUBRICATION_FADE",
+        "SENSOR_CALIBRATION_DRIFT",
+        "HULL_MICROMETEORITE_DAMAGE",
+        "SPACE_DEBRIS_COLLISION",
+        "THERMAL_STRESS",
+        "VIBRATION_OVERLOAD",
+        "PRESSURE_DIFFERENTIAL_STRESS",
+        "ELECTROMAGNETIC_SURGE_EFFECTS",
+        "ATMOSPHERIC_ENTRY_HEAT"
+      ]
+    },
+    "component": {
+      "type": "string",
+      "enum": [
+        "FRAME",
+        "REACTOR",
+        "ENGINE"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the event."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the event."
+    }
+  },
+  "required": [
+    "symbol",
+    "component",
+    "name",
+    "description"
+  ]
+}
