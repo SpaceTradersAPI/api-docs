@@ -2353,12 +2353,23 @@
                         },
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "../models/ShipConditionEvent.json"
+                              }
+                            ]
+                          }
                         }
                       },
                       "required": [
                         "extraction",
                         "cooldown",
-                        "cargo"
+                        "cargo",
+                        "events"
                       ],
                       "type": "object"
                     }
