@@ -60,7 +60,7 @@
     "symbol",
     "name",
     "condition",
-    "performance",
+    "integrity",
     "description",
     "moduleSlots",
     "mountingPoints",
