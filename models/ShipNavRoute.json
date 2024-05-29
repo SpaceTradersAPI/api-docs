@@ -21,7 +21,6 @@
   },
   "required": [
     "destination",
-    "departure",
     "origin",
     "departureTime",
     "arrival"
