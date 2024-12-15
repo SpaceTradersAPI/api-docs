@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "A mount is installed on the exterier of a ship.",
+  "description": "A mount is installed on the exterior of a ship.",
   "properties": {
     "symbol": {
       "type": "string",
