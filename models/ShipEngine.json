@@ -33,6 +33,9 @@
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"
+    },
+    "quality": {
+      "$ref": "./ShipComponentQuality.json"
     }
   },
   "required": [
@@ -42,6 +45,7 @@
     "integrity",
     "description",
     "speed",
-    "requirements"
+    "requirements",
+    "quality"
   ]
 }

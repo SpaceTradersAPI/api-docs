@@ -55,7 +55,9 @@
         "scheme": "bearer",
         "type": "http"
       }
-    }
+    },
+    "links": {},
+    "callbacks": {}
   },
   "paths": {
     "/": {
@@ -235,13 +237,13 @@
           }
         },
         "summary": "Get Status",
-        "tags": [],
         "security": [
           {},
           {
             "AgentToken": []
           }
-        ]
+        ],
+        "parameters": []
       }
     },
     "/register": {
@@ -324,8 +326,8 @@
           }
         },
         "summary": "Register New Agent",
-        "tags": [],
-        "security": []
+        "security": [],
+        "parameters": []
       }
     },
     "/systems": {
@@ -429,20 +431,20 @@
           {
             "AgentToken": []
           }
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "default": "X1-OE",
-            "type": "string"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "default": "X1-OE",
+              "type": "string"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "/systems/{systemSymbol}/waypoints": {
       "get": {
@@ -527,6 +529,15 @@
                 }
               ]
             }
+          },
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "security": [
@@ -535,18 +546,7 @@
             "AgentToken": []
           }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}": {
       "get": {
@@ -582,28 +582,28 @@
           {
             "AgentToken": []
           }
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/market": {
       "get": {
@@ -638,28 +638,28 @@
         "summary": "Get Market",
         "tags": [
           "Systems"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard": {
       "get": {
@@ -695,28 +695,28 @@
         "summary": "Get Shipyard",
         "tags": [
           "Systems"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate": {
       "get": {
@@ -752,28 +752,28 @@
         "summary": "Get Jump Gate",
         "tags": [
           "Systems"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/construction": {
       "get": {
@@ -809,28 +809,28 @@
         "summary": "Get Construction Site",
         "tags": [
           "Systems"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/systems/{systemSymbol}/waypoints/{waypointSymbol}/construction/supply": {
       "post": {
@@ -906,28 +906,28 @@
         "summary": "Supply Construction Site",
         "tags": [
           "Systems"
+        ],
+        "parameters": [
+          {
+            "description": "The system symbol",
+            "in": "path",
+            "name": "systemSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The waypoint symbol",
+            "in": "path",
+            "name": "waypointSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
-      },
-      "parameters": [
-        {
-          "description": "The system symbol",
-          "in": "path",
-          "name": "systemSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "description": "The waypoint symbol",
-          "in": "path",
-          "name": "waypointSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
+      }
     },
     "/factions": {
       "get": {
@@ -1022,20 +1022,20 @@
         "summary": "Get Faction",
         "tags": [
           "Factions"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The faction symbol",
-          "in": "path",
-          "name": "factionSymbol",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "example": "COSMIC"
+        ],
+        "parameters": [
+          {
+            "description": "The faction symbol",
+            "in": "path",
+            "name": "factionSymbol",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "COSMIC"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "/my/agent": {
       "get": {
@@ -1069,7 +1069,8 @@
         "summary": "Get Agent",
         "tags": [
           "Agents"
-        ]
+        ],
+        "parameters": []
       }
     },
     "/agents": {
@@ -1284,32 +1285,21 @@
         "summary": "Get Contract",
         "tags": [
           "Contracts"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The contract ID",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "parameters": [
+          {
+            "description": "The contract ID",
+            "in": "path",
+            "name": "contractId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "/my/contracts/{contractId}/accept": {
-      "parameters": [
-        {
-          "description": "The contract ID to accept.",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Accept a contract by ID. \n\nYou can only accept contracts that were offered to you, were not accepted yet, and whose deadlines has not passed yet.",
         "operationId": "accept-contract",
@@ -1353,21 +1343,21 @@
         "summary": "Accept Contract",
         "tags": [
           "Contracts"
+        ],
+        "parameters": [
+          {
+            "description": "The contract ID to accept.",
+            "in": "path",
+            "name": "contractId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/contracts/{contractId}/deliver": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "contractId",
-          "in": "path",
-          "required": true,
-          "description": "The ID of the contract."
-        }
-      ],
       "post": {
         "description": "Deliver cargo to a contract.\n\nIn order to use this API, a ship must be at the delivery location (denoted in the delivery terms as `destinationSymbol` of a contract) and must have a number of units of a good required by this contract in its cargo.\n\nCargo that was delivered will be removed from the ship's cargo.",
         "operationId": "deliver-contract",
@@ -1441,21 +1431,21 @@
         "summary": "Deliver Cargo to Contract",
         "tags": [
           "Contracts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the contract."
+          }
         ]
       }
     },
     "/my/contracts/{contractId}/fulfill": {
-      "parameters": [
-        {
-          "description": "The ID of the contract to fulfill.",
-          "in": "path",
-          "name": "contractId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Fulfill a contract. Can only be used on contracts that have all of their delivery terms fulfilled.",
         "operationId": "fulfill-contract",
@@ -1500,6 +1490,17 @@
         "summary": "Fulfill Contract",
         "tags": [
           "Contracts"
+        ],
+        "parameters": [
+          {
+            "description": "The ID of the contract to fulfill.",
+            "in": "path",
+            "name": "contractId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
@@ -1638,7 +1639,8 @@
         "summary": "Purchase Ship",
         "tags": [
           "Fleet"
-        ]
+        ],
+        "parameters": []
       }
     },
     "/my/ships/{shipSymbol}": {
@@ -1674,32 +1676,21 @@
         "summary": "Get Ship",
         "tags": [
           "Fleet"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "/my/ships/{shipSymbol}/cargo": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "get": {
         "description": "Retrieve the cargo of a ship under your agent's ownership.",
         "operationId": "get-my-ship-cargo",
@@ -1732,21 +1723,21 @@
         "summary": "Get Ship Cargo",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/orbit": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Attempt to move your ship into orbit at its current location. The request will only succeed if your ship is capable of moving into orbit at the time of the request.\n\nOrbiting ships are able to do actions that require the ship to be above surface such as navigating or extracting, but cannot access elements in their current waypoint, such as the market or a shipyard.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.",
         "operationId": "orbit-ship",
@@ -1788,23 +1779,23 @@
         "summary": "Orbit Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/refine": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
-        "description": "Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of refining at the time of the request. In order to be able to refine, a ship must have goods that can be refined and have installed a `Refinery` module that can refine it.\n\nWhen refining, 30 basic goods will be converted into 10 processed goods.",
+        "description": "Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of refining at the time of the request. In order to be able to refine, a ship must have goods that can be refined and have installed a `Refinery` module that can refine it.\n\nWhen refining, 100 basic goods will be converted into 10 processed goods.",
         "operationId": "ship-refine",
         "requestBody": {
           "content": {
@@ -1920,21 +1911,21 @@
         "summary": "Ship Refine",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/chart": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Command a ship to chart the waypoint at its current location.\n\nMost waypoints in the universe are uncharted by default. These waypoints have their traits hidden until they have been charted by a ship.\n\nCharting a waypoint will record your agent as the one who created the chart, and all other agents would also be able to see the waypoint's traits.",
         "operationId": "create-chart",
@@ -1978,6 +1969,17 @@
         "summary": "Create Chart",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
@@ -2017,32 +2019,21 @@
         "summary": "Get Ship Cooldown",
         "tags": [
           "Fleet"
-        ]
-      },
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "/my/ships/{shipSymbol}/dock": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Attempt to dock your ship at its current location. Docking will only succeed if your ship is capable of docking at the time of the request.\n\nDocked ships can access elements in their current location, such as the market or a shipyard, but cannot do actions that require the ship to be above surface such as navigating or extracting.\n\nThe endpoint is idempotent - successive calls will succeed even if the ship is already docked.",
         "operationId": "dock-ship",
@@ -2084,21 +2075,21 @@
         "summary": "Dock Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/survey": {
-      "parameters": [
-        {
-          "description": "The symbol of the ship.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Create surveys on a waypoint that can be extracted such as asteroid fields. A survey focuses on specific types of deposits from the extracted location. When ships extract using this survey, they are guaranteed to procure a high amount of one of the goods in the survey.\n\nIn order to use a survey, send the entire survey details in the body of the extract request.\n\nEach survey may have multiple deposits, and if a symbol shows up more than once, that indicates a higher chance of extracting that resource.\n\nYour ship will enter a cooldown after surveying in which it is unable to perform certain actions. Surveys will eventually expire after a period of time or will be exhausted after being extracted several times based on the survey's size. Multiple ships can use the same survey for extraction.\n\nA ship must have the `Surveyor` mount installed in order to use this function.",
         "operationId": "create-survey",
@@ -2146,21 +2137,21 @@
         "summary": "Create Survey",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The symbol of the ship.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/extract": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Extract resources from a waypoint that can be extracted, such as asteroid fields, into your ship. Send an optional survey as the payload to target specific yields.\n\nThe ship must be in orbit to be able to extract and must have mining equipments installed that can extract goods, such as the `Gas Siphon` mount for gas-based goods or `Mining Laser` mount for ore-based goods.\n\nThe survey property is now deprecated. See the `extract/survey` endpoint for more details.",
         "operationId": "extract-resources",
@@ -2235,21 +2226,21 @@
         "summary": "Extract Resources",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/siphon": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Siphon gases, such as hydrocarbon, from gas giants.\n\nThe ship must be in orbit to be able to siphon and must have siphon mounts and a gas processor installed.",
         "operationId": "siphon-resources",
@@ -2309,21 +2300,21 @@
         "summary": "Siphon Resources",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/extract/survey": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Use a survey when extracting resources from a waypoint. This endpoint requires a survey as the payload, which allows your ship to extract specific yields.\n\nSend the full survey object as the payload which will be validated according to the signature. If the signature is invalid, or any properties of the survey are changed, the request will fail.",
         "operationId": "extract-resources-with-survey",
@@ -2392,21 +2383,21 @@
         "summary": "Extract Resources with Survey",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/jettison": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Jettison cargo from your ship's cargo hold.",
         "operationId": "jettison",
@@ -2470,21 +2461,21 @@
         "summary": "Jettison Cargo",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/jump": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Jump your ship instantly to a target connected waypoint. The ship must be in orbit to execute a jump.\n\nA unit of antimatter is purchased and consumed from the market when jumping. The price of antimatter is determined by the market and is subject to change. A ship can only jump to connected waypoints",
         "operationId": "jump-ship",
@@ -2555,21 +2546,21 @@
         "summary": "Jump Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/navigate": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Navigate to a target destination. The ship must be in orbit to use this function. The destination waypoint must be within the same system as the ship's current location. Navigating will consume the necessary fuel from the ship's manifest based on the distance to the target waypoint.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at it's destination.\n\nTo travel between systems, see the ship's Warp or Jump actions.",
         "operationId": "navigate-ship",
@@ -2644,21 +2635,21 @@
         "summary": "Navigate Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/nav": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "patch": {
         "description": "Update the nav configuration of a ship.\n\nCurrently only supports configuring the Flight Mode of the ship, which affects its speed and fuel consumption.",
         "operationId": "patch-ship-nav",
@@ -2705,6 +2696,17 @@
         "summary": "Patch Ship Nav",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       },
       "get": {
@@ -2739,21 +2741,21 @@
         "summary": "Get Ship Nav",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/warp": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Warp your ship to a target destination in another system. The ship must be in orbit to use this function and must have the `Warp Drive` module installed. Warping will consume the necessary fuel from the ship's manifest.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at its destination.",
         "operationId": "warp-ship",
@@ -2817,21 +2819,21 @@
         "summary": "Warp Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/sell": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Symbol of a ship."
-        }
-      ],
       "post": {
         "description": "Sell cargo in your ship to a market that trades this cargo. The ship must be docked in a waypoint that has the `Marketplace` trait in order to use this function.",
         "operationId": "sell-cargo",
@@ -2904,21 +2906,21 @@
         "summary": "Sell Cargo",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Symbol of a ship."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/systems": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Scan for nearby systems, retrieving information on the systems' distance from the ship and their waypoints. Requires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
         "operationId": "create-ship-system-scan",
@@ -2966,21 +2968,21 @@
         "summary": "Scan Systems",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/waypoints": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Scan for nearby waypoints, retrieving detailed information on each waypoint in range. Scanning uncharted waypoints will allow you to ignore their uncharted state and will list the waypoints' traits.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
         "operationId": "create-ship-waypoint-scan",
@@ -3028,21 +3030,21 @@
         "summary": "Scan Waypoints",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/scan/ships": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Scan for nearby ships, retrieving information for all ships in range.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
         "operationId": "create-ship-ship-scan",
@@ -3090,21 +3092,21 @@
         "summary": "Scan Ships",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/refuel": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "post": {
         "description": "Refuel your ship by buying fuel from the local market.\n\nRequires the ship to be docked in a waypoint that has the `Marketplace` trait, and the market must be selling fuel in order to refuel.\n\nEach fuel bought from the market replenishes 100 units in your ship's fuel.\n\nShips will always be refuel to their frame's maximum fuel capacity when using this action.",
         "operationId": "refuel-ship",
@@ -3175,21 +3177,21 @@
         "summary": "Refuel Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/purchase": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ship's symbol."
-        }
-      ],
       "post": {
         "description": "Purchase cargo from a market.\n\nThe ship must be docked in a waypoint that has `Marketplace` trait, and the market must be selling a good to be able to purchase it.\n\nThe maximum amount of units of a good that can be purchased in each transaction are denoted by the `tradeVolume` value of the good, which can be viewed by using the Get Market action.\n\nPurchased goods are added to the ship's cargo hold.",
         "operationId": "purchase-cargo",
@@ -3262,21 +3264,21 @@
         "summary": "Purchase Cargo",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/transfer": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The transferring ship's symbol."
-        }
-      ],
       "post": {
         "description": "Transfer cargo between ships.\n\nThe receiving ship must be in the same waypoint as the transferring ship, and it must able to hold the additional cargo after the transfer is complete. Both ships also must be in the same state, either both are docked or both are orbiting.\n\nThe response body's cargo shows the cargo of the transferring ship after the transfer is complete.",
         "operationId": "transfer-cargo",
@@ -3345,21 +3347,21 @@
         "summary": "Transfer Cargo",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The transferring ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/negotiate/contract": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ship's symbol."
-        }
-      ],
       "post": {
         "description": "Negotiate a new contract with the HQ.\n\nIn order to negotiate a new contract, an agent must not have ongoing or offered contracts over the allowed maximum amount. Currently the maximum contracts an agent can have at a time is 1.\n\nOnce a contract is negotiated, it is added to the list of contracts offered to the agent, which the agent can then accept. \n\nThe ship must be present at any waypoint with a faction present to negotiate a contract with that faction.",
         "operationId": "negotiateContract",
@@ -3401,21 +3403,21 @@
         "summary": "Negotiate Contract",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/mounts": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ship's symbol."
-        }
-      ],
       "get": {
         "description": "Get the mounts installed on a ship.",
         "operationId": "get-mounts",
@@ -3452,21 +3454,21 @@
         "summary": "Get Mounts",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/mounts/install": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ship's symbol."
-        }
-      ],
       "post": {
         "description": "Install a mount on a ship.\n\nIn order to install a mount, the ship must be docked and located in a waypoint that has a `Shipyard` trait. The ship also must have the mount to install in its cargo hold.\n\nAn installation fee will be deduced by the Shipyard for installing the mount on the ship. ",
         "operationId": "install-mount",
@@ -3541,21 +3543,21 @@
         "summary": "Install Mount",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/mounts/remove": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ship's symbol."
-        }
-      ],
       "post": {
         "description": "Remove a mount from a ship.\n\nThe ship must be docked in a waypoint that has the `Shipyard` trait, and must have the desired mount that it wish to remove installed.\n\nA removal fee will be deduced from the agent by the Shipyard.",
         "operationId": "remove-mount",
@@ -3631,21 +3633,21 @@
         "summary": "Remove Mount",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ship's symbol."
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/scrap": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "get": {
         "x-preview-feature": true,
         "description": "Get the amount of value that will be returned when scrapping a ship.",
@@ -3687,6 +3689,17 @@
         "summary": "Get Scrap Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       },
       "post": {
@@ -3734,21 +3747,21 @@
         "summary": "Scrap Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
     },
     "/my/ships/{shipSymbol}/repair": {
-      "parameters": [
-        {
-          "description": "The ship symbol.",
-          "in": "path",
-          "name": "shipSymbol",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "get": {
         "x-preview-feature": true,
         "description": "Get the cost of repairing a ship.",
@@ -3790,6 +3803,17 @@
         "summary": "Get Repair Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       },
       "post": {
@@ -3841,8 +3865,572 @@
         "summary": "Repair Ship",
         "tags": [
           "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ]
       }
+    },
+    "/market/supply-chain": {
+      "get": {
+        "summary": "Get Supply Chain",
+        "description": "Describes which import and exports map to each other.",
+        "parameters": [],
+        "operationId": "get-supply-chain",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the supply chain information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "data": {
+                        "exportToImportMap": {
+                          "LIQUID_HYDROGEN": [
+                            "MACHINERY"
+                          ],
+                          "LIQUID_NITROGEN": [
+                            "MACHINERY"
+                          ],
+                          "HYDROCARBON": [
+                            "MACHINERY"
+                          ],
+                          "AMMONIA_ICE": [
+                            "MACHINERY"
+                          ],
+                          "ICE_WATER": [
+                            "MACHINERY"
+                          ],
+                          "PRECIOUS_STONES": [
+                            "EXPLOSIVES"
+                          ],
+                          "QUARTZ_SAND": [
+                            "EXPLOSIVES"
+                          ],
+                          "SILICON_CRYSTALS": [
+                            "EXPLOSIVES"
+                          ],
+                          "IRON_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "ALUMINUM_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "SILVER_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "COPPER_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "PLATINUM_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "GOLD_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "URANITE_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "MERITIUM_ORE": [
+                            "EXPLOSIVES"
+                          ],
+                          "DIAMONDS": [
+                            "EXPLOSIVES"
+                          ],
+                          "SHIP_SALVAGE": [
+                            "MACHINERY"
+                          ],
+                          "CULTURAL_ARTIFACTS": [
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "PLASTICS": [
+                            "LIQUID_HYDROGEN"
+                          ],
+                          "FERTILIZERS": [
+                            "LIQUID_NITROGEN"
+                          ],
+                          "FUEL": [
+                            "HYDROCARBON"
+                          ],
+                          "IRON": [
+                            "IRON_ORE"
+                          ],
+                          "ALUMINUM": [
+                            "ALUMINUM_ORE"
+                          ],
+                          "POLYNUCLEOTIDES": [
+                            "LIQUID_HYDROGEN",
+                            "LIQUID_NITROGEN"
+                          ],
+                          "EXPLOSIVES": [
+                            "LIQUID_HYDROGEN",
+                            "LIQUID_NITROGEN"
+                          ],
+                          "COPPER": [
+                            "COPPER_ORE"
+                          ],
+                          "SILVER": [
+                            "SILVER_ORE"
+                          ],
+                          "PLATINUM": [
+                            "PLATINUM_ORE"
+                          ],
+                          "GOLD": [
+                            "GOLD_ORE"
+                          ],
+                          "URANITE": [
+                            "URANITE_ORE"
+                          ],
+                          "MERITIUM": [
+                            "MERITIUM_ORE"
+                          ],
+                          "AMMUNITION": [
+                            "IRON",
+                            "LIQUID_NITROGEN"
+                          ],
+                          "FAB_MATS": [
+                            "IRON",
+                            "QUARTZ_SAND"
+                          ],
+                          "FOOD": [
+                            "FERTILIZERS"
+                          ],
+                          "FABRICS": [
+                            "FERTILIZERS"
+                          ],
+                          "ELECTRONICS": [
+                            "SILICON_CRYSTALS",
+                            "COPPER"
+                          ],
+                          "MACHINERY": [
+                            "IRON"
+                          ],
+                          "EQUIPMENT": [
+                            "ALUMINUM",
+                            "PLASTICS"
+                          ],
+                          "JEWELRY": [
+                            "GOLD",
+                            "SILVER",
+                            "PRECIOUS_STONES",
+                            "DIAMONDS"
+                          ],
+                          "MICROPROCESSORS": [
+                            "SILICON_CRYSTALS",
+                            "COPPER"
+                          ],
+                          "FIREARMS": [
+                            "IRON",
+                            "AMMUNITION"
+                          ],
+                          "ASSAULT_RIFLES": [
+                            "ALUMINUM",
+                            "AMMUNITION"
+                          ],
+                          "CLOTHING": [
+                            "FABRICS"
+                          ],
+                          "SHIP_PLATING": [
+                            "ALUMINUM",
+                            "MACHINERY"
+                          ],
+                          "SHIP_PARTS": [
+                            "EQUIPMENT",
+                            "ELECTRONICS"
+                          ],
+                          "MEDICINE": [
+                            "FABRICS",
+                            "POLYNUCLEOTIDES"
+                          ],
+                          "DRUGS": [
+                            "AMMONIA_ICE",
+                            "POLYNUCLEOTIDES"
+                          ],
+                          "MILITARY_EQUIPMENT": [
+                            "ALUMINUM",
+                            "ELECTRONICS"
+                          ],
+                          "LAB_INSTRUMENTS": [
+                            "ELECTRONICS",
+                            "EQUIPMENT"
+                          ],
+                          "BIOCOMPOSITES": [
+                            "FABRICS",
+                            "POLYNUCLEOTIDES"
+                          ],
+                          "ADVANCED_CIRCUITRY": [
+                            "ELECTRONICS",
+                            "MICROPROCESSORS"
+                          ],
+                          "REACTOR_SOLAR_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "REACTOR_FUSION_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "REACTOR_FISSION_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "REACTOR_CHEMICAL_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "REACTOR_ANTIMATTER_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "ENGINE_IMPULSE_DRIVE_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "ENGINE_ION_DRIVE_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MODULE_CARGO_HOLD_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MODULE_CARGO_HOLD_II": [
+                            "ALUMINUM",
+                            "MACHINERY"
+                          ],
+                          "MODULE_MINERAL_PROCESSOR_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MODULE_GAS_PROCESSOR_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MODULE_CREW_QUARTERS_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "FABRICS"
+                          ],
+                          "MODULE_ENVOY_QUARTERS_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "FABRICS"
+                          ],
+                          "MODULE_PASSENGER_CABIN_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "FABRICS"
+                          ],
+                          "MODULE_SCIENCE_LAB_I": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_ORE_REFINERY_I": [
+                            "PLATINUM",
+                            "MACHINERY"
+                          ],
+                          "MODULE_FUEL_REFINERY_I": [
+                            "PLATINUM",
+                            "MACHINERY"
+                          ],
+                          "MODULE_MICRO_REFINERY_I": [
+                            "PLATINUM",
+                            "MACHINERY"
+                          ],
+                          "MOUNT_GAS_SIPHON_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MOUNT_GAS_SIPHON_II": [
+                            "ALUMINUM",
+                            "MACHINERY"
+                          ],
+                          "MOUNT_SURVEYOR_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "ELECTRONICS"
+                          ],
+                          "MOUNT_SURVEYOR_II": [
+                            "ALUMINUM",
+                            "MACHINERY",
+                            "ELECTRONICS"
+                          ],
+                          "MOUNT_SENSOR_ARRAY_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "ELECTRONICS"
+                          ],
+                          "MOUNT_SENSOR_ARRAY_II": [
+                            "ALUMINUM",
+                            "MACHINERY",
+                            "ELECTRONICS"
+                          ],
+                          "MOUNT_MINING_LASER_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "DIAMONDS"
+                          ],
+                          "MOUNT_MINING_LASER_II": [
+                            "ALUMINUM",
+                            "MACHINERY",
+                            "DIAMONDS"
+                          ],
+                          "MOUNT_TURRET_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "MOUNT_LASER_CANNON_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "DIAMONDS"
+                          ],
+                          "MOUNT_MISSILE_LAUNCHER_I": [
+                            "IRON",
+                            "MACHINERY"
+                          ],
+                          "QUANTUM_STABILIZERS": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "ANTIMATTER": [
+                            "LAB_INSTRUMENTS",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "EXOTIC_MATTER": [
+                            "LAB_INSTRUMENTS",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "RELIC_TECH": [
+                            "LAB_INSTRUMENTS",
+                            "EQUIPMENT"
+                          ],
+                          "NOVEL_LIFEFORMS": [
+                            "LAB_INSTRUMENTS",
+                            "EQUIPMENT"
+                          ],
+                          "BOTANICAL_SPECIMENS": [
+                            "LAB_INSTRUMENTS",
+                            "EQUIPMENT"
+                          ],
+                          "AI_MAINFRAMES": [
+                            "ADVANCED_CIRCUITRY",
+                            "MICROPROCESSORS"
+                          ],
+                          "QUANTUM_DRIVES": [
+                            "ADVANCED_CIRCUITRY",
+                            "DIAMONDS"
+                          ],
+                          "GRAVITON_EMITTERS": [
+                            "ADVANCED_CIRCUITRY",
+                            "GOLD"
+                          ],
+                          "ROBOTIC_DRONES": [
+                            "ADVANCED_CIRCUITRY",
+                            "ALUMINUM"
+                          ],
+                          "CYBER_IMPLANTS": [
+                            "ADVANCED_CIRCUITRY",
+                            "BIOCOMPOSITES"
+                          ],
+                          "NANOBOTS": [
+                            "POLYNUCLEOTIDES",
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "GENE_THERAPEUTICS": [
+                            "POLYNUCLEOTIDES",
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "NEURAL_CHIPS": [
+                            "POLYNUCLEOTIDES",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MOOD_REGULATORS": [
+                            "POLYNUCLEOTIDES",
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "VIRAL_AGENTS": [
+                            "POLYNUCLEOTIDES",
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "MICRO_FUSION_GENERATORS": [
+                            "ADVANCED_CIRCUITRY",
+                            "PLATINUM",
+                            "DIAMONDS"
+                          ],
+                          "SUPERGRAINS": [
+                            "FERTILIZERS",
+                            "POLYNUCLEOTIDES",
+                            "LAB_INSTRUMENTS"
+                          ],
+                          "LASER_RIFLES": [
+                            "DIAMONDS",
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "HOLOGRAPHICS": [
+                            "GOLD",
+                            "SILVER",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "ENGINE_ION_DRIVE_II": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "ENGINE_HYPER_DRIVE_I": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_CARGO_HOLD_III": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_JUMP_DRIVE_I": [
+                            "IRON",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_JUMP_DRIVE_II": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY",
+                            "GOLD"
+                          ],
+                          "MODULE_JUMP_DRIVE_III": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY",
+                            "GOLD",
+                            "MERITIUM"
+                          ],
+                          "MODULE_WARP_DRIVE_I": [
+                            "IRON",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_WARP_DRIVE_II": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY",
+                            "URANITE"
+                          ],
+                          "MODULE_WARP_DRIVE_III": [
+                            "PLATINUM",
+                            "ADVANCED_CIRCUITRY",
+                            "MERITIUM",
+                            "MERITIUM"
+                          ],
+                          "MOUNT_GAS_SIPHON_III": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MODULE_SHIELD_GENERATOR_I": [
+                            "IRON",
+                            "MACHINERY",
+                            "URANITE"
+                          ],
+                          "MODULE_SHIELD_GENERATOR_II": [
+                            "ALUMINUM",
+                            "MACHINERY",
+                            "URANITE"
+                          ],
+                          "MOUNT_SURVEYOR_III": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY"
+                          ],
+                          "MOUNT_SENSOR_ARRAY_III": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY",
+                            "URANITE"
+                          ],
+                          "MOUNT_MINING_LASER_III": [
+                            "PLATINUM",
+                            "MACHINERY",
+                            "ADVANCED_CIRCUITRY",
+                            "URANITE"
+                          ],
+                          "SHIP_PROBE": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_MINING_DRONE": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_SIPHON_DRONE": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_LIGHT_HAULER": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_COMMAND_FRIGATE": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_INTERCEPTOR": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_EXPLORER": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_LIGHT_SHUTTLE": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_HEAVY_FREIGHTER": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_ORE_HOUND": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_REFINING_FREIGHTER": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ],
+                          "SHIP_SURVEYOR": [
+                            "SHIP_PLATING",
+                            "SHIP_PARTS"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data"
+        ],
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      },
+      "parameters": []
     }
   }
 }
