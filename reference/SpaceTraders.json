@@ -1,21 +1,22 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.1",
   "info": {
+    "title": "SpaceTraders API",
+    "version": "2.3.0",
+    "description": "SpaceTraders is an open-universe game and learning platform that offers a set of HTTP endpoints to control a fleet of ships and explore a multiplayer universe.\n\nThe API is documented using [OpenAPI](https://github.com/SpaceTradersAPI/api-docs). You can send your first request right here in your browser to check the status of the game server.\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://api.spacetraders.io/v2\",\n}\n```\n\nUnlike a traditional game, SpaceTraders does not have a first-party client or app to play the game. Instead, you can use the API to build your own client, write a script to automate your ships, or try an app built by the community.\n\nWe have a [Discord channel](https://discord.com/invite/jh6zurdWk5) where you can share your projects, ask questions, and get help from other players.\n\n\n",
     "contact": {
       "email": "joel@spacetraders.io",
       "name": "Joel Brubaker"
     },
-    "description": "SpaceTraders is an open-universe game and learning platform that offers a set of HTTP endpoints to control a fleet of ships and explore a multiplayer universe.\n\nThe API is documented using [OpenAPI](https://github.com/SpaceTradersAPI/api-docs). You can send your first request right here in your browser to check the status of the game server.\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://api.spacetraders.io/v2\",\n}\n```\n\nUnlike a traditional game, SpaceTraders does not have a first-party client or app to play the game. Instead, you can use the API to build your own client, write a script to automate your ships, or try an app built by the community.\n\nWe have a [Discord channel](https://discord.com/invite/jh6zurdWk5) where you can share your projects, ask questions, and get help from other players.\n\n\n",
     "license": {
       "name": "No Permission",
       "url": "https://choosealicense.com/no-permission/"
-    },
-    "title": "SpaceTraders API",
-    "version": "2.0.0"
+    }
   },
   "security": [
     {
-      "AgentToken": []
+      "AgentToken": [],
+      "AccountToken": []
     }
   ],
   "servers": [
@@ -26,24 +27,32 @@
   ],
   "tags": [
     {
-      "description": "Agents",
+      "description": "The agents endpoints contain actions that relate to agents. Both your own and other agents.",
       "name": "Agents"
     },
     {
-      "description": "Contracts",
+      "description": "The contracts endpoints contain actions that relate to contracts. Contracts are agreements between agents and factions to perform certain services in exchange for a reward.",
       "name": "Contracts"
     },
     {
-      "description": "Factions",
+      "description": "The factions endpoints contain actions that relate to factions. Factions are organizations or sentient beings that are actively competing for control of the universe.",
       "name": "Factions"
     },
     {
-      "description": "Fleet",
+      "description": "The fleet endpoints contain actions that relate to the fleet of ships owned by agents, and the actions those ships can perform.",
       "name": "Fleet"
     },
     {
-      "description": "Systems",
+      "description": "The systems endpoints contain actions that relate to systems and waypoints. Systems are the individual stars in the universe, and waypoints are the locations within a system.",
       "name": "Systems"
+    },
+    {
+      "name": "Data",
+      "description": "The data endpoints contain actions that relate to the data that is stored in the game. This is all the data that doesn't change over the course of a reset (but might change between resets)."
+    },
+    {
+      "description": "The global endpoints contain actions that relate to the game server itself. This includes announcements, leaderboards, and server resets. It also includes endpoints that don't fit into the other categories.",
+      "name": "Global"
     }
   ],
   "components": {
@@ -51,9 +60,16 @@
     "schemas": {},
     "securitySchemes": {
       "AgentToken": {
-        "description": "When you register a new agent you will be granted a private bearer token which grants authorization to use the API.",
+        "description": "When you register a new agent you will be granted a private bearer token which grants authorization to use the API during a specific reset.",
         "scheme": "bearer",
-        "type": "http"
+        "type": "http",
+        "bearerFormat": "JWT"
+      },
+      "AccountToken": {
+        "description": "When you create an account you will be able to generate a private bearer token which grants authorization to create agents.",
+        "scheme": "bearer",
+        "type": "http",
+        "bearerFormat": "JWT"
       }
     },
     "links": {},
@@ -64,6 +80,9 @@
       "get": {
         "description": "Return the status of the game server.\nThis also includes a few global elements, such as announcements, server reset dates and leaderboards.",
         "operationId": "get-status",
+        "tags": [
+          "Global"
+        ],
         "responses": {
           "200": {
             "content": {
@@ -248,8 +267,16 @@
     },
     "/register": {
       "post": {
-        "description": "Creates a new agent and ties it to an account. \nThe agent symbol must consist of a 3-14 character string, and will be used to represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nThis new agent will be tied to a starting faction of your choice, which determines your starting location, and will be granted an authorization token, a contract with their starting faction, a command ship that can fly across space with advanced capabilities, a small probe ship that can be used for reconnaissance, and 150,000 credits.\n\n> #### Keep your token safe and secure\n>\n> Save your token during the alpha phase. There is no way to regenerate this token without starting a new agent. In the future you will be able to generate and manage your tokens from the SpaceTraders website.\n\nIf you are new to SpaceTraders, It is recommended to register with the COSMIC faction, a faction that is well connected to the rest of the universe. After registering, you should try our interactive [quickstart guide](https://docs.spacetraders.io/quickstart/new-game) which will walk you through basic API requests in just a few minutes.",
+        "description": "Creates a new agent and ties it to an account. \nThe agent symbol must consist of a 3-14 character string, and will be used to represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nThis new agent will be tied to a starting faction of your choice, which determines your starting location, and will be granted an authorization token, a contract with their starting faction, a command ship that can fly across space with advanced capabilities, a small probe ship that can be used for reconnaissance, and 175,000 credits.\n\n> #### Keep your token safe and secure\n>\n> Keep careful track of where you store your token. You can generate a new token from our account dashboard, but if someone else gains access to your token they will be able to use it to make API requests on your behalf until the end of the reset.\n\nIf you are new to SpaceTraders, It is recommended to register with the COSMIC faction, a faction that is well connected to the rest of the universe. After registering, you should try our interactive [quickstart guide](https://docs.spacetraders.io/quickstart/new-game) which will walk you through a few basic API requests in just a few minutes.",
         "operationId": "register",
+        "tags": [
+          "Global"
+        ],
+        "security": [
+          {
+            "AccountToken": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -326,7 +353,6 @@
           }
         },
         "summary": "Register New Agent",
-        "security": [],
         "parameters": []
       }
     },
@@ -2191,11 +2217,7 @@
                         "events": {
                           "type": "array",
                           "items": {
-                            "oneOf": [
-                              {
-                                "$ref": "../models/ShipConditionEvent.json"
-                              }
-                            ]
+                            "$ref": "../models/ShipConditionEvent.json"
                           }
                         }
                       },
@@ -2265,11 +2287,7 @@
                         "events": {
                           "type": "array",
                           "items": {
-                            "oneOf": [
-                              {
-                                "$ref": "../models/ShipConditionEvent.json"
-                              }
-                            ]
+                            "$ref": "../models/ShipConditionEvent.json"
                           }
                         }
                       },
@@ -2348,11 +2366,7 @@
                         "events": {
                           "type": "array",
                           "items": {
-                            "oneOf": [
-                              {
-                                "$ref": "../models/ShipConditionEvent.json"
-                              }
-                            ]
+                            "$ref": "../models/ShipConditionEvent.json"
                           }
                         }
                       },
@@ -3901,536 +3915,55 @@
                           ],
                           "LIQUID_NITROGEN": [
                             "MACHINERY"
-                          ],
-                          "HYDROCARBON": [
-                            "MACHINERY"
-                          ],
-                          "AMMONIA_ICE": [
-                            "MACHINERY"
-                          ],
-                          "ICE_WATER": [
-                            "MACHINERY"
-                          ],
-                          "PRECIOUS_STONES": [
-                            "EXPLOSIVES"
-                          ],
-                          "QUARTZ_SAND": [
-                            "EXPLOSIVES"
-                          ],
-                          "SILICON_CRYSTALS": [
-                            "EXPLOSIVES"
-                          ],
-                          "IRON_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "ALUMINUM_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "SILVER_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "COPPER_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "PLATINUM_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "GOLD_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "URANITE_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "MERITIUM_ORE": [
-                            "EXPLOSIVES"
-                          ],
-                          "DIAMONDS": [
-                            "EXPLOSIVES"
-                          ],
-                          "SHIP_SALVAGE": [
-                            "MACHINERY"
-                          ],
-                          "CULTURAL_ARTIFACTS": [
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "PLASTICS": [
-                            "LIQUID_HYDROGEN"
-                          ],
-                          "FERTILIZERS": [
-                            "LIQUID_NITROGEN"
-                          ],
-                          "FUEL": [
-                            "HYDROCARBON"
-                          ],
-                          "IRON": [
-                            "IRON_ORE"
-                          ],
-                          "ALUMINUM": [
-                            "ALUMINUM_ORE"
-                          ],
-                          "POLYNUCLEOTIDES": [
-                            "LIQUID_HYDROGEN",
-                            "LIQUID_NITROGEN"
-                          ],
-                          "EXPLOSIVES": [
-                            "LIQUID_HYDROGEN",
-                            "LIQUID_NITROGEN"
-                          ],
-                          "COPPER": [
-                            "COPPER_ORE"
-                          ],
-                          "SILVER": [
-                            "SILVER_ORE"
-                          ],
-                          "PLATINUM": [
-                            "PLATINUM_ORE"
-                          ],
-                          "GOLD": [
-                            "GOLD_ORE"
-                          ],
-                          "URANITE": [
-                            "URANITE_ORE"
-                          ],
-                          "MERITIUM": [
-                            "MERITIUM_ORE"
-                          ],
-                          "AMMUNITION": [
-                            "IRON",
-                            "LIQUID_NITROGEN"
-                          ],
-                          "FAB_MATS": [
-                            "IRON",
-                            "QUARTZ_SAND"
-                          ],
-                          "FOOD": [
-                            "FERTILIZERS"
-                          ],
-                          "FABRICS": [
-                            "FERTILIZERS"
-                          ],
-                          "ELECTRONICS": [
-                            "SILICON_CRYSTALS",
-                            "COPPER"
-                          ],
-                          "MACHINERY": [
-                            "IRON"
-                          ],
-                          "EQUIPMENT": [
-                            "ALUMINUM",
-                            "PLASTICS"
-                          ],
-                          "JEWELRY": [
-                            "GOLD",
-                            "SILVER",
-                            "PRECIOUS_STONES",
-                            "DIAMONDS"
-                          ],
-                          "MICROPROCESSORS": [
-                            "SILICON_CRYSTALS",
-                            "COPPER"
-                          ],
-                          "FIREARMS": [
-                            "IRON",
-                            "AMMUNITION"
-                          ],
-                          "ASSAULT_RIFLES": [
-                            "ALUMINUM",
-                            "AMMUNITION"
-                          ],
-                          "CLOTHING": [
-                            "FABRICS"
-                          ],
-                          "SHIP_PLATING": [
-                            "ALUMINUM",
-                            "MACHINERY"
-                          ],
-                          "SHIP_PARTS": [
-                            "EQUIPMENT",
-                            "ELECTRONICS"
-                          ],
-                          "MEDICINE": [
-                            "FABRICS",
-                            "POLYNUCLEOTIDES"
-                          ],
-                          "DRUGS": [
-                            "AMMONIA_ICE",
-                            "POLYNUCLEOTIDES"
-                          ],
-                          "MILITARY_EQUIPMENT": [
-                            "ALUMINUM",
-                            "ELECTRONICS"
-                          ],
-                          "LAB_INSTRUMENTS": [
-                            "ELECTRONICS",
-                            "EQUIPMENT"
-                          ],
-                          "BIOCOMPOSITES": [
-                            "FABRICS",
-                            "POLYNUCLEOTIDES"
-                          ],
-                          "ADVANCED_CIRCUITRY": [
-                            "ELECTRONICS",
-                            "MICROPROCESSORS"
-                          ],
-                          "REACTOR_SOLAR_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "REACTOR_FUSION_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "REACTOR_FISSION_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "REACTOR_CHEMICAL_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "REACTOR_ANTIMATTER_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "ENGINE_IMPULSE_DRIVE_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "ENGINE_ION_DRIVE_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MODULE_CARGO_HOLD_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MODULE_CARGO_HOLD_II": [
-                            "ALUMINUM",
-                            "MACHINERY"
-                          ],
-                          "MODULE_MINERAL_PROCESSOR_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MODULE_GAS_PROCESSOR_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MODULE_CREW_QUARTERS_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "FABRICS"
-                          ],
-                          "MODULE_ENVOY_QUARTERS_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "FABRICS"
-                          ],
-                          "MODULE_PASSENGER_CABIN_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "FABRICS"
-                          ],
-                          "MODULE_SCIENCE_LAB_I": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_ORE_REFINERY_I": [
-                            "PLATINUM",
-                            "MACHINERY"
-                          ],
-                          "MODULE_FUEL_REFINERY_I": [
-                            "PLATINUM",
-                            "MACHINERY"
-                          ],
-                          "MODULE_MICRO_REFINERY_I": [
-                            "PLATINUM",
-                            "MACHINERY"
-                          ],
-                          "MOUNT_GAS_SIPHON_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MOUNT_GAS_SIPHON_II": [
-                            "ALUMINUM",
-                            "MACHINERY"
-                          ],
-                          "MOUNT_SURVEYOR_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "ELECTRONICS"
-                          ],
-                          "MOUNT_SURVEYOR_II": [
-                            "ALUMINUM",
-                            "MACHINERY",
-                            "ELECTRONICS"
-                          ],
-                          "MOUNT_SENSOR_ARRAY_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "ELECTRONICS"
-                          ],
-                          "MOUNT_SENSOR_ARRAY_II": [
-                            "ALUMINUM",
-                            "MACHINERY",
-                            "ELECTRONICS"
-                          ],
-                          "MOUNT_MINING_LASER_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "DIAMONDS"
-                          ],
-                          "MOUNT_MINING_LASER_II": [
-                            "ALUMINUM",
-                            "MACHINERY",
-                            "DIAMONDS"
-                          ],
-                          "MOUNT_TURRET_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "MOUNT_LASER_CANNON_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "DIAMONDS"
-                          ],
-                          "MOUNT_MISSILE_LAUNCHER_I": [
-                            "IRON",
-                            "MACHINERY"
-                          ],
-                          "QUANTUM_STABILIZERS": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "ANTIMATTER": [
-                            "LAB_INSTRUMENTS",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "EXOTIC_MATTER": [
-                            "LAB_INSTRUMENTS",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "RELIC_TECH": [
-                            "LAB_INSTRUMENTS",
-                            "EQUIPMENT"
-                          ],
-                          "NOVEL_LIFEFORMS": [
-                            "LAB_INSTRUMENTS",
-                            "EQUIPMENT"
-                          ],
-                          "BOTANICAL_SPECIMENS": [
-                            "LAB_INSTRUMENTS",
-                            "EQUIPMENT"
-                          ],
-                          "AI_MAINFRAMES": [
-                            "ADVANCED_CIRCUITRY",
-                            "MICROPROCESSORS"
-                          ],
-                          "QUANTUM_DRIVES": [
-                            "ADVANCED_CIRCUITRY",
-                            "DIAMONDS"
-                          ],
-                          "GRAVITON_EMITTERS": [
-                            "ADVANCED_CIRCUITRY",
-                            "GOLD"
-                          ],
-                          "ROBOTIC_DRONES": [
-                            "ADVANCED_CIRCUITRY",
-                            "ALUMINUM"
-                          ],
-                          "CYBER_IMPLANTS": [
-                            "ADVANCED_CIRCUITRY",
-                            "BIOCOMPOSITES"
-                          ],
-                          "NANOBOTS": [
-                            "POLYNUCLEOTIDES",
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "GENE_THERAPEUTICS": [
-                            "POLYNUCLEOTIDES",
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "NEURAL_CHIPS": [
-                            "POLYNUCLEOTIDES",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MOOD_REGULATORS": [
-                            "POLYNUCLEOTIDES",
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "VIRAL_AGENTS": [
-                            "POLYNUCLEOTIDES",
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "MICRO_FUSION_GENERATORS": [
-                            "ADVANCED_CIRCUITRY",
-                            "PLATINUM",
-                            "DIAMONDS"
-                          ],
-                          "SUPERGRAINS": [
-                            "FERTILIZERS",
-                            "POLYNUCLEOTIDES",
-                            "LAB_INSTRUMENTS"
-                          ],
-                          "LASER_RIFLES": [
-                            "DIAMONDS",
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "HOLOGRAPHICS": [
-                            "GOLD",
-                            "SILVER",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "ENGINE_ION_DRIVE_II": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "ENGINE_HYPER_DRIVE_I": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_CARGO_HOLD_III": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_JUMP_DRIVE_I": [
-                            "IRON",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_JUMP_DRIVE_II": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY",
-                            "GOLD"
-                          ],
-                          "MODULE_JUMP_DRIVE_III": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY",
-                            "GOLD",
-                            "MERITIUM"
-                          ],
-                          "MODULE_WARP_DRIVE_I": [
-                            "IRON",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_WARP_DRIVE_II": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY",
-                            "URANITE"
-                          ],
-                          "MODULE_WARP_DRIVE_III": [
-                            "PLATINUM",
-                            "ADVANCED_CIRCUITRY",
-                            "MERITIUM",
-                            "MERITIUM"
-                          ],
-                          "MOUNT_GAS_SIPHON_III": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MODULE_SHIELD_GENERATOR_I": [
-                            "IRON",
-                            "MACHINERY",
-                            "URANITE"
-                          ],
-                          "MODULE_SHIELD_GENERATOR_II": [
-                            "ALUMINUM",
-                            "MACHINERY",
-                            "URANITE"
-                          ],
-                          "MOUNT_SURVEYOR_III": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY"
-                          ],
-                          "MOUNT_SENSOR_ARRAY_III": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY",
-                            "URANITE"
-                          ],
-                          "MOUNT_MINING_LASER_III": [
-                            "PLATINUM",
-                            "MACHINERY",
-                            "ADVANCED_CIRCUITRY",
-                            "URANITE"
-                          ],
-                          "SHIP_PROBE": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_MINING_DRONE": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_SIPHON_DRONE": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_LIGHT_HAULER": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_COMMAND_FRIGATE": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_INTERCEPTOR": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_EXPLORER": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_LIGHT_SHUTTLE": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_HEAVY_FREIGHTER": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_ORE_HOUND": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_REFINING_FREIGHTER": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
-                          ],
-                          "SHIP_SURVEYOR": [
-                            "SHIP_PLATING",
-                            "SHIP_PARTS"
                           ]
                         }
                       }
                     }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "exportToImportMap": {
+                          "type": "object",
+                          "properties": {
+                            "string": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "exportToImportMap"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
                   }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
+                },
+                "application/xml": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {}
+                  }
                 }
               }
             }
-          }
+          },
+          "tags": [
+            "Data"
+          ],
+          "security": [
+            {
+              "AgentToken": []
+            }
+          ]
         },
-        "tags": [
-          "Data"
-        ],
-        "security": [
-          {
-            "AgentToken": []
-          }
-        ]
-      },
-      "parameters": []
+        "parameters": []
+      }
     }
   }
-}
