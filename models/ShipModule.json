@@ -36,7 +36,7 @@
     "range": {
       "type": "integer",
       "minimum": 0,
-      "description": "Modules that have a range will such as a sensor array show this value to denote how far can the module reach with its capabilities."
+      "description": "Modules that have a range will such as a sensor array show this value to denote how far the module can reach with its capabilities."
     },
     "name": {
       "type": "string",
