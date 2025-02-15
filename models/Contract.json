@@ -29,6 +29,11 @@
       "default": false,
       "description": "Whether the contract has been accepted by the agent"
     },
+    "declined": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the contract has been declined"
+    },
     "fulfilled": {
       "type": "boolean",
       "default": false,

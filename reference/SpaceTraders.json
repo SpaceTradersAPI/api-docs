@@ -1471,6 +1471,60 @@
         ]
       }
     },
+    "/my/contracts/{contractId}/decline": {
+      "post": {
+        "description": "Politely decline a contract.",
+        "operationId": "decline-contract",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "contract": {
+                          "$ref": "../models/Contract.json"
+                        }
+                      },
+                      "required": [
+                        "contract"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Succesfully declined contract."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Decline Contract",
+        "tags": [
+          "Contracts"
+        ],
+        "parameters": [
+          {
+            "description": "The contract ID to decline.",
+            "in": "path",
+            "name": "contractId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/my/contracts/{contractId}/fulfill": {
       "post": {
         "description": "Fulfill a contract. Can only be used on contracts that have all of their delivery terms fulfilled.",
@@ -3967,3 +4021,4 @@
       }
     }
   }
+}
