@@ -53,6 +53,7 @@
     "terms",
     "accepted",
     "fulfilled",
-    "expiration"
+    "expiration",
+    "deadlineToAccept"
   ]
 }
