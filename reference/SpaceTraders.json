@@ -2719,1412 +2719,1412 @@
                     "type": "object"
                   }
                 }
-              },
-              "description": "The updated data of the ship."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Patch Ship Nav",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
               }
-            }
-          ]
+            },
+            "description": "The updated data of the ship."
+          }
         },
-        "get": {
-          "description": "Get the current nav status of a ship.",
-          "operationId": "get-ship-nav",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Patch Ship Nav",
+        "tags": [
+          "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "description": "Get the current nav status of a ship.",
+        "operationId": "get-ship-nav",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "properties": {
+                    "data": {
+                      "$ref": "../models/ShipNav.json"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The current nav status of the ship."
+          }
+        },
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ],
+        "summary": "Get Ship Nav",
+        "tags": [
+          "Fleet"
+        ],
+        "parameters": [
+          {
+            "description": "The ship symbol.",
+            "in": "path",
+            "name": "shipSymbol",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "/my/ships/{shipSymbol}/warp": {
+    "post": {
+      "description": "Warp your ship to a target destination in another system. The ship must be in orbit to use this function and must have the `Warp Drive` module installed. Warping will consume the necessary fuel from the ship's manifest.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at its destination.",
+      "operationId": "warp-ship",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "waypointSymbol": {
+                  "description": "The target destination.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "waypointSymbol"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "description": ""
+      },
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
                     "properties": {
-                      "data": {
+                      "fuel": {
+                        "$ref": "../models/ShipFuel.json"
+                      },
+                      "nav": {
                         "$ref": "../models/ShipNav.json"
                       }
                     },
                     "required": [
-                      "data"
+                      "nav",
+                      "fuel"
                     ],
                     "type": "object"
                   }
-                }
-              },
-              "description": "The current nav status of the ship."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Get Ship Nav",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
               }
             }
-          ]
+          },
+          "description": "The successful transit information including the route details and changes to ship fuel. The route includes the expected time of arrival."
         }
       },
-      "/my/ships/{shipSymbol}/warp": {
-        "post": {
-          "description": "Warp your ship to a target destination in another system. The ship must be in orbit to use this function and must have the `Warp Drive` module installed. Warping will consume the necessary fuel from the ship's manifest.\n\nThe returned response will detail the route information including the expected time of arrival. Most ship actions are unavailable until the ship has arrived at its destination.",
-          "operationId": "warp-ship",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "waypointSymbol": {
-                      "description": "The target destination.",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "waypointSymbol"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": ""
-          },
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "fuel": {
-                            "$ref": "../models/ShipFuel.json"
-                          },
-                          "nav": {
-                            "$ref": "../models/ShipNav.json"
-                          }
-                        },
-                        "required": [
-                          "nav",
-                          "fuel"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "The successful transit information including the route details and changes to ship fuel. The route includes the expected time of arrival."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Warp Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
+      "security": [
+        {
+          "AgentToken": []
         }
-      },
-      "/my/ships/{shipSymbol}/sell": {
-        "post": {
-          "description": "Sell cargo in your ship to a market that trades this cargo. The ship must be docked in a waypoint that has the `Marketplace` trait in order to use this function.",
-          "operationId": "sell-cargo",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "SellCargoRequest",
-                  "type": "object",
-                  "properties": {
-                    "symbol": {
-                      "$ref": "../models/TradeSymbol.json"
-                    },
-                    "units": {
-                      "type": "integer",
-                      "description": "Amounts of units to sell of the selected good."
-                    }
-                  },
-                  "required": [
-                    "symbol",
-                    "units"
-                  ]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Sell Cargo 201 Response",
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/MarketTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "cargo",
-                          "transaction",
-                          "agent"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Cargo was successfully sold."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Sell Cargo",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "Symbol of a ship."
-            }
-          ]
+      ],
+      "summary": "Warp Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
         }
-      },
-      "/my/ships/{shipSymbol}/scan/systems": {
-        "post": {
-          "description": "Scan for nearby systems, retrieving information on the systems' distance from the ship and their waypoints. Requires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
-          "operationId": "create-ship-system-scan",
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "cooldown",
-                          "systems"
-                        ],
-                        "properties": {
-                          "cooldown": {
-                            "$ref": "../models/Cooldown.json"
-                          },
-                          "systems": {
-                            "type": "array",
-                            "description": "List of scanned systems.",
-                            "items": {
-                              "$ref": "../models/ScannedSystem.json"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/sell": {
+    "post": {
+      "description": "Sell cargo in your ship to a market that trades this cargo. The ship must be docked in a waypoint that has the `Marketplace` trait in order to use this function.",
+      "operationId": "sell-cargo",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "SellCargoRequest",
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "$ref": "../models/TradeSymbol.json"
+                },
+                "units": {
+                  "type": "integer",
+                  "description": "Amounts of units to sell of the selected good."
                 }
               },
-              "description": "Successfully scanned for nearby systems."
+              "required": [
+                "symbol",
+                "units"
+              ]
             }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Scan Systems",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/scan/waypoints": {
-        "post": {
-          "description": "Scan for nearby waypoints, retrieving detailed information on each waypoint in range. Scanning uncharted waypoints will allow you to ignore their uncharted state and will list the waypoints' traits.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
-          "operationId": "create-ship-waypoint-scan",
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "cooldown",
-                          "waypoints"
-                        ],
-                        "properties": {
-                          "cooldown": {
-                            "$ref": "../models/Cooldown.json"
-                          },
-                          "waypoints": {
-                            "type": "array",
-                            "description": "List of scanned waypoints.",
-                            "items": {
-                              "$ref": "../models/ScannedWaypoint.json"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                }
-              },
-              "description": "Successfully scanned for nearby waypoints."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Scan Waypoints",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/scan/ships": {
-        "post": {
-          "description": "Scan for nearby ships, retrieving information for all ships in range.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
-          "operationId": "create-ship-ship-scan",
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "cooldown",
-                          "ships"
-                        ],
-                        "properties": {
-                          "cooldown": {
-                            "$ref": "../models/Cooldown.json"
-                          },
-                          "ships": {
-                            "type": "array",
-                            "description": "List of scanned ships.",
-                            "items": {
-                              "$ref": "../models/ScannedShip.json"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                }
-              },
-              "description": "Successfully scanned for nearby ships."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Scan Ships",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/refuel": {
-        "post": {
-          "description": "Refuel your ship by buying fuel from the local market.\n\nRequires the ship to be docked in a waypoint that has the `Marketplace` trait, and the market must be selling fuel in order to refuel.\n\nEach fuel bought from the market replenishes 100 units in your ship's fuel.\n\nShips will always be refuel to their frame's maximum fuel capacity when using this action.",
-          "operationId": "refuel-ship",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "units": {
-                      "type": "integer",
-                      "description": "The amount of fuel to fill in the ship's tanks. When not specified, the ship will be refueled to its maximum fuel capacity. If the amount specified is greater than the ship's remaining capacity, the ship will only be refueled to its maximum fuel capacity. The amount specified is not in market units but in ship fuel units.",
-                      "example": "100",
-                      "minimum": 1
-                    },
-                    "fromCargo": {
-                      "type": "boolean",
-                      "description": "Wether to use the FUEL thats in your cargo or not. Default: false",
-                      "example": false
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "fuel": {
-                            "$ref": "../models/ShipFuel.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/MarketTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "agent",
-                          "fuel",
-                          "transaction"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Refueled successfully."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Refuel Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/purchase": {
-        "post": {
-          "description": "Purchase cargo from a market.\n\nThe ship must be docked in a waypoint that has `Marketplace` trait, and the market must be selling a good to be able to purchase it.\n\nThe maximum amount of units of a good that can be purchased in each transaction are denoted by the `tradeVolume` value of the good, which can be viewed by using the Get Market action.\n\nPurchased goods are added to the ship's cargo hold.",
-          "operationId": "purchase-cargo",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Purchase Cargo Request",
-                  "type": "object",
-                  "properties": {
-                    "symbol": {
-                      "$ref": "../models/TradeSymbol.json"
-                    },
-                    "units": {
-                      "type": "integer",
-                      "description": "Amounts of units to purchase."
-                    }
-                  },
-                  "required": [
-                    "symbol",
-                    "units"
-                  ]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Purchase Cargo 201 Response",
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/MarketTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "cargo",
-                          "transaction",
-                          "agent"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Purchased goods successfully."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Purchase Cargo",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/transfer": {
-        "post": {
-          "description": "Transfer cargo between ships.\n\nThe receiving ship must be in the same waypoint as the transferring ship, and it must able to hold the additional cargo after the transfer is complete. Both ships also must be in the same state, either both are docked or both are orbiting.\n\nThe response body's cargo shows the cargo of the transferring ship after the transfer is complete.",
-          "operationId": "transfer-cargo",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Transfer Cargo Request",
-                  "type": "object",
-                  "properties": {
-                    "tradeSymbol": {
-                      "$ref": "../models/TradeSymbol.json"
-                    },
-                    "units": {
-                      "type": "integer",
-                      "description": "Amount of units to transfer."
-                    },
-                    "shipSymbol": {
-                      "type": "string",
-                      "description": "The symbol of the ship to transfer to."
-                    }
-                  },
-                  "required": [
-                    "tradeSymbol",
-                    "units",
-                    "shipSymbol"
-                  ]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Transfer Cargo 200 Response",
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "cargo"
-                        ],
-                        "properties": {
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                }
-              },
-              "description": "Transfer successful."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Transfer Cargo",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The transferring ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/negotiate/contract": {
-        "post": {
-          "description": "Negotiate a new contract with the HQ.\n\nIn order to negotiate a new contract, an agent must not have ongoing or offered contracts over the allowed maximum amount. Currently the maximum contracts an agent can have at a time is 1.\n\nOnce a contract is negotiated, it is added to the list of contracts offered to the agent, which the agent can then accept. \n\nThe ship must be present at any waypoint with a faction present to negotiate a contract with that faction.",
-          "operationId": "negotiateContract",
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Negotiate Contract 200 Response",
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "contract": {
-                            "$ref": "../models/Contract.json"
-                          }
-                        },
-                        "required": [
-                          "contract"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Successfully negotiated a new contract."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Negotiate Contract",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/mounts": {
-        "get": {
-          "description": "Get the mounts installed on a ship.",
-          "operationId": "get-mounts",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Get Mounts 200 Response",
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "items": {
-                          "$ref": "../models/ShipMount.json"
-                        },
-                        "type": "array"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Got installed mounts."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Get Mounts",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/mounts/install": {
-        "post": {
-          "description": "Install a mount on a ship.\n\nIn order to install a mount, the ship must be docked and located in a waypoint that has a `Shipyard` trait. The ship also must have the mount to install in its cargo hold.\n\nAn installation fee will be deduced by the Shipyard for installing the mount on the ship. ",
-          "operationId": "install-mount",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Install Mount Request",
-                  "properties": {
-                    "symbol": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "symbol"
-                  ],
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Install Mount 201 Response",
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "agent",
-                          "mounts",
-                          "cargo",
-                          "transaction"
-                        ],
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "mounts": {
-                            "type": "array",
-                            "description": "List of installed mounts after the installation of the new mount.",
-                            "items": {
-                              "$ref": "../models/ShipMount.json"
-                            }
-                          },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/ShipModificationTransaction.json"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                }
-              },
-              "description": "Successfully installed the mount."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Install Mount",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/mounts/remove": {
-        "post": {
-          "description": "Remove a mount from a ship.\n\nThe ship must be docked in a waypoint that has the `Shipyard` trait, and must have the desired mount that it wish to remove installed.\n\nA removal fee will be deduced from the agent by the Shipyard.",
-          "operationId": "remove-mount",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Remove Mount Request",
-                  "type": "object",
-                  "properties": {
-                    "symbol": {
-                      "type": "string",
-                      "description": "The symbol of the mount to remove."
-                    }
-                  },
-                  "required": [
-                    "symbol"
-                  ]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "title": "Remove Mount 201 Response",
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "required": [
-                          "agent",
-                          "mounts",
-                          "cargo",
-                          "transaction"
-                        ],
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "mounts": {
-                            "type": "array",
-                            "description": "List of installed mounts after the removal of the selected mount.",
-                            "items": {
-                              "$ref": "../models/ShipMount.json"
-                            }
-                          },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/ShipModificationTransaction.json"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                }
-              },
-              "description": "Successfully removed the mount."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Remove Mount",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ship's symbol."
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/scrap": {
-        "get": {
-          "x-preview-feature": true,
-          "description": "Get the amount of value that will be returned when scrapping a ship.",
-          "operationId": "get-scrap-ship",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "transaction": {
-                            "$ref": "../models/ScrapTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "transaction"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Successfully retrieved the amount of value that will be returned when scrapping a ship."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Get Scrap Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "post": {
-          "x-preview-feature": true,
-          "description": "Scrap a ship, removing it from the game and returning a portion of the ship's value to the agent. The ship must be docked in a waypoint that has the `Shipyard` trait in order to use this function. To preview the amount of value that will be returned, use the Get Ship action.",
-          "operationId": "scrap-ship",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/ScrapTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "agent",
-                          "transaction"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Ship scrapped successfully."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Scrap Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/my/ships/{shipSymbol}/repair": {
-        "get": {
-          "x-preview-feature": true,
-          "description": "Get the cost of repairing a ship.",
-          "operationId": "get-repair-ship",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "transaction": {
-                            "$ref": "../models/RepairTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "transaction"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Successfully retrieved the cost of repairing a ship."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Get Repair Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "post": {
-          "x-preview-feature": true,
-          "description": "Repair a ship, restoring the ship to maximum condition. The ship must be docked at a waypoint that has the `Shipyard` trait in order to use this function. To preview the cost of repairing the ship, use the Get action.",
-          "operationId": "repair-ship",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "properties": {
-                      "data": {
-                        "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
-                          },
-                          "ship": {
-                            "$ref": "../models/Ship.json"
-                          },
-                          "transaction": {
-                            "$ref": "../models/RepairTransaction.json"
-                          }
-                        },
-                        "required": [
-                          "agent",
-                          "ship",
-                          "transaction"
-                        ],
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ],
-                    "type": "object"
-                  }
-                }
-              },
-              "description": "Ship repaired successfully."
-            }
-          },
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ],
-          "summary": "Repair Ship",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "description": "The ship symbol.",
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/market/supply-chain": {
-        "get": {
-          "summary": "Get Supply Chain",
-          "description": "Describes which import and exports map to each other.",
-          "parameters": [],
-          "operationId": "get-supply-chain",
-          "responses": {
-            "200": {
-              "description": "Successfully retrieved the supply chain information",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "x-examples": {
-                      "Example 1": {
-                        "data": {
-                          "exportToImportMap": {
-                            "LIQUID_HYDROGEN": [
-                              "MACHINERY"
-                            ],
-                            "LIQUID_NITROGEN": [
-                              "MACHINERY"
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "exportToImportMap": {
-                            "type": "object",
-                            "properties": {
-                              "string": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "exportToImportMap"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "data"
-                      ]
-                    }
-                  },
-                  "application/xml": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {}
-                    }
-                  }
-                }
-              }
-            },
-            "tags": [
-              "Data"
-            ],
-            "security": [
-              {
-                "AgentToken": []
-              }
-            ]
           }
         }
       },
-      "/my/ships/{shipSymbol}/modules": {
-        "get": {
-          "operationId": "get-ship-modules",
-          "summary": "Get Ship Modules",
-          "description": "Get the modules installed on a ship.",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
-              },
-              "description": "The symbol of the ship"
+                "title": "Sell Cargo 201 Response",
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/MarketTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "cargo",
+                      "transaction",
+                      "agent"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successfully retrieved ship modules.",
-              "content": {
-                "application/json": {
-                  "schema": {
+          },
+          "description": "Cargo was successfully sold."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Sell Cargo",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Symbol of a ship."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/scan/systems": {
+    "post": {
+      "description": "Scan for nearby systems, retrieving information on the systems' distance from the ship and their waypoints. Requires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
+      "operationId": "create-ship-system-scan",
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
                     "type": "object",
                     "required": [
-                      "data"
+                      "cooldown",
+                      "systems"
                     ],
                     "properties": {
-                      "data": {
+                      "cooldown": {
+                        "$ref": "../models/Cooldown.json"
+                      },
+                      "systems": {
+                        "type": "array",
+                        "description": "List of scanned systems.",
+                        "items": {
+                          "$ref": "../models/ScannedSystem.json"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Successfully scanned for nearby systems."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Scan Systems",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/scan/waypoints": {
+    "post": {
+      "description": "Scan for nearby waypoints, retrieving detailed information on each waypoint in range. Scanning uncharted waypoints will allow you to ignore their uncharted state and will list the waypoints' traits.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
+      "operationId": "create-ship-waypoint-scan",
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "cooldown",
+                      "waypoints"
+                    ],
+                    "properties": {
+                      "cooldown": {
+                        "$ref": "../models/Cooldown.json"
+                      },
+                      "waypoints": {
+                        "type": "array",
+                        "description": "List of scanned waypoints.",
+                        "items": {
+                          "$ref": "../models/ScannedWaypoint.json"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Successfully scanned for nearby waypoints."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Scan Waypoints",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/scan/ships": {
+    "post": {
+      "description": "Scan for nearby ships, retrieving information for all ships in range.\n\nRequires a ship to have the `Sensor Array` mount installed to use.\n\nThe ship will enter a cooldown after using this function, during which it cannot execute certain actions.",
+      "operationId": "create-ship-ship-scan",
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "cooldown",
+                      "ships"
+                    ],
+                    "properties": {
+                      "cooldown": {
+                        "$ref": "../models/Cooldown.json"
+                      },
+                      "ships": {
+                        "type": "array",
+                        "description": "List of scanned ships.",
+                        "items": {
+                          "$ref": "../models/ScannedShip.json"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Successfully scanned for nearby ships."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Scan Ships",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/refuel": {
+    "post": {
+      "description": "Refuel your ship by buying fuel from the local market.\n\nRequires the ship to be docked in a waypoint that has the `Marketplace` trait, and the market must be selling fuel in order to refuel.\n\nEach fuel bought from the market replenishes 100 units in your ship's fuel.\n\nShips will always be refuel to their frame's maximum fuel capacity when using this action.",
+      "operationId": "refuel-ship",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "units": {
+                  "type": "integer",
+                  "description": "The amount of fuel to fill in the ship's tanks. When not specified, the ship will be refueled to its maximum fuel capacity. If the amount specified is greater than the ship's remaining capacity, the ship will only be refueled to its maximum fuel capacity. The amount specified is not in market units but in ship fuel units.",
+                  "example": "100",
+                  "minimum": 1
+                },
+                "fromCargo": {
+                  "type": "boolean",
+                  "description": "Wether to use the FUEL thats in your cargo or not. Default: false",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "fuel": {
+                        "$ref": "../models/ShipFuel.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/MarketTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "agent",
+                      "fuel",
+                      "transaction"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Refueled successfully."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Refuel Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/purchase": {
+    "post": {
+      "description": "Purchase cargo from a market.\n\nThe ship must be docked in a waypoint that has `Marketplace` trait, and the market must be selling a good to be able to purchase it.\n\nThe maximum amount of units of a good that can be purchased in each transaction are denoted by the `tradeVolume` value of the good, which can be viewed by using the Get Market action.\n\nPurchased goods are added to the ship's cargo hold.",
+      "operationId": "purchase-cargo",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Purchase Cargo Request",
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "$ref": "../models/TradeSymbol.json"
+                },
+                "units": {
+                  "type": "integer",
+                  "description": "Amounts of units to purchase."
+                }
+              },
+              "required": [
+                "symbol",
+                "units"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Purchase Cargo 201 Response",
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/MarketTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "cargo",
+                      "transaction",
+                      "agent"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Purchased goods successfully."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Purchase Cargo",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/transfer": {
+    "post": {
+      "description": "Transfer cargo between ships.\n\nThe receiving ship must be in the same waypoint as the transferring ship, and it must able to hold the additional cargo after the transfer is complete. Both ships also must be in the same state, either both are docked or both are orbiting.\n\nThe response body's cargo shows the cargo of the transferring ship after the transfer is complete.",
+      "operationId": "transfer-cargo",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Transfer Cargo Request",
+              "type": "object",
+              "properties": {
+                "tradeSymbol": {
+                  "$ref": "../models/TradeSymbol.json"
+                },
+                "units": {
+                  "type": "integer",
+                  "description": "Amount of units to transfer."
+                },
+                "shipSymbol": {
+                  "type": "string",
+                  "description": "The symbol of the ship to transfer to."
+                }
+              },
+              "required": [
+                "tradeSymbol",
+                "units",
+                "shipSymbol"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Transfer Cargo 200 Response",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "cargo"
+                    ],
+                    "properties": {
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Transfer successful."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Transfer Cargo",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The transferring ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/negotiate/contract": {
+    "post": {
+      "description": "Negotiate a new contract with the HQ.\n\nIn order to negotiate a new contract, an agent must not have ongoing or offered contracts over the allowed maximum amount. Currently the maximum contracts an agent can have at a time is 1.\n\nOnce a contract is negotiated, it is added to the list of contracts offered to the agent, which the agent can then accept. \n\nThe ship must be present at any waypoint with a faction present to negotiate a contract with that faction.",
+      "operationId": "negotiateContract",
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Negotiate Contract 200 Response",
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "contract": {
+                        "$ref": "../models/Contract.json"
+                      }
+                    },
+                    "required": [
+                      "contract"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Successfully negotiated a new contract."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Negotiate Contract",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/mounts": {
+    "get": {
+      "description": "Get the mounts installed on a ship.",
+      "operationId": "get-mounts",
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Get Mounts 200 Response",
+                "description": "",
+                "properties": {
+                  "data": {
+                    "items": {
+                      "$ref": "../models/ShipMount.json"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Got installed mounts."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Get Mounts",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/mounts/install": {
+    "post": {
+      "description": "Install a mount on a ship.\n\nIn order to install a mount, the ship must be docked and located in a waypoint that has a `Shipyard` trait. The ship also must have the mount to install in its cargo hold.\n\nAn installation fee will be deduced by the Shipyard for installing the mount on the ship. ",
+      "operationId": "install-mount",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Install Mount Request",
+              "properties": {
+                "symbol": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "symbol"
+              ],
+              "type": "object"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Install Mount 201 Response",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "agent",
+                      "mounts",
+                      "cargo",
+                      "transaction"
+                    ],
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "mounts": {
+                        "type": "array",
+                        "description": "List of installed mounts after the installation of the new mount.",
+                        "items": {
+                          "$ref": "../models/ShipMount.json"
+                        }
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/ShipModificationTransaction.json"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Successfully installed the mount."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Install Mount",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/mounts/remove": {
+    "post": {
+      "description": "Remove a mount from a ship.\n\nThe ship must be docked in a waypoint that has the `Shipyard` trait, and must have the desired mount that it wish to remove installed.\n\nA removal fee will be deduced from the agent by the Shipyard.",
+      "operationId": "remove-mount",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "Remove Mount Request",
+              "type": "object",
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "description": "The symbol of the mount to remove."
+                }
+              },
+              "required": [
+                "symbol"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Remove Mount 201 Response",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "agent",
+                      "mounts",
+                      "cargo",
+                      "transaction"
+                    ],
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "mounts": {
+                        "type": "array",
+                        "description": "List of installed mounts after the removal of the selected mount.",
+                        "items": {
+                          "$ref": "../models/ShipMount.json"
+                        }
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/ShipModificationTransaction.json"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": "Successfully removed the mount."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Remove Mount",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The ship's symbol."
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/scrap": {
+    "get": {
+      "x-preview-feature": true,
+      "description": "Get the amount of value that will be returned when scrapping a ship.",
+      "operationId": "get-scrap-ship",
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "transaction": {
+                        "$ref": "../models/ScrapTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "transaction"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Successfully retrieved the amount of value that will be returned when scrapping a ship."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Get Scrap Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "post": {
+      "x-preview-feature": true,
+      "description": "Scrap a ship, removing it from the game and returning a portion of the ship's value to the agent. The ship must be docked in a waypoint that has the `Shipyard` trait in order to use this function. To preview the amount of value that will be returned, use the Get Ship action.",
+      "operationId": "scrap-ship",
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/ScrapTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "agent",
+                      "transaction"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Ship scrapped successfully."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Scrap Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/my/ships/{shipSymbol}/repair": {
+    "get": {
+      "x-preview-feature": true,
+      "description": "Get the cost of repairing a ship.",
+      "operationId": "get-repair-ship",
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "transaction": {
+                        "$ref": "../models/RepairTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "transaction"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Successfully retrieved the cost of repairing a ship."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Get Repair Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "post": {
+      "x-preview-feature": true,
+      "description": "Repair a ship, restoring the ship to maximum condition. The ship must be docked at a waypoint that has the `Shipyard` trait in order to use this function. To preview the cost of repairing the ship, use the Get action.",
+      "operationId": "repair-ship",
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "ship": {
+                        "$ref": "../models/Ship.json"
+                      },
+                      "transaction": {
+                        "$ref": "../models/RepairTransaction.json"
+                      }
+                    },
+                    "required": [
+                      "agent",
+                      "ship",
+                      "transaction"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Ship repaired successfully."
+        }
+      },
+      "security": [
+        {
+          "AgentToken": []
+        }
+      ],
+      "summary": "Repair Ship",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "description": "The ship symbol.",
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "/market/supply-chain": {
+    "get": {
+      "summary": "Get Supply Chain",
+      "description": "Describes which import and exports map to each other.",
+      "parameters": [],
+      "operationId": "get-supply-chain",
+      "responses": {
+        "200": {
+          "description": "Successfully retrieved the supply chain information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "data": {
+                      "exportToImportMap": {
+                        "LIQUID_HYDROGEN": [
+                          "MACHINERY"
+                        ],
+                        "LIQUID_NITROGEN": [
+                          "MACHINERY"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "exportToImportMap": {
+                        "type": "object",
+                        "properties": {
+                          "string": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "exportToImportMap"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data"
+        ],
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
+      }
+    }
+  },
+  "/my/ships/{shipSymbol}/modules": {
+    "get": {
+      "operationId": "get-ship-modules",
+      "summary": "Get Ship Modules",
+      "description": "Get the modules installed on a ship.",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The symbol of the ship"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successfully retrieved ship modules.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "../models/ShipModule.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/my/ships/{shipSymbol}/modules/install": {
+    "post": {
+      "operationId": "install-ship-module",
+      "summary": "Install Ship Module",
+      "description": "Install a module on a ship. The module must be in your cargo.",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The symbol of the ship"
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "symbol"
+              ],
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "description": "The symbol of the module to install"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Successfully installed the module on the ship.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "agent",
+                      "modules",
+                      "cargo",
+                      "transaction"
+                    ],
+                    "properties": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "modules": {
                         "type": "array",
                         "items": {
                           "$ref": "../models/ShipModule.json"
                         }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/my/ships/{shipSymbol}/modules/install": {
-        "post": {
-          "operationId": "install-ship-module",
-          "summary": "Install Ship Module",
-          "description": "Install a module on a ship. The module must be in your cargo.",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The symbol of the ship"
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "symbol"
-                  ],
-                  "properties": {
-                    "symbol": {
-                      "type": "string",
-                      "description": "The symbol of the module to install"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "Successfully installed the module on the ship.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "required": [
-                      "data"
-                    ],
-                    "properties": {
-                      "data": {
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
                         "type": "object",
                         "required": [
-                          "agent",
-                          "modules",
-                          "cargo",
-                          "transaction"
+                          "waypointSymbol",
+                          "shipSymbol",
+                          "tradeSymbol",
+                          "totalPrice",
+                          "timestamp"
                         ],
                         "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
+                          "waypointSymbol": {
+                            "type": "string"
                           },
-                          "modules": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/ShipModule.json"
-                            }
+                          "shipSymbol": {
+                            "type": "string"
                           },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
+                          "tradeSymbol": {
+                            "type": "string"
                           },
-                          "transaction": {
-                            "type": "object",
-                            "required": [
-                              "waypointSymbol",
-                              "shipSymbol",
-                              "tradeSymbol",
-                              "totalPrice",
-                              "timestamp"
-                            ],
-                            "properties": {
-                              "waypointSymbol": {
-                                "type": "string"
-                              },
-                              "shipSymbol": {
-                                "type": "string"
-                              },
-                              "tradeSymbol": {
-                                "type": "string"
-                              },
-                              "totalPrice": {
-                                "type": "integer"
-                              },
-                              "timestamp": {
-                                "type": "string"
-                              }
-                            }
+                          "totalPrice": {
+                            "type": "integer"
+                          },
+                          "timestamp": {
+                            "type": "string"
                           }
                         }
                       }
@@ -4135,102 +4135,102 @@
             }
           }
         }
-      },
-      "/my/ships/{shipSymbol}/modules/remove": {
-        "post": {
-          "operationId": "remove-ship-module",
-          "summary": "Remove Ship Module",
-          "description": "Remove a module from a ship. The module will be placed in cargo.",
-          "tags": [
-            "Fleet"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "shipSymbol",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The symbol of the ship"
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "symbol"
-                  ],
-                  "properties": {
-                    "symbol": {
-                      "type": "string",
-                      "description": "The symbol of the module to remove"
-                    }
-                  }
+      }
+    }
+  },
+  "/my/ships/{shipSymbol}/modules/remove": {
+    "post": {
+      "operationId": "remove-ship-module",
+      "summary": "Remove Ship Module",
+      "description": "Remove a module from a ship. The module will be placed in cargo.",
+      "tags": [
+        "Fleet"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "shipSymbol",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The symbol of the ship"
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "symbol"
+              ],
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "description": "The symbol of the module to remove"
                 }
               }
             }
-          },
-          "responses": {
-            "201": {
-              "description": "Successfully removed the module from the ship.",
-              "content": {
-                "application/json": {
-                  "schema": {
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Successfully removed the module from the ship.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "data": {
                     "type": "object",
                     "required": [
-                      "data"
+                      "agent",
+                      "modules",
+                      "cargo",
+                      "transaction"
                     ],
                     "properties": {
-                      "data": {
+                      "agent": {
+                        "$ref": "../models/Agent.json"
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../models/ShipModule.json"
+                        }
+                      },
+                      "cargo": {
+                        "$ref": "../models/ShipCargo.json"
+                      },
+                      "transaction": {
                         "type": "object",
                         "required": [
-                          "agent",
-                          "modules",
-                          "cargo",
-                          "transaction"
+                          "waypointSymbol",
+                          "shipSymbol",
+                          "tradeSymbol",
+                          "totalPrice",
+                          "timestamp"
                         ],
                         "properties": {
-                          "agent": {
-                            "$ref": "../models/Agent.json"
+                          "waypointSymbol": {
+                            "type": "string"
                           },
-                          "modules": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/ShipModule.json"
-                            }
+                          "shipSymbol": {
+                            "type": "string"
                           },
-                          "cargo": {
-                            "$ref": "../models/ShipCargo.json"
+                          "tradeSymbol": {
+                            "type": "string"
                           },
-                          "transaction": {
-                            "type": "object",
-                            "required": [
-                              "waypointSymbol",
-                              "shipSymbol",
-                              "tradeSymbol",
-                              "totalPrice",
-                              "timestamp"
-                            ],
-                            "properties": {
-                              "waypointSymbol": {
-                                "type": "string"
-                              },
-                              "shipSymbol": {
-                                "type": "string"
-                              },
-                              "tradeSymbol": {
-                                "type": "string"
-                              },
-                              "totalPrice": {
-                                "type": "integer"
-                              },
-                              "timestamp": {
-                                "type": "string"
-                              }
-                            }
+                          "totalPrice": {
+                            "type": "integer"
+                          },
+                          "timestamp": {
+                            "type": "string"
                           }
                         }
                       }
