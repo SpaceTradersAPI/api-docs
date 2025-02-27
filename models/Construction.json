@@ -18,9 +18,5 @@
       "description": "Whether the waypoint has been constructed."
     }
   },
-  "required": [
-    "symbol",
-    "materials",
-    "isComplete"
-  ]
+  "required": ["symbol", "materials", "isComplete"]
 }

@@ -28,11 +28,5 @@
       "description": "The symbol of the parent waypoint, if this waypoint is in orbit around another waypoint. Otherwise this value is undefined."
     }
   },
-  "required": [
-    "symbol",
-    "type",
-    "x",
-    "y",
-    "orbitals"
-  ]
+  "required": ["symbol", "type", "x", "y", "orbitals"]
 }

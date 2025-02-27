@@ -7,11 +7,7 @@
     "type": {
       "type": "string",
       "description": "The type of trade good (export, import, or exchange).",
-      "enum": [
-        "EXPORT",
-        "IMPORT",
-        "EXCHANGE"
-      ]
+      "enum": ["EXPORT", "IMPORT", "EXCHANGE"]
     },
     "tradeVolume": {
       "type": "integer",
@@ -35,12 +31,5 @@
       "minimum": 0
     }
   },
-  "required": [
-    "symbol",
-    "type",
-    "tradeVolume",
-    "supply",
-    "purchasePrice",
-    "sellPrice"
-  ]
+  "required": ["symbol", "type", "tradeVolume", "supply", "purchasePrice", "sellPrice"]
 }

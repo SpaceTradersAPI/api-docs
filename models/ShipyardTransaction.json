@@ -29,12 +29,5 @@
       "description": "The timestamp of the transaction."
     }
   },
-  "required": [
-    "waypointSymbol",
-    "shipSymbol",
-    "shipType",
-    "price",
-    "agentSymbol",
-    "timestamp"
-  ]
+  "required": ["waypointSymbol", "shipSymbol", "shipType", "price", "agentSymbol", "timestamp"]
 }

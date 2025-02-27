@@ -17,9 +17,7 @@
             "$ref": "./ShipType.json"
           }
         },
-        "required": [
-          "type"
-        ]
+        "required": ["type"]
       }
     },
     "transactions": {
@@ -41,9 +39,5 @@
       "description": "The fee to modify a ship at this shipyard. This includes installing or removing modules and mounts on a ship. In the case of mounts, the fee is a flat rate per mount. In the case of modules, the fee is per slot the module occupies."
     }
   },
-  "required": [
-    "symbol",
-    "shipTypes",
-    "modificationsFee"
-  ]
+  "required": ["symbol", "shipTypes", "modificationsFee"]
 }

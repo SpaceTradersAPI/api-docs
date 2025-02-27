@@ -39,14 +39,5 @@
       "$ref": "./ShipComponentQuality.json"
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "condition",
-    "integrity",
-    "description",
-    "powerOutput",
-    "requirements",
-    "quality"
-  ]
+  "required": ["symbol", "name", "condition", "integrity", "description", "powerOutput", "requirements", "quality"]
 }

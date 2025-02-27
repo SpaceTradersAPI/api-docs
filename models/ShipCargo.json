@@ -19,10 +19,6 @@
       }
     }
   },
-  "required": [
-    "capacity",
-    "units",
-    "inventory"
-  ],
+  "required": ["capacity", "units", "inventory"],
   "description": "Ship cargo details."
 }

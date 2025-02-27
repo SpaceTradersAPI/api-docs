@@ -1,11 +1,5 @@
 {
   "type": "string",
   "description": "The supply level of a trade good.",
-  "enum": [
-    "SCARCE",
-    "LIMITED",
-    "MODERATE",
-    "HIGH",
-    "ABUNDANT"
-  ]
+  "enum": ["SCARCE", "LIMITED", "MODERATE", "HIGH", "ABUNDANT"]
 }
