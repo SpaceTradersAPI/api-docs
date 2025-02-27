@@ -328,8 +328,11 @@
                         "faction": {
                           "$ref": "../models/Faction.json"
                         },
-                        "ship": {
-                          "$ref": "../models/Ship.json"
+                        "ships": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/Ship.json"
+                          }
                         },
                         "token": {
                           "description": "A Bearer token for accessing secured API endpoints.",
