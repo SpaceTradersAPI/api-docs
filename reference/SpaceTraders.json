@@ -3928,20 +3928,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "data": {
-                        "exportToImportMap": {
-                          "LIQUID_HYDROGEN": [
-                            "MACHINERY"
-                          ],
-                          "LIQUID_NITROGEN": [
-                            "MACHINERY"
-                          ]
-                        }
-                      }
-                    }
-                  },
                   "properties": {
                     "data": {
                       "type": "object",
@@ -3956,35 +3942,43 @@
                               }
                             }
                           }
-                        },
-                        "required": [
-                          "exportToImportMap"
-                        ]
+                        }
+                      },
+                      "required": [
+                        "exportToImportMap"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "x-examples": {
+                    "Example 1": {
+                      "data": {
+                        "exportToImportMap": {
+                          "LIQUID_HYDROGEN": [
+                            "MACHINERY"
+                          ],
+                          "LIQUID_NITROGEN": [
+                            "MACHINERY"
+                          ]
+                        }
                       }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                },
-                "application/xml": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {}
+                    }
                   }
                 }
               }
             }
-          },
-          "tags": [
-            "Data"
-          ],
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ]
-        }
+          }
+        },
+        "tags": [
+          "Data"
+        ],
+        "security": [
+          {
+            "AgentToken": []
+          }
+        ]
       }
     },
     "/my/ships/{shipSymbol}/modules": {
