@@ -3934,16 +3934,16 @@
                               }
                             }
                           }
-                        },
+                        }
+                      },
                         "required": [
                           "exportToImportMap"
                         ]
-                      }
-                    },
+                    }
+                  },
                     "required": [
                       "data"
                     ]
-                  }
                 }
                 }
               }
