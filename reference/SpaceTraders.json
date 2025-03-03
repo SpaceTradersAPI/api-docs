@@ -3944,12 +3944,7 @@
                       "data"
                     ]
                   }
-                },
-                "application/xml": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {}
-                  }
+                }
                 }
               }
             }
