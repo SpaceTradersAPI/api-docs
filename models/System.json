@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "description": "System details.",
   "properties": {
     "symbol": {
       "type": "string",

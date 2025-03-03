@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Market details.",
   "type": "object",
   "properties": {
     "symbol": {

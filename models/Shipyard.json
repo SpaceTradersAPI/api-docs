@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Shipyard details.",
   "type": "object",
   "properties": {
     "symbol": {

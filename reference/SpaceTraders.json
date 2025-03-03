@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.1",
   "info": {
     "title": "SpaceTraders API",
     "version": "2.3.0",
@@ -3965,11 +3965,49 @@
                         }
                       }
                     }
+                  },
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "exportToImportMap": {
+                          "type": "object",
+                          "properties": {
+                            "string": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "exportToImportMap"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {}
                   }
                 }
               }
             }
-          }
+          },
+          "tags": [
+            "Data"
+          ],
+          "security": [
+            {
+              "AgentToken": []
+            }
+          ]
         },
         "tags": [
           "Data"
@@ -4238,4 +4276,3 @@
       }
     }
   }
-}

@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "description": "Waypoint details.",
   "properties": {
     "symbol": {
       "$ref": "./WaypointSymbol.json"
