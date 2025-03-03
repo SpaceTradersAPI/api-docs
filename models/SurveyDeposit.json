@@ -7,7 +7,5 @@
       "description": "The symbol of the deposit."
     }
   },
-  "required": [
-    "symbol"
-  ]
+  "required": ["symbol"]
 }

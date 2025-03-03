@@ -42,10 +42,5 @@
       }
     }
   },
-  "required": [
-    "symbol",
-    "exports",
-    "imports",
-    "exchange"
-  ]
+  "required": ["symbol", "exports", "imports", "exchange"]
 }

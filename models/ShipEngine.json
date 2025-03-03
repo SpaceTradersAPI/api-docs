@@ -4,12 +4,7 @@
   "properties": {
     "symbol": {
       "type": "string",
-      "enum": [
-        "ENGINE_IMPULSE_DRIVE_I",
-        "ENGINE_ION_DRIVE_I",
-        "ENGINE_ION_DRIVE_II",
-        "ENGINE_HYPER_DRIVE_I"
-      ],
+      "enum": ["ENGINE_IMPULSE_DRIVE_I", "ENGINE_ION_DRIVE_I", "ENGINE_ION_DRIVE_II", "ENGINE_HYPER_DRIVE_I"],
       "description": "The symbol of the engine."
     },
     "name": {
@@ -38,14 +33,5 @@
       "$ref": "./ShipComponentQuality.json"
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "condition",
-    "integrity",
-    "description",
-    "speed",
-    "requirements",
-    "quality"
-  ]
+  "required": ["symbol", "name", "condition", "integrity", "description", "speed", "requirements", "quality"]
 }

@@ -28,9 +28,5 @@
       "maximum": 20
     }
   },
-  "required": [
-    "total",
-    "page",
-    "limit"
-  ]
+  "required": ["total", "page", "limit"]
 }

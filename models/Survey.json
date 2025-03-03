@@ -27,18 +27,8 @@
     "size": {
       "type": "string",
       "description": "The size of the deposit. This value indicates how much can be extracted from the survey before it is exhausted.",
-      "enum": [
-        "SMALL",
-        "MODERATE",
-        "LARGE"
-      ]
+      "enum": ["SMALL", "MODERATE", "LARGE"]
     }
   },
-  "required": [
-    "signature",
-    "symbol",
-    "deposits",
-    "expiration",
-    "size"
-  ]
+  "required": ["signature", "symbol", "deposits", "expiration", "size"]
 }

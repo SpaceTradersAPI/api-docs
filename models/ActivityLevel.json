@@ -1,12 +1,7 @@
 {
   "type": "string",
   "description": "The activity level of a trade good. If the good is an import, this represents how strong consumption is. If the good is an export, this represents how strong the production is for the good. When activity is strong, consumption or production is near maximum capacity. When activity is weak, consumption or production is near minimum capacity.",
-  "enum": [
-    "WEAK",
-    "GROWING",
-    "STRONG",
-    "RESTRICTED"
-  ],
+  "enum": ["WEAK", "GROWING", "STRONG", "RESTRICTED"],
   "x-enumDescriptions": {
     "WEAK": "Indicates very low production or consumption activity. This may suggest a surplus in supply or a lack of demand.",
     "GROWING": "Represents increasing activity in production or consumption, suggesting a developing market.",

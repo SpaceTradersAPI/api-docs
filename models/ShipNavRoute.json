@@ -19,11 +19,5 @@
       "description": "The date time of the ship's arrival. If the ship is in-transit, this is the expected time of arrival."
     }
   },
-  "required": [
-    "destination",
-    "departure",
-    "origin",
-    "departureTime",
-    "arrival"
-  ]
+  "required": ["destination", "departure", "origin", "departureTime", "arrival"]
 }

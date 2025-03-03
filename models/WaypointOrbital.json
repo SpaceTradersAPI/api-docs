@@ -8,7 +8,5 @@
       "description": "The symbol of the orbiting waypoint."
     }
   },
-  "required": [
-    "symbol"
-  ]
+  "required": ["symbol"]
 }

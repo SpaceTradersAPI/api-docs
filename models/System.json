@@ -38,13 +38,5 @@
       }
     }
   },
-  "required": [
-    "symbol",
-    "sectorSymbol",
-    "type",
-    "x",
-    "y",
-    "waypoints",
-    "factions"
-  ]
+  "required": ["symbol", "sectorSymbol", "type", "x", "y", "waypoints", "factions"]
 }

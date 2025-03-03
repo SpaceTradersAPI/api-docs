@@ -11,8 +11,5 @@
       "$ref": "./SiphonYield.json"
     }
   },
-  "required": [
-    "shipSymbol",
-    "yield"
-  ]
+  "required": ["shipSymbol", "yield"]
 }

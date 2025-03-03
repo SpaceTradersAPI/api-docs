@@ -10,8 +10,5 @@
       "description": "The number of units extracted that were placed into the ship's cargo hold."
     }
   },
-  "required": [
-    "symbol",
-    "units"
-  ]
+  "required": ["symbol", "units"]
 }

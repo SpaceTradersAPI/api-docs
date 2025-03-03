@@ -19,10 +19,5 @@
       "minimum": 1
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "description",
-    "units"
-  ]
+  "required": ["symbol", "name", "description", "units"]
 }

@@ -1,11 +1,6 @@
 {
   "type": "string",
   "description": "The ship's set speed when traveling between waypoints or systems.",
-  "enum": [
-    "DRIFT",
-    "STEALTH",
-    "CRUISE",
-    "BURN"
-  ],
+  "enum": ["DRIFT", "STEALTH", "CRUISE", "BURN"],
   "default": "CRUISE"
 }

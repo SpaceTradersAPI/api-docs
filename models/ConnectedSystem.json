@@ -31,12 +31,5 @@
       "description": "The distance of this system to the connected Jump Gate."
     }
   },
-  "required": [
-    "symbol",
-    "sectorSymbol",
-    "type",
-    "x",
-    "y",
-    "distance"
-  ]
+  "required": ["symbol", "sectorSymbol", "type", "x", "y", "distance"]
 }

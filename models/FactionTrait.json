@@ -13,9 +13,5 @@
       "description": "A description of the trait."
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "description"
-  ]
+  "required": ["symbol", "name", "description"]
 }

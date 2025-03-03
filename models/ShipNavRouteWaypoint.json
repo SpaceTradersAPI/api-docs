@@ -22,11 +22,5 @@
       "description": "Position in the universe in the y axis."
     }
   },
-  "required": [
-    "symbol",
-    "type",
-    "systemSymbol",
-    "x",
-    "y"
-  ]
+  "required": ["symbol", "type", "systemSymbol", "x", "y"]
 }

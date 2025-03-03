@@ -28,12 +28,5 @@
       "description": "The system's distance from the scanning ship."
     }
   },
-  "required": [
-    "symbol",
-    "sectorSymbol",
-    "type",
-    "x",
-    "y",
-    "distance"
-  ]
+  "required": ["symbol", "sectorSymbol", "type", "x", "y", "distance"]
 }

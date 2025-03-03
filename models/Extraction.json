@@ -11,8 +11,5 @@
       "$ref": "./ExtractionYield.json"
     }
   },
-  "required": [
-    "shipSymbol",
-    "yield"
-  ]
+  "required": ["shipSymbol", "yield"]
 }

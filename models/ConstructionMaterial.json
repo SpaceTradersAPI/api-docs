@@ -14,9 +14,5 @@
       "description": "The number of units fulfilled toward the required amount."
     }
   },
-  "required": [
-    "tradeSymbol",
-    "required",
-    "fulfilled"
-  ]
+  "required": ["tradeSymbol", "required", "fulfilled"]
 }
