@@ -10,7 +10,8 @@
     },
     "license": {
       "name": "No Permission",
-      "url": "https://choosealicense.com/no-permission/"
+      "url": "https://choosealicense.com/no-permission/",
+      "identifier": "No Permission"
     }
   },
   "security": [
@@ -3934,22 +3935,17 @@
                               }
                             }
                           }
-                        },
+                        }
+                      },
                         "required": [
                           "exportToImportMap"
                         ]
-                      }
-                    },
+                    }
+                  },
                     "required": [
                       "data"
                     ]
-                  }
-                },
-                "application/xml": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {}
-                  }
+                }
                 }
               }
             }
@@ -3962,8 +3958,7 @@
               "AgentToken": []
             }
           ]
-        },
-        "parameters": []
+        }
       }
     }
   }
