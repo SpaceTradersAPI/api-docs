@@ -28,6 +28,14 @@
       ],
       "description": "The symbol of the module."
     },
+    "name": {
+      "type": "string",
+      "description": "Name of this module."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of this module."
+    },
     "capacity": {
       "type": "integer",
       "minimum": 0,
@@ -37,14 +45,6 @@
       "type": "integer",
       "minimum": 0,
       "description": "Modules that have a range will such as a sensor array show this value to denote how far can the module reach with its capabilities."
-    },
-    "name": {
-      "type": "string",
-      "description": "Name of this module."
-    },
-    "description": {
-      "type": "string",
-      "description": "Description of this module."
     },
     "requirements": {
       "$ref": "./ShipRequirements.json"
