@@ -50,10 +50,5 @@
       "$ref": "./ShipRequirements.json"
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "description",
-    "requirements"
-  ]
+  "required": ["symbol", "name", "description", "requirements"]
 }
