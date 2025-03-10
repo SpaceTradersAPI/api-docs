@@ -1,4 +1,5 @@
 {
+  "title": "WaypointOrbital",
   "type": "object",
   "description": "An orbital is another waypoint that orbits a parent waypoint.",
   "properties": {

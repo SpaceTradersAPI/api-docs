@@ -1,4 +1,5 @@
 {
+  "title": "Construction",
   "type": "object",
   "description": "The construction details of a waypoint.",
   "properties": {

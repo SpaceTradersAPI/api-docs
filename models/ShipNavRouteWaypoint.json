@@ -1,4 +1,5 @@
 {
+  "title": "ShipNavRouteWaypoint",
   "description": "The destination or departure of a ships nav route.",
   "type": "object",
   "properties": {

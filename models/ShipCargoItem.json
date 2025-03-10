@@ -1,4 +1,5 @@
 {
+  "title": "ShipCargoItem",
   "type": "object",
   "description": "The type of cargo item and the number of units.",
   "properties": {

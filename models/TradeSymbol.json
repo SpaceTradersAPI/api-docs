@@ -1,4 +1,5 @@
 {
+  "title": "TradeSymbol",
   "type": "string",
   "enum": [
     "PRECIOUS_STONES",

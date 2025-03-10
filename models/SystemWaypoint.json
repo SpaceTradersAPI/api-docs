@@ -1,4 +1,5 @@
 {
+  "title": "SystemWaypoint",
   "type": "object",
   "description": "Waypoint details.",
   "properties": {

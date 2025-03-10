@@ -1,4 +1,5 @@
 {
+  "title": "WaypointTrait",
   "type": "object",
   "properties": {
     "symbol": {

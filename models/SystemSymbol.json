@@ -1,4 +1,5 @@
 {
+  "title": "SystemSymbol",
   "type": "string",
   "description": "The symbol of the system.",
   "minLength": 1,

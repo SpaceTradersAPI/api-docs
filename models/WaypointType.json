@@ -1,4 +1,5 @@
 {
+  "title": "WaypointType",
   "type": "string",
   "description": "The type of waypoint.",
   "enum": [

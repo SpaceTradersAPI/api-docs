@@ -1,4 +1,5 @@
 {
+  "title": "Cooldown",
   "type": "object",
   "description": "A cooldown is a period of time in which a ship cannot perform certain actions.",
   "properties": {

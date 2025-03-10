@@ -1,4 +1,5 @@
 {
+  "title": "ShipReactor",
   "type": "object",
   "description": "The reactor of the ship. The reactor is responsible for powering the ship's systems and weapons.",
   "properties": {

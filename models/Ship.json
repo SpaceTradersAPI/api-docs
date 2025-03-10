@@ -1,4 +1,5 @@
 {
+  "title": "Ship",
   "description": "Ship details.",
   "type": "object",
   "properties": {

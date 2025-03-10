@@ -1,4 +1,5 @@
 {
+  "title": "ShipNavRouteWaypointDeprecated",
   "type": "object",
   "deprecated": true,
   "description": "Deprecated. Use origin instead.",

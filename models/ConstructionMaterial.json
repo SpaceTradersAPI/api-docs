@@ -1,4 +1,5 @@
 {
+  "title": "ConstructionMaterial",
   "description": "The details of the required construction materials for a given waypoint under construction.",
   "type": "object",
   "properties": {

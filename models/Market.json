@@ -1,4 +1,5 @@
 {
+  "title": "Market",
   "description": "Market details.",
   "type": "object",
   "properties": {

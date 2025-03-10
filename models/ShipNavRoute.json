@@ -1,4 +1,5 @@
 {
+  "title": "ShipNavRoute",
   "type": "object",
   "description": "The routing information for the ship's most recent transit or current location.",
   "properties": {

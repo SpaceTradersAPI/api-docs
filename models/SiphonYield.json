@@ -1,4 +1,5 @@
 {
+  "title": "SiphonYield",
   "type": "object",
   "description": "A yield from the siphon operation.",
   "properties": {

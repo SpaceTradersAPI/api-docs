@@ -1,4 +1,5 @@
 {
+  "title": "ConnectedSystem",
   "type": "object",
   "properties": {
     "symbol": {

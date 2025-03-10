@@ -1,4 +1,5 @@
 {
+  "title": "ShipNavStatus",
   "type": "string",
   "description": "The current status of the ship",
   "enum": ["IN_TRANSIT", "IN_ORBIT", "DOCKED"]

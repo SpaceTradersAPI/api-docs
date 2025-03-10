@@ -1,4 +1,5 @@
 {
+  "title": "ShipRegistration",
   "type": "object",
   "description": "The public registration information of the ship",
   "properties": {

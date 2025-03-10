@@ -1,4 +1,5 @@
 {
+  "title": "ShipNav",
   "type": "object",
   "description": "The navigation information of the ship.",
   "properties": {

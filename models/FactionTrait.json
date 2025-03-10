@@ -1,4 +1,5 @@
 {
+  "title": "FactionTrait",
   "type": "object",
   "properties": {
     "symbol": {

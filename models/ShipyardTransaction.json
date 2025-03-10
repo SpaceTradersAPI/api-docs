@@ -1,4 +1,5 @@
 {
+  "title": "ShipyardTransaction",
   "type": "object",
   "description": "Results of a transaction with a shipyard.",
   "properties": {

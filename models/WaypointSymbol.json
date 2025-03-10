@@ -1,4 +1,5 @@
 {
+  "title": "WaypointSymbol",
   "type": "string",
   "description": "The symbol of the waypoint.",
   "minLength": 1,

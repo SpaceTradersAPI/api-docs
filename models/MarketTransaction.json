@@ -1,4 +1,5 @@
 {
+  "title": "MarketTransaction",
   "type": "object",
   "properties": {
     "waypointSymbol": {

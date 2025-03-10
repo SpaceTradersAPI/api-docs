@@ -1,4 +1,5 @@
 {
+  "title": "Siphon",
   "description": "Siphon details.",
   "type": "object",
   "properties": {

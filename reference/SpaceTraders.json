@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.1",
   "info": {
     "title": "SpaceTraders API",
     "version": "2.3.0",
@@ -3709,7 +3709,6 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Remove Module 201 Response",
                   "type": "object",
                   "required": ["data"],
                   "properties": {

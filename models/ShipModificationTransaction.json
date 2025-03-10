@@ -1,4 +1,5 @@
 {
+  "title": "ShipModificationTransaction",
   "type": "object",
   "properties": {
     "waypointSymbol": {

@@ -1,4 +1,5 @@
 {
+  "title": "ContractTerms",
   "type": "object",
   "description": "The terms to fulfill the contract.",
   "properties": {

@@ -1,4 +1,5 @@
 {
+  "title": "WaypointFaction",
   "type": "object",
   "description": "The faction that controls the waypoint.",
   "properties": {

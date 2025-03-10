@@ -1,4 +1,5 @@
 {
+  "title": "Meta",
   "description": "Meta details for pagination.",
   "type": "object",
   "x-examples": {

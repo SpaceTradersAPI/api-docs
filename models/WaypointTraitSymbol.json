@@ -1,4 +1,5 @@
 {
+  "title": "WaypointTraitSymbol",
   "type": "string",
   "description": "The unique identifier of the trait.",
   "enum": [

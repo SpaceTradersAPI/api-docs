@@ -1,4 +1,5 @@
 {
+  "title": "SystemFaction",
   "type": "object",
   "properties": {
     "symbol": {

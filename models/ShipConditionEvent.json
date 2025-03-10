@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "title": "ShipConditionEvent",
   "description": "An event that represents damage or wear to a ship's reactor, frame, or engine, reducing the condition of the ship.",
   "properties": {
     "symbol": {

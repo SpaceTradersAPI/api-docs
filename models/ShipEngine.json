@@ -1,4 +1,5 @@
 {
+  "title": "ShipEngine",
   "type": "object",
   "description": "The engine determines how quickly a ship travels between waypoints.",
   "properties": {

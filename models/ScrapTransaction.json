@@ -1,4 +1,5 @@
 {
+  "title": "ScrapTransaction",
   "type": "object",
   "properties": {
     "waypointSymbol": {

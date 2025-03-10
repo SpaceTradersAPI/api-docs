@@ -1,4 +1,5 @@
 {
+  "title": "ScannedSystem",
   "description": "Details of a system was that scanned.",
   "type": "object",
   "properties": {

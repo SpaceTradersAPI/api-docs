@@ -1,4 +1,5 @@
 {
+  "title": "Agent",
   "description": "Agent details.",
   "type": "object",
   "properties": {

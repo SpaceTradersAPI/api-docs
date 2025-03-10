@@ -1,4 +1,5 @@
 {
+  "title": "SystemType",
   "type": "string",
   "description": "The type of system.",
   "enum": [

@@ -1,4 +1,5 @@
 {
+  "title": "ShipMount",
   "type": "object",
   "description": "A mount is installed on the exterier of a ship.",
   "properties": {

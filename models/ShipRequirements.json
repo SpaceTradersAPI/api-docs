@@ -1,4 +1,5 @@
 {
+  "title": "ShipRequirements",
   "type": "object",
   "description": "The requirements for installation on a ship",
   "properties": {

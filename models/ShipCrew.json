@@ -1,4 +1,5 @@
 {
+  "title": "ShipCrew",
   "type": "object",
   "description": "The ship's crew service and maintain the ship's systems and equipment.",
   "properties": {
