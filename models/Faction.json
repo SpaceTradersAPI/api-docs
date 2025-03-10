@@ -32,11 +32,5 @@
       "description": "Whether or not the faction is currently recruiting new agents."
     }
   },
-  "required": [
-    "symbol",
-    "name",
-    "description",
-    "traits",
-    "isRecruiting"
-  ]
+  "required": ["symbol", "name", "description", "traits", "isRecruiting"]
 }

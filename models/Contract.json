@@ -14,11 +14,7 @@
     },
     "type": {
       "type": "string",
-      "enum": [
-        "PROCUREMENT",
-        "TRANSPORT",
-        "SHUTTLE"
-      ],
+      "enum": ["PROCUREMENT", "TRANSPORT", "SHUTTLE"],
       "description": "Type of contract."
     },
     "terms": {
@@ -46,13 +42,5 @@
       "description": "The time at which the contract is no longer available to be accepted"
     }
   },
-  "required": [
-    "id",
-    "factionSymbol",
-    "type",
-    "terms",
-    "accepted",
-    "fulfilled",
-    "expiration"
-  ]
+  "required": ["id", "factionSymbol", "type", "terms", "accepted", "fulfilled", "expiration"]
 }

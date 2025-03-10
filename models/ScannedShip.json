@@ -21,9 +21,7 @@
           "description": "The symbol of the frame."
         }
       },
-      "required": [
-        "symbol"
-      ]
+      "required": ["symbol"]
     },
     "reactor": {
       "type": "object",
@@ -34,16 +32,12 @@
           "description": "The symbol of the reactor."
         }
       },
-      "required": [
-        "symbol"
-      ]
+      "required": ["symbol"]
     },
     "engine": {
       "type": "object",
       "description": "The engine of the ship.",
-      "required": [
-        "symbol"
-      ],
+      "required": ["symbol"],
       "properties": {
         "symbol": {
           "type": "string",
@@ -63,16 +57,9 @@
             "description": "The symbol of the mount."
           }
         },
-        "required": [
-          "symbol"
-        ]
+        "required": ["symbol"]
       }
     }
   },
-  "required": [
-    "symbol",
-    "registration",
-    "nav",
-    "engine"
-  ]
+  "required": ["symbol", "registration", "nav", "engine"]
 }

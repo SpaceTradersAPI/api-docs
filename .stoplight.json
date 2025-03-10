@@ -3,15 +3,11 @@
   "formats": {
     "openapi": {
       "rootDir": "reference",
-      "include": [
-        "**"
-      ]
+      "include": ["**"]
     },
     "json_schema": {
       "rootDir": "models",
-      "include": [
-        "**"
-      ]
+      "include": ["**"]
     },
     "markdown": {
       "rootDir": "docs"

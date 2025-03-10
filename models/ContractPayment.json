@@ -11,8 +11,5 @@
       "description": "The amount of credits received when the contract is fulfilled."
     }
   },
-  "required": [
-    "onAccepted",
-    "onFulfilled"
-  ]
+  "required": ["onAccepted", "onFulfilled"]
 }

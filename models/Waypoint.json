@@ -56,14 +56,5 @@
       "description": "True if the waypoint is under construction."
     }
   },
-  "required": [
-    "symbol",
-    "type",
-    "systemSymbol",
-    "x",
-    "y",
-    "orbitals",
-    "traits",
-    "isUnderConstruction"
-  ]
+  "required": ["symbol", "type", "systemSymbol", "x", "y", "orbitals", "traits", "isUnderConstruction"]
 }

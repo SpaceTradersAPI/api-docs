@@ -15,10 +15,7 @@
     "type": {
       "type": "string",
       "description": "The type of transaction.",
-      "enum": [
-        "PURCHASE",
-        "SELL"
-      ]
+      "enum": ["PURCHASE", "SELL"]
     },
     "units": {
       "type": "integer",

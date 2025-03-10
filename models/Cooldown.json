@@ -23,9 +23,5 @@
       "description": "The date and time when the cooldown expires in ISO 8601 format"
     }
   },
-  "required": [
-    "shipSymbol",
-    "totalSeconds",
-    "remainingSeconds"
-  ]
+  "required": ["shipSymbol", "totalSeconds", "remainingSeconds"]
 }

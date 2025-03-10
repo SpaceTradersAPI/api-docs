@@ -16,9 +16,5 @@
       "$ref": "./ShipRole.json"
     }
   },
-  "required": [
-    "name",
-    "factionSymbol",
-    "role"
-  ]
+  "required": ["name", "factionSymbol", "role"]
 }

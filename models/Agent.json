@@ -33,11 +33,5 @@
       "description": "How many ships are owned by the agent."
     }
   },
-  "required": [
-    "symbol",
-    "headquarters",
-    "credits",
-    "startingFaction",
-    "shipCount"
-  ]
+  "required": ["symbol", "headquarters", "credits", "startingFaction", "shipCount"]
 }
