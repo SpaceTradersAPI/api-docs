@@ -356,7 +356,7 @@
                 }
               }
             },
-            "description": "Succesfully registered."
+            "description": "Successfully registered."
           }
         },
         "summary": "Register New Agent",
@@ -990,7 +990,7 @@
                 }
               }
             },
-            "description": "Succesfully fetched factions."
+            "description": "Successfully fetched factions."
           }
         },
         "summary": "List Factions",
@@ -1249,7 +1249,7 @@
                 }
               }
             },
-            "description": "Succesfully listed contracts."
+            "description": "Successfully listed contracts."
           }
         },
         "security": [
@@ -1365,7 +1365,7 @@
                 }
               }
             },
-            "description": "Succesfully accepted contract."
+            "description": "Successfully accepted contract."
           }
         },
         "security": [
@@ -1566,7 +1566,7 @@
                 }
               }
             },
-            "description": "Succesfully listed ships."
+            "description": "Successfully listed ships."
           }
         },
         "security": [
@@ -2038,7 +2038,7 @@
                 }
               }
             },
-            "description": "Succesfully fetched ship's cooldown."
+            "description": "Successfully fetched ship's cooldown."
           },
           "204": {
             "description": "No cooldown."

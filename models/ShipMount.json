@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "A mount is installed on the exterier of a ship.",
+  "description": "A mount is installed on the exterior of a ship.",
   "properties": {
     "symbol": {
       "type": "string",
@@ -21,7 +21,7 @@
         "MOUNT_MISSILE_LAUNCHER_I",
         "MOUNT_TURRET_I"
       ],
-      "description": "Symbo of this mount."
+      "description": "Symbol of this mount."
     },
     "name": {
       "type": "string",
