@@ -19,7 +19,8 @@
         "FRAME_TRANSPORT",
         "FRAME_DESTROYER",
         "FRAME_CRUISER",
-        "FRAME_CARRIER"
+        "FRAME_CARRIER",
+        "FRAME_BULK_FREIGHTER"
       ],
       "description": "Symbol of the frame."
     },

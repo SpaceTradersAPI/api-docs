@@ -80,9 +80,7 @@
       "get": {
         "description": "Return the status of the game server.\nThis also includes a few global elements, such as announcements, server reset dates and leaderboards.",
         "operationId": "get-status",
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "responses": {
           "200": {
             "content": {
@@ -107,12 +105,7 @@
                     },
                     "stats": {
                       "type": "object",
-                      "required": [
-                        "agents",
-                        "ships",
-                        "systems",
-                        "waypoints"
-                      ],
+                      "required": ["agents", "ships", "systems", "waypoints"],
                       "properties": {
                         "accounts": {
                           "type": "integer",
@@ -138,10 +131,7 @@
                     },
                     "leaderboards": {
                       "type": "object",
-                      "required": [
-                        "mostCredits",
-                        "mostSubmittedCharts"
-                      ],
+                      "required": ["mostCredits", "mostSubmittedCharts"],
                       "properties": {
                         "mostCredits": {
                           "type": "array",
@@ -159,10 +149,7 @@
                                 "description": "Amount of credits."
                               }
                             },
-                            "required": [
-                              "agentSymbol",
-                              "credits"
-                            ]
+                            "required": ["agentSymbol", "credits"]
                           }
                         },
                         "mostSubmittedCharts": {
@@ -180,20 +167,14 @@
                                 "description": "Amount of charts done by the agent."
                               }
                             },
-                            "required": [
-                              "agentSymbol",
-                              "chartCount"
-                            ]
+                            "required": ["agentSymbol", "chartCount"]
                           }
                         }
                       }
                     },
                     "serverResets": {
                       "type": "object",
-                      "required": [
-                        "next",
-                        "frequency"
-                      ],
+                      "required": ["next", "frequency"],
                       "properties": {
                         "next": {
                           "type": "string",
@@ -217,10 +198,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "title",
-                          "body"
-                        ]
+                        "required": ["title", "body"]
                       }
                     },
                     "links": {
@@ -235,10 +213,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "name",
-                          "url"
-                        ]
+                        "required": ["name", "url"]
                       }
                     }
                   },
@@ -273,9 +248,7 @@
       "post": {
         "description": "Creates a new agent and ties it to an account. \nThe agent symbol must consist of a 3-14 character string, and will be used to represent your agent. This symbol will prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.\n\nThis new agent will be tied to a starting faction of your choice, which determines your starting location, and will be granted an authorization token, a contract with their starting faction, a command ship that can fly across space with advanced capabilities, a small probe ship that can be used for reconnaissance, and 175,000 credits.\n\n> #### Keep your token safe and secure\n>\n> Keep careful track of where you store your token. You can generate a new token from our account dashboard, but if someone else gains access to your token they will be able to use it to make API requests on your behalf until the end of the reset.\n\nIf you are new to SpaceTraders, It is recommended to register with the COSMIC faction, a faction that is well connected to the rest of the universe. After registering, you should try our interactive [quickstart guide](https://docs.spacetraders.io/quickstart/new-game) which will walk you through a few basic API requests in just a few minutes.",
         "operationId": "register",
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "security": [
           {
             "AccountToken": []
@@ -301,10 +274,7 @@
                     "description": "Your email address. This is used if you reserved your call sign between resets."
                   }
                 },
-                "required": [
-                  "symbol",
-                  "faction"
-                ],
+                "required": ["symbol", "faction"],
                 "type": "object"
               }
             }
@@ -339,19 +309,11 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "token",
-                        "agent",
-                        "faction",
-                        "contract",
-                        "ship"
-                      ],
+                      "required": ["token", "agent", "faction", "contract", "ship"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -384,10 +346,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -396,9 +355,7 @@
           }
         },
         "summary": "List Systems",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "schema": {
@@ -445,9 +402,7 @@
                       "$ref": "../models/System.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -456,9 +411,7 @@
           }
         },
         "summary": "Get System",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "security": [
           {},
           {
@@ -500,10 +453,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -512,9 +462,7 @@
           }
         },
         "summary": "List Waypoints in System",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "schema": {
@@ -596,9 +544,7 @@
                       "$ref": "../models/Waypoint.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -607,9 +553,7 @@
           }
         },
         "summary": "Get Waypoint",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "security": [
           {},
           {
@@ -652,9 +596,7 @@
                       "$ref": "../models/Market.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -669,9 +611,7 @@
           }
         ],
         "summary": "Get Market",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "description": "The system symbol",
@@ -709,9 +649,7 @@
                       "$ref": "../models/Shipyard.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -726,9 +664,7 @@
           }
         ],
         "summary": "Get Shipyard",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "description": "The system symbol",
@@ -766,9 +702,7 @@
                       "$ref": "../models/JumpGate.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -783,9 +717,7 @@
           }
         ],
         "summary": "Get Jump Gate",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "description": "The system symbol",
@@ -823,9 +755,7 @@
                       "$ref": "../models/Construction.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -840,9 +770,7 @@
           }
         ],
         "summary": "Get Construction Site",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "description": "The system symbol",
@@ -887,11 +815,7 @@
                     "description": "Amount of units to supply."
                   }
                 },
-                "required": [
-                  "shipSymbol",
-                  "tradeSymbol",
-                  "units"
-                ],
+                "required": ["shipSymbol", "tradeSymbol", "units"],
                 "type": "object"
               }
             }
@@ -914,16 +838,11 @@
                           "$ref": "../models/ShipCargo.json"
                         }
                       },
-                      "required": [
-                        "construction",
-                        "cargo"
-                      ],
+                      "required": ["construction", "cargo"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -937,9 +856,7 @@
           }
         ],
         "summary": "Supply Construction Site",
-        "tags": [
-          "Systems"
-        ],
+        "tags": ["Systems"],
         "parameters": [
           {
             "description": "The system symbol",
@@ -982,10 +899,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -994,9 +908,7 @@
           }
         },
         "summary": "List Factions",
-        "tags": [
-          "Factions"
-        ],
+        "tags": ["Factions"],
         "parameters": [
           {
             "schema": {
@@ -1042,9 +954,7 @@
                       "$ref": "../models/Faction.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1053,9 +963,7 @@
           }
         },
         "summary": "Get Faction",
-        "tags": [
-          "Factions"
-        ],
+        "tags": ["Factions"],
         "parameters": [
           {
             "description": "The faction symbol",
@@ -1084,9 +992,7 @@
                       "$ref": "../models/Agent.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1100,9 +1006,7 @@
           }
         ],
         "summary": "Get Agent",
-        "tags": [
-          "Agents"
-        ],
+        "tags": ["Agents"],
         "parameters": []
       }
     },
@@ -1126,10 +1030,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -1138,9 +1039,7 @@
           }
         },
         "summary": "List Agents",
-        "tags": [
-          "Agents"
-        ],
+        "tags": ["Agents"],
         "parameters": [
           {
             "schema": {
@@ -1186,9 +1085,7 @@
                       "$ref": "../models/Agent.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1197,9 +1094,7 @@
           }
         },
         "summary": "Get Public Agent",
-        "tags": [
-          "Agents"
-        ],
+        "tags": ["Agents"],
         "parameters": [
           {
             "description": "The agent symbol",
@@ -1241,10 +1136,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -1258,9 +1150,7 @@
           }
         ],
         "summary": "List Contracts",
-        "tags": [
-          "Contracts"
-        ],
+        "tags": ["Contracts"],
         "parameters": [
           {
             "schema": {
@@ -1300,9 +1190,7 @@
                       "$ref": "../models/Contract.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1316,9 +1204,7 @@
           }
         ],
         "summary": "Get Contract",
-        "tags": [
-          "Contracts"
-        ],
+        "tags": ["Contracts"],
         "parameters": [
           {
             "description": "The contract ID",
@@ -1351,16 +1237,11 @@
                           "$ref": "../models/Contract.json"
                         }
                       },
-                      "required": [
-                        "contract",
-                        "agent"
-                      ],
+                      "required": ["contract", "agent"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1374,9 +1255,7 @@
           }
         ],
         "summary": "Accept Contract",
-        "tags": [
-          "Contracts"
-        ],
+        "tags": ["Contracts"],
         "parameters": [
           {
             "description": "The contract ID to accept.",
@@ -1412,11 +1291,7 @@
                     "description": "Amount of units to deliver."
                   }
                 },
-                "required": [
-                  "shipSymbol",
-                  "tradeSymbol",
-                  "units"
-                ],
+                "required": ["shipSymbol", "tradeSymbol", "units"],
                 "type": "object"
               }
             }
@@ -1439,16 +1314,11 @@
                           "$ref": "../models/ShipCargo.json"
                         }
                       },
-                      "required": [
-                        "contract",
-                        "cargo"
-                      ],
+                      "required": ["contract", "cargo"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1462,9 +1332,7 @@
           }
         ],
         "summary": "Deliver Cargo to Contract",
-        "tags": [
-          "Contracts"
-        ],
+        "tags": ["Contracts"],
         "parameters": [
           {
             "schema": {
@@ -1498,16 +1366,11 @@
                           "$ref": "../models/Contract.json"
                         }
                       },
-                      "required": [
-                        "contract",
-                        "agent"
-                      ],
+                      "required": ["contract", "agent"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1521,9 +1384,7 @@
           }
         ],
         "summary": "Fulfill Contract",
-        "tags": [
-          "Contracts"
-        ],
+        "tags": ["Contracts"],
         "parameters": [
           {
             "description": "The ID of the contract to fulfill.",
@@ -1558,10 +1419,7 @@
                       "$ref": "../models/Meta.json"
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
+                  "required": ["data", "meta"],
                   "type": "object"
                 }
               }
@@ -1575,9 +1433,7 @@
           }
         ],
         "summary": "List Ships",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "schema": {
@@ -1618,10 +1474,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "shipType",
-                  "waypointSymbol"
-                ],
+                "required": ["shipType", "waypointSymbol"],
                 "type": "object"
               }
             }
@@ -1646,17 +1499,11 @@
                           "$ref": "../models/ShipyardTransaction.json"
                         }
                       },
-                      "required": [
-                        "ship",
-                        "agent",
-                        "transaction"
-                      ],
+                      "required": ["ship", "agent", "transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1670,9 +1517,7 @@
           }
         ],
         "summary": "Purchase Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": []
       }
     },
@@ -1691,9 +1536,7 @@
                       "$ref": "../models/Ship.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1707,9 +1550,7 @@
           }
         ],
         "summary": "Get Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -1738,9 +1579,7 @@
                       "$ref": "../models/ShipCargo.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1754,9 +1593,7 @@
           }
         ],
         "summary": "Get Ship Cargo",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -1789,14 +1626,10 @@
                         }
                       },
                       "type": "object",
-                      "required": [
-                        "nav"
-                      ]
+                      "required": ["nav"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -1810,9 +1643,7 @@
           }
         ],
         "summary": "Orbit Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -1839,22 +1670,10 @@
                   "produce": {
                     "description": "The type of good to produce out of the refining process.",
                     "type": "string",
-                    "enum": [
-                      "IRON",
-                      "COPPER",
-                      "SILVER",
-                      "GOLD",
-                      "ALUMINUM",
-                      "PLATINUM",
-                      "URANITE",
-                      "MERITIUM",
-                      "FUEL"
-                    ]
+                    "enum": ["IRON", "COPPER", "SILVER", "GOLD", "ALUMINUM", "PLATINUM", "URANITE", "MERITIUM", "FUEL"]
                   }
                 },
-                "required": [
-                  "produce"
-                ]
+                "required": ["produce"]
               }
             }
           }
@@ -1869,12 +1688,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cargo",
-                        "cooldown",
-                        "produced",
-                        "consumed"
-                      ],
+                      "required": ["cargo", "cooldown", "produced", "consumed"],
                       "properties": {
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
@@ -1897,10 +1711,7 @@
                                 "description": "Amount of units of the good."
                               }
                             },
-                            "required": [
-                              "tradeSymbol",
-                              "units"
-                            ]
+                            "required": ["tradeSymbol", "units"]
                           }
                         },
                         "consumed": {
@@ -1918,18 +1729,13 @@
                                 "description": "Amount of units of the good."
                               }
                             },
-                            "required": [
-                              "tradeSymbol",
-                              "units"
-                            ]
+                            "required": ["tradeSymbol", "units"]
                           }
                         }
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -1942,9 +1748,7 @@
           }
         ],
         "summary": "Ship Refine",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -1977,17 +1781,12 @@
                           "$ref": "../models/Waypoint.json"
                         }
                       },
-                      "required": [
-                        "chart",
-                        "waypoint"
-                      ],
+                      "required": ["chart", "waypoint"],
                       "type": "object"
                     }
                   },
                   "type": "object",
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -2000,9 +1799,7 @@
           }
         ],
         "summary": "Create Chart",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -2031,9 +1828,7 @@
                       "$ref": "../models/Cooldown.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2050,9 +1845,7 @@
           }
         ],
         "summary": "Get Ship Cooldown",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -2084,15 +1877,11 @@
                           "$ref": "../models/ShipNav.json"
                         }
                       },
-                      "required": [
-                        "nav"
-                      ],
+                      "required": ["nav"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2106,9 +1895,7 @@
           }
         ],
         "summary": "Dock Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -2135,10 +1922,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cooldown",
-                        "surveys"
-                      ],
+                      "required": ["cooldown", "surveys"],
                       "properties": {
                         "cooldown": {
                           "$ref": "../models/Cooldown.json"
@@ -2153,9 +1937,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -2168,9 +1950,7 @@
           }
         ],
         "summary": "Create Survey",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The symbol of the ship.",
@@ -2228,18 +2008,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "extraction",
-                        "cooldown",
-                        "cargo",
-                        "events"
-                      ],
+                      "required": ["extraction", "cooldown", "cargo", "events"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2253,9 +2026,7 @@
           }
         ],
         "summary": "Extract Resources",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2298,18 +2069,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "siphon",
-                        "cooldown",
-                        "cargo",
-                        "events"
-                      ],
+                      "required": ["siphon", "cooldown", "cargo", "events"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2323,9 +2087,7 @@
           }
         ],
         "summary": "Siphon Resources",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2377,18 +2139,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "extraction",
-                        "cooldown",
-                        "cargo",
-                        "events"
-                      ],
+                      "required": ["extraction", "cooldown", "cargo", "events"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2402,9 +2157,7 @@
           }
         ],
         "summary": "Extract Resources with Survey",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2437,10 +2190,7 @@
                     "description": "Amount of units to jettison of this good."
                   }
                 },
-                "required": [
-                  "symbol",
-                  "units"
-                ]
+                "required": ["symbol", "units"]
               }
             }
           }
@@ -2458,15 +2208,11 @@
                           "$ref": "../models/ShipCargo.json"
                         }
                       },
-                      "required": [
-                        "cargo"
-                      ],
+                      "required": ["cargo"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2480,9 +2226,7 @@
           }
         ],
         "summary": "Jettison Cargo",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2510,9 +2254,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "waypointSymbol"
-                ],
+                "required": ["waypointSymbol"],
                 "type": "object"
               }
             }
@@ -2540,18 +2282,11 @@
                           "$ref": "../models/Agent.json"
                         }
                       },
-                      "required": [
-                        "nav",
-                        "cooldown",
-                        "transaction",
-                        "agent"
-                      ],
+                      "required": ["nav", "cooldown", "transaction", "agent"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2565,9 +2300,7 @@
           }
         ],
         "summary": "Jump Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2595,9 +2328,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "waypointSymbol"
-                ],
+                "required": ["waypointSymbol"],
                 "type": "object"
               }
             }
@@ -2626,17 +2357,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "nav",
-                        "fuel",
-                        "events"
-                      ],
+                      "required": ["nav", "fuel", "events"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2650,9 +2375,7 @@
           }
         ],
         "summary": "Navigate Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2706,17 +2429,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "nav",
-                        "fuel",
-                        "events"
-                      ],
+                      "required": ["nav", "fuel", "events"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2730,9 +2447,7 @@
           }
         ],
         "summary": "Patch Ship Nav",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2759,9 +2474,7 @@
                       "$ref": "../models/ShipNav.json"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2775,9 +2488,7 @@
           }
         ],
         "summary": "Get Ship Nav",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2805,9 +2516,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "waypointSymbol"
-                ],
+                "required": ["waypointSymbol"],
                 "type": "object"
               }
             }
@@ -2830,16 +2539,11 @@
                           "$ref": "../models/ShipNav.json"
                         }
                       },
-                      "required": [
-                        "nav",
-                        "fuel"
-                      ],
+                      "required": ["nav", "fuel"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2853,9 +2557,7 @@
           }
         ],
         "summary": "Warp Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -2888,10 +2590,7 @@
                     "description": "Amounts of units to sell of the selected good."
                   }
                 },
-                "required": [
-                  "symbol",
-                  "units"
-                ]
+                "required": ["symbol", "units"]
               }
             }
           }
@@ -2916,17 +2615,11 @@
                           "$ref": "../models/MarketTransaction.json"
                         }
                       },
-                      "required": [
-                        "cargo",
-                        "transaction",
-                        "agent"
-                      ],
+                      "required": ["cargo", "transaction", "agent"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -2940,9 +2633,7 @@
           }
         ],
         "summary": "Sell Cargo",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -2969,10 +2660,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cooldown",
-                        "systems"
-                      ],
+                      "required": ["cooldown", "systems"],
                       "properties": {
                         "cooldown": {
                           "$ref": "../models/Cooldown.json"
@@ -2987,9 +2675,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3002,9 +2688,7 @@
           }
         ],
         "summary": "Scan Systems",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3031,10 +2715,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cooldown",
-                        "waypoints"
-                      ],
+                      "required": ["cooldown", "waypoints"],
                       "properties": {
                         "cooldown": {
                           "$ref": "../models/Cooldown.json"
@@ -3049,9 +2730,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3064,9 +2743,7 @@
           }
         ],
         "summary": "Scan Waypoints",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3093,10 +2770,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cooldown",
-                        "ships"
-                      ],
+                      "required": ["cooldown", "ships"],
                       "properties": {
                         "cooldown": {
                           "$ref": "../models/Cooldown.json"
@@ -3111,9 +2785,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3126,9 +2798,7 @@
           }
         ],
         "summary": "Scan Ships",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3187,17 +2857,11 @@
                           "$ref": "../models/MarketTransaction.json"
                         }
                       },
-                      "required": [
-                        "agent",
-                        "fuel",
-                        "transaction"
-                      ],
+                      "required": ["agent", "fuel", "transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3211,9 +2875,7 @@
           }
         ],
         "summary": "Refuel Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3246,10 +2908,7 @@
                     "description": "Amounts of units to purchase."
                   }
                 },
-                "required": [
-                  "symbol",
-                  "units"
-                ]
+                "required": ["symbol", "units"]
               }
             }
           }
@@ -3274,17 +2933,11 @@
                           "$ref": "../models/MarketTransaction.json"
                         }
                       },
-                      "required": [
-                        "cargo",
-                        "transaction",
-                        "agent"
-                      ],
+                      "required": ["cargo", "transaction", "agent"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3298,9 +2951,7 @@
           }
         ],
         "summary": "Purchase Cargo",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3337,11 +2988,7 @@
                     "description": "The symbol of the ship to transfer to."
                   }
                 },
-                "required": [
-                  "tradeSymbol",
-                  "units",
-                  "shipSymbol"
-                ]
+                "required": ["tradeSymbol", "units", "shipSymbol"]
               }
             }
           }
@@ -3356,9 +3003,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "cargo"
-                      ],
+                      "required": ["cargo"],
                       "properties": {
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
@@ -3366,9 +3011,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3381,9 +3024,7 @@
           }
         ],
         "summary": "Transfer Cargo",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3415,15 +3056,11 @@
                           "$ref": "../models/Contract.json"
                         }
                       },
-                      "required": [
-                        "contract"
-                      ],
+                      "required": ["contract"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3437,9 +3074,7 @@
           }
         ],
         "summary": "Negotiate Contract",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3472,9 +3107,7 @@
                       "type": "array"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3488,9 +3121,7 @@
           }
         ],
         "summary": "Get Mounts",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3518,9 +3149,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "symbol"
-                ],
+                "required": ["symbol"],
                 "type": "object"
               }
             }
@@ -3536,12 +3165,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "agent",
-                        "mounts",
-                        "cargo",
-                        "transaction"
-                      ],
+                      "required": ["agent", "mounts", "cargo", "transaction"],
                       "properties": {
                         "agent": {
                           "$ref": "../models/Agent.json"
@@ -3562,9 +3186,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3577,9 +3199,7 @@
           }
         ],
         "summary": "Install Mount",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3609,9 +3229,7 @@
                     "description": "The symbol of the mount to remove."
                   }
                 },
-                "required": [
-                  "symbol"
-                ]
+                "required": ["symbol"]
               }
             }
           }
@@ -3626,12 +3244,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "agent",
-                        "mounts",
-                        "cargo",
-                        "transaction"
-                      ],
+                      "required": ["agent", "mounts", "cargo", "transaction"],
                       "properties": {
                         "agent": {
                           "$ref": "../models/Agent.json"
@@ -3652,9 +3265,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             },
@@ -3667,9 +3278,7 @@
           }
         ],
         "summary": "Remove Mount",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -3701,15 +3310,11 @@
                           "$ref": "../models/ScrapTransaction.json"
                         }
                       },
-                      "required": [
-                        "transaction"
-                      ],
+                      "required": ["transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3723,9 +3328,7 @@
           }
         ],
         "summary": "Get Scrap Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3758,16 +3361,11 @@
                           "$ref": "../models/ScrapTransaction.json"
                         }
                       },
-                      "required": [
-                        "agent",
-                        "transaction"
-                      ],
+                      "required": ["agent", "transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3781,9 +3379,7 @@
           }
         ],
         "summary": "Scrap Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3815,15 +3411,11 @@
                           "$ref": "../models/RepairTransaction.json"
                         }
                       },
-                      "required": [
-                        "transaction"
-                      ],
+                      "required": ["transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3837,9 +3429,7 @@
           }
         ],
         "summary": "Get Repair Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3875,17 +3465,11 @@
                           "$ref": "../models/RepairTransaction.json"
                         }
                       },
-                      "required": [
-                        "agent",
-                        "ship",
-                        "transaction"
-                      ],
+                      "required": ["agent", "ship", "transaction"],
                       "type": "object"
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "type": "object"
                 }
               }
@@ -3899,9 +3483,7 @@
           }
         ],
         "summary": "Repair Ship",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "description": "The ship symbol.",
@@ -3920,10 +3502,7 @@
         "summary": "Get Supply Chain",
         "description": "Describes which import and exports map to each other.",
         "parameters": [],
-<<<<<<< Updated upstream
-=======
         "tags": ["Data"],
->>>>>>> Stashed changes
         "operationId": "get-supply-chain",
         "responses": {
           "200": {
@@ -3932,10 +3511,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
                   "properties": {
                     "data": {
                       "type": "object",
@@ -3952,74 +3527,25 @@
                           }
                         }
                       },
-                      "required": [
-                        "exportToImportMap"
-                      ]
+                      "required": ["exportToImportMap"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "x-examples": {
                     "Example 1": {
                       "data": {
                         "exportToImportMap": {
-                          "LIQUID_HYDROGEN": [
-                            "MACHINERY"
-                          ],
-                          "LIQUID_NITROGEN": [
-                            "MACHINERY"
-                          ]
+                          "LIQUID_HYDROGEN": ["MACHINERY"],
+                          "LIQUID_NITROGEN": ["MACHINERY"]
                         }
                       }
                     }
-                  },
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "exportToImportMap": {
-                          "type": "object",
-                          "properties": {
-                            "string": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        },
-                        "required": [
-                          "exportToImportMap"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "data"
-                    ]
-                  }
-                },
-                "application/xml": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {}
                   }
                 }
               }
             }
-          },
-          "tags": [
-            "Data"
-          ],
-          "security": [
-            {
-              "AgentToken": []
-            }
-          ]
+          }
         },
-        "tags": [
-          "Data"
-        ],
         "security": [
           {
             "AgentToken": []
@@ -4032,9 +3558,7 @@
         "operationId": "get-ship-modules",
         "summary": "Get Ship Modules",
         "description": "Get the modules installed on a ship.",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -4053,9 +3577,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -4076,9 +3598,7 @@
         "operationId": "install-ship-module",
         "summary": "Install Ship Module",
         "description": "Install a module on a ship. The module must be in your cargo.",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -4095,9 +3615,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "symbol"
-                ],
+                "required": ["symbol"],
                 "properties": {
                   "symbol": {
                     "type": "string",
@@ -4115,18 +3633,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "agent",
-                        "modules",
-                        "cargo",
-                        "transaction"
-                      ],
+                      "required": ["agent", "modules", "cargo", "transaction"],
                       "properties": {
                         "agent": {
                           "$ref": "../models/Agent.json"
@@ -4142,13 +3653,7 @@
                         },
                         "transaction": {
                           "type": "object",
-                          "required": [
-                            "waypointSymbol",
-                            "shipSymbol",
-                            "tradeSymbol",
-                            "totalPrice",
-                            "timestamp"
-                          ],
+                          "required": ["waypointSymbol", "shipSymbol", "tradeSymbol", "totalPrice", "timestamp"],
                           "properties": {
                             "waypointSymbol": {
                               "type": "string"
@@ -4182,9 +3687,7 @@
         "operationId": "remove-ship-module",
         "summary": "Remove Ship Module",
         "description": "Remove a module from a ship. The module will be placed in cargo.",
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "parameters": [
           {
             "in": "path",
@@ -4201,9 +3704,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "symbol"
-                ],
+                "required": ["symbol"],
                 "properties": {
                   "symbol": {
                     "type": "string",
@@ -4222,18 +3723,11 @@
                 "schema": {
                   "title": "Remove Module 201 Response",
                   "type": "object",
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "properties": {
                     "data": {
                       "type": "object",
-                      "required": [
-                        "agent",
-                        "modules",
-                        "cargo",
-                        "transaction"
-                      ],
+                      "required": ["agent", "modules", "cargo", "transaction"],
                       "properties": {
                         "agent": {
                           "$ref": "../models/Agent.json"
@@ -4249,13 +3743,7 @@
                         },
                         "transaction": {
                           "type": "object",
-                          "required": [
-                            "waypointSymbol",
-                            "shipSymbol",
-                            "tradeSymbol",
-                            "totalPrice",
-                            "timestamp"
-                          ],
+                          "required": ["waypointSymbol", "shipSymbol", "tradeSymbol", "totalPrice", "timestamp"],
                           "properties": {
                             "waypointSymbol": {
                               "type": "string"
@@ -4285,3 +3773,4 @@
       }
     }
   }
+}
