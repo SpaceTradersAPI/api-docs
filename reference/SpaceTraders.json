@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.1",
+  "openapi": "3.0.1",
   "info": {
     "title": "SpaceTraders API",
     "version": "2.3.0",
@@ -356,7 +356,7 @@
                 }
               }
             },
-            "description": "Succesfully registered."
+            "description": "Successfully registered."
           }
         },
         "summary": "Register New Agent",
@@ -990,7 +990,7 @@
                 }
               }
             },
-            "description": "Succesfully fetched factions."
+            "description": "Successfully fetched factions."
           }
         },
         "summary": "List Factions",
@@ -1249,7 +1249,7 @@
                 }
               }
             },
-            "description": "Succesfully listed contracts."
+            "description": "Successfully listed contracts."
           }
         },
         "security": [
@@ -1365,7 +1365,7 @@
                 }
               }
             },
-            "description": "Succesfully accepted contract."
+            "description": "Successfully accepted contract."
           }
         },
         "security": [
@@ -1566,7 +1566,7 @@
                 }
               }
             },
-            "description": "Succesfully listed ships."
+            "description": "Successfully listed ships."
           }
         },
         "security": [
@@ -2038,7 +2038,7 @@
                 }
               }
             },
-            "description": "Succesfully fetched ship's cooldown."
+            "description": "Successfully fetched ship's cooldown."
           },
           "204": {
             "description": "No cooldown."
@@ -2271,7 +2271,7 @@
     },
     "/my/ships/{shipSymbol}/siphon": {
       "post": {
-        "description": "Siphon gases, such as hydrocarbon, from gas giants.\n\nThe ship must be in orbit to be able to siphon and must have siphon mounts and a gas processor installed.",
+        "description": "Siphon gases or other resources from gas giants.\n\nThe ship must be in orbit to be able to siphon and must have siphon mounts and a gas processor installed.",
         "operationId": "siphon-resources",
         "responses": {
           "201": {
@@ -3920,6 +3920,10 @@
         "summary": "Get Supply Chain",
         "description": "Describes which import and exports map to each other.",
         "parameters": [],
+<<<<<<< Updated upstream
+=======
+        "tags": ["Data"],
+>>>>>>> Stashed changes
         "operationId": "get-supply-chain",
         "responses": {
           "200": {
@@ -3928,6 +3932,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                   "properties": {
                     "data": {
                       "type": "object",
@@ -4212,6 +4220,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "Remove Module 201 Response",
                   "type": "object",
                   "required": [
                     "data"

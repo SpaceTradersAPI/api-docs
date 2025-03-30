@@ -88,6 +88,7 @@
     "FRAME_DESTROYER",
     "FRAME_CRUISER",
     "FRAME_CARRIER",
+    "FRAME_BULK_FREIGHTER",
     "REACTOR_SOLAR_I",
     "REACTOR_FUSION_I",
     "REACTOR_FISSION_I",
@@ -143,7 +144,8 @@
     "SHIP_LIGHT_SHUTTLE",
     "SHIP_ORE_HOUND",
     "SHIP_REFINING_FREIGHTER",
-    "SHIP_SURVEYOR"
+    "SHIP_SURVEYOR",
+    "SHIP_BULK_FREIGHTER"
   ],
   "description": "The good's symbol."
 }

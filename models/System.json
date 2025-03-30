@@ -12,6 +12,14 @@
       "minLength": 1,
       "description": "The symbol of the sector."
     },
+    "constellation": {
+      "type": "string",
+      "description": "The constellation that the system is part of."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the system."
+    },
     "type": {
       "$ref": "./SystemType.json"
     },
