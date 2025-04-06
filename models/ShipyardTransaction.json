@@ -8,11 +8,11 @@
     "shipSymbol": {
       "type": "string",
       "deprecated": true,
-      "description": "The symbol of the ship that was the subject of the transaction."
+      "description": "The symbol of the ship type (e.g. SHIP_MINING_DRONE) that was the subject of the transaction. Contrary to what the name implies, this is NOT the symbol of the ship that was purchased."
     },
     "shipType": {
       "type": "string",
-      "description": "The symbol of the ship that was the subject of the transaction."
+      "description": "The symbol of the ship type (e.g. SHIP_MINING_DRONE) that was the subject of the transaction."
     },
     "price": {
       "type": "integer",
