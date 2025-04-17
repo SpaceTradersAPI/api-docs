@@ -498,17 +498,10 @@
             "in": "query",
             "name": "traits",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "../models/WaypointTraitSymbol.json"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "../models/WaypointTraitSymbol.json"
-                  }
-                }
-              ]
+              "type": "array",
+              "items": {
+                "$ref": "../models/WaypointTraitSymbol.json"
+              }
             }
           },
           {
