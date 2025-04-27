@@ -66,7 +66,7 @@
         "bearerFormat": "JWT"
       },
       "AccountToken": {
-        "description": "When you create an account you will be able to generate a private bearer token which grants authorization to create agents.",
+        "description": "After you create an account you will be able to generate a private bearer token which grants authorization to create agents.",
         "scheme": "bearer",
         "type": "http",
         "bearerFormat": "JWT"
@@ -1764,7 +1764,7 @@
     },
     "/my/ships/{shipSymbol}/chart": {
       "post": {
-        "description": "Command a ship to chart the waypoint at its current location.\n\nMost waypoints in the universe are uncharted by default. These waypoints have their traits hidden until they have been charted by a ship.\n\nCharting a waypoint will record your agent as the one who created the chart, and all other agents would also be able to see the waypoint's traits.",
+        "description": "Command a ship to chart the waypoint at its current location.\n\nMost waypoints in the universe are uncharted by default. These waypoints have their traits hidden until they have been charted by a ship.\n\nCharting a waypoint will record your agent as the one who created the chart, and all other agents would also be able to see the waypoint's traits. Charting a waypoint gives you a one time reward of credits based on the rarity of the waypoint's traits.",
         "operationId": "create-chart",
         "responses": {
           "201": {
@@ -1779,9 +1779,12 @@
                         },
                         "waypoint": {
                           "$ref": "../models/Waypoint.json"
+                        },
+                        "agent": {
+                          "$ref": "../models/Agent.json"
                         }
                       },
-                      "required": ["chart", "waypoint"],
+                      "required": ["chart", "waypoint", "agent"],
                       "type": "object"
                     }
                   },
@@ -2000,6 +2003,12 @@
                         },
                         "cargo": {
                           "$ref": "../models/ShipCargo.json"
+                        },
+                        "modifiers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../models/WaypointModifier.json"
+                          }
                         },
                         "events": {
                           "type": "array",
@@ -2855,6 +2864,9 @@
                         },
                         "transaction": {
                           "$ref": "../models/MarketTransaction.json"
+                        },
+                        "cargo": {
+                          "$ref": "../models/ShipCargo.json"
                         }
                       },
                       "required": ["agent", "fuel", "transaction"],
