@@ -3517,12 +3517,10 @@
                       "properties": {
                         "exportToImportMap": {
                           "type": "object",
-                          "properties": {
-                            "string": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
                             }
                           }
                         }
